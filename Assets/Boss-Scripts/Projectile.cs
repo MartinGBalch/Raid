@@ -31,9 +31,10 @@ public class Projectile : MonoBehaviour {
             CoolDown = StartCD;
             for(int i = 0; i < BulletCount; i++)
             {
-                transform.Rotate(new Vector3(0, ArcDegree * i, 0));
+                transform.Rotate(new Vector3(0, ArcDegree , 0));
                 var projectile = (GameObject)Instantiate(Bullet, transform.position,transform.rotation);
                 projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward )* bulletSpeed;
+
                 Destroy(projectile, BulletLifetime);
                 //Rigidbody PBR = projectile.GetComponent<Rigidbody>();
                 //projectile.transform.position = transform.position;
