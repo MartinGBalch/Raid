@@ -9,6 +9,7 @@ public class AoEAttack : MonoBehaviour {
     public float CoolDown;
     private float StartCD;
     public float Range;
+    public float height;
     // Use this for initialization
     void Start()
     {
@@ -27,7 +28,7 @@ public class AoEAttack : MonoBehaviour {
                 float RandX = Random.Range(-Range, Range);
                 float RandZ = Random.Range(-Range, Range);
                 var AoE = AoeEffect;
-                AoE.transform.position = new Vector3(transform.position.x + RandX, 15, transform.position.z + RandZ);
+                AoE.transform.position = new Vector3(transform.position.x + RandX, height, transform.position.z + RandZ);
                 Instantiate(AoE);
             }
         }

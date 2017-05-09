@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TerrainCorrection : MonoBehaviour {
 
-	
+    float distDIF;
 	void Start ()
     {
         RaycastHit hit;
@@ -12,7 +12,9 @@ public class TerrainCorrection : MonoBehaviour {
         {
             if(hit.collider.tag == "Floor")
             {
-                transform.position = new Vector3(transform.position.x, hit.collider.transform.position.y, transform.position.z);
+                distDIF = hit.distance - transform.position.y;
+                
+                transform.position = new Vector3(transform.position.x, hit.transform.position.y - distDIF - transform.localScale.y, transform.position.z);
             }
             else
             {
