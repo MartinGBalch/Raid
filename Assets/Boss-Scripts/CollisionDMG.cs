@@ -9,10 +9,16 @@ public class CollisionDMG : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
+        if(collider.tag == "Player")
+        {
+            var player = collider.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                player.TakeDamage(Dmg);
+            }
+        }
         
-
-       
-            Debug.Log("Dmg IS" + Dmg);
+      
            
     }
 
