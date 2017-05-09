@@ -42,7 +42,7 @@ public class BossStateManager : MonoBehaviour
             switch(DoBlank)
             {
                 case 0:
-                    AoeMechanic.RunMechanic();
+                    ProjectileMechanic.RunMechanic();
                     break;
                 case 1:
                     FistSlamMechanic.RunMechanic();
@@ -51,7 +51,7 @@ public class BossStateManager : MonoBehaviour
                     BoulderFallMechanic.RunMechanic();
                     break;
                 case 3:
-                    ProjectileMechanic.RunMechanic();
+                    AoeMechanic.RunMechanic();
                     break;
             }
 
