@@ -7,16 +7,23 @@ public class FistCollision : MonoBehaviour {
     public float timer;
     bool IsDamage = false;
     private float ActualTimer;
-	void Start ()
+    public float Dmg;
+    
+
+    void Start ()
     {
         ActualTimer = timer;	
 	}
 	
     void OnTriggerStay(Collider collider)
     {
-        if(IsDamage == true)
+        
+            var player = collider.GetComponent<PlayerHealth>();
+        
+            
+        if (IsDamage == true && player != null)
         {
-            Debug.Log("Fist Slam Damage");
+            player.TakeDamage(Dmg);
             IsDamage = false;
             Destroy(gameObject);
         }
@@ -29,6 +36,7 @@ public class FistCollision : MonoBehaviour {
         if(ActualTimer <= 0)
         {
             IsDamage = true;
-        }	
+        }
+        if (ActualTimer <= -1) { Destroy(gameObject); }
 	}
 }

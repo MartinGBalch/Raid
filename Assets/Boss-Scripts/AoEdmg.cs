@@ -11,12 +11,17 @@ public class AoEdmg : MonoBehaviour {
 
     void OnTriggerStay(Collider collider)
     {
-        AtkSpeed -= Time.deltaTime;
+        var player = collider.GetComponent<PlayerHealth>();
 
+        AtkSpeed -= Time.deltaTime;
+       
         if (AtkSpeed <= 0)
         {
-            Debug.Log("Dmg IS" + Dmg);
-            AtkSpeed = StartSpeed;
+            if (player != null)
+            {
+                player.TakeDamage(Dmg);
+                AtkSpeed = StartSpeed;
+            }
         }
     }
 
