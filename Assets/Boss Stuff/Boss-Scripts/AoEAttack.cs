@@ -15,14 +15,9 @@ public class AoEAttack : MonoBehaviour {
     {
         StartCD = CoolDown;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void RunMechanic()
     {
-        CoolDown -= Time.deltaTime;
-        if (CoolDown <= 0)
-        {
-            CoolDown = StartCD;
+       
             for (int i = 0; i < spawnCount; i++)
             {
                 float RandX = Random.Range(-Range, Range);
@@ -31,6 +26,23 @@ public class AoEAttack : MonoBehaviour {
                 AoE.transform.position = new Vector3(transform.position.x + RandX, height, transform.position.z + RandZ);
                 Instantiate(AoE);
             }
-        }
+        
     }
+    // Update is called once per frame
+    //void Update()
+    //{
+    //    CoolDown -= Time.deltaTime;
+    //    if (CoolDown <= 0)
+    //    {
+    //        CoolDown = StartCD;
+    //        for (int i = 0; i < spawnCount; i++)
+    //        {
+    //            float RandX = Random.Range(-Range, Range);
+    //            float RandZ = Random.Range(-Range, Range);
+    //            var AoE = AoeEffect;
+    //            AoE.transform.position = new Vector3(transform.position.x + RandX, height, transform.position.z + RandZ);
+    //            Instantiate(AoE);
+    //        }
+    //    }
+    //}
 }

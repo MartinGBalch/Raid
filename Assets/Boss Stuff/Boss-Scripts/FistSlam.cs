@@ -9,22 +9,32 @@ public class FistSlam : MonoBehaviour
     public float ATKSpeed;
     private float StartATKSpeed;
 
-	// Use this for initialization
-	void Start ()
+
+    public void RunMechanic()
+    {
+       
+
+            DMGCollider.transform.position = Player.transform.position;
+            Instantiate(DMGCollider);
+        
+    }
+
+    // Use this for initialization
+    void Start ()
     {
         StartATKSpeed = ATKSpeed;	
 	}
 	
 	// Update is called once per frame
-	void Update ()
-    {
-        ATKSpeed -= Time.deltaTime;
-        if(ATKSpeed <= 0)
-        {
-            ATKSpeed = StartATKSpeed;
+	//void Update ()
+ //   {
+ //       ATKSpeed -= Time.deltaTime;
+ //       if(ATKSpeed <= 0)
+ //       {
+ //           ATKSpeed = StartATKSpeed;
            
-            DMGCollider.transform.position = Player.transform.position;
-            Instantiate(DMGCollider);
-        }
-	}
+ //           DMGCollider.transform.position = Player.transform.position;
+ //           Instantiate(DMGCollider);
+ //       }
+	//}
 }
