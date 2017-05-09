@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/camera post.unity
+  isLoaded: 1
+  isActive: 1
