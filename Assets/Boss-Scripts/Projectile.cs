@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour {
     private float StartCD;
     private float ArcDegree;
     public int BulletCount;
+    private int StartBulletCount;
     Rigidbody rb;
     public float bulletSpeed;
     Quaternion rotationCache;
@@ -19,6 +20,7 @@ public class Projectile : MonoBehaviour {
         rb = Bullet.GetComponent<Rigidbody>();
         StartCD = CoolDown;
         ArcDegree = 180 / BulletCount;
+        StartBulletCount = BulletCount;
 	}
 	
 	// Update is called once per frame
