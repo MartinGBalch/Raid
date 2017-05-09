@@ -17,16 +17,19 @@ public class FistCollision : MonoBehaviour {
 	
     void OnTriggerStay(Collider collider)
     {
-        
-            var player = collider.GetComponent<PlayerHealth>();
-        
-            
-        if (IsDamage == true && player != null)
+        if (collider.tag == "Player")
         {
-            player.TakeDamage(Dmg);
-            IsDamage = false;
-            Destroy(gameObject);
+            var player = collider.GetComponent<PlayerHealth>();
+
+
+            if (IsDamage == true && player != null)
+            {
+                player.TakeDamage(Dmg);
+                IsDamage = false;
+                Destroy(gameObject);
+            }
         }
+            
     }
 
 	// Update is called once per frame
