@@ -19,25 +19,33 @@ public class BossTurning : MonoBehaviour
         rb = Boss.GetComponent<Rigidbody>();
         AdjustStart = AdjustTimer;
 	}
-	
+	void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            AdjustTimer = AdjustStart;
+            IsTurning = false;
+        }
+    }
 	// Update is called once per frame
 	void Update ()
     {
 
 
-         AngleBtwn = Vector3.Angle(transform.forward, Player.transform.position);
-
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 toOther = Player.transform.position - transform.position;
+         //AngleBtwn = Vector3.Angle(transform.forward, Player.transform.position);
+        //print(AngleBtwn);
+        Vector3 forward = Boss.transform.TransformDirection(Vector3.forward);
+        Vector3 toOther = Player.transform.position - Boss.transform.position;
         if (Vector3.Dot(forward, toOther) < 0)
         {
+            print(Vector3.Dot(forward, toOther));
             IsTurning = true;
             
         }
        
        
-            Vector3 Right = transform.TransformDirection(Vector3.right);
-            Vector3 toOtherRight = Player.transform.position - transform.position;
+            Vector3 Right = Boss.transform.TransformDirection(Vector3.right);
+            Vector3 toOtherRight = Player.transform.position - Boss.transform.position;
             if (Vector3.Dot(Right, toOther) < 0)
             {
                 Direction = false;
@@ -61,11 +69,11 @@ public class BossTurning : MonoBehaviour
            
             
         }
-        if (AngleBtwn <= 20)
-        {
-            IsTurning = false;
-            AdjustTimer = AdjustStart;
-        }
+        //if (AngleBtwn <= 20)
+        //{
+        //    IsTurning = false;
+        //   
+        //}
 
 
 

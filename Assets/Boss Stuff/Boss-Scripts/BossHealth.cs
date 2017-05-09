@@ -9,18 +9,23 @@ public class BossHealth : MonoBehaviour, IDamageable {
     private float StartResistance;
     public float VulnerableTime;
     private float StartTimer;
-
-
+    
+    private float DamageToBeDealt = 0;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
     }
     public void TakeDamage(float damageDealt)
     {
-        Health -= EstimatedDamageTaken(damageDealt);
+        DamageToBeDealt = EstimatedDamageTaken(damageDealt);
+        if(DamageToBeDealt >= 0)
+        {
+            Health -= DamageToBeDealt;
+        }
+        
     }
 
-
+   
     // Use this for initialization
     void Start ()
     {
@@ -40,5 +45,10 @@ public class BossHealth : MonoBehaviour, IDamageable {
                 VulnerableTime = StartTimer;
             }
         }
+        if(Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+        
 	}
 }
