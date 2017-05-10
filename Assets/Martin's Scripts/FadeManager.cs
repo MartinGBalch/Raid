@@ -44,7 +44,7 @@ public class FadeManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Fade(true, 10);
+            Fade(true, 1);
             Cursor.visible = true;
             text.enabled = false;
         }
@@ -56,9 +56,10 @@ public class FadeManager : MonoBehaviour
 
         transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
         fadeImage.color = Color.Lerp(new Color(1, 1, 1, 0), Color.white, transition);
-        enter.color = Color.Lerp(Color.black, new Color(.25f,0,0,.05f), transition);
-        
-        
+        //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
+        enter.color = Color.Lerp(new Color(0,0,0,0), Color.magenta, transition);
+
+
 
 
         if (transition > 1 || transition < 0)
