@@ -31,6 +31,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 		if(Health <= 0)
         {
            var BossStuff = Boss.GetComponent<BossHealth>();
+            Boss.GetComponent<BossStateManagerTwo>().PylonCount--; 
             BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
             BossStuff.ResistDamage = 0;
             Destroy(gameObject);
