@@ -20,7 +20,10 @@ interface IStaminable
     void StaminaDrain(float StaminaDrainage);
 }
 
-
+interface IAlive
+{
+    bool isAlive(float Health);
+}
 
 //public class Interfaces : MonoBehaviour {
 

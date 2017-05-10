@@ -336,7 +336,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
        
         var fwd = transform.forward;
 
-        var direct = (follow.transform.position - transform.position).normalized;
+        var direct = (follow.position - transform.position).normalized;
 
         var lkat = Vector3.Slerp(fwd, direct, DT * tempDamp);
 
@@ -372,10 +372,10 @@ public class ThirdPersonCameraController : MonoBehaviour {
             x += HorzSpeed * DT * 2;
         }
 
-        y = ClampAngle(y, -50, 80);
+        y = ClampAngle(y, 10, 80);
 
         Vector3 position;
-
+       
         Quaternion rotation = Quaternion.Euler(y, x, 0);
 
         //if (PlayerController.Sprint)
