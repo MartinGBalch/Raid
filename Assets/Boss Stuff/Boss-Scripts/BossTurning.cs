@@ -14,6 +14,10 @@ public class BossTurning : MonoBehaviour
     public bool Direction = false; // Right - false : Left - true
     public float AngleBtwn;
     // Use this for initialization
+
+   
+    
+
     void Start ()
     {
         rb = Boss.GetComponent<Rigidbody>();
@@ -38,7 +42,7 @@ public class BossTurning : MonoBehaviour
         Vector3 toOther = Player.transform.position - Boss.transform.position;
         if (Vector3.Dot(forward, toOther) < 0)
         {
-            print(Vector3.Dot(forward, toOther));
+            
             IsTurning = true;
             
         }
