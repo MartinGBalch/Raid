@@ -182,23 +182,25 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             jumptime = 1f;
 
         }
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < 0 && !Grounded())
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * DT;
         }
-        else if (rb.velocity.y > 0 && jumpInput == 0)
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * DT;
-        }
+        //else if (rb.velocity.y > 0 && jumpInput == 0)
+        //{
+        //    rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * DT;
+        //}
     }
-    bool attacking = false;
+    public bool attacking = false;
     public float attackTime;
+    public GameObject hitbox;
     public void AttackFunction()
     {
         if (attacking == false)
         {
-            attackTime = .2f;
+            attackTime = .5f;
             attacking = true;
+            hitbox.SetActive(true);
         }
 
         attackTime -= DT;
@@ -239,7 +241,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             NonCombatState = States.MovementState;
             CombatState = States.MovementState;
             attackCooldown = .2f;
-
+            hitbox.SetActive(false);
             anim.SetBool("Attacking", false);
         }
     }
@@ -309,6 +311,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public void Idle()
     { 
         rb.velocity = new Vector3(0, rb.velocity.y, 0);
+      
     }
 
     public void Movement()
@@ -371,7 +374,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        jumpCount = 2;
+        jumpCount = 1;
         anim.SetBool("Jumping", false);
     }
 }
