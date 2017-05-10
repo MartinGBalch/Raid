@@ -8,10 +8,11 @@ public class FadeManager : MonoBehaviour
 {
     public static FadeManager Instance { set; get; }
 
-    public Image fadeImage;
-    public Button start;
+    
+    public Button b_play;
+    public Button b_enter;
     public Text enter;
-    public Text text;
+    public Text play;
 
     private bool isInTransition;
     private bool isShowing;
@@ -19,7 +20,7 @@ public class FadeManager : MonoBehaviour
     private float transition;
     private float duration;
    
-
+    
     
 
     private void Awake()
@@ -38,15 +39,16 @@ public class FadeManager : MonoBehaviour
     }
 
 	// Use this for initialization
-	void Start () {}
+	void Start () { play.enabled = false; }
 	// Update is called once per frame
 	void Update ()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Fade(true, 1);
+            Fade(true, 3);
             Cursor.visible = true;
-            text.enabled = false;
+            enter.enabled = false;
+            play.enabled = true;
         }
 
         
@@ -55,9 +57,9 @@ public class FadeManager : MonoBehaviour
             return;
 
         transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
-        fadeImage.color = Color.Lerp(new Color(1, 1, 1, 0), Color.white, transition);
+       
         //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
-        enter.color = Color.Lerp(new Color(0,0,0,0), Color.magenta, transition);
+        play.color = Color.Lerp(new Color(0,0,0,0), new Color(.75f,0,0,.5f), transition);
 
 
 
@@ -72,6 +74,14 @@ public class FadeManager : MonoBehaviour
     public void  Play()
     {
         Debug.Log("Damn");
+    }
+
+    public void Enter()
+    {
+        Fade(true, 3);
+        Cursor.visible = true;
+        enter.enabled = false;
+        play.enabled = true;
     }
   
 }
