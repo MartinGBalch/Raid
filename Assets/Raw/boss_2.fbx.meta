@@ -1,0 +1,167 @@
+fileFormatVersion: 2
+guid: 2179a9cca526238469bf4d377872bec5
+timeCreated: 1494365655
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: belly
+    100002: //RootNode
+    100004: Boss_mesh
+    100006: Character1_Ctrl_Reference
+    100008: Character1_Hips
+    100010: Character1_LeftArm
+    100012: Character1_LeftForeArm
+    100014: Character1_LeftHand
+    100016: Character1_LeftShoulder
+    100018: Character1_Neck
+    100020: Character1_Reference
+    100022: Character1_RightArm
+    100024: Character1_RightForeArm
+    100026: Character1_RightHand
+    100028: Character1_RightShoulder
+    100030: Character1_Spine
+    100032: Character1_Spine1
+    100034: Character1_Spine2
+    100036: head
+    100038: hips
+    100040: L_clav
+    100042: L_forearm
+    100044: L_hand
+    100046: L_upperarm
+    100048: R_clav
+    100050: R_forearm
+    100052: R_hand
+    100054: R_upperarm
+    100056: shoulder
+    100058: sternum
+    100060: transform1
+    100062: transform10
+    100064: transform11
+    100066: transform12
+    100068: transform13
+    100070: transform2
+    100072: transform3
+    100074: transform4
+    100076: transform5
+    100078: transform6
+    100080: transform7
+    100082: transform8
+    100084: transform9
+    400000: belly
+    400002: //RootNode
+    400004: Boss_mesh
+    400006: Character1_Ctrl_Reference
+    400008: Character1_Hips
+    400010: Character1_LeftArm
+    400012: Character1_LeftForeArm
+    400014: Character1_LeftHand
+    400016: Character1_LeftShoulder
+    400018: Character1_Neck
+    400020: Character1_Reference
+    400022: Character1_RightArm
+    400024: Character1_RightForeArm
+    400026: Character1_RightHand
+    400028: Character1_RightShoulder
+    400030: Character1_Spine
+    400032: Character1_Spine1
+    400034: Character1_Spine2
+    400036: head
+    400038: hips
+    400040: L_clav
+    400042: L_forearm
+    400044: L_hand
+    400046: L_upperarm
+    400048: R_clav
+    400050: R_forearm
+    400052: R_hand
+    400054: R_upperarm
+    400056: shoulder
+    400058: sternum
+    400060: transform1
+    400062: transform10
+    400064: transform11
+    400066: transform12
+    400068: transform13
+    400070: transform2
+    400072: transform3
+    400074: transform4
+    400076: transform5
+    400078: transform6
+    400080: transform7
+    400082: transform8
+    400084: transform9
+    2300000: Boss_mesh
+    3300000: Boss_mesh
+    4300000: Boss_mesh
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
