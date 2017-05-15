@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossStateManagerTwo : MonoBehaviour {
+public class BossStateManagerTwo : MonoBehaviour
+{
 
     AoEAttack AoeMechanic;
     FistSlam FistSlamMechanic;
@@ -18,33 +19,10 @@ public class BossStateManagerTwo : MonoBehaviour {
     private float StartTime;
     public float Timer2;
     private float StartTime2;
-
-    //bool NeedsToUpdate = false;
-    //public GameObject[] Pylon;
-    //private GameObject PlaceHolder;
-    //private Transform[] StartPos;
-    //public int PylonCount;
-    //void UpdatePlayArea()
-    //{
-    //    for (int i = 0; i < Pylon.Length; i++)
-    //    {
-
-    //        Instantiate(PlaceHolder, StartPos[i]);
-    //    }
-    //    NeedsToUpdate = false;
-
-    //}
-
-
+    
     void Awake()
     {
-        //PlaceHolder = Pylon[0];
-        //PylonCount = Pylon.Length;
-        //for (int i = 0; i < Pylon.Length; i++)
-        //{
-        //    StartPos[i] = Pylon[i].transform;
-        //}
-
+        
         State = 0;
         StartTime = Timer;
         StartTime2 = Timer2;
@@ -54,15 +32,20 @@ public class BossStateManagerTwo : MonoBehaviour {
         BoulderFallMechanic = GetComponent<SpawnBoulders>();
         ProjectileMechanic = GetComponent<Projectile>();
     }
+    void Start()
+    {
+        
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Health.Health <= 700) { State = 1; /*NeedsToUpdate = true;*/ }
+        if (Health.Health <= 700) { State = 1;  }
 
-        if (Health.Health <= 400) { State = 2;/* NeedsToUpdate = true;*/ }
+        if (Health.Health <= 400) { State = 2; }
 
-        //if (NeedsToUpdate == true) { UpdatePlayArea(); }
+       
         Timer -= Time.deltaTime;
 
         if (Timer <= 0)

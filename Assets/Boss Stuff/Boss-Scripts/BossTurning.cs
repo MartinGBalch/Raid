@@ -13,6 +13,7 @@ public class BossTurning : MonoBehaviour
     private float AdjustStart;
     public bool Direction = false; // Right - false : Left - true
     public float AngleBtwn;
+
     // Use this for initialization
 
    
@@ -30,6 +31,10 @@ public class BossTurning : MonoBehaviour
             AdjustTimer = AdjustStart;
             IsTurning = false;
         }
+        
+
+
+
     }
 	// Update is called once per frame
 	void Update ()
@@ -73,56 +78,7 @@ public class BossTurning : MonoBehaviour
            
             
         }
-        //if (AngleBtwn <= 20)
-        //{
-        //    IsTurning = false;
-        //   
-        //}
-
-
-
-
-        //RaycastHit hitCenter;
-        //RaycastHit hitRight;
-        //RaycastHit hitLeft;
-
-        //if (Physics.Raycast(transform.position, transform.forward, out hitCenter, 75))
-        //{
-        //    if (hitCenter.collider.tag == "Player")
-        //    {
-        //        print(hitCenter.collider.name);
-        //        Right = false;
-        //        Left = false;
-        //        AdjustTimer = AdjustStart;
-        //    }
-        //}
-        //if (Physics.Raycast(transform.position, transform.right, out hitRight, 75))
-        //{
-        //    if (hitRight.collider.tag == "Player")
-        //    {
-        //        //print(hitRight.collider.name);
-
-        //        Right = true;
-        //        Left = false;
-        //    }
-        //}
-        //if (Physics.Raycast(transform.position, -transform.right, out hitLeft, 75))
-        //{
-        //    if (hitLeft.collider.tag == "Player")
-        //    {
-        //        // print(hitLeft.collider.name);
-
-        //        Left = true;
-        //        Right = false;
-        //    }
-        //}
-
-        //AdjustTimer -= Time.deltaTime;
-
-        //if (AdjustTimer <= 0)
-        //{
-        //    if (Right == true) { Boss.transform.Rotate(0, Speed, 0); }
-        //    if (Left == true) { Boss.transform.Rotate(0, -Speed, 0); }
+        
 
 
 
