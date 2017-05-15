@@ -10,7 +10,7 @@ public class BossStateManagerTwo : MonoBehaviour
     SpawnBoulders BoulderFallMechanic;
     Projectile ProjectileMechanic;
     BossHealth Health;
-
+    
    
 
     public int State;
@@ -31,6 +31,7 @@ public class BossStateManagerTwo : MonoBehaviour
         FistSlamMechanic = GetComponent<FistSlam>();
         BoulderFallMechanic = GetComponent<SpawnBoulders>();
         ProjectileMechanic = GetComponent<Projectile>();
+        
     }
     void Start()
     {
