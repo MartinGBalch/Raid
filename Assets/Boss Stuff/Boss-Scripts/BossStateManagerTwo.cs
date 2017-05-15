@@ -10,10 +10,7 @@ public class BossStateManagerTwo : MonoBehaviour {
     Projectile ProjectileMechanic;
     BossHealth Health;
 
-    public GameObject[] Pylon;
-    private GameObject PlaceHolder;
-    private Transform[] StartPos;
-    public int PylonCount;
+   
 
     public int State;
 
@@ -22,28 +19,31 @@ public class BossStateManagerTwo : MonoBehaviour {
     public float Timer2;
     private float StartTime2;
 
-    bool NeedsToUpdate = false;
+    //bool NeedsToUpdate = false;
+    //public GameObject[] Pylon;
+    //private GameObject PlaceHolder;
+    //private Transform[] StartPos;
+    //public int PylonCount;
+    //void UpdatePlayArea()
+    //{
+    //    for (int i = 0; i < Pylon.Length; i++)
+    //    {
 
-    void UpdatePlayArea()
-    {
-        for (int i = 0; i < Pylon.Length; i++)
-        {
+    //        Instantiate(PlaceHolder, StartPos[i]);
+    //    }
+    //    NeedsToUpdate = false;
 
-            Instantiate(PlaceHolder, StartPos[i]);
-        }
-        NeedsToUpdate = false;
-
-    }
+    //}
 
 
     void Awake()
     {
-        PlaceHolder = Pylon[0];
-        PylonCount = Pylon.Length;
-        for (int i = 0; i < Pylon.Length; i++)
-        {
-            StartPos[i] = Pylon[i].transform;
-        }
+        //PlaceHolder = Pylon[0];
+        //PylonCount = Pylon.Length;
+        //for (int i = 0; i < Pylon.Length; i++)
+        //{
+        //    StartPos[i] = Pylon[i].transform;
+        //}
 
         State = 0;
         StartTime = Timer;
@@ -58,11 +58,11 @@ public class BossStateManagerTwo : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Health.Health <= 700) { State = 1; NeedsToUpdate = true; }
+        if (Health.Health <= 700) { State = 1; /*NeedsToUpdate = true;*/ }
 
-        if (Health.Health <= 400) { State = 2; NeedsToUpdate = true; }
+        if (Health.Health <= 400) { State = 2;/* NeedsToUpdate = true;*/ }
 
-        if (NeedsToUpdate == true) { UpdatePlayArea(); }
+        //if (NeedsToUpdate == true) { UpdatePlayArea(); }
         Timer -= Time.deltaTime;
 
         if (Timer <= 0)
