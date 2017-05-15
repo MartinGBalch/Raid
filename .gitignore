@@ -1,4 +1,10 @@
-Raid.sln
+*.sln
+*.csproj
+
+# Stores cooked data on a per-machine basis
+Library/ 
+
+# Runtime junk
 Temp/
 Library/
 Temp/
