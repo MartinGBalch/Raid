@@ -6,31 +6,38 @@ public class BirdController : MonoBehaviour
 {
     public GameObject Player;
     public GameObject Camera;
-    private ThirdPersonCameraController CamController;
+    public ThirdPersonCameraController CamController;
     private ThirdPersonPlayerController PlayerController;
 
 
-    private Vector3 velocityCamSmooth = Vector3.zero;
+    public Vector3 velocityCamSmooth = Vector3.zero;
     [SerializeField]
-    private float camSmoothDampTimeNonLock, camSmoothDampTimeLock;
+    private float BirdSmoothDampAttack, BirdSmoothDampIdle;
     [SerializeField]
     private float SetcamSmoothDampTime = .1f;
+    [SerializeField]
+
+
+    ControllerSupport Controller;
 
     enum States
     {
         idleState,
         idle,
         idleAfk,
+        AttackState,
     }
 
     States CurrentState, IdleState;
 
     void Start()
     {
+        SetcamSmoothDampTime = BirdSmoothDampIdle;
         CurrentState = States.idleState;
         IdleState = States.idle;
-        CamController = Camera.GetComponent<ThirdPersonCameraController>();
+       // CamController = Camera.GetComponent<ThirdPersonCameraController>();
         PlayerController = Player.GetComponent<ThirdPersonPlayerController>();
+       
     }
 
     public void DoIdleState()
@@ -48,6 +55,8 @@ public class BirdController : MonoBehaviour
     }
     public float x, y;
 
+    public bool ControllerFire, ControllerCharge;
+   
     private static float ClampAngle(float angle, float min, float max)
     {
         if (angle < -360)
@@ -68,6 +77,12 @@ public class BirdController : MonoBehaviour
     public float tempDamp;
     public void DoIdle()
     {
+        Hit = false;
+        if(Vector3.Distance(transform.position, Player.transform.position) <= 6)
+        {
+
+            SetcamSmoothDampTime -= DT;
+        }
         x += HorzSpeed * distance * .05f;
         
 
@@ -76,57 +91,22 @@ public class BirdController : MonoBehaviour
         Vector3 position;
 
         Quaternion rotation = Quaternion.Euler(y, x, 0);
-
-        //if (PlayerController.Sprint)
-        //{
-        //    MinDistance = 3;
-        //    MaxDistance = 7;
-        //}
-        //else
-        //{
-        //    MinDistance = 1;
-        //    MaxDistance = 3;
-        //}
+        
 
         distance = Mathf.Clamp(distance, MinDistance, MaxDistance);
-
-        RaycastHit hit;
-        //if (Physics.Linecast(Player.transform.position, transform.position, out hit))
-        //{
-        //    distance -= hit.distance;
-        //}
+        
 
         Vector3 negDistance = new Vector3(0.0f, 3.0f, -distance);
         position = rotation * negDistance + Player.transform.position;
-
-
-        //if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-        //{
-        //    tempDamp += DT * 15;
-        //}
-        //else
-        //{
-        //    tempDamp -= DT * 10;
-        //}
+        
         tempDamp = Mathf.Clamp(tempDamp, 1, 20);
-
-        //var fwd = transform.forward;
-
-        //var direct = (Player.transform.position - transform.position).normalized;
-
-        //var lkat = Vector3.Slerp(fwd, direct, DT * tempDamp);
-
-
-        //transform.LookAt(lkat + transform.position, Vector3.up);
-
+        
         Vector3 oldPos = transform.position;
         smoothPosition(transform.position, position);
 
         Vector3 dirMov = (transform.position - oldPos).normalized;
 
         transform.forward = dirMov;
-        //transform.right = Player.transform.position - transform.position;
-        
 
 
     }
@@ -134,16 +114,115 @@ public class BirdController : MonoBehaviour
     {
 
     }
+    public float attackDamp;
 
 
+    bool Hit;
+
+    Vector3 killpos = Vector3.zero;
+    Vector3 killOffset = Vector3.zero;
+    public void DoAttack()
+    {
+        if (TempTarget != null)
+        {
+            Vector3 offset = new Vector3(0, TempTarget.transform.localScale.y * 3, 0);
+            if (Vector3.Distance(transform.position, TempTarget.transform.position) > (tempDistance / 2))
+            {
+
+                //var fwd = transform.forward;
+
+                //var direct = (TempTarget.transform.position - transform.position).normalized;
+
+                //var lkat = Vector3.Slerp(fwd, direct, DT * tempDamp);
+
+                //transform.LookAt(lkat + transform.position, Vector3.up);
+
+                Vector3 oldPos = transform.position;
+                transform.position = Vector3.Lerp(transform.position, TempTarget.transform.position, DT);
+                Vector3 dirMov = (transform.position - oldPos).normalized;
+
+                transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp * 1.5f);
+                if (Vector3.Distance(transform.position, TempTarget.transform.position) < (tempDistance / 2) + 1.5f)
+                {
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+                    {
+                        if (!Hit && (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Boss")))
+                        {
+                            //ParticleSystem bulletHit = Instantiate(impact, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                            //bulletHit.transform.parent = hit.collider.gameObject.transform;
+                            
+                            IDamageable dmg = hit.collider.GetComponent<IDamageable>();
+                            killpos = TempTarget.transform.position;
+                            killOffset = offset;
+
+                            Hit = true;
+                           dmg.TakeDamage(100);
+                           
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                Vector3 oldPos = transform.position;
+                transform.position = Vector3.Lerp(transform.position, (TempTarget.transform.position + offset), DT * 2);
+                Vector3 dirMov = (transform.position - oldPos).normalized;
+                transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
+
+                if (Vector3.Distance(transform.position, (TempTarget.transform.position + offset)) < 1)
+                {
+                    CurrentState = States.idleState;
+                }
+            }
+        }
+        else
+        {
+            Vector3 oldPos = transform.position;
+            transform.position = Vector3.Lerp(transform.position, (killpos + killOffset), DT * 2);
+            Vector3 dirMov = (transform.position - oldPos).normalized;
+            transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
+
+            if (Vector3.Distance(transform.position, (killpos + killOffset)) < 1)
+            {
+                CurrentState = States.idleState;
+            }
+            //SetcamSmoothDampTime = BirdSmoothDampIdle;
+        }
+    }
+    public bool fire;
+    private GameObject TempTarget;
+    private float tempDistance;
+    private bool Charge, Fire;
+    public void KeyInput()
+    {
+        Charge = Input.GetMouseButtonDown(1) || Controller.Charge;
+        Fire = Input.GetMouseButtonUp(1) || Controller.Fire;
+     
+        if (Fire)
+        {
+            TempTarget = CamController.target.gameObject;
+            SetcamSmoothDampTime = BirdSmoothDampAttack ;
+            tempDistance = Vector3.Distance(transform.position, TempTarget.transform.position);
+            CurrentState = States.AttackState;
+            Fire = false;
+            Controller.Fire = false;
+        }
+    }
     float DT;
     void FixedUpdate()
     {
+        KeyInput();
         DT = Time.deltaTime;
         switch(CurrentState)
         {
             case States.idleState:
                 DoIdle();
+                break;
+            case States.AttackState:
+                DoAttack();
                 break;
 
         }
