@@ -6,7 +6,7 @@ public class MinionHealth : MonoBehaviour, IDamageable {
 
 
     public float Health;
-    public float ResistDamage;
+    private float ResistDamage = 0;
     
 
     public float EstimatedDamageTaken(float damageDealt)

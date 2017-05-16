@@ -7,9 +7,10 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
     public float Health;
     private float StartHealth;
-    public float ResistDamage;
-    public float DamageToBoss;
+    private float ResistDamage = 0;
+    //public float DamageToBoss;
     public GameObject Boss;
+    public GameObject Mesh;
     bool Reset = false;
     public float ResetTimer;
     private float StartTime;
@@ -38,7 +39,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
             Debug.Log("The Boss is Vulnerable");
             BossStuff.ResistDamage = 0;
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             Reset = true;
         }
@@ -49,7 +50,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             {
                 Health = StartHealth;
                 ResetTimer = StartTime;
-                gameObject.GetComponent<MeshRenderer>().enabled = true;
+                Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
                 Reset = false;
 

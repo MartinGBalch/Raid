@@ -12,12 +12,18 @@ public class MinionMovement : MonoBehaviour {
     
     public float atkRange;
     public float Dist;
+
+    public bool IsStunned = false;
+
+    public float StunTimer;
+    private float StartStun;
 	// Use this for initialization
 	void Start ()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
         StartSpeed = atkSpeed;
+        StartStun = StunTimer;
         atkRange += agent.stoppingDistance;
 	}
 	
@@ -26,10 +32,11 @@ public class MinionMovement : MonoBehaviour {
     {
         agent.destination = player.transform.position;
         atkSpeed -= Time.deltaTime;
+        
         Dist = Vector3.Distance(transform.position, agent.destination);
         if (Dist <= atkRange)
         {
-            if (atkSpeed <= 0)
+            if (atkSpeed <= 0 && IsStunned == false)
             {
                 Debug.Log("Attack, collider on");
                 DmgCollider.GetComponent<BoxCollider>().enabled = true;
@@ -37,12 +44,31 @@ public class MinionMovement : MonoBehaviour {
             }
 
         }
+
+        if (IsStunned == true)
+        {
+            
+            agent.isStopped = true;
+            
+            StunTimer -= Time.deltaTime;
+            if (StunTimer <= 0)
+            {
+                StunTimer = StartStun;
+                agent.isStopped = false;
+                IsStunned = false;
+            }
+
+        }
+
+       
+
+
         //if (atkSpeed <= -1)
         //{
         //    Debug.Log("Collider off");
-            
+
         //    DmgCollider.GetComponent<BoxCollider>().enabled = false;
         //}
 
-	}
+    }
 }

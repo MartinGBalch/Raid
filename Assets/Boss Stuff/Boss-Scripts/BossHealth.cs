@@ -40,6 +40,7 @@ public class BossHealth : MonoBehaviour, IDamageable {
     {
 		if(ResistDamage == 0)
         {
+            
             VulnerableTime -= Time.deltaTime;
             if(VulnerableTime <= 0)
             {

@@ -10,27 +10,33 @@ public class BossStateManagerTwo : MonoBehaviour
     SpawnBoulders BoulderFallMechanic;
     Projectile ProjectileMechanic;
     BossHealth Health;
-    
-   
+    BeamAttack WipeMechanic;
 
+    private float DT;
     public int State;
 
     public float Timer;
     private float StartTime;
     public float Timer2;
     private float StartTime2;
-    
+    public float WipeTimer;
+    private float StartWipe;
+    public float WipeDelay;
+    private float StartDelay;
     void Awake()
     {
         
         State = 0;
         StartTime = Timer;
         StartTime2 = Timer2;
+        StartWipe = WipeTimer;
+        StartDelay = WipeDelay;
         Health = GetComponent<BossHealth>();
         AoeMechanic = GetComponent<AoEAttack>();
         FistSlamMechanic = GetComponent<FistSlam>();
         BoulderFallMechanic = GetComponent<SpawnBoulders>();
         ProjectileMechanic = GetComponent<Projectile>();
+        WipeMechanic = GetComponent<BeamAttack>();
         
     }
     void Start()
@@ -42,12 +48,13 @@ public class BossStateManagerTwo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DT = Time.deltaTime;
         if (Health.Health <= 700) { State = 1;  }
 
         if (Health.Health <= 400) { State = 2; }
 
        
-        Timer -= Time.deltaTime;
+        Timer -= DT;
 
         if (Timer <= 0)
         {
@@ -58,21 +65,23 @@ public class BossStateManagerTwo : MonoBehaviour
                 case 0:
                     ProjectileMechanic.RunMechanic();
                     break;
+                
                 case 1:
-                    FistSlamMechanic.RunMechanic();
-                    break;
-                case 2:
                     BoulderFallMechanic.RunMechanic();
                     break;
-                case 3:
+                case 2:
                     AoeMechanic.RunMechanic();
                     break;
+                    // -FIST SLAM-
+                    //case 3:
+                    //    FistSlamMechanic.RunMechanic();
+                    //    break;
             }
 
         }
         if (State == 2)
         {
-            Timer2 -= Time.deltaTime;
+            Timer2 -= DT;
             if (Timer2 <= 0)
             {
                 Timer2 = StartTime;
@@ -82,18 +91,38 @@ public class BossStateManagerTwo : MonoBehaviour
                     case 0:
                         AoeMechanic.RunMechanic();
                         break;
+                   
                     case 1:
-                        FistSlamMechanic.RunMechanic();
-                        break;
-                    case 2:
                         BoulderFallMechanic.RunMechanic();
                         break;
-                    case 3:
+                    case 2:
                         ProjectileMechanic.RunMechanic();
                         break;
+                    // -FIST SLAM-
+                   //case 3:
+                   //    FistSlamMechanic.RunMechanic();
+                   //    break;
                 }
 
             }
+
+            // -WIPE MECHANIC -
+
+            //WipeTimer -= DT;
+            //if (WipeTimer <= 0)
+            //{
+            //  //  Debug.Log("Charging...");
+            //    WipeDelay -= DT;
+            //    if (WipeDelay <= 0)
+            //    {
+            //        //Debug.Log("Firing");
+            //        WipeMechanic.RunMechanic();
+            //        WipeDelay = StartDelay;
+            //        WipeTimer = StartWipe;
+            //    }
+
+            //}
+
         }
 
 
