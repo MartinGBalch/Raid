@@ -23,6 +23,7 @@ public class BossStateManagerTwo : MonoBehaviour
     private float StartWipe;
     public float WipeDelay;
     private float StartDelay;
+    
     void Awake()
     {
         
@@ -59,13 +60,13 @@ public class BossStateManagerTwo : MonoBehaviour
         if (Timer <= 0)
         {
             Timer = StartTime;
-            int DoBlank = Random.Range(0, (2 + State));
+            int DoBlank = Random.Range(0, (1 + State));
             switch (DoBlank)
             {
                 case 0:
                     ProjectileMechanic.RunMechanic();
                     break;
-                
+
                 case 1:
                     BoulderFallMechanic.RunMechanic();
                     break;
@@ -85,7 +86,7 @@ public class BossStateManagerTwo : MonoBehaviour
             if (Timer2 <= 0)
             {
                 Timer2 = StartTime;
-                int DoBlank2 = Random.Range(0, (2 + State));
+                int DoBlank2 = Random.Range(0, (1 + State));
                 switch (DoBlank2)
                 {
                     case 0:

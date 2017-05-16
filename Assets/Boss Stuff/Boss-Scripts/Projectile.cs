@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour {
     public float bulletSpeed;
     Quaternion rotationCache;
     public float BulletLifetime;
-
+    
     public void RunMechanic()
     {
         
@@ -36,12 +36,14 @@ public class Projectile : MonoBehaviour {
 
             }
             Gun.transform.rotation = rotationCache;
-        
+       
+
     }
 
 	// Use this for initialization
 	void Start ()
     {
+        
         rb = Bullet.GetComponent<Rigidbody>();
         StartCD = CoolDown;
         ArcDegree = 180 / BulletCount;
