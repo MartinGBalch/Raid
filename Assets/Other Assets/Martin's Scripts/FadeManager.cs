@@ -8,9 +8,17 @@ public class FadeManager : MonoBehaviour
 {
     public static FadeManager Instance { set; get; }
 
-    public Image fadeImage;
-    public Button start;
-    public Text enter;
+    public Canvas ButtonMenu;
+    public Canvas TitleMenu;
+
+    public Button b_play;
+    public Button b_enter;
+    public Button b_exit;
+    public Text title;
+    public Text l_title;
+    public Text play;
+    public Text start;
+    public Text quit;
 
     private bool isInTransition;
     private bool isShowing;
@@ -18,7 +26,7 @@ public class FadeManager : MonoBehaviour
     private float transition;
     private float duration;
    
-
+    
     
 
     private void Awake()
@@ -37,12 +45,17 @@ public class FadeManager : MonoBehaviour
     }
 
 	// Use this for initialization
-	void Start () {}
+	void Start () { play.enabled = false; ButtonMenu.enabled = false; }
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        { Fade(true, 1.25f);}
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    Fade(true, 3);
+        //    Cursor.visible = true;
+        //    enter.enabled = false;
+        //    play.enabled = true;
+        //}
 
         
 
@@ -50,8 +63,13 @@ public class FadeManager : MonoBehaviour
             return;
 
         transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
-        fadeImage.color = Color.Lerp(new Color(1, 1, 1, 0), Color.white, transition);
-        enter.color = Color.Lerp(new Color(1, 1, 1, 0), Color.black, transition);
+       
+        //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
+        play.color = Color.Lerp(new Color(0,0,0,0), Color.white, transition);
+        start.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
+        quit.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
+
+
 
 
         if (transition > 1 || transition < 0)
@@ -60,5 +78,26 @@ public class FadeManager : MonoBehaviour
         }
 	}
 
+
+    public void  Play()
+    {
+        Debug.Log("Damn");
+    }
+
+    public void Enter()
+    {
+        Fade(true, 2);
+        Cursor.visible = true;
+        title.enabled = false;
+        l_title.enabled = false;
+        play.enabled = true;
+        ButtonMenu.enabled = true;
+        TitleMenu.enabled = false;
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
   
 }
