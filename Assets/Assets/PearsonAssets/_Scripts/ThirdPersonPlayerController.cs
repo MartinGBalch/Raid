@@ -44,7 +44,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     {
         forwardInput = Input.GetAxis(inputSetting.Forward_Axis);
         turnInput = Input.GetAxis(inputSetting.Turn_Axis);
-        jumpInput = Input.GetAxisRaw(inputSetting.Jump_Axis);
+      //  jumpInput = Input.GetAxisRaw(inputSetting.Jump_Axis);
     }
     
     private Animator anim;
@@ -118,18 +118,19 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         Jump = Input.GetKeyDown(KeyCode.Space) || Controller.Jump;
         Sprint = Input.GetKey(KeyCode.LeftShift) || Controller.Sprint;
-        if (Forward || Backward || Left || Right || Jump || Sprint)
+        if (Forward || Backward || Left || Right || Jump || Sprint || attacking)
         { moved = true; }
         else
         { moved = false; }
 
 
-        Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Controller.Dash > 0) && canDash && moved;
+        Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Controller.Dash > .1f) && canDash && moved;
         SprintFunction();
         JumpFunction();
         attackCooldown -= DT;
-        if ((Input.GetMouseButton(0) ||Controller.Attack) && attacking == false)
+        if ((Input.GetMouseButton(0) || Controller.Attack) && attacking == false)
         {
+            comboNumb++;
             anim.SetBool("Attacking", true);
             NonCombatState = States.AttackState;
         }
@@ -211,7 +212,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public void JumpFunction()
     {
         jumptime -= DT;
-        if ((jumpInput > 0 || Jump) && jumpCount > 0 && jumptime < 0)
+        if ((Jump) && jumpCount > 0 && jumptime < 0)
         {
             anim.SetBool("Jumping", true);
             this.rb.AddForce(Vector3.up * jumpVel);
@@ -223,7 +224,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * DT;
         }
-        else if (rb.velocity.y > 0 && jumpInput == 0)
+        else if (rb.velocity.y > 0 )
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * DT;
         }
@@ -240,6 +241,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public bool attacking = false;
     public float attackTime;
     public GameObject hitbox;
+    int comboNumb = 0;
     public void AttackFunction()
     {
         if (attacking == false)
@@ -269,7 +271,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             }
             else
             {
-        Vector3 dir1 = Vector3.Normalize(new Vector3(cam.forward.x, 0, cam.forward.z));
+                Vector3 dir1 = Vector3.Normalize(new Vector3(cam.forward.x, 0, cam.forward.z));
                 rb.velocity = new Vector3(0, 0, 0);
                 transform.forward = dir1;
             }
@@ -357,7 +359,16 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public void Movement()
     {
         Vector3 dir1 = Vector3.Normalize(new Vector3(cam.forward.x,0,cam.forward.z));
-      
+
+        // try using perpendicular between player and camera instead of camera's right
+        var t = (cam.position - transform.position).normalized;
+        t.y = 0;
+        t = new Vector3(-t.z, 0, t.x);
+
+
+        Debug.DrawLine(cam.position, t*20 + cam.position);
+        //try desired velocity        
+        t = cam.right;
         if (Forward)
         {
             rb.AddForce(dir1 * NonCombatMaxSpeed);
@@ -370,16 +381,20 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         if (Right)
         {
-            rb.AddForce(cam.right * NonCombatMaxSpeed);
+            var d = t * NonCombatMaxSpeed - rb.velocity;
+            rb.AddForce(d);           
+            //rb.AddForce(t /*cam.right*/ * NonCombatMaxSpeed);
         }
         else if (Left)
         {
-            rb.AddForce(cam.right * -NonCombatMaxSpeed);
+            var d = -t * NonCombatMaxSpeed - rb.velocity;
+            rb.AddForce(d);
+            //rb.AddForce(t /*cam.right*/ * -NonCombatMaxSpeed);
         }
         Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         Quaternion dirQ = Quaternion.LookRotation(dir);
-        Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 2);
+        Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 1);
         rb.MoveRotation(slerp);
        
         rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));

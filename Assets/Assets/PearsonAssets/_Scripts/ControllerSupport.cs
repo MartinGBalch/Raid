@@ -19,7 +19,7 @@ public class ControllerSupport : MonoBehaviour {
     {
         if (Xbox && !PS4)
         {
-            Charge = Input.GetButtonDown("Xbox X Button");
+            Charge = Input.GetButton("Xbox X Button");
             Fire = Input.GetButtonUp("Xbox X Button");
             Attack = Input.GetButtonDown("Xbox B Button");
             Jump = Input.GetButtonDown("Xbox A Button");
@@ -31,9 +31,9 @@ public class ControllerSupport : MonoBehaviour {
             RightStickHorizontal = Input.GetAxis("XboxRightStickX");
             RightStickVertical = Input.GetAxis("XboxRightStickY");
         }
-        else
+        else if(PS4)
         {
-            Charge = Input.GetButtonDown("PS4SquareButton");
+            Charge = Input.GetButton("PS4SquareButton");
             Fire = Input.GetButtonUp("PS4SquareButton");
             Attack = Input.GetButtonDown("PS4CircleButton");
             Jump = Input.GetButtonDown("PS4XButton");
@@ -41,7 +41,7 @@ public class ControllerSupport : MonoBehaviour {
             Horizontal = Input.GetAxis("PS4Horizontal");
             Vertical = Input.GetAxis("PS4Vertical");
             Dash = Input.GetAxis("PS4RightTrigger");
-            Target = Input.GetAxis("Ps4LeftTrigger");
+            Target = Input.GetAxis("PS4LeftTrigger");
             RightStickHorizontal = Input.GetAxis("PS4RightStickX");
             RightStickVertical = Input.GetAxis("PS4RightStickY");
         }

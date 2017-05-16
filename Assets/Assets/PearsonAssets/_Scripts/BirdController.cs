@@ -8,8 +8,8 @@ public class BirdController : MonoBehaviour
     public GameObject Camera;
     public ThirdPersonCameraController CamController;
     private ThirdPersonPlayerController PlayerController;
-
-
+    public EnergyCharge Energy;
+    public ParticleSystem PS;
     public Vector3 velocityCamSmooth = Vector3.zero;
     [SerializeField]
     private float BirdSmoothDampAttack, BirdSmoothDampIdle;
@@ -26,6 +26,7 @@ public class BirdController : MonoBehaviour
         idle,
         idleAfk,
         AttackState,
+        ChargeState,
     }
 
     States CurrentState, IdleState;
@@ -80,8 +81,11 @@ public class BirdController : MonoBehaviour
         Hit = false;
         if(Vector3.Distance(transform.position, Player.transform.position) <= 6)
         {
-
             SetcamSmoothDampTime -= DT;
+        }
+        if (Vector3.Distance(transform.position, Player.transform.position) <=5)
+        {
+            canAttack = true;
         }
         x += HorzSpeed * distance * .05f;
         
@@ -121,6 +125,20 @@ public class BirdController : MonoBehaviour
 
     Vector3 killpos = Vector3.zero;
     Vector3 killOffset = Vector3.zero;
+    public float attackDamage;
+    public float ChargeAmount;
+    public void ChargeAttack()
+    {
+      
+            if (ChargeAmount <= Energy.Energy)
+            {
+                ChargeAmount += DT * 30;
+            }
+            attackDamage = ChargeAmount;
+            attackDamage = Mathf.Clamp(attackDamage, 0, 100);
+        
+        
+    }
     public void DoAttack()
     {
         if (TempTarget != null)
@@ -141,6 +159,14 @@ public class BirdController : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, TempTarget.transform.position, DT);
                 Vector3 dirMov = (transform.position - oldPos).normalized;
 
+
+                if (Vector3.Distance(transform.position, TempTarget.transform.position) < (tempDistance / 2) + 5)
+                {
+
+                    PS.simulationSpace = ParticleSystemSimulationSpace.World;
+                    PS.Play();
+                }
+
                 transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp * 1.5f);
                 if (Vector3.Distance(transform.position, TempTarget.transform.position) < (tempDistance / 2) + 1.5f)
                 {
@@ -152,13 +178,18 @@ public class BirdController : MonoBehaviour
                         {
                             //ParticleSystem bulletHit = Instantiate(impact, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
                             //bulletHit.transform.parent = hit.collider.gameObject.transform;
-                            
+
+                           
                             IDamageable dmg = hit.collider.GetComponent<IDamageable>();
                             killpos = TempTarget.transform.position;
                             killOffset = offset;
 
                             Hit = true;
-                           dmg.TakeDamage(100);
+                            dmg.TakeDamage(attackDamage);
+                            Energy.Energy = Energy.Energy - attackDamage;
+                            attackDamage = 0;
+                            ChargeAmount = 0;
+                            Controller.Charge = false;
                            
                         }
 
@@ -196,20 +227,31 @@ public class BirdController : MonoBehaviour
     private GameObject TempTarget;
     private float tempDistance;
     private bool Charge, Fire;
+    bool canAttack = true;
     public void KeyInput()
     {
-        Charge = Input.GetMouseButtonDown(1) || Controller.Charge;
-        Fire = Input.GetMouseButtonUp(1) || Controller.Fire;
-     
-        if (Fire)
+        Charge = Input.GetMouseButton(1) || Controller.Charge;
+        Fire = (Input.GetMouseButtonUp(1) || Controller.Fire) && CurrentState != States.AttackState && canAttack;
+
+        if (Energy.Energy >= 20)
         {
-            TempTarget = CamController.target.gameObject;
-            SetcamSmoothDampTime = BirdSmoothDampAttack ;
-            tempDistance = Vector3.Distance(transform.position, TempTarget.transform.position);
-            CurrentState = States.AttackState;
-            Fire = false;
-            Controller.Fire = false;
+            if (Charge)
+            {
+                ChargeAttack();
+            }
+
+            if (Fire)
+            {
+                TempTarget = CamController.target.gameObject;
+                SetcamSmoothDampTime = BirdSmoothDampAttack;
+                tempDistance = Vector3.Distance(transform.position, TempTarget.transform.position);
+                CurrentState = States.AttackState;
+                Fire = false;
+                Controller.Fire = false;
+                canAttack = false;
+            }
         }
+       
     }
     float DT;
     void FixedUpdate()
@@ -221,6 +263,8 @@ public class BirdController : MonoBehaviour
             case States.idleState:
                 DoIdle();
                 break;
+
+           
             case States.AttackState:
                 DoAttack();
                 break;
