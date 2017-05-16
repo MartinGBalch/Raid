@@ -13,6 +13,7 @@ public class FadeManager : MonoBehaviour
 
     public Button b_play;
     public Button b_enter;
+    public Button b_exit;
     public Text title;
     public Text l_title;
     public Text play;
@@ -64,7 +65,7 @@ public class FadeManager : MonoBehaviour
         transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
        
         //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
-        play.color = Color.Lerp(new Color(0,0,0,0), new Color(.75f,0,0,.5f), transition);
+        play.color = Color.Lerp(new Color(0,0,0,0), Color.white, transition);
         start.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
         quit.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
 
@@ -92,6 +93,11 @@ public class FadeManager : MonoBehaviour
         play.enabled = true;
         ButtonMenu.enabled = true;
         TitleMenu.enabled = false;
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
   
 }
