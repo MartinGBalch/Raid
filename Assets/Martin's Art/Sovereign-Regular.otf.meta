@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 986ec43613a0d9a48b34096644e2d9c2
+timeCreated: 1494956101
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Sovereign
+  fontNames:
+  - Sovereign
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
