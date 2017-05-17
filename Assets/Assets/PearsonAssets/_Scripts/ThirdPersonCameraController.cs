@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ThirdPersonCameraController : MonoBehaviour {
+    public ControllerSupport Controller;
     public GameObject Player;
     public Transform Center;
     public Rigidbody rb;
@@ -29,6 +30,34 @@ public class ThirdPersonCameraController : MonoBehaviour {
     private float correctedDistance;
     private float currentDist;
 
+    public class CamShake
+    {
+        public float floatshakeAmount = 0.7f;
+        public float shakeAmount = .01f;
+        public float decreaseFactor = 1.0f;
+        public float Shake = .5f;
+        public bool shake;
+
+        public void CameraShake(Transform transform, float DT)
+        {
+
+
+            if (Shake > 0)
+            {
+                transform.localPosition = Random.insideUnitSphere * shakeAmount;
+                Shake -= DT * decreaseFactor;
+            }
+            else
+            {
+                shake = false;
+            }
+
+
+
+        }
+    }
+    CamShake Shake = new CamShake();
+    public bool shake;
     [SerializeField]
     private float DistAway;
     [SerializeField]
@@ -77,6 +106,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     void Start()
     {
+        trans = GetComponent<Transform>();
         cam = GetComponent<Camera>();
         Vector3 angles = transform.eulerAngles;
         x = angles.x;
@@ -219,28 +249,30 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     public void KeyInput()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        // if (Input.GetKeyDown(KeyCode.Q) || Input.GetAxis("XboxLeftTrigger") != 0 || Input.GetAxis("XboxLeftTrigger") == 0 || Input.GetAxis("PS4LeftTrigger") != 0 || Input.GetAxis("PS4LeftTrigger") == 0) 
+        //{
+
+        if (target != null && CurrentLockState == States.NonLockedOnState && (Controller.Target >.1f || Input.GetKey(KeyCode.Q)))
         {
-            if(CurrentLockState == States.NonLockedOnState)
-            {
-                CurrentLockState = States.LockedOnState;
-            }
-            else
-            {
-                CurrentLockState = States.NonLockedOnState;
-            }
+            CurrentLockState = States.LockedOnState;
         }
+        else if ((!Input.GetKey(KeyCode.Q) && Controller.Target < .1f ) || target == null)
+        {
+            CurrentLockState = States.NonLockedOnState;
+        }
+        //}
     }
 
     public void NonLockedOn()
     {
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, 1 << 8))
         {
             target = hit.transform.gameObject;
         }
 
-        if (target != null && Vector3.Distance(transform.position, target.transform.position) > 20)
+        if (target != null && Vector3.Distance(transform.position, target.transform.position) > 25)
         {
             target = null;
           
@@ -259,41 +291,42 @@ public class ThirdPersonCameraController : MonoBehaviour {
             target = ClosetTargetView();
         }
         
-
         CameraLock();
-        if ((target != null && Vector3.Distance(transform.position, target.transform.position) > 20) || (target != null && Vector3.Distance(transform.position, follow.transform.position) > 20))
+        if ((target != null && Vector3.Distance(transform.position, target.transform.position) > 25) || (target != null && Vector3.Distance(transform.position, follow.transform.position) > 25))
         {
             target = null;
             CurrentLockState = States.NonLockedOnState;
-
         }
 
 
         SetcamSmoothDampTime = camSmoothDampTimeLock;
 
     }
-
+    bool correct = false;
     public void CameraLook()
     {
 
         x += Input.GetAxis("Mouse X") * MouseXSpeed * distance * 0.01f;
         y -= Input.GetAxis("Mouse Y") * MouseYSpeed * 0.02f;
 
-        x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .05f;
+        x += Controller.RightStickHorizontal * MouseXSpeed * distance * 0.01f;
+        y += Controller.RightStickVertical * MouseYSpeed * 0.1f;
+        
 
-        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || moving == true)
-        {
-            SetAfkTime = AfkTime;
-        }
-        else
-        {
-            SetAfkTime -= DT;
-        }
 
-        if (SetAfkTime < 0)
-        {
-            CurrentIdleState = States.IdleCamMovementAFK;
-        }
+        //if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || moving == true || Input.GetAxis("XboxRightStickX") > 0|| Input.GetAxis("XboxRightStickY") > 0 || Input.GetAxis("XboxRightStickX") < 0 || Input.GetAxis("XboxRightStickY") < 0)
+        //{
+        //    SetAfkTime = AfkTime;
+        //}
+        //else
+        //{
+        //    SetAfkTime -= DT;
+        //}
+
+        //if (SetAfkTime < 0)
+        //{
+        //    CurrentIdleState = States.IdleCamMovementAFK;
+        //}
 
         y = ClampAngle(y, -50, 80);
 
@@ -301,10 +334,10 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         Quaternion rotation = Quaternion.Euler(y, x, 0);
 
-        if (PlayerController.Sprint)
+        if (PlayerController.Sprint || PlayerController.Dash)
         {
             minViewDist = 3;
-            maxViewDist = 7;
+            maxViewDist = 4;
         }
         else
         {
@@ -313,26 +346,50 @@ public class ThirdPersonCameraController : MonoBehaviour {
         }
 
         distance = Mathf.Clamp(distance, minViewDist, maxViewDist);
-
+        Vector3 negDistance;
         RaycastHit hit;
+        
         if (Physics.Linecast(follow.position, transform.position, out hit))
         {
+
             distance -= hit.distance;
+            correct = true;
+        }
+        if (correct)
+        {
+
+
+            if (!Physics.Raycast(transform.position, -transform.forward, out hit, 3))
+            {
+                distance += DT;
+            }
+            else if (Physics.Raycast(transform.position, -transform.forward, out hit, 3))
+            {
+
+            }
+
+            if(distance >= maxViewDist)
+            {
+                correct = false;
+            }
         }
 
-        Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+
+        negDistance = new Vector3(0.0f, 0.0f, -distance);
         position = rotation * negDistance + follow.position;
-
-
-        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        if (!PlayerController.moved && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0))
         {
-            tempDamp += DT * 15;
+            tempDamp = 50;
+        }
+        else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0 )
+        {
+            tempDamp += DT * 50;
         }
         else
         {
-            tempDamp -= DT * 10;
+            tempDamp -= DT * 50;
         }
-        tempDamp = Mathf.Clamp(tempDamp, 1, 20);
+        tempDamp = Mathf.Clamp(tempDamp, 5, 50);
        
         var fwd = transform.forward;
 
@@ -344,14 +401,17 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         smoothPosition(transform.position, position);
 
+        x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .03f;
+
     }
+
     public void CameraLock()
     {
 
-        // x -= Input.GetAxis("Horizontal") * HorzSpeed * distance * .01f;
+        
 
         Vector3 screenPoint = cam.WorldToViewportPoint(follow.position);
-        bool onScreenRight = screenPoint.x > .51f;// && screenPoint.x <= .6f && screenPoint.y >= .4f && screenPoint.y <= .6f;
+        bool onScreenRight = screenPoint.x > .51f;
         bool onScreenLeft = screenPoint.x < .49f;
 
         
@@ -372,22 +432,17 @@ public class ThirdPersonCameraController : MonoBehaviour {
             x += HorzSpeed * DT * 2;
         }
 
-        y = ClampAngle(y, 10, 80);
+        if (screenPoint.y < .5f)
+        {
+           y -= HorzSpeed * DT * 3;
+        }
+
+        y = ClampAngle(y,5, 80);
 
         Vector3 position;
        
         Quaternion rotation = Quaternion.Euler(y, x, 0);
-
-        //if (PlayerController.Sprint)
-        //{
-        //    minViewDist = 3;
-        //    maxViewDist = 7;
-        //}
-        //else
-        //{
-        //    minViewDist = 1;
-        //    maxViewDist = 3;
-        //}
+        
 
         distance = Mathf.Clamp(distance, 1, 100);
 
@@ -396,14 +451,13 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             distance -= hit.distance;
         }
-      //  bool visible =  follow.renderer
 
         distance = Vector3.Distance(follow.position, target.transform.position) + 5;
 
 
         Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
         position = rotation * negDistance + target.transform.position;
-
+       
         var fwd = transform.forward;
         var direct = (target.transform.position - transform.position).normalized;
         var lkat = Vector3.Slerp(fwd, direct, DT * TempTargetDamp);
@@ -426,14 +480,14 @@ public class ThirdPersonCameraController : MonoBehaviour {
         }
 
     }
-
+  
     public void DoCamMoveAfk()
     {
         float Xmove = Input.GetAxis("Mouse X");
         float Ymove = Input.GetAxis("Mouse Y");
         
 
-        if (Xmove != 0 || Ymove != 0)
+        if (Xmove != 0 || Ymove != 0 || Controller.Horizontal != 0 || Controller.Vertical != 0)
         {
             CurrentIdleState = States.IdleCamMovement;
         }
@@ -470,11 +524,11 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
 
         transform.rotation = rotation;
-        transform.position = position;
+        smoothPosition(transform.position,position);
 
 
     }
-    
+    private Transform trans;
     void LateUpdate ()
     {
         DT = Time.deltaTime;
@@ -489,6 +543,12 @@ public class ThirdPersonCameraController : MonoBehaviour {
                 CombatMoveCamState();
                 break;
         }
+
+        //if(shake)
+        //{
+        //    Shake.CameraShake(trans, DT);
+        //    shake = Shake.shake;
+        //}
 
         if (Input.GetKey(KeyCode.Escape))
             Screen.lockCursor = false;

@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public float Health;
     public float ResistDamage;
-
+    public float MaxHealth;
 
 
 
@@ -19,12 +19,18 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         Health -= EstimatedDamageTaken(damageDealt);
     }
 
-    void Start () {
-		
+    void Start ()
+    {
+        MaxHealth = Health;	
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+        Health = Mathf.Clamp(Health, 0, MaxHealth);
+        if(Health <= 0)
+        {
+            Destroy(gameObject);
+        }
 	}
 }
