@@ -176,9 +176,7 @@ public class BirdController : MonoBehaviour
                     {
                         if (!Hit && (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Boss")))
                         {
-                            //ParticleSystem bulletHit = Instantiate(impact, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-                            //bulletHit.transform.parent = hit.collider.gameObject.transform;
-
+                       
                            
                             IDamageable dmg = hit.collider.GetComponent<IDamageable>();
                             killpos = TempTarget.transform.position;
@@ -203,7 +201,7 @@ public class BirdController : MonoBehaviour
                 Vector3 dirMov = (transform.position - oldPos).normalized;
                 transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
 
-                if (Vector3.Distance(transform.position, (TempTarget.transform.position + offset)) < 1)
+                if (Vector3.Distance(transform.position, (TempTarget.transform.position + killOffset)) < 1)
                 {
                     CurrentState = States.idleState;
                 }

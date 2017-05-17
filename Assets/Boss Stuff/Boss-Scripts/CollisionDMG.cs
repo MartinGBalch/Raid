@@ -6,6 +6,7 @@ public class CollisionDMG : MonoBehaviour {
 
     public float Dmg;
     float distDIF;
+    public float LerpSpeed;
 
     void OnTriggerEnter(Collider collider)
     {
@@ -39,9 +40,9 @@ public class CollisionDMG : MonoBehaviour {
             if (hit.collider.tag == "Floor")
             {
                 distDIF = Mathf.Abs(hit.point.y - transform.position.y);
-                Vector3 POS = new Vector3(transform.position.x, hit.transform.position.y - distDIF , transform.position.z);
+                Vector3 POS = new Vector3(transform.position.x, hit.transform.position.y - distDIF, transform.position.z);
 
-                transform.position = Vector3.Lerp(transform.position, POS, Time.deltaTime * 5);
+                transform.position = Vector3.Lerp(transform.position, POS, Time.deltaTime * LerpSpeed);
             }
             
         }

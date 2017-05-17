@@ -7,8 +7,8 @@ public class MinionSpawn : MonoBehaviour {
 
     public GameObject Minion;
     public float spawnCount;
-    public float Range;
-    
+    public float MaxRange;
+    public float MinRange;
     // Use this for initialization
     void Start () {
 		
@@ -19,8 +19,8 @@ public class MinionSpawn : MonoBehaviour {
     {
         for (int i = 0; i < spawnCount; i++)
         {
-            float RandX = Random.Range(-Range, Range);
-            float RandZ = Random.Range(-Range, Range);
+            float RandX = Random.Range(MinRange, MaxRange);
+            float RandZ = Random.Range(MinRange, MaxRange);
             var MinionBaby = Minion;
             MinionBaby.transform.position = new Vector3(transform.forward.x + RandX, transform.position.y, transform.forward.z + (RandZ/2));
             Instantiate(MinionBaby);
