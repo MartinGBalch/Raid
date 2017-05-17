@@ -14,11 +14,26 @@ public class AttackDamage : MonoBehaviour
         {
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<BossPartsHealth>().TakeDamage(DamageAmount);
+                // other.GetComponent<BossPartsHealth>().TakeDamage(DamageAmount);
+                var Stunnable = other.GetComponent<MinionMovement>();
+               var IsDamageable = other.GetComponent<IDamageable>();
+                if(IsDamageable != null)
+                {
+                    IsDamageable.TakeDamage(DamageAmount);
+                }
+                if(Stunnable != null)
+                {
+                    Stunnable.IsStunned = true;
+                }
             }
             else if(other.CompareTag("Boss"))
             {
-                other.GetComponent<BossHealth>().TakeDamage(DamageAmount);
+                //other.GetComponent<BossHealth>().TakeDamage(DamageAmount);
+                var IsDamageable = other.GetComponent<IDamageable>();
+                if (IsDamageable != null)
+                {
+                    IsDamageable.TakeDamage(DamageAmount);
+                }
             }
         }
     }

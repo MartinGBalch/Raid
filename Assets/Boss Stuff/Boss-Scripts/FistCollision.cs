@@ -32,14 +32,14 @@ public class FistCollision : MonoBehaviour {
             
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
         ActualTimer -= Time.deltaTime;
-        if(ActualTimer <= 0)
+        if (ActualTimer <= 0)
         {
             IsDamage = true;
         }
         if (ActualTimer <= -1) { Destroy(gameObject); }
-	}
+    }
 }

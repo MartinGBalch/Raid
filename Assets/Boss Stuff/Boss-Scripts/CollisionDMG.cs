@@ -5,7 +5,8 @@ using UnityEngine;
 public class CollisionDMG : MonoBehaviour {
 
     public float Dmg;
-  
+    float distDIF;
+    public float LerpSpeed;
 
     void OnTriggerEnter(Collider collider)
     {
@@ -15,6 +16,7 @@ public class CollisionDMG : MonoBehaviour {
             if (player != null)
             {
                 player.TakeDamage(Dmg);
+                Destroy(gameObject);
             }
         }
         
@@ -32,6 +34,17 @@ public class CollisionDMG : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.up, out hit, 50))
+        {
+            if (hit.collider.tag == "Floor")
+            {
+                distDIF = Mathf.Abs(hit.point.y - transform.position.y);
+                Vector3 POS = new Vector3(transform.position.x, hit.transform.position.y - distDIF, transform.position.z);
+
+                transform.position = Vector3.Lerp(transform.position, POS, Time.deltaTime * LerpSpeed);
+            }
+            
+        }
     }
 }

@@ -12,19 +12,26 @@ public class TerrainCorrection : MonoBehaviour {
         {
             if(hit.collider.tag == "Floor")
             {
-                distDIF = hit.distance - transform.position.y;
+                distDIF = Mathf.Abs(hit.point.y - transform.position.y);
                 
-                transform.position = new Vector3(transform.position.x, hit.transform.position.y - distDIF - transform.localScale.y, transform.position.z);
+                Vector3 NewPos = new Vector3(transform.position.x, transform.position.y - distDIF + (transform.localScale.y / 3) , transform.position.z);
+                transform.position = NewPos;
             }
             else
             {
                 Destroy(gameObject);
             }
+
         }
-	}
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
 }

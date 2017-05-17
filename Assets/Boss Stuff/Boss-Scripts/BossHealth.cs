@@ -9,7 +9,8 @@ public class BossHealth : MonoBehaviour, IDamageable {
     private float StartResistance;
     public float VulnerableTime;
     private float StartTimer;
-    
+    MinionSpawn BabySpawner;
+
     private float DamageToBeDealt = 0;
     public float EstimatedDamageTaken(float damageDealt)
     {
@@ -29,6 +30,7 @@ public class BossHealth : MonoBehaviour, IDamageable {
     // Use this for initialization
     void Start ()
     {
+        BabySpawner = GetComponent<MinionSpawn>();
         StartResistance = ResistDamage;
         StartTimer = VulnerableTime;
 	}
@@ -38,15 +40,19 @@ public class BossHealth : MonoBehaviour, IDamageable {
     {
 		if(ResistDamage == 0)
         {
+            
             VulnerableTime -= Time.deltaTime;
             if(VulnerableTime <= 0)
             {
+                Debug.Log("The Boss is Immune Again");
+                BabySpawner.RunMechanic();
                 ResistDamage = StartResistance;
                 VulnerableTime = StartTimer;
             }
         }
         if(Health <= 0)
         {
+            Debug.Log("The Boss Is Dead");
             Destroy(gameObject);
         }
         
