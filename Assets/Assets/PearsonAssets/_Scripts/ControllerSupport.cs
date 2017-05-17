@@ -21,7 +21,8 @@ public class ControllerSupport : MonoBehaviour {
         {
             Charge = Input.GetButton("Xbox X Button");
             Fire = Input.GetButtonUp("Xbox X Button");
-            Attack = Input.GetButtonDown("Xbox B Button");
+            ChargeAttack = Input.GetButton("Xbox B Button");
+            Attack = Input.GetButtonUp("Xbox B Button");
             Jump = Input.GetButtonDown("Xbox A Button");
             Sprint = Input.GetButton("XboxLeftStickPress");
             Horizontal = Input.GetAxis("XboxHorizontal");

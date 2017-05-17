@@ -131,13 +131,13 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
 
         Jump = Input.GetKeyDown(KeyCode.Space) || Controller.Jump;
-        Sprint = Input.GetKey(KeyCode.LeftShift) || Controller.Sprint;
         if (Forward || Backward || Left || Right || Jump || Sprint || attacking)
         { moved = true; }
         else
         { moved = false; }
 
 
+        Sprint = (Input.GetKey(KeyCode.LeftShift) || Controller.Sprint) && moved;
         Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Controller.Dash > .1f) && canDash && moved;
         SprintFunction();
         JumpFunction();
@@ -476,7 +476,13 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     }
 
-	void FixedUpdate ()
+    private void OnCollisionEnter(Collision collision)
+    {
+        jumpCount = 1;
+        anim.SetBool("Jumping", false);
+    }
+
+    void FixedUpdate ()
     {
         DT = Time.deltaTime;
         KeyInput();
@@ -492,9 +498,4 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        jumpCount = 1;
-        anim.SetBool("Jumping", false);
-    }
 }
