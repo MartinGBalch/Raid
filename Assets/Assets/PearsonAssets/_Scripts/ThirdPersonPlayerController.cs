@@ -37,6 +37,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     bool Grounded()
     {
+        
         return Physics.Raycast(transform.position, Vector3.down, moveSetting.distToGrounded);
     }
 
