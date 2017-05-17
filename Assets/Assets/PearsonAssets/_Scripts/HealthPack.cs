@@ -8,11 +8,12 @@ public class HealthPack : MonoBehaviour
     {
 
         if(other.CompareTag("Player"))
-        {if (other.GetComponent<PlayerHealth>().Health != other.GetComponent<PlayerHealth>().MaxHealth)
+        {if (other.GetComponent<PlayerHealth>().Health < other.GetComponent<PlayerHealth>().MaxHealth)
             {
                 other.GetComponent<PlayerHealth>().Health += (other.GetComponent<PlayerHealth>().MaxHealth * .2f);
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+           
         }
 
     }

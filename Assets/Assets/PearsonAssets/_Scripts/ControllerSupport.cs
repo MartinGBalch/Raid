@@ -5,7 +5,7 @@ using UnityEngine;
 public class ControllerSupport : MonoBehaviour {
 
     public bool Xbox, PS4;
-    public bool Fire, Charge, Attack, Jump, Sprint;
+    public bool Fire, Charge, Attack, Jump, Sprint, ChargeAttack;
     public float Horizontal, Vertical,Dash,Target,RightStickHorizontal, RightStickVertical;
 
 	// Use this for initialization
@@ -35,7 +35,8 @@ public class ControllerSupport : MonoBehaviour {
         {
             Charge = Input.GetButton("PS4SquareButton");
             Fire = Input.GetButtonUp("PS4SquareButton");
-            Attack = Input.GetButtonDown("PS4CircleButton");
+            ChargeAttack = Input.GetButton("PS4CircleButton");
+            Attack = Input.GetButtonUp("PS4CircleButton");
             Jump = Input.GetButtonDown("PS4XButton");
             Sprint = Input.GetButton("PS4LeftStickPress");
             Horizontal = Input.GetAxis("PS4Horizontal");
