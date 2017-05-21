@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-﻿<Properties StartupItem="Raid.CSharp.Plugins.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Interfaces.cs">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Other Assets\Martin's Scripts\FadeManager.cs">
     <Files>
-      <File FileName="Assets\Interfaces.cs" Line="1" Column="1" />
-=======
-﻿<Properties StartupItem="Raid.Plugins.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Interfaces.cs">
-    <Files>
-      <File FileName="Assets\Interfaces.cs" Line="6" Column="1" />
->>>>>>> fdeabbde6d3998c76a67371a389159d6bb65aea4
+      <File FileName="Assets\Other Assets\Martin's Scripts\FadeManager.cs" Line="85" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
