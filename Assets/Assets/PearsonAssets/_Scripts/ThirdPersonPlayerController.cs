@@ -66,10 +66,14 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         AttackState,
         ChargeState,
         HeavyAttackState,
+        AttackStateMovement,
+        AttackOne,
+        AttackTwo,
+        AttackThree,
 
     }
 
-    public States CurrentState, NonCombatState, CombatState;
+    public States CurrentState, NonCombatState, CombatState, AttackingState;
 
 	void Start ()
     {
@@ -78,8 +82,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         NonCombatState = States.IdleState;
         CombatState = States.CombatIdleState;
         CurrentState = States.OutOfCombatState;
+        AttackingState = States.AttackOne;
         rb = GetComponent<Rigidbody>();
-      anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
 	}
 
     bool Forward, Backward, Left, Right;
@@ -100,6 +105,139 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public float Charge;
     private float smoothTimer;
     private Vector3 moveVector;
+
+
+    public void AttackFunction()
+    {
+        presstimer -= DT;
+        AttackMovement();
+        switch (AttackingState)
+        {
+            case States.AttackOne:
+                AttackOne();
+                break;
+            case States.AttackTwo:
+                AttackTwo();
+                break;
+            case States.AttackThree:
+                AttackThree();
+                break;
+
+
+        }
+
+
+    }
+
+    bool buttonPress = false;
+
+    void AttackMovement()
+    {
+        if (cam1.target != null)
+        {
+
+
+            Vector3 dir1 = (cam1.target.transform.position - transform.position).normalized;
+            dir1.y = 0;
+
+            rb.AddForce(dir1 * NonCombatMaxSpeed);
+
+            RaycastHit hit;
+
+
+
+            Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            Quaternion dirQ = Quaternion.LookRotation(dir);
+            Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 0.5f);
+
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
+            {
+                rb.freezeRotation = true;
+            }
+            else
+            {
+                rb.MoveRotation(slerp);
+            }
+            rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
+
+
+        }
+        else
+        {
+            Vector3 camRel = cam.transform.localToWorldMatrix * new Vector4(moveVector.x, moveVector.y, moveVector.z, 0);
+
+            camRel.y = 0;
+            camRel.Normalize();
+
+            var force = camRel * NonCombatMaxSpeed - rb.velocity;
+
+            rb.AddForce(force);
+
+            Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            Quaternion dirQ = Quaternion.LookRotation(dir);
+            Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 0.5f);
+            rb.MoveRotation(slerp);
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
+            {
+                rb.freezeRotation = true;
+            }
+            else
+            {
+
+                rb.MoveRotation(slerp);
+            }
+            rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
+
+        }
+    }
+    float presstimer;
+    void AttackOne()
+    {
+        HorzSpeed = .4f;
+        vertSpeed = .5f;
+        attackTime = .5f;
+        hitbox.SetActive(true);
+        if ((Input.GetMouseButtonDown(0) || Controller.Attack) && presstimer <= 0)
+        {
+            Controller.Attack = false;
+            presstimer = .01f;
+            buttonPress = true;
+        }
+
+
+    }
+    void AttackTwo()
+    {
+        attackTime = .4f;
+        HorzSpeed = .01f;
+        vertSpeed = .01f;
+        hitbox.SetActive(true);
+        if (Input.GetMouseButtonDown(0) || Controller.Attack)
+        {
+            Controller.Attack = false;
+            presstimer = .01f;
+            buttonPress = true;
+        }
+    }
+    void AttackThree()
+    {
+        attackTime = .4f;
+        HorzSpeed = .5f;
+        vertSpeed = .5f;
+        hitbox.SetActive(true);
+        if (Input.GetMouseButtonDown(0) || Controller.Attack)
+        {
+            Controller.Attack = false;
+            presstimer = .01f;
+            buttonPress = true;
+        }
+    }
+
+
+
 
     public void KeyInput()
     {
@@ -145,35 +283,17 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         attackCooldown -= DT;
         ComboTime -= DT;
         smoothTimer -= DT;
-        if ((Input.GetMouseButton(0) || Controller.ChargeAttack) && attacking == false)
+       
+        if ((Input.GetMouseButtonDown(0) || Controller.Attack) && attacking == false)
         {
-
-            NonCombatState = States.ChargeState;
-        }
-        else if ((Input.GetMouseButtonUp(0) || Controller.Attack) && attacking == false)
-        {
-          
-            ComboTime = .7f;
-            
-            smoothTimer = .2f;
-            comboNumb++;
-            anim.SetBool("Attacking", true);
-
+            Controller.Attack = false;
+            attacking = true;
+            anim.SetTrigger("Attack");
+            presstimer = .01f;
             NonCombatState = States.AttackState;
 
         }
-        if((Input.GetMouseButtonUp(0) || Controller.Attack))
-        {
-
-            smoothTimer = .2f;
-        }
-        anim.SetInteger("ComboNumb", comboNumb);
-
-        if (ComboTime <= 0)
-        {
-            anim.SetBool("Attacking", false);
-            comboNumb = 0;
-        }
+       
     }
 
     public void SprintFunction()
@@ -305,68 +425,63 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
     }
 
-    public void AttackFunction()
-    {
-        if (attacking == false)
-        {
-            ComboFunction();
-          
-            attacking = true;
-            hitbox.SetActive(true);
-        }
-
-        attackTime -= DT;
-        if (attackTime > 0 && attacking == true)
-        {
-            if (cam1.target != null)
-            {
 
 
-              
+    //public void AttackFunction()
+    //{
+    //    if (attacking == false)
+    //    {
+    //        ComboFunction();
 
-                Vector3 dir1 = (cam1.target.transform.position - transform.position).normalized;
-                dir1.y = 0;
+    //        attacking = true;
+    //        hitbox.SetActive(true);
+    //    }
 
-                rb.AddForce(dir1 * NonCombatMaxSpeed);
+    //    attackTime -= DT;
+    //    if (attackTime > 0 && attacking == true)
+    //    {
+    //        if (cam1.target != null)
+    //        {
 
-                Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-                Quaternion dirQ = Quaternion.LookRotation(dir);
-                Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, DT * 10);
-                rb.MoveRotation(slerp);
 
-                rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
-            }
-            else
-            {
-                Vector3 dir1 = Vector3.Normalize(new Vector3(cam.forward.x, 0, cam.forward.z));
-                rb.velocity = new Vector3(0, 0, 0);
-                transform.forward = dir1;
-            }
-        }
-        else
-        {
-            attacking = false;
-            NonCombatState = States.MovementState;
-            CombatState = States.MovementState;
-            attackCooldown = .2f;
-            hitbox.SetActive(false);
-           // anim.SetBool("Attacking", false);
-            Controller.Attack = false;
-          if(comboNumb == 3)
-            {
-                comboNumb = 0;
-            }
-        }
-    }
-    public void ChargeFunction()
-    {
 
-    }
-    public void HeavyAttackFunction()
-    {
+    //            Vector3 dir1 = (cam1.target.transform.position - transform.position).normalized;
+    //            dir1.y = 0;
 
-    }
+    //            rb.AddForce(dir1 * NonCombatMaxSpeed);
+
+    //            Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+    //            Quaternion dirQ = Quaternion.LookRotation(dir);
+    //            Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, DT * 10);
+    //            rb.MoveRotation(slerp);
+
+    //            rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
+    //        }
+    //        else
+    //        {
+    //            Vector3 dir1 = Vector3.Normalize(new Vector3(cam.forward.x, 0, cam.forward.z));
+    //            rb.velocity = new Vector3(0, 0, 0);
+    //            transform.forward = dir1;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        attacking = false;
+    //        NonCombatState = States.MovementState;
+    //        CombatState = States.MovementState;
+    //        attackCooldown = .2f;
+    //        hitbox.SetActive(false);
+    //        anim.SetBool("Attacking", false);
+    //        Controller.Attack = false;
+    //      if(comboNumb == 3)
+    //        {
+    //            comboNumb = 0;
+    //        }
+    //    }
+    //}
+
     public void OutOfCombat()
     {
         switch (NonCombatState)
@@ -380,12 +495,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             case States.AttackState:
                 AttackFunction();
                 break;
-            case States.ChargeState:
-                ChargeFunction();
-                break;
-            case States.HeavyAttackState:
-                HeavyAttackFunction();
-                break;
+         
         }
 
         if (moved == true && NonCombatState != States.AttackState)
@@ -451,8 +561,6 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         camRel.y = 0;
         camRel.Normalize();
 
-        Debug.Log(camRel);
-
         var force = camRel * NonCombatMaxSpeed - rb.velocity;
 
         rb.AddForce(force);
@@ -467,16 +575,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     }
     
-    public void CombatMovement()
-    {
-
-    }
-
-    public void CombatIdle()
-    {
-
-    }
-
+    
+   
     private void OnCollisionEnter(Collision collision)
     {
         jumpCount = 1;
@@ -496,6 +596,68 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             case States.CombatState:
                 Combat();
                 break;
+        }
+    }
+
+    public void EndAttackOne()
+    {
+
+        if (buttonPress == false)
+        {
+            hitbox.SetActive(false);
+            anim.SetTrigger("EndAttack");
+            attacking = false;
+            buttonPress = false;
+            AttackingState = States.AttackOne;
+            NonCombatState = States.IdleState;
+        }
+        else
+        {
+            hitbox.SetActive(false);
+            anim.SetTrigger("Combo1");
+            buttonPress = false;
+            AttackingState = States.AttackTwo;
+        }
+    }
+    public void EndAttackTwo()
+    {
+
+        if (buttonPress == false)
+        {
+            hitbox.SetActive(false);
+            anim.SetTrigger("EndAttack");
+            attacking = false;
+            buttonPress = false;
+            AttackingState = States.AttackOne;
+            NonCombatState = States.IdleState;
+        }
+        else
+        {
+
+            hitbox.SetActive(false);
+            anim.SetTrigger("Combo2");
+            buttonPress = false;
+            AttackingState = States.AttackThree;
+        }
+    }
+    public void EndAttackThree()
+    {
+
+        if (buttonPress == false)
+        {
+            hitbox.SetActive(false);
+            anim.SetTrigger("EndAttack");
+            attacking = false;
+            buttonPress = false;
+            AttackingState = States.AttackOne;
+            NonCombatState = States.IdleState;
+        }
+        else
+        {
+            hitbox.SetActive(false);
+            anim.SetTrigger("Combo3");
+            buttonPress = false;
+            AttackingState = States.AttackOne;
         }
     }
 

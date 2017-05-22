@@ -144,6 +144,7 @@ public class BirdController : MonoBehaviour
         if (TempTarget != null)
         {
             Vector3 offset = new Vector3(0, TempTarget.transform.localScale.y * 3, 0);
+            killOffset = offset;
             if (Vector3.Distance(transform.position, TempTarget.transform.position) > (tempDistance / 2))
             {
 
@@ -201,7 +202,7 @@ public class BirdController : MonoBehaviour
                 Vector3 dirMov = (transform.position - oldPos).normalized;
                 transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
 
-                if (Vector3.Distance(transform.position, (TempTarget.transform.position + killOffset)) < 1)
+                if (Vector3.Distance(transform.position, (TempTarget.transform.position + killOffset)) < 3)
                 {
                     CurrentState = States.idleState;
                 }
