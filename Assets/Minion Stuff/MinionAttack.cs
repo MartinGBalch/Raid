@@ -14,7 +14,7 @@ public class MinionAttack : MonoBehaviour {
         if (other.tag == "Player")
         {
             gameObject.GetComponent<BoxCollider>().enabled = false;
-            Debug.Log("Damage");
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
             other.GetComponent<PlayerHealth>().TakeDamage(damage);
             
         }

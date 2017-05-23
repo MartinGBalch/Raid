@@ -13,7 +13,7 @@ public class BoulderFall : MonoBehaviour {
             Kinetic = false;
             Destroy(gameObject, .5f);
         }
-        if(collision.collider.tag == "Player")
+        if(collision.collider.tag == "Player" && Kinetic == true)
         {
             var player = collision.gameObject.GetComponent<PlayerHealth>();
             if(player != null)
