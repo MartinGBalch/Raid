@@ -16,7 +16,28 @@ public class ChargerAI : MonoBehaviour {
     float DT;
     Rigidbody rb;
     Vector3 FirstBase;
+    public float Dmg;
+    bool CanDealDamage = false;
     // Use this for initialization
+
+    void OnTriggerEnter(Collider other)
+    {
+       
+        if (other.tag == "Player")
+        {
+           
+            var thingy = other.gameObject.GetComponent<IDamageable>();
+            if (thingy != null && CanDealDamage == true)
+            {
+                thingy.TakeDamage(Dmg);
+                CanDealDamage = false;
+            }
+
+        }
+
+    }
+
+
     void Start ()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -44,6 +65,7 @@ public class ChargerAI : MonoBehaviour {
             ChargeDelay -= DT;
             if (ChargeDelay <= 0)
             {
+                CanDealDamage = true;
                 agent.isStopped = false;
                
             }
