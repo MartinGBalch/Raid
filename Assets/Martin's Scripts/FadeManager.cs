@@ -11,15 +11,20 @@ public class FadeManager : MonoBehaviour
 
     public Canvas ButtonMenu;
     public Canvas TitleMenu;
+    public Canvas SettingMenu;
 
     public Button b_play;
     public Button b_enter;
     public Button b_exit;
+    public Button b_setting;
+    public Button b_back;
+
     public Text title;
     public Text l_title;
     public Text play;
     public Text start;
     public Text quit;
+    public Text setting;
 
     private bool isInTransition;
     private bool isShowing;
@@ -46,7 +51,12 @@ public class FadeManager : MonoBehaviour
     }
 
 	// Use this for initialization
-	void Start () { play.enabled = false; ButtonMenu.enabled = false; }
+	void Start ()
+    {
+        play.enabled = false;
+        ButtonMenu.enabled = false;
+        SettingMenu.enabled = false;
+    }
 	// Update is called once per frame
 	void Update ()
     {
@@ -69,6 +79,7 @@ public class FadeManager : MonoBehaviour
         play.color = Color.Lerp(new Color(0,0,0,0), Color.white, transition);
         start.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
         quit.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
+        setting.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
 
 
 
@@ -95,6 +106,22 @@ public class FadeManager : MonoBehaviour
         ButtonMenu.enabled = true;
         TitleMenu.enabled = false;
     }
+
+    public void Settings()
+    {
+        SettingMenu.enabled = true;
+        ButtonMenu.enabled = false;
+    }
+
+    public void Back()
+    {
+        SettingMenu.enabled = false;
+        TitleMenu.enabled = true;
+    }
+
+
+
+
 
     public void Exit()
     {
