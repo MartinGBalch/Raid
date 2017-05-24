@@ -345,9 +345,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
         Vector3 negDistance;
         RaycastHit hit;
         
-        if (Physics.Linecast(follow.position, transform.position, out hit, 1 << 1) ||  Physics.Linecast(follow.position, transform.position, out hit, 1 << 9))
+        if (Physics.Linecast(follow.position, transform.position, out hit, 1 << 10) || Physics.Linecast(follow.position, transform.position, out hit, 1 << 9))
         {
-
             distance -= hit.distance;
             correct = true;
         }
