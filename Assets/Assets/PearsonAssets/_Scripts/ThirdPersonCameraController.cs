@@ -272,11 +272,9 @@ public class ThirdPersonCameraController : MonoBehaviour {
             target = hit.transform.gameObject;
         }
 
-        if (target != null && Vector3.Distance(transform.position, target.transform.position) > 25)
+        if (target != null && Vector3.Distance(Player.transform.position, target.transform.position) > 35)
         {
             target = null;
-          
-
         }
 
         SetcamSmoothDampTime = camSmoothDampTimeNonLock;
@@ -292,7 +290,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         }
         
         CameraLock();
-        if ((target != null && Vector3.Distance(transform.position, target.transform.position) > 25) || (target != null && Vector3.Distance(transform.position, follow.transform.position) > 25))
+        if ((target != null && Vector3.Distance(Player.transform.position, target.transform.position) > 35) || (target != null && Vector3.Distance(transform.position, follow.transform.position) > 35))
         {
             target = null;
             CurrentLockState = States.NonLockedOnState;
@@ -312,8 +310,6 @@ public class ThirdPersonCameraController : MonoBehaviour {
         x += Controller.RightStickHorizontal * MouseXSpeed * distance * 0.01f;
         y += Controller.RightStickVertical * MouseYSpeed * 0.1f;
         
-
-
         //if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || moving == true || Input.GetAxis("XboxRightStickX") > 0|| Input.GetAxis("XboxRightStickY") > 0 || Input.GetAxis("XboxRightStickX") < 0 || Input.GetAxis("XboxRightStickY") < 0)
         //{
         //    SetAfkTime = AfkTime;
@@ -349,9 +345,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
         Vector3 negDistance;
         RaycastHit hit;
         
-        if (Physics.Linecast(follow.position, transform.position, out hit))
+        if (Physics.Linecast(follow.position, transform.position, out hit, 1 << 10) || Physics.Linecast(follow.position, transform.position, out hit, 1 << 9))
         {
-
             distance -= hit.distance;
             correct = true;
         }
@@ -389,7 +384,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             tempDamp -= DT * 50;
         }
-        tempDamp = Mathf.Clamp(tempDamp, 5, 50);
+        tempDamp = Mathf.Clamp(tempDamp, 1, 50);
        
         var fwd = transform.forward;
 
@@ -437,7 +432,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
            y -= HorzSpeed * DT * 3;
         }
 
-        y = ClampAngle(y,5, 80);
+        y = ClampAngle(y,10, 80);
 
         Vector3 position;
        
@@ -447,13 +442,34 @@ public class ThirdPersonCameraController : MonoBehaviour {
         distance = Mathf.Clamp(distance, 1, 100);
 
         RaycastHit hit;
-        if (Physics.Linecast(target.transform.position, transform.position, out hit))
-        {
-            distance -= hit.distance;
-        }
 
         distance = Vector3.Distance(follow.position, target.transform.position) + 5;
 
+
+        if (Physics.Linecast(follow.position, transform.position, out hit, 1 << 1) )
+        {
+
+            distance -= hit.distance;
+            correct = true;
+        }
+        if (correct)
+        {
+
+
+            if (!Physics.Raycast(transform.position, -transform.forward, out hit, 3))
+            {
+                distance += DT;
+            }
+            else if (Physics.Raycast(transform.position, -transform.forward, out hit, 3))
+            {
+               
+            }
+
+            if (distance >= maxViewDist)
+            {
+                correct = false;
+            }
+        }
 
         Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
         position = rotation * negDistance + target.transform.position;
@@ -543,12 +559,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
                 CombatMoveCamState();
                 break;
         }
-
-        //if(shake)
-        //{
-        //    Shake.CameraShake(trans, DT);
-        //    shake = Shake.shake;
-        //}
+        
 
         if (Input.GetKey(KeyCode.Escape))
             Screen.lockCursor = false;

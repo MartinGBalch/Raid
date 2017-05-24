@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2b2c382aba7e69749a597a71933c30bb
-timeCreated: 1494961673
+guid: 3661b6809f610654b9247c30c5d4c2dc
+timeCreated: 1495646509
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -137,9 +137,9 @@ ModelImporter:
     400126: QuickRigCharacter_Spine
     400128: QuickRigCharacter_Spine1
     400130: QuickRigCharacter_Spine2
+    2300000: CHR_basemesh
+    3300000: CHR_basemesh
     4300000: CHR_basemesh
-    9500000: //RootNode
-    13700000: CHR_basemesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -204,7 +204,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
