@@ -22,7 +22,7 @@ public class ControllerSupport : MonoBehaviour {
             Charge = Input.GetButton("Xbox X Button");
             Fire = Input.GetButtonUp("Xbox X Button");
             ChargeAttack = Input.GetButton("Xbox B Button");
-            Attack = Input.GetButtonDown("Xbox B Button");
+            Attack = Input.GetButtonDown("Xbox B Button") || Attack;
             Jump = Input.GetButtonDown("Xbox A Button");
             Sprint = Input.GetButton("XboxLeftStickPress");
             Horizontal = Input.GetAxis("XboxHorizontal");
@@ -37,7 +37,7 @@ public class ControllerSupport : MonoBehaviour {
             Charge = Input.GetButton("PS4SquareButton");
             Fire = Input.GetButtonUp("PS4SquareButton");
             ChargeAttack = Input.GetButton("PS4CircleButton");
-            Attack = Input.GetButtonDown("PS4CircleButton");
+            Attack = Input.GetButtonDown("PS4CircleButton")  || Attack;
             Jump = Input.GetButtonDown("PS4XButton");
             Sprint = Input.GetButton("PS4LeftStickPress");
             Horizontal = Input.GetAxis("PS4Horizontal");

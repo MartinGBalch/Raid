@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: f38c29c186fe9314988a4ac80d2a612e
-timeCreated: 1494963739
+guid: 5a2c80fb8298db24cb10b6b0af165d57
+timeCreated: 1495497415
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: CHR_basemesh
+    100000: //RootNode
     100002: QuickRigCharacter_Ctrl_ChestEndEffector
     100004: QuickRigCharacter_Ctrl_ChestOriginEffector
     100006: QuickRigCharacter_Ctrl_Head
@@ -70,8 +70,7 @@ ModelImporter:
     100124: QuickRigCharacter_Spine
     100126: QuickRigCharacter_Spine1
     100128: QuickRigCharacter_Spine2
-    100130: //RootNode
-    400000: CHR_basemesh
+    400000: //RootNode
     400002: QuickRigCharacter_Ctrl_ChestEndEffector
     400004: QuickRigCharacter_Ctrl_ChestOriginEffector
     400006: QuickRigCharacter_Ctrl_Head
@@ -136,10 +135,8 @@ ModelImporter:
     400124: QuickRigCharacter_Spine
     400126: QuickRigCharacter_Spine1
     400128: QuickRigCharacter_Spine2
-    400130: //RootNode
-    4300000: CHR_basemesh
+    7400000: Take 001
     9500000: //RootNode
-    13700000: CHR_basemesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -198,7 +195,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: QuickRigCharacter_Hips
+    rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0

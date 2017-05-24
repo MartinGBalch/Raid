@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BirdController : MonoBehaviour
+public class BirdMotor : MonoBehaviour
 {
     public GameObject Player;
     public GameObject Camera;
@@ -14,11 +14,11 @@ public class BirdController : MonoBehaviour
     [SerializeField]
     private float BirdSmoothDampAttack, BirdSmoothDampIdle;
     [SerializeField]
-    private float SetcamSmoothDampTime = .1f;
+    private float SetcamSmoothDampTime = 1;
     [SerializeField]
+    public Transform Hoveroffset;
 
-
-    ControllerSupport Controller;
+    public ControllerSupport Controller;
 
     enum States
     {
@@ -33,6 +33,7 @@ public class BirdController : MonoBehaviour
 
     void Start()
     {
+       // offset = Player.transform.position + transform.position;
         SetcamSmoothDampTime = BirdSmoothDampIdle;
         CurrentState = States.idleState;
         IdleState = States.idle;
@@ -78,37 +79,30 @@ public class BirdController : MonoBehaviour
     public float tempDamp;
     public void DoIdle()
     {
+      
         Hit = false;
-        if(Vector3.Distance(transform.position, Player.transform.position) <= 6)
-        {
-            SetcamSmoothDampTime -= DT;
-        }
-        if (Vector3.Distance(transform.position, Player.transform.position) <=5)
+        if (Vector3.Distance(transform.position, Player.transform.position) <= 5)
         {
             canAttack = true;
         }
-        x += HorzSpeed * distance * .05f;
-        
 
-        y = ClampAngle(y, 0, 80);
-
-        Vector3 position;
-
-        Quaternion rotation = Quaternion.Euler(y, x, 0);
-        
-        distance = Mathf.Clamp(distance, MinDistance, MaxDistance);
-        
-        Vector3 negDistance = new Vector3(0.0f, 3.0f, -distance);
-        position = rotation * negDistance + Player.transform.position;
-        
-        tempDamp = Mathf.Clamp(tempDamp, 1, 20);
-        
         Vector3 oldPos = transform.position;
-        smoothPosition(transform.position, position);
-
+        smoothPosition(transform.position, Hoveroffset.position);
         Vector3 dirMov = (transform.position - oldPos).normalized;
+       
+        if ( Vector3.Distance(transform.position, Hoveroffset.position) > 1.5f)
+        {
+            var fwd = transform.forward;
 
-        transform.forward = dirMov;
+
+            var lkat = Vector3.Slerp(fwd, dirMov, DT * 2);
+
+            transform.LookAt(lkat + transform.position, Vector3.up);
+        }
+        else
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Hoveroffset.rotation, DT * 40);
+        }
         
     }
     public void DoIdleAfk()
@@ -126,15 +120,16 @@ public class BirdController : MonoBehaviour
     public float ChargeAmount;
     public void ChargeAttack()
     {
-      
+
             if (ChargeAmount <= Energy.Energy)
             {
                 ChargeAmount += DT * 30;
             }
+
             attackDamage = ChargeAmount;
+            ChargeAmount = Mathf.Clamp(ChargeAmount, 20, 100);
             attackDamage = Mathf.Clamp(attackDamage, 0, 100);
-        
-        
+
     }
     public void DoAttack()
     {
@@ -175,8 +170,7 @@ public class BirdController : MonoBehaviour
                     {
                         if (!Hit && (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Boss")))
                         {
-                       
-                           
+                            
                             IDamageable dmg = hit.collider.GetComponent<IDamageable>();
                             killpos = TempTarget.transform.position;
                             killOffset = offset;
@@ -240,13 +234,16 @@ public class BirdController : MonoBehaviour
 
             if (Fire)
             {
-                TempTarget = CamController.target.gameObject;
-                SetcamSmoothDampTime = BirdSmoothDampAttack;
-                tempDistance = Vector3.Distance(transform.position, TempTarget.transform.position);
-                CurrentState = States.AttackState;
-                Fire = false;
-                Controller.Fire = false;
-                canAttack = false;
+                if (CamController.target != null)
+                {
+                    TempTarget = CamController.target.gameObject;
+                    SetcamSmoothDampTime = BirdSmoothDampAttack;
+                    tempDistance = Vector3.Distance(transform.position, TempTarget.transform.position);
+                    CurrentState = States.AttackState;
+                    Fire = false;
+                    Controller.Fire = false;
+                    canAttack = false;
+                }
             }
         }
        
