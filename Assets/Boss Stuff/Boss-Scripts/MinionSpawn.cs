@@ -21,8 +21,9 @@ public class MinionSpawn : MonoBehaviour {
         {
             float RandX = Random.Range(MinRange, MaxRange);
             float RandZ = Random.Range(MinRange, MaxRange);
+            Vector2 Dir = Random.insideUnitCircle;
             var MinionBaby = Minion;
-            MinionBaby.transform.position = new Vector3(transform.forward.x + RandX, transform.position.y, transform.forward.z + (RandZ/2));
+            MinionBaby.transform.position = new Vector3(Dir.x + RandX , transform.position.y, Dir.y + RandZ );
             Instantiate(MinionBaby);
         }
     }

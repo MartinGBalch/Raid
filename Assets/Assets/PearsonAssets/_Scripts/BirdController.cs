@@ -96,10 +96,8 @@ public class BirdController : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(y, x, 0);
         
-
         distance = Mathf.Clamp(distance, MinDistance, MaxDistance);
         
-
         Vector3 negDistance = new Vector3(0.0f, 3.0f, -distance);
         position = rotation * negDistance + Player.transform.position;
         
@@ -111,8 +109,7 @@ public class BirdController : MonoBehaviour
         Vector3 dirMov = (transform.position - oldPos).normalized;
 
         transform.forward = dirMov;
-
-
+        
     }
     public void DoIdleAfk()
     {
@@ -144,7 +141,8 @@ public class BirdController : MonoBehaviour
         if (TempTarget != null)
         {
             Vector3 offset = new Vector3(0, TempTarget.transform.localScale.y * 3, 0);
-            if (Vector3.Distance(transform.position, TempTarget.transform.position) > (tempDistance / 2))
+            killOffset = offset;
+            if (Vector3.Distance(transform.position, TempTarget.transform.position) > (tempDistance / 2) && Hit == false)
             {
 
                 //var fwd = transform.forward;
@@ -168,6 +166,7 @@ public class BirdController : MonoBehaviour
                 }
 
                 transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp * 1.5f);
+
                 if (Vector3.Distance(transform.position, TempTarget.transform.position) < (tempDistance / 2) + 1.5f)
                 {
                     RaycastHit hit;
@@ -181,7 +180,7 @@ public class BirdController : MonoBehaviour
                             IDamageable dmg = hit.collider.GetComponent<IDamageable>();
                             killpos = TempTarget.transform.position;
                             killOffset = offset;
-
+                           
                             Hit = true;
                             dmg.TakeDamage(attackDamage);
                             Energy.Energy = Energy.Energy - attackDamage;
@@ -197,11 +196,11 @@ public class BirdController : MonoBehaviour
             else
             {
                 Vector3 oldPos = transform.position;
-                transform.position = Vector3.Lerp(transform.position, (TempTarget.transform.position + offset), DT * 2);
+                transform.position = Vector3.MoveTowards(transform.position, (TempTarget.transform.position + killOffset), DT * 7);
                 Vector3 dirMov = (transform.position - oldPos).normalized;
                 transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
 
-                if (Vector3.Distance(transform.position, (TempTarget.transform.position + killOffset)) < 1)
+                if (Vector3.Distance(transform.position, (TempTarget.transform.position + killOffset)) < 5)
                 {
                     CurrentState = States.idleState;
                 }
@@ -210,14 +209,15 @@ public class BirdController : MonoBehaviour
         else
         {
             Vector3 oldPos = transform.position;
-            transform.position = Vector3.Lerp(transform.position, (killpos + killOffset), DT * 2);
+            transform.position = Vector3.MoveTowards(transform.position, (killpos + killOffset), DT * 7);
             Vector3 dirMov = (transform.position - oldPos).normalized;
             transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
 
-            if (Vector3.Distance(transform.position, (killpos + killOffset)) < 1)
+            if (Vector3.Distance(transform.position, (killpos + killOffset)) < 4)
             {
                 CurrentState = States.idleState;
             }
+
             //SetcamSmoothDampTime = BirdSmoothDampIdle;
         }
     }

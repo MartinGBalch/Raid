@@ -66,10 +66,14 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         AttackState,
         ChargeState,
         HeavyAttackState,
+        AttackStateMovement,
+        AttackOne,
+        AttackTwo,
+        AttackThree,
 
     }
 
-    public States CurrentState, NonCombatState, CombatState;
+    public States CurrentState, NonCombatState, CombatState, AttackingState;
 
 	void Start ()
     {
@@ -78,8 +82,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         NonCombatState = States.IdleState;
         CombatState = States.CombatIdleState;
         CurrentState = States.OutOfCombatState;
+        AttackingState = States.AttackOne;
         rb = GetComponent<Rigidbody>();
-      anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
 	}
 
     bool Forward, Backward, Left, Right;
@@ -100,6 +105,151 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public float Charge;
     private float smoothTimer;
     private Vector3 moveVector;
+
+
+    public void AttackFunction()
+    {
+        presstimer -= DT;
+        AttackMovement();
+        switch (AttackingState)
+        {
+            case States.AttackOne:
+                AttackOne();
+                break;
+            case States.AttackTwo:
+                AttackTwo();
+                break;
+            case States.AttackThree:
+                AttackThree();
+                break;
+
+
+        }
+
+
+    }
+
+    bool buttonPress = false;
+
+    void AttackMovement()
+    {
+        if (cam1.target != null)
+        {
+
+
+            Vector3 dir1 = (cam1.target.transform.position - transform.position).normalized;
+            dir1.y = 0;
+
+            rb.velocity = (dir1 * NonCombatMaxSpeed);
+
+            RaycastHit hit;
+
+
+
+            Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            Quaternion dirQ = Quaternion.LookRotation(dir);
+            Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 0.5f);
+
+
+
+            var fwd = transform.forward;
+
+            var direct = (cam1.target.transform.position - transform.position).normalized;
+
+            var lkat = Vector3.Slerp(fwd, direct, DT * 4);
+            lkat.y = 0;
+            transform.LookAt(lkat + transform.position, Vector3.up);
+
+            //if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
+            //{
+            //    rb.freezeRotation = true;
+            //}
+            //else
+            //{
+            //    rb.MoveRotation(slerp);
+            //}
+            rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
+
+
+        }
+        else
+        {
+            Vector3 camRel = transform.forward;
+            
+            camRel.Normalize();
+
+            var force = camRel * NonCombatMaxSpeed - rb.velocity;
+
+            rb.AddForce(force);
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            Quaternion dirQ = Quaternion.LookRotation(dir);
+            Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 0.5f);
+            rb.MoveRotation(slerp);
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
+            {
+                rb.freezeRotation = true;
+            }
+            else
+            {
+
+                rb.MoveRotation(slerp);
+            }
+            rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
+
+        }
+    }
+    float presstimer = 0;
+    void AttackOne()
+    {
+        HorzSpeed = .4f;
+        vertSpeed = 1f;
+        attackTime = 1f;
+        hitbox.SetActive(true);
+        if (( mouseAttack || Controller.Attack) && presstimer <= 0)
+        {
+            mouseAttack = false;
+            Controller.Attack = false;
+            presstimer = .01f;
+            buttonPress = true;
+        }
+
+
+    }
+    void AttackTwo()
+    {
+        attackTime = .4f;
+        HorzSpeed = .01f;
+        vertSpeed = .01f;
+        hitbox.SetActive(true);
+        if (mouseAttack || Controller.Attack)
+        {
+            mouseAttack = false;
+            Controller.Attack = false;
+            presstimer = .01f;
+            buttonPress = true;
+        }
+    }
+    void AttackThree()
+    {
+        attackTime = .4f;
+        HorzSpeed = 1f;
+        vertSpeed = 1f;
+        hitbox.SetActive(true);
+        if (mouseAttack || Controller.Attack)
+        {
+            mouseAttack = false;
+            Controller.Attack = false;
+            presstimer = .01f;
+            buttonPress = true;
+        }
+    }
+    public bool mouseAttack = false;
+
+
 
     public void KeyInput()
     {
@@ -145,35 +295,18 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         attackCooldown -= DT;
         ComboTime -= DT;
         smoothTimer -= DT;
-        if ((Input.GetMouseButton(0) || Controller.ChargeAttack) && attacking == false)
+        mouseAttack = Input.GetMouseButtonDown(0);
+        if (( mouseAttack|| Controller.Attack) && attacking == false)
         {
-
-            NonCombatState = States.ChargeState;
-        }
-        else if ((Input.GetMouseButtonUp(0) || Controller.Attack) && attacking == false)
-        {
-          
-            ComboTime = .7f;
-            
-            smoothTimer = .2f;
-            comboNumb++;
-            anim.SetBool("Attacking", true);
-
+            Controller.Attack = false;
+            mouseAttack = false;
+            attacking = true;
+            anim.SetTrigger("Attack");
+            presstimer = .005f;
             NonCombatState = States.AttackState;
 
         }
-        if((Input.GetMouseButtonUp(0) || Controller.Attack))
-        {
-
-            smoothTimer = .2f;
-        }
-        anim.SetInteger("ComboNumb", comboNumb);
-
-        if (ComboTime <= 0)
-        {
-            anim.SetBool("Attacking", false);
-            comboNumb = 0;
-        }
+       
     }
 
     public void SprintFunction()
@@ -184,13 +317,13 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
             anim.SetBool("jogging", true);
             NonCombatMaxSpeed = 20;
-            vertSpeed = 7;
-            HorzSpeed = 7;
+            vertSpeed = 15;
+            HorzSpeed = 15;
         }
         if(!Sprint && !Dashing && !attacking)
         {
-            HorzSpeed = 3;
-            vertSpeed = 3;
+            HorzSpeed = 7;
+            vertSpeed = 7;
             anim.SetBool("jogging", false);
         }
 
@@ -231,8 +364,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
 
             NonCombatMaxSpeed = 50;
-            vertSpeed = 20;
-            HorzSpeed = 20;
+            vertSpeed = 30;
+            HorzSpeed = 30;
         }
         else if(dashTime < 0)
         {
@@ -246,23 +379,24 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public void JumpFunction()
     {
         jumptime -= DT;
-        if ((Jump) && jumpCount > 0 && jumptime < 0)
+        if ((Jump) && jumpCount > 0 && jumptime < 0 && !Dashing)
         {
             anim.SetBool("Jumping", true);
             this.rb.AddForce(Vector3.up * jumpVel);
             jumpCount--;
             jumptime = 1f;
+            canmove = true;
 
         }
-        if (rb.velocity.y < 0 && !Grounded())
+        if (rb.velocity.y < 0 && !Grounded() && !Dashing)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * DT;
         }
-        else if (rb.velocity.y > 0 )
+        else if (rb.velocity.y > 0 && !Dashing)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * DT;
         }
-        else if(Grounded() == false)
+        else if(Grounded() == false && !Dashing)
         {
 
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * DT;
@@ -305,68 +439,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
     }
 
-    public void AttackFunction()
-    {
-        if (attacking == false)
-        {
-            ComboFunction();
-          
-            attacking = true;
-            hitbox.SetActive(true);
-        }
-
-        attackTime -= DT;
-        if (attackTime > 0 && attacking == true)
-        {
-            if (cam1.target != null)
-            {
-
-
-              
-
-                Vector3 dir1 = (cam1.target.transform.position - transform.position).normalized;
-                dir1.y = 0;
-
-                rb.AddForce(dir1 * NonCombatMaxSpeed);
-
-                Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-                Quaternion dirQ = Quaternion.LookRotation(dir);
-                Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, DT * 10);
-                rb.MoveRotation(slerp);
-
-                rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
-            }
-            else
-            {
-                Vector3 dir1 = Vector3.Normalize(new Vector3(cam.forward.x, 0, cam.forward.z));
-                rb.velocity = new Vector3(0, 0, 0);
-                transform.forward = dir1;
-            }
-        }
-        else
-        {
-            attacking = false;
-            NonCombatState = States.MovementState;
-            CombatState = States.MovementState;
-            attackCooldown = .2f;
-            hitbox.SetActive(false);
-           // anim.SetBool("Attacking", false);
-            Controller.Attack = false;
-          if(comboNumb == 3)
-            {
-                comboNumb = 0;
-            }
-        }
-    }
-    public void ChargeFunction()
-    {
-
-    }
-    public void HeavyAttackFunction()
-    {
-
-    }
+    
     public void OutOfCombat()
     {
         switch (NonCombatState)
@@ -380,12 +453,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             case States.AttackState:
                 AttackFunction();
                 break;
-            case States.ChargeState:
-                ChargeFunction();
-                break;
-            case States.HeavyAttackState:
-                HeavyAttackFunction();
-                break;
+         
         }
 
         if (moved == true && NonCombatState != States.AttackState)
@@ -432,7 +500,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
 
 
-        anim.SetFloat("Speed", rb.velocity.magnitude / 1);
+        anim.SetFloat("Speed", rb.velocity.magnitude /1 );
     }
 
     public void Idle()
@@ -441,52 +509,102 @@ public class ThirdPersonPlayerController : MonoBehaviour {
       
     }
 
-
+    bool canmove;
     public void Movement()
     {
-        
-        
-        Vector3 camRel = cam.transform.localToWorldMatrix * new Vector4(moveVector.x,moveVector.y,moveVector.z, 0);
+        if (canmove)
+        {
+            Vector3 camRel = cam.transform.localToWorldMatrix * new Vector4(moveVector.x, moveVector.y, moveVector.z, 0);
 
-        camRel.y = 0;
-        camRel.Normalize();
+            camRel.y = 0;
+            camRel.Normalize();
 
-        Debug.Log(camRel);
+            var force = camRel * NonCombatMaxSpeed - rb.velocity;
 
-        var force = camRel * NonCombatMaxSpeed - rb.velocity;
+            rb.AddForce(force);
 
-        rb.AddForce(force);
+            Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        Vector3 dir = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            Quaternion dirQ = Quaternion.LookRotation(dir);
+            Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 0.5f);
 
-        Quaternion dirQ = Quaternion.LookRotation(dir);
-        Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 0.5f);
-        rb.MoveRotation(slerp);
+            rb.MoveRotation(slerp);
 
-        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
+            RaycastHit hit;
 
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
+            {
+                rb.freezeRotation = true;
+            }
+            else
+            {
+                rb.MoveRotation(slerp);
+            }
+
+            rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -HorzSpeed, HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -vertSpeed, vertSpeed));
+        }
     }
     
-    public void CombatMovement()
-    {
-
-    }
-
-    public void CombatIdle()
-    {
-
-    }
-
+    
+   
     private void OnCollisionEnter(Collision collision)
     {
-        jumpCount = 1;
-        anim.SetBool("Jumping", false);
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            canmove = true;
+            jumpCount = 1;
+            anim.SetBool("Jumping", false);
+        }
+        else
+        {
+
+            rb.freezeRotation = true;
+        }
+
+        if (!Grounded())
+        {
+
+            canmove = false;
+            jumpCount = 1;
+        }
+        else
+        {
+
+            jumpCount = 1;
+            canmove = true;
+        }
+    }
+    private void OnCollisionStay(Collision Collider)
+    {
+        if (Collider.gameObject.CompareTag("Floor"))
+        {
+            
+        }
+        else
+        {
+            rb.freezeRotation = true;
+        }
+
+        if (Grounded())
+        {
+
+            canmove = true;
+            jumpCount = 1;
+        }
+
+    }
+    void Update()
+    {
+        KeyInput();
+        anim.SetBool("Attacking", NonCombatState == States.AttackState);
+
+        
     }
 
     void FixedUpdate ()
     {
         DT = Time.deltaTime;
-        KeyInput();
+   
         AnimBlendControl();
         switch (CurrentState)
         {
@@ -496,6 +614,70 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             case States.CombatState:
                 Combat();
                 break;
+        }
+    }
+
+    public void EndAttackOne()
+    {
+        Debug.Log("1 - " + (buttonPress ? "true" : "false"));
+        if (buttonPress == false)
+        {
+            hitbox.SetActive(false);
+            Debug.Log("...End... - 1");
+            anim.SetTrigger("EndAttack");
+            attacking = false;
+            AttackingState = States.AttackOne;
+            NonCombatState = States.IdleState;
+        }
+        else
+        {
+            hitbox.SetActive(false);
+            anim.SetTrigger("Combo1");
+            AttackingState = States.AttackTwo;
+        }
+
+        buttonPress = false;
+    }
+    public void EndAttackTwo()
+    {
+        Debug.Log("2 - " + (buttonPress ? "true" : "false"));
+        if (NonCombatState == States.AttackState)
+        {
+            if (buttonPress == false && AttackingState == States.AttackTwo)
+            {
+                hitbox.SetActive(false);
+                Debug.Log("...End... - 2");
+                anim.SetTrigger("EndAttack");
+                attacking = false;
+                AttackingState = States.AttackOne;
+                NonCombatState = States.IdleState;
+            }
+            else
+            {
+
+                hitbox.SetActive(false);
+                anim.SetTrigger("Combo2");
+                AttackingState = States.AttackThree;
+            }
+        }
+        buttonPress = false;
+    }
+    public void EndAttackThree()
+    {
+        if (NonCombatState == States.AttackState)
+        {
+            if (AttackingState == States.AttackThree)
+            {
+                Debug.Log("3 - " + (buttonPress ? "true" : "false"));
+                hitbox.SetActive(false);
+                Debug.Log("...End... - 3");
+                anim.SetTrigger("EndAttack");
+                attacking = false;
+                buttonPress = false;
+                AttackingState = States.AttackOne;
+                NonCombatState = States.IdleState;
+
+            }
         }
     }
 

@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 48ab65042fe90bb45a0bce05939d8cbf
+timeCreated: 1495582461
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: back
+    100002: Body
+    100004: head
+    100006: hip
+    100008: jaw
+    100010: JIGGLE_belly
+    100012: JIGGLE_L_breast
+    100014: JIGGLE_R_breast
+    100016: L_clav
+    100018: L_hand
+    100020: L_lowerarm
+    100022: L_middle
+    100024: L_middle1
+    100026: L_middle2
+    100028: L_middle3
+    100030: L_pinky
+    100032: L_pinky1
+    100034: L_pinky2
+    100036: L_pinky3
+    100038: L_thumb
+    100040: L_thumb1
+    100042: L_thumb2
+    100044: L_thumb3
+    100046: L_upperarm
+    100048: L_wrist
+    100050: lowerteeth_tongue
+    100052: //RootNode
+    100054: neck
+    100056: R_clav
+    100058: R_hand
+    100060: R_lowerarm
+    100062: R_middle
+    100064: R_middle1
+    100066: R_middle2
+    100068: R_middle3
+    100070: R_pinky
+    100072: R_pinky1
+    100074: R_pinky2
+    100076: R_pinky3
+    100078: R_thumb
+    100080: R_thumb1
+    100082: R_thumb2
+    100084: R_thumb3
+    100086: R_upperarm
+    100088: R_wrist
+    100090: tongue
+    100092: tongue1
+    100094: tongue2
+    100096: tongue3
+    100098: torso
+    100100: uppperteeth
+    400000: back
+    400002: Body
+    400004: head
+    400006: hip
+    400008: jaw
+    400010: JIGGLE_belly
+    400012: JIGGLE_L_breast
+    400014: JIGGLE_R_breast
+    400016: L_clav
+    400018: L_hand
+    400020: L_lowerarm
+    400022: L_middle
+    400024: L_middle1
+    400026: L_middle2
+    400028: L_middle3
+    400030: L_pinky
+    400032: L_pinky1
+    400034: L_pinky2
+    400036: L_pinky3
+    400038: L_thumb
+    400040: L_thumb1
+    400042: L_thumb2
+    400044: L_thumb3
+    400046: L_upperarm
+    400048: L_wrist
+    400050: lowerteeth_tongue
+    400052: //RootNode
+    400054: neck
+    400056: R_clav
+    400058: R_hand
+    400060: R_lowerarm
+    400062: R_middle
+    400064: R_middle1
+    400066: R_middle2
+    400068: R_middle3
+    400070: R_pinky
+    400072: R_pinky1
+    400074: R_pinky2
+    400076: R_pinky3
+    400078: R_thumb
+    400080: R_thumb1
+    400082: R_thumb2
+    400084: R_thumb3
+    400086: R_upperarm
+    400088: R_wrist
+    400090: tongue
+    400092: tongue1
+    400094: tongue2
+    400096: tongue3
+    400098: torso
+    400100: uppperteeth
+    2300000: uppperteeth
+    3300000: uppperteeth
+    4300000: uppperteeth
+    4300002: Body
+    4300004: lowerteeth_tongue
+    9500000: //RootNode
+    13700000: Body
+    13700002: lowerteeth_tongue
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
