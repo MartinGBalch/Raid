@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class FadeManager : MonoBehaviour
@@ -81,7 +82,7 @@ public class FadeManager : MonoBehaviour
 
     public void  Play()
     {
-        Debug.Log("Damn");
+		SceneManager.LoadScene ("ProtoType 1");
     }
 
     public void Enter()
