@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 3394224cc9b68fc47aff0259b53ce792
 folderAsset: yes
 timeCreated: 1495047047
 licenseType: Free
+=======
+guid: 45adde837cd64fe4fbc52f2ca0020d20
+folderAsset: yes
+timeCreated: 1495489549
+licenseType: Pro
+>>>>>>> Pearson
 DefaultImporter:
   userData: 
   assetBundleName: 

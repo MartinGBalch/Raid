@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public float Health;
     public float ResistDamage;
     public float MaxHealth;
-
+    public Image Circle;
 
 
     public float EstimatedDamageTaken(float damageDealt)
@@ -32,5 +32,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             Destroy(gameObject);
         }
+        Circle.fillAmount = Health / MaxHealth;
 	}
 }
