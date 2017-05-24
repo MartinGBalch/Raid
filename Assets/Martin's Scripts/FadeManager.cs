@@ -21,6 +21,7 @@ public class FadeManager : MonoBehaviour
 
     public Text title;
     public Text l_title;
+    public Text c_line;
     public Text play;
     public Text start;
     public Text quit;
@@ -31,14 +32,17 @@ public class FadeManager : MonoBehaviour
 
     private float transition;
     private float duration;
-   
-    
+
+    public Color buttonColor;
+    public Color titleColor;
     
 
     private void Awake()
     {
         Instance = this;
-        
+
+       
+
     }
 
     public void Fade(bool showing, float duration)
@@ -56,6 +60,8 @@ public class FadeManager : MonoBehaviour
         play.enabled = false;
         ButtonMenu.enabled = false;
         SettingMenu.enabled = false;
+
+      
     }
 	// Update is called once per frame
 	void Update ()
@@ -76,10 +82,10 @@ public class FadeManager : MonoBehaviour
         transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
        
         //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
-        play.color = Color.Lerp(new Color(0,0,0,0), Color.white, transition);
-        start.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
-        quit.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
-        setting.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(.75f, 0, 0, .5f), transition);
+        play.color = Color.Lerp(new Color(0,0,0,0), titleColor, transition);
+        start.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+        quit.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+        setting.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
 
 
 
@@ -100,8 +106,6 @@ public class FadeManager : MonoBehaviour
     {
         Fade(true, 2);
         Cursor.visible = true;
-        title.enabled = false;
-        l_title.enabled = false;
         play.enabled = true;
         ButtonMenu.enabled = true;
         TitleMenu.enabled = false;
@@ -118,10 +122,6 @@ public class FadeManager : MonoBehaviour
         SettingMenu.enabled = false;
         TitleMenu.enabled = true;
     }
-
-
-
-
 
     public void Exit()
     {

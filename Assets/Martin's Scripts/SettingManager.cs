@@ -20,6 +20,8 @@ public class SettingManager : MonoBehaviour
 
     public AudioSource musicSource;
 
+
+ 
    void OnEnable()
    {
         gameSettings = new GameSettings();
@@ -75,7 +77,7 @@ public class SettingManager : MonoBehaviour
 
     public void OnApplyButtonClick()
     {
-
+        SaveSettings();
     }
 
     public void SaveSettings()
