@@ -161,8 +161,9 @@ public class BossStateManagerTwo : MonoBehaviour
 
         behaviorTimer -= DT;
         if(behaviorTimer <= 0)
-        { 
-            Behaviour = Random.Range(1, 3 + State);
+        {
+            Behaviour++;
+           // Behaviour = Random.Range(1, 3 + State);
             behaviorTimer = BehaviorStart;
         }
 
