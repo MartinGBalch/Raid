@@ -249,9 +249,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     public void KeyInput()
     {
-        // if (Input.GetKeyDown(KeyCode.Q) || Input.GetAxis("XboxLeftTrigger") != 0 || Input.GetAxis("XboxLeftTrigger") == 0 || Input.GetAxis("PS4LeftTrigger") != 0 || Input.GetAxis("PS4LeftTrigger") == 0) 
-        //{
-
+   
+       
         if (target != null && CurrentLockState == States.NonLockedOnState && (Controller.Target >.1f || Input.GetKey(KeyCode.Q)))
         {
             CurrentLockState = States.LockedOnState;
@@ -260,23 +259,29 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             CurrentLockState = States.NonLockedOnState;
         }
-        //}
+        
     }
 
     public void NonLockedOn()
     {
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, 1 << 8))
+        Debug.DrawRay(transform.position, transform.forward,Color.red,100);
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 100, 1 << 8))
         {
             target = hit.transform.gameObject;
         }
-
         if (target != null && Vector3.Distance(Player.transform.position, target.transform.position) > 35)
         {
             target = null;
         }
-
+        if (target != null && target.CompareTag("Pylon") )
+        {
+            if (target.gameObject.GetComponent<BossPartsHealth>().Alive == false)
+            {
+                target = null;
+            }
+        }
         SetcamSmoothDampTime = camSmoothDampTimeNonLock;
 
         CameraLook();
@@ -295,7 +300,16 @@ public class ThirdPersonCameraController : MonoBehaviour {
             target = null;
             CurrentLockState = States.NonLockedOnState;
         }
+        if (target != null && target.CompareTag("Pylon"))
+        {
+            if (target.gameObject.GetComponent<BossPartsHealth>().Alive == false)
+                {
+                target = null;
 
+                CurrentLockState = States.NonLockedOnState;
+            }
+
+        }
 
         SetcamSmoothDampTime = camSmoothDampTimeLock;
 
@@ -384,7 +398,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             tempDamp -= DT * 50;
         }
-        tempDamp = Mathf.Clamp(tempDamp, 1, 50);
+        tempDamp = Mathf.Clamp(tempDamp, 2, 50);
        
         var fwd = transform.forward;
 
@@ -426,7 +440,6 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             x += HorzSpeed * DT * 2;
         }
-
         if (screenPoint.y < .5f)
         {
            y -= HorzSpeed * DT * 3;

@@ -16,7 +16,7 @@ public class BirdMotor : MonoBehaviour
     [SerializeField]
     private float SetcamSmoothDampTime = 1;
     [SerializeField]
-    public Transform Hoveroffset;
+    public Transform Hoveroffset, SuperSet;
 
     public ControllerSupport Controller;
 
@@ -27,6 +27,7 @@ public class BirdMotor : MonoBehaviour
         idleAfk,
         AttackState,
         ChargeState,
+        SuperState,
     }
 
     States CurrentState, IdleState;
@@ -107,7 +108,7 @@ public class BirdMotor : MonoBehaviour
     }
     public void DoIdleAfk()
     {
-
+       
     }
     public float attackDamp;
 
@@ -131,6 +132,7 @@ public class BirdMotor : MonoBehaviour
             attackDamage = Mathf.Clamp(attackDamage, 0, 100);
 
     }
+    float AttackTimer = 3;
     public void DoAttack()
     {
         if (TempTarget != null)
@@ -166,15 +168,15 @@ public class BirdMotor : MonoBehaviour
                 {
                     RaycastHit hit;
 
-                    if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+                    if (Physics.Linecast(transform.position, TempTarget.transform.position, out hit))
                     {
-                        if (!Hit && (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Boss")))
+                        if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
                         {
                             
                             IDamageable dmg = hit.collider.GetComponent<IDamageable>();
-                            killpos = TempTarget.transform.position;
+                            killpos = hit.collider.transform.position;
                             killOffset = offset;
-                           
+                            AttackTimer = 3;
                             Hit = true;
                             dmg.TakeDamage(attackDamage);
                             Energy.Energy = Energy.Energy - attackDamage;
@@ -185,6 +187,24 @@ public class BirdMotor : MonoBehaviour
                         }
 
                     }
+                    else
+                    {
+                        if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
+                        {
+
+                            IDamageable dmg = TempTarget.GetComponent<IDamageable>();
+                            killpos = TempTarget.transform.position;
+                            killOffset = offset;
+                            AttackTimer = 3;
+                            Hit = true;
+                            dmg.TakeDamage(attackDamage);
+                            Energy.Energy = Energy.Energy - attackDamage;
+                            attackDamage = 0;
+                            ChargeAmount = 0;
+                            Controller.Charge = false;
+
+                        }
+                    }
                 }
             }
             else
@@ -193,8 +213,8 @@ public class BirdMotor : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, (TempTarget.transform.position + killOffset), DT * 7);
                 Vector3 dirMov = (transform.position - oldPos).normalized;
                 transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
-
-                if (Vector3.Distance(transform.position, (TempTarget.transform.position + killOffset)) < 5)
+                AttackTimer -= DT;
+                if (Vector3.Distance(transform.position, (TempTarget.transform.position + killOffset)) < 1 || AttackTimer < 0)
                 {
                     CurrentState = States.idleState;
                 }
@@ -206,8 +226,8 @@ public class BirdMotor : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, (killpos + killOffset), DT * 7);
             Vector3 dirMov = (transform.position - oldPos).normalized;
             transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
-
-            if (Vector3.Distance(transform.position, (killpos + killOffset)) < 4)
+            AttackTimer -= DT;
+            if (Vector3.Distance(transform.position, (killpos + killOffset)) < 1 || AttackTimer < 0)
             {
                 CurrentState = States.idleState;
             }
@@ -225,16 +245,16 @@ public class BirdMotor : MonoBehaviour
         Charge = Input.GetMouseButton(1) || Controller.Charge;
         Fire = (Input.GetMouseButtonUp(1) || Controller.Fire) && CurrentState != States.AttackState && canAttack;
 
-        if (Energy.Energy >= 20)
+        if (Energy.Energy >= 20 )
         {
-            if (Charge)
+            if (Charge && PlayerController.BirdSuper == false)
             {
                 ChargeAttack();
             }
 
             if (Fire)
             {
-                if (CamController.target != null)
+                if (CamController.target != null && PlayerController.BirdSuper == false)
                 {
                     TempTarget = CamController.target.gameObject;
                     SetcamSmoothDampTime = BirdSmoothDampAttack;
@@ -244,14 +264,47 @@ public class BirdMotor : MonoBehaviour
                     Controller.Fire = false;
                     canAttack = false;
                 }
+            
+               
             }
         }
-       
+        if (PlayerController.BirdSuper == true)
+        {
+            CurrentState = States.SuperState;
+
+        }
+
+    }
+    void DoSuper()
+    {
+        if (Vector3.Distance(transform.position, SuperSet.position) >= -2f && Vector3.Distance(transform.position, SuperSet.position) <= 2f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, SuperSet.position,4);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, SuperSet.rotation,  4);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, SuperSet.position, DT * 40);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, SuperSet.rotation, DT * 40);
+
+        }
+
+        if(PlayerController.inSuper == false)
+        {
+            CurrentState = States.idleState;
+        }
     }
     float DT;
-    void FixedUpdate()
+
+    private void Update()
     {
         KeyInput();
+    }
+
+    void FixedUpdate()
+    {
+       
         DT = Time.deltaTime;
         switch(CurrentState)
         {
@@ -264,6 +317,9 @@ public class BirdMotor : MonoBehaviour
                 DoAttack();
                 break;
 
+            case States.SuperState:
+                DoSuper();
+                break;
         }
     }
 }

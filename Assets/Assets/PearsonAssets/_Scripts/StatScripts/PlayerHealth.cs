@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float ResistDamage;
     public float MaxHealth;
     public Image Circle;
-
+    public bool Imune;
 
     public float EstimatedDamageTaken(float damageDealt)
     {
@@ -16,7 +16,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damageDealt)
     {
-        Health -= EstimatedDamageTaken(damageDealt);
+        if (!Imune)
+        {
+            Health -= EstimatedDamageTaken(damageDealt);
+        }
     }
 
     void Start ()

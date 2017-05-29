@@ -5,7 +5,7 @@ using UnityEngine;
 public class ControllerSupport : MonoBehaviour {
 
     public bool Xbox, PS4;
-    public bool Fire, Charge, Attack, Jump, Sprint, ChargeAttack;
+    public bool Fire, Charge, Attack, Jump, Sprint, ChargeAttack, SuperCharge,SuperLaser;
     public float Horizontal, Vertical,Dash,Target,RightStickHorizontal, RightStickVertical;
 
 	// Use this for initialization
@@ -19,10 +19,12 @@ public class ControllerSupport : MonoBehaviour {
     {
         if (Xbox && !PS4)
         {
-            Charge = Input.GetButton("Xbox X Button");
-            Fire = Input.GetButtonUp("Xbox X Button");
-            ChargeAttack = Input.GetButton("Xbox B Button");
-            Attack = Input.GetButtonDown("Xbox B Button") || Attack;
+            SuperCharge = Input.GetButtonDown("Xbox Y Button");
+            Charge = Input.GetButton("Xbox B Button");
+            Fire = Input.GetButtonUp("Xbox B Button");
+            SuperLaser = Input.GetButton("Xbox B Button");
+            ChargeAttack = Input.GetButton("Xbox X Button");
+            Attack = Input.GetButtonDown("Xbox X Button") || Attack;
             Jump = Input.GetButtonDown("Xbox A Button");
             Sprint = Input.GetButton("XboxLeftStickPress");
             Horizontal = Input.GetAxis("XboxHorizontal");
@@ -34,10 +36,13 @@ public class ControllerSupport : MonoBehaviour {
         }
         else if(PS4)
         {
-            Charge = Input.GetButton("PS4SquareButton");
-            Fire = Input.GetButtonUp("PS4SquareButton");
+
+            SuperCharge = Input.GetButtonDown("PS4TriangleButton");
+            Charge = Input.GetButton("PS4CircleButton");
+            Fire = Input.GetButtonUp("PS4CircleButton");
+            SuperLaser = Input.GetButton("PS4CircleButton");
             ChargeAttack = Input.GetButton("PS4CircleButton");
-            Attack = Input.GetButtonDown("PS4CircleButton")  || Attack;
+            Attack = Input.GetButtonDown("PS4SquareButton")  || Attack;
             Jump = Input.GetButtonDown("PS4XButton");
             Sprint = Input.GetButton("PS4LeftStickPress");
             Horizontal = Input.GetAxis("PS4Horizontal");
