@@ -37,10 +37,10 @@ public class MinionMovement : MonoBehaviour {
         
         
         Dist = Vector3.Distance(transform.position, agent.destination);
-        if (Dist <= atkRange)
+        if (Dist <= atkRange && IsStunned == false)
         {
             atkSpeed -= Time.deltaTime;
-            if (atkSpeed <= 0 && IsStunned == false)
+            if (atkSpeed <= 0 )
             {
                 Debug.Log("Attack, collider on");
                 DmgCollider.GetComponent<MeshRenderer>().enabled = true;
