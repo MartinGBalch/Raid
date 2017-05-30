@@ -41,43 +41,34 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
         if (Health <= 0)
         {
-<<<<<<< HEAD
             PM.NeedReset = false;
             Health = StartHealth;
-=======
-           var BossStuff = Boss.GetComponent<BossHealth>();
+
+            //var BossStuff = Boss.GetComponent<BossHealth>();
             //Boss.GetComponent<BossStateManagerTwo>().PylonCount--; 
             //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
-            Debug.Log("The Boss is Vulnerable");
-            BossStuff.ResistDamage = 0;
+            //Debug.Log("The Boss is Vulnerable");
+            //BossStuff.ResistDamage = 0;
             Alive = false;
->>>>>>> Pearson
+
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             PM.PylonCount--;
         }
         if (PM.NeedReset == true)
         {
-<<<<<<< HEAD
-=======
-            ResetTimer -= Time.deltaTime;
-            if (ResetTimer <= 0)
-            {
+
+           
                 Alive = true;
                 Health = StartHealth;
-                ResetTimer = StartTime;
+                
                 Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
-                Reset = false;
->>>>>>> Pearson
+               
+
+
 
             
-
-            Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponent<CapsuleCollider>().enabled = true;
-            
-
-
         }
     }
 }
