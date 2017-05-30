@@ -19,9 +19,9 @@ public class CollisionDMG : MonoBehaviour {
                 Destroy(gameObject);
             }
         }
-        
-      
-           
+        if (collider.tag == "Pylon") { Destroy(gameObject); }
+        if (collider.tag == "Pillar") { Destroy(gameObject); }
+
     }
 
 
@@ -41,7 +41,7 @@ public class CollisionDMG : MonoBehaviour {
             {
                 distDIF = Mathf.Abs(hit.point.y - transform.position.y);
                 Vector3 POS = new Vector3(transform.position.x, hit.transform.position.y - distDIF, transform.position.z);
-
+                Debug.DrawLine(transform.position, POS);
                 transform.position = Vector3.Lerp(transform.position, POS, Time.deltaTime * LerpSpeed);
             }
             

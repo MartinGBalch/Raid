@@ -16,6 +16,8 @@ public class BossStateManagerTwo : MonoBehaviour
     public int State;
     public int Behaviour;
 
+    public bool DoWipeMechanic = false;
+
     public float behaviorTimer;
     private float BehaviorStart;
 
@@ -240,7 +242,7 @@ public class BossStateManagerTwo : MonoBehaviour
         //    }
 
         // -WIPE MECHANIC -
-        if(State == 2)
+        if(State == 2 && DoWipeMechanic == true)
         {
             WipeTimer -= DT;
             if (WipeTimer <= 0)
