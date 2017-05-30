@@ -352,7 +352,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             NonCombatState = States.DashAttackState;
         }
         else if ((mouseAttack || Controller.Attack) && attacking == false &&
-            NonCombatState != States.SuperState)
+            NonCombatState != States.SuperState && NonCombatState != States.DashAttackState)
         {
             Controller.Attack = false;
             mouseAttack = false;
@@ -363,7 +363,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         }
         if ((Controller.SuperCharge || Input.GetMouseButtonDown(2)) && 
-            NonCombatState != States.SuperState && Energy.Energy >= Energy.MaxEnergy)
+            NonCombatState != States.SuperState && Energy.Energy >= Energy.MaxEnergy && NonCombatState != States.DashAttackState)
         {
             NonCombatState = States.SuperState;
             beginSuper = true;
@@ -845,7 +845,6 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             canmove = true;
             jumpCount = 2;
-            anim.SetBool("Jumping", false);
         }
         else
         {
@@ -861,7 +860,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
         else
         {
-            
+
+            anim.SetBool("Jumping", false);
             canmove = true;
         }
     }

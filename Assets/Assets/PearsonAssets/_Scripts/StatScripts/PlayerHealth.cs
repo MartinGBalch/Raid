@@ -9,7 +9,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float MaxHealth;
     public Image Circle;
     public bool Imune;
-
+    
+    public CameraShake Shake;
+    public ParticleSystem Damage;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -18,7 +20,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (!Imune)
         {
+            Shake.StartShake(Shake.testProperties);
             Health -= EstimatedDamageTaken(damageDealt);
+            Damage.Play();
         }
     }
 
