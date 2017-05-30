@@ -170,7 +170,13 @@ public class BossStateManagerTwo : MonoBehaviour
         
         if(behaviorTimer <= 0)
         {
+<<<<<<< HEAD
             PickBehavior();
+=======
+            Behaviour++;
+           // Behaviour = Random.Range(1, 3 + State);
+            behaviorTimer = BehaviorStart;
+>>>>>>> 7958c4708b97ee94427acd8632546b39f99ee9c9
         }
 
         if (Behaviour == 1) {  BehaviorOne(); }
@@ -234,21 +240,25 @@ public class BossStateManagerTwo : MonoBehaviour
         //    }
 
         // -WIPE MECHANIC -
+        if(State == 2)
+        {
+            WipeTimer -= DT;
+            if (WipeTimer <= 0)
+            {
+                //  Debug.Log("Charging...");
+                Debug.DrawLine(WipeMechanic.LazerHead.transform.position, WipeMechanic.Player.transform.position);
+                WipeDelay -= DT;
+                if (WipeDelay <= 0)
+                {
+                    //Debug.Log("Firing");
+                    WipeMechanic.RunMechanic();
+                    WipeDelay = StartDelay;
+                    WipeTimer = StartWipe;
+                }
 
-        //WipeTimer -= DT;
-        //if (WipeTimer <= 0)
-        //{
-        //  //  Debug.Log("Charging...");
-        //    WipeDelay -= DT;
-        //    if (WipeDelay <= 0)
-        //    {
-        //        //Debug.Log("Firing");
-        //        WipeMechanic.RunMechanic();
-        //        WipeDelay = StartDelay;
-        //        WipeTimer = StartWipe;
-        //    }
-
-        //}
+            }
+        }
+        
 
     }
 
