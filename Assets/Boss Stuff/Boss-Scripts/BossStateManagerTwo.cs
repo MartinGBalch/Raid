@@ -36,7 +36,7 @@ public class BossStateManagerTwo : MonoBehaviour
     {
         
         State = 0;
-        Behaviour = 1;
+       // Behaviour = 1;
         BehaviorStart = behaviorTimer;
         StartTime = Timer;
         StartTime2 = Timer2;
@@ -67,7 +67,7 @@ public class BossStateManagerTwo : MonoBehaviour
         {
             BulletSprayAmount++;
             ProjectileMechanic.RunMechanic();
-            if (BulletSprayAmount <= 5) { Timer = StartTime / 2; }
+            if (BulletSprayAmount <= 5) { Timer = StartTime / 3; }
             else { Timer = StartTime; }  
         }
 
@@ -149,6 +149,11 @@ public class BossStateManagerTwo : MonoBehaviour
         }
     }
 
+    public void PickBehavior()
+    {
+        Behaviour = Random.Range(1, 3 + State);
+        behaviorTimer = BehaviorStart;
+    }
 
 
     // Update is called once per frame
@@ -156,14 +161,22 @@ public class BossStateManagerTwo : MonoBehaviour
     {
         DT = Time.deltaTime;
         if (Health.Health <= 700) { State = 1;  }
-
+        
         if (Health.Health <= 400) { State = 2; }
 
-        behaviorTimer -= DT;
+        if (Health.ResistDamage > 0) { behaviorTimer -= DT; }
+        if (Health.ResistDamage == 0) { Turning.AdjustTimer = 2; }
+        
+        
         if(behaviorTimer <= 0)
-        { 
-            Behaviour = Random.Range(1, 3 + State);
+        {
+
+            PickBehavior();
+
+            Behaviour++;
+           // Behaviour = Random.Range(1, 3 + State);
             behaviorTimer = BehaviorStart;
+
         }
 
         if (Behaviour == 1) {  BehaviorOne(); }
@@ -227,21 +240,25 @@ public class BossStateManagerTwo : MonoBehaviour
         //    }
 
         // -WIPE MECHANIC -
+        if(State == 2)
+        {
+            WipeTimer -= DT;
+            if (WipeTimer <= 0)
+            {
+                //  Debug.Log("Charging...");
+                Debug.DrawLine(WipeMechanic.LazerHead.transform.position, WipeMechanic.Player.transform.position);
+                WipeDelay -= DT;
+                if (WipeDelay <= 0)
+                {
+                    //Debug.Log("Firing");
+                    WipeMechanic.RunMechanic();
+                    WipeDelay = StartDelay;
+                    WipeTimer = StartWipe;
+                }
 
-        //WipeTimer -= DT;
-        //if (WipeTimer <= 0)
-        //{
-        //  //  Debug.Log("Charging...");
-        //    WipeDelay -= DT;
-        //    if (WipeDelay <= 0)
-        //    {
-        //        //Debug.Log("Firing");
-        //        WipeMechanic.RunMechanic();
-        //        WipeDelay = StartDelay;
-        //        WipeTimer = StartWipe;
-        //    }
-
-        //}
+            }
+        }
+        
 
     }
 
