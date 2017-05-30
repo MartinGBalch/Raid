@@ -1,8 +1,8 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Other Assets\Martin's Scripts\FadeManager.cs">
+﻿<Properties StartupItem="Raid.CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Assets\PearsonAssets\_Scripts\ThirdPersonCameraController.cs">
     <Files>
-      <File FileName="Assets\Other Assets\Martin's Scripts\FadeManager.cs" Line="85" Column="42" />
+      <File FileName="Assets\Assets\PearsonAssets\_Scripts\ThirdPersonCameraController.cs" Line="128" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
