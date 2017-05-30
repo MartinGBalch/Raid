@@ -13,6 +13,11 @@ public class BeamAttack : MonoBehaviour {
 
     public GameObject LazerHead;
     public GameObject Player;
+
+    void Start()
+    {
+
+    }
     //void Start()
     //{
     //    rb = GetComponent<Rigidbody>();

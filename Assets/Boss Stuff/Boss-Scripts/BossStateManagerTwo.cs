@@ -228,21 +228,25 @@ public class BossStateManagerTwo : MonoBehaviour
         //    }
 
         // -WIPE MECHANIC -
+        if(State == 2)
+        {
+            WipeTimer -= DT;
+            if (WipeTimer <= 0)
+            {
+                //  Debug.Log("Charging...");
+                Debug.DrawLine(WipeMechanic.LazerHead.transform.position, WipeMechanic.Player.transform.position);
+                WipeDelay -= DT;
+                if (WipeDelay <= 0)
+                {
+                    //Debug.Log("Firing");
+                    WipeMechanic.RunMechanic();
+                    WipeDelay = StartDelay;
+                    WipeTimer = StartWipe;
+                }
 
-        //WipeTimer -= DT;
-        //if (WipeTimer <= 0)
-        //{
-        //  //  Debug.Log("Charging...");
-        //    WipeDelay -= DT;
-        //    if (WipeDelay <= 0)
-        //    {
-        //        //Debug.Log("Firing");
-        //        WipeMechanic.RunMechanic();
-        //        WipeDelay = StartDelay;
-        //        WipeTimer = StartWipe;
-        //    }
-
-        //}
+            }
+        }
+        
 
     }
 
