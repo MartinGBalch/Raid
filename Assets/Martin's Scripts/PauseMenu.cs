@@ -8,18 +8,23 @@ public class PauseMenu : MonoBehaviour
 {
     public Canvas PauseCanvas;
     public Canvas InGameSettings;
-
     public Canvas ControlsCanvas;
 
+   
+
     public bool paused;
+
+    float SetTime;
 
     // Use this for initialization
     public void Start()
     {
         paused = false;
         PauseCanvas.enabled = false;
-        InGameSettings.enabled = false;
+        //InGameSettings.enabled = false;
         ControlsCanvas.enabled = false;
+        //ControlsCanvas.GetComponent<Canvas>().enabled = false;
+        //ControlsCanvas.
     }
 
     // Update is called once per frame
@@ -27,6 +32,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            SetTime = Time.timeScale;
             paused = true;
             PauseCanvas.enabled = true;
             Cursor.visible = true;
@@ -37,8 +43,9 @@ public class PauseMenu : MonoBehaviour
         }
         else if (!paused)
         {
-            Time.timeScale = 1;
+            Time.timeScale = SetTime;
         }
+
     }
 
     public void Resume()
@@ -60,6 +67,7 @@ public class PauseMenu : MonoBehaviour
     public void Controls()
     {
         ControlsCanvas.enabled = true;
+       
     }
 
     public void Back()
@@ -67,5 +75,6 @@ public class PauseMenu : MonoBehaviour
         PauseCanvas.enabled = true;
         InGameSettings.enabled = false;
         InGameSettings.enabled = false;
+       
     }
 }
