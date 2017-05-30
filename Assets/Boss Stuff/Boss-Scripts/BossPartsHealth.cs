@@ -14,6 +14,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public GameObject Manager;
     PylonManager PM;
     bool Reset = false;
+    public bool Alive = true;
     public float ResetTimer;
     private float StartTime;
     public float EstimatedDamageTaken(float damageDealt)
@@ -42,6 +43,14 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         {
             PM.NeedReset = false;
             Health = StartHealth;
+
+            //var BossStuff = Boss.GetComponent<BossHealth>();
+            //Boss.GetComponent<BossStateManagerTwo>().PylonCount--; 
+            //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
+            //Debug.Log("The Boss is Vulnerable");
+            //BossStuff.ResistDamage = 0;
+            Alive = false;
+
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             PM.PylonCount--;
@@ -49,13 +58,17 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         if (PM.NeedReset == true)
         {
 
+           
+                Alive = true;
+                Health = StartHealth;
+                
+                Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                gameObject.GetComponent<CapsuleCollider>().enabled = true;
+               
+
+
+
             
-
-            Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponent<CapsuleCollider>().enabled = true;
-            
-
-
         }
     }
 }
