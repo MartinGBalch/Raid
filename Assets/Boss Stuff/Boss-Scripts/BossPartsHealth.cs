@@ -12,6 +12,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public GameObject Boss;
     public GameObject Mesh;
     bool Reset = false;
+    public bool Alive = true;
     public float ResetTimer;
     private float StartTime;
     public float EstimatedDamageTaken(float damageDealt)
@@ -39,6 +40,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
             Debug.Log("The Boss is Vulnerable");
             BossStuff.ResistDamage = 0;
+            Alive = false;
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             Reset = true;
@@ -48,6 +50,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             ResetTimer -= Time.deltaTime;
             if (ResetTimer <= 0)
             {
+                Alive = true;
                 Health = StartHealth;
                 ResetTimer = StartTime;
                 Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
