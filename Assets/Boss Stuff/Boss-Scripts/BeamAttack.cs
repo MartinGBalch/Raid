@@ -13,23 +13,20 @@ public class BeamAttack : MonoBehaviour {
 
     public GameObject LazerHead;
     public GameObject Player;
-<<<<<<< HEAD
+
     void Start()
     {
       
     }
-=======
 
-    void Start()
-    {
 
-    }
+ 
     //void Start()
     //{
     //    rb = GetComponent<Rigidbody>();
     //    startTime = Time.time;
     //}
->>>>>>> 7958c4708b97ee94427acd8632546b39f99ee9c9
+
     //void Update()
     //{
     //    Vector3 center = (sunrise.position + sunset.position) * 0.5F;

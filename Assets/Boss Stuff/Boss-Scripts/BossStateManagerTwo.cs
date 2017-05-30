@@ -170,13 +170,13 @@ public class BossStateManagerTwo : MonoBehaviour
         
         if(behaviorTimer <= 0)
         {
-<<<<<<< HEAD
+
             PickBehavior();
-=======
+
             Behaviour++;
            // Behaviour = Random.Range(1, 3 + State);
             behaviorTimer = BehaviorStart;
->>>>>>> 7958c4708b97ee94427acd8632546b39f99ee9c9
+
         }
 
         if (Behaviour == 1) {  BehaviorOne(); }
