@@ -8,13 +8,13 @@ public class MinionHealth : MonoBehaviour, IDamageable {
     public float Health;
     private float ResistDamage = 0;
     
-
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
     }
     public void TakeDamage(float damageDealt)
     {
+       
         Health -= EstimatedDamageTaken(damageDealt);
 
     }
