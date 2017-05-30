@@ -10,6 +10,7 @@ public class BossHealth : MonoBehaviour, IDamageable {
     public float VulnerableTime;
     private float StartTimer;
     MinionSpawn BabySpawner;
+    BossStateManagerTwo BossState;
 
     private float DamageToBeDealt = 0;
     public float EstimatedDamageTaken(float damageDealt)
@@ -30,6 +31,7 @@ public class BossHealth : MonoBehaviour, IDamageable {
     // Use this for initialization
     void Start ()
     {
+        BossState = GetComponent<BossStateManagerTwo>();
         BabySpawner = GetComponent<MinionSpawn>();
         StartResistance = ResistDamage;
         StartTimer = VulnerableTime;
@@ -40,12 +42,13 @@ public class BossHealth : MonoBehaviour, IDamageable {
     {
 		if(ResistDamage == 0)
         {
-            
+            BossState.Behaviour = 69;
             VulnerableTime -= Time.deltaTime;
             if(VulnerableTime <= 0)
             {
                 Debug.Log("The Boss is Immune Again");
                 BabySpawner.RunMechanic();
+                BossState.PickBehavior();
                 ResistDamage = StartResistance;
                 VulnerableTime = StartTimer;
             }

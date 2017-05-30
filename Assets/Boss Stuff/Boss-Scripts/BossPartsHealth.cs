@@ -9,8 +9,10 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     private float StartHealth;
     private float ResistDamage = 0;
     //public float DamageToBoss;
-    public GameObject Boss;
+    //public GameObject Boss;
     public GameObject Mesh;
+    public GameObject Manager;
+    PylonManager PM;
     bool Reset = false;
     public float ResetTimer;
     private float StartTime;
@@ -27,36 +29,38 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     {
         StartHealth = Health;
         StartTime = ResetTimer;
+        PM = Manager.GetComponent<PylonManager>();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		if(Health <= 0 && Reset == false)
+
+        //if (Health > 0) { Debug.DrawLine(transform.position, Boss.transform.position); }
+
+        if (Health <= 0)
         {
-           var BossStuff = Boss.GetComponent<BossHealth>();
-            //Boss.GetComponent<BossStateManagerTwo>().PylonCount--; 
-            //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
-            Debug.Log("The Boss is Vulnerable");
-            BossStuff.ResistDamage = 0;
+            PM.NeedReset = false;
+            Health = StartHealth;
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
-            Reset = true;
+            PM.PylonCount--;
         }
-        if (Reset == true)
+        if (PM.NeedReset == true)
         {
-            ResetTimer -= Time.deltaTime;
-            if (ResetTimer <= 0)
-            {
-                Health = StartHealth;
-                ResetTimer = StartTime;
-                Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                gameObject.GetComponent<CapsuleCollider>().enabled = true;
-                Reset = false;
 
-            }
+            
+
+            Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<CapsuleCollider>().enabled = true;
+            
+
 
         }
-
-	}
+    }
 }
+ //var BossStuff = Boss.GetComponent<BossHealth>();
+           // //Boss.GetComponent<BossStateManagerTwo>().PylonCount--; 
+           // //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
+           // Debug.Log("The Boss is Vulnerable");
+           // BossStuff.ResistDamage = 0;

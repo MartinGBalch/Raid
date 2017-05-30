@@ -18,7 +18,8 @@ public class MinionHealth : MonoBehaviour, IDamageable {
         Health -= EstimatedDamageTaken(damageDealt);
 
     }
-    void Start () {
+    void Start ()
+    {
 		
 	}
 	

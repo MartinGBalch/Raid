@@ -28,7 +28,7 @@ public class SpawnBoulders : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        StartCD = CoolDown;
+       
     }
 	
 	// Update is called once per frame
