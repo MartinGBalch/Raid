@@ -17,6 +17,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public bool Alive = true;
     public float ResetTimer;
     private float StartTime;
+    public ParticleSystem Beam;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -50,8 +51,8 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
             //Debug.Log("The Boss is Vulnerable");
             //BossStuff.ResistDamage = 0;
-           
 
+            Beam.Stop();
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             PM.PylonCount--;
@@ -65,8 +66,8 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
                 
                 Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
-           
 
+            Beam.Play();
 
 
 

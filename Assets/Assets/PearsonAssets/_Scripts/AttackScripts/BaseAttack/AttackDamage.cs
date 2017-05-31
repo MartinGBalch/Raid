@@ -7,6 +7,7 @@ public class AttackDamage : MonoBehaviour
     public GameObject PlayerCam;
     public GameObject Player;
     public ThirdPersonPlayerController PlayerController;
+    public TimeManager Timer;
     public EnergyCharge Energy;
     public float DamageAmount;
     public float EnergyRechargeAmt;
@@ -19,6 +20,7 @@ public class AttackDamage : MonoBehaviour
      
             if (other.CompareTag("Enemy"))
             {
+            Timer.startSlowMotion(Timer.TestProperties);
                 // other.GetComponent<BossPartsHealth>().TakeDamage(DamageAmount);
                 var Stunnable = other.GetComponent<MinionMovement>();
                 var IsDamageable = other.GetComponent<IDamageable>();
