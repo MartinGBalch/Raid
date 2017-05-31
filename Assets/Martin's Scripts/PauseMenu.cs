@@ -18,6 +18,8 @@ public class PauseMenu : MonoBehaviour
 
     float SetTime;
 
+    public ControllerSupport controller;
+
     // Use this for initialization
     public void Start()
     {
@@ -33,9 +35,9 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || controller.StartButton)
         {
-            SetTime = Time.timeScale;
+           //SetTime = Time.timeScale;
             paused = true;
             PauseCanvas.enabled = true;
             Cursor.visible = true;
@@ -46,7 +48,7 @@ public class PauseMenu : MonoBehaviour
         }
         else if (!paused)
         {
-            Time.timeScale = SetTime;
+            Time.timeScale = 1;
         }
 
     }

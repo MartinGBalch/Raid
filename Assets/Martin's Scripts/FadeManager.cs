@@ -103,7 +103,7 @@ public class FadeManager : MonoBehaviour
 
     public void  Play()
     {
-		SceneManager.LoadScene ("ProtoType 1");
+		SceneManager.LoadScene ("Alpha");
     }
 
     public void Enter()
