@@ -101,7 +101,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         PlayerController = Player.GetComponent<ThirdPersonPlayerController>();
 
         CurrentLockState = States.NonLockedOnState;
-
+        Screen.lockCursor = true;
         if (RB != null)
         {
             RB.freezeRotation = true;
@@ -539,6 +539,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     }
     private Transform trans;
+    CursorLockMode wantedMode;
     void LateUpdate ()
     {
         DT = Time.deltaTime;
@@ -553,13 +554,19 @@ public class ThirdPersonCameraController : MonoBehaviour {
                 CombatMoveCamState();
                 break;
         }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == true)
+        {
+            Cursor.lockState = CursorLockMode.None;
+           
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+           
+        }
         
-
-        if (Input.GetKey(KeyCode.Escape))
-            Screen.lockCursor = false;
-        else
-            Screen.lockCursor = true;
-
 
     }
 }
