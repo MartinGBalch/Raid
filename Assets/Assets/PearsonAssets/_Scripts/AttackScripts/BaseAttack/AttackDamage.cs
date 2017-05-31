@@ -20,8 +20,6 @@ public class AttackDamage : MonoBehaviour
      
             if (other.CompareTag("Enemy"))
             {
-            Timer.startSlowMotion(Timer.TestProperties);
-                // other.GetComponent<BossPartsHealth>().TakeDamage(DamageAmount);
                 var Stunnable = other.GetComponent<MinionMovement>();
                 var IsDamageable = other.GetComponent<IDamageable>();
               

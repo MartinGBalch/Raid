@@ -28,7 +28,7 @@ public class TargetScript : MonoBehaviour {
             }
             else if(Cam.target.GetComponent<MinionHealth>() != null)
             {
-                healthBar.fillAmount = Cam.target.GetComponent<MinionHealth>().Health / 75;
+                healthBar.fillAmount = Cam.target.GetComponent<MinionHealth>().Health / 50;
             }
             else if (Cam.target.GetComponent<BossHealth>() != null)
             {
