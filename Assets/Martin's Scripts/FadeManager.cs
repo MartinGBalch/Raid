@@ -35,7 +35,8 @@ public class FadeManager : MonoBehaviour
 
     public Color buttonColor;
     public Color titleColor;
-    
+
+    public ControllerSupport controller;
 
     private void Awake()
     {
@@ -66,15 +67,18 @@ public class FadeManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //if (Input.GetKeyDown(KeyCode.Return))
-        //{
-        //    Fade(true, 3);
-        //    Cursor.visible = true;
-        //    enter.enabled = false;
-        //    play.enabled = true;
-        //}
+        if (controller.StartButton)
+        {
+            Fade(true, 3);
+            Cursor.visible = true;
+            controller.StartButton = false;
+            play.enabled = true;
+            ButtonMenu.enabled = true;
+            TitleMenu.enabled = false;
+        }
 
-        
+
+
 
         if (!isInTransition)
             return;
