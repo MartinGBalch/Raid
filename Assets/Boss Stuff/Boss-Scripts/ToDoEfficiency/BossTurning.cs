@@ -13,16 +13,18 @@ public class BossTurning : MonoBehaviour
     private float AdjustStart;
     public bool Direction = false; // Right - false : Left - true
     public float AngleBtwn;
-
+    private TimeManager DeltaTime;
+    float DT;
     // Use this for initialization
 
-   
-    
+
+
 
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
         AdjustStart = AdjustTimer;
+        DeltaTime = FindObjectOfType<TimeManager>();
 	}
 
 
@@ -41,7 +43,7 @@ public class BossTurning : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
+        DT = DeltaTime.DT;
         
 
         
@@ -70,7 +72,7 @@ public class BossTurning : MonoBehaviour
                 
         if (IsTurning == true)
         {
-            AdjustTimer -= Time.deltaTime;
+            AdjustTimer -= DT;
             if(AdjustTimer <= 0)
             {
                 if (Direction) { transform.Rotate(0, Speed, 0);  }

@@ -18,6 +18,7 @@ public class BoulderFall : MonoBehaviour {
             var player = collision.gameObject.GetComponent<PlayerHealth>();
             if(player != null)
             {
+               
                 player.TakeDamage(dmg);
                 Destroy(gameObject, .5f);
             }

@@ -7,6 +7,8 @@ public class CollisionDMG : MonoBehaviour {
     public float Dmg;
     float distDIF;
     public float LerpSpeed;
+    Transform MyT;
+    
 
     void OnTriggerEnter(Collider collider)
     {
@@ -28,25 +30,27 @@ public class CollisionDMG : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-       
+        MyT = GetComponent<Transform>();
+      
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 50))
+        if (Physics.Raycast(MyT.position, -MyT.up, out hit, 50))
         {
             if (hit.collider.tag == "Floor")
             {
                 
-                distDIF = Mathf.Abs(hit.point.y - transform.position.y);
+                distDIF = Mathf.Abs(hit.point.y - MyT.position.y);
               
 
-                Vector3 POS = new Vector3(transform.position.x, hit.transform.position.y - distDIF, transform.position.z);
-                
-                
-                transform.position = Vector3.Lerp(transform.position, POS, Time.deltaTime * LerpSpeed);
+                Vector3 POS = new Vector3(MyT.position.x, MyT.position.y - distDIF + (MyT.localScale.y / 2), MyT.position.z);
+
+
+                MyT.position = Vector3.Lerp(MyT.position, POS, Time.deltaTime * LerpSpeed);
             }
            
             

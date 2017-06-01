@@ -8,12 +8,14 @@ public class FistCollision : MonoBehaviour {
     bool IsDamage = false;
     private float ActualTimer;
     public float Dmg;
-    
+    private TimeManager DeltaTime;
+    float DT;
 
     void Start ()
     {
-        ActualTimer = timer;	
-	}
+        ActualTimer = timer;
+        DeltaTime = FindObjectOfType<TimeManager>();
+    }
 	
     void OnTriggerStay(Collider collider)
     {
@@ -35,7 +37,9 @@ public class FistCollision : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        ActualTimer -= Time.deltaTime;
+        DT = DeltaTime.DT;
+
+        ActualTimer -= DT;
         if (ActualTimer <= 0)
         {
             IsDamage = true;

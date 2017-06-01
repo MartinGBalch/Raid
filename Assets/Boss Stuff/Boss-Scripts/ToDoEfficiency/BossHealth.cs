@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossHealth : MonoBehaviour, IDamageable {
+public class BossHealth : MonoBehaviour, IDamageable
+{
+    private TimeManager DeltaTime;
+    float DT;
+
 
     public float Health;
     public float ResistDamage;
@@ -31,6 +35,7 @@ public class BossHealth : MonoBehaviour, IDamageable {
     // Use this for initialization
     void Start ()
     {
+        DeltaTime = FindObjectOfType<TimeManager>();
         BossState = GetComponent<BossStateManagerTwo>();
         BabySpawner = GetComponent<MinionSpawn>();
         StartResistance = ResistDamage;
@@ -40,13 +45,15 @@ public class BossHealth : MonoBehaviour, IDamageable {
 	// Update is called once per frame
 	void Update ()
     {
+        DT = DeltaTime.DT;
+
 		if(ResistDamage == 0)
         {
             BossState.Behaviour = 69;
-            VulnerableTime -= Time.deltaTime;
+            VulnerableTime -= DT;
             if(VulnerableTime <= 0)
             {
-                Debug.Log("The Boss is Immune Again");
+               
                 BabySpawner.RunMechanic();
                 BossState.PickBehavior();
                 ResistDamage = StartResistance;
@@ -55,7 +62,7 @@ public class BossHealth : MonoBehaviour, IDamageable {
         }
         if(Health <= 0)
         {
-            Debug.Log("The Boss Is Dead");
+            
             Destroy(gameObject);
         }
         

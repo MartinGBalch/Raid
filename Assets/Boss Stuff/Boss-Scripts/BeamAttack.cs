@@ -13,10 +13,10 @@ public class BeamAttack : MonoBehaviour {
 
     public GameObject LazerHead;
     public GameObject Player;
-
+    PlayerHealth Health;
     void Start()
     {
-      
+        Health = Player.GetComponent<PlayerHealth>();
     }
 
 
@@ -58,7 +58,7 @@ public class BeamAttack : MonoBehaviour {
         }
         else
         {
-            Player.GetComponent<PlayerHealth>().TakeDamage(1000);
+            Health.TakeDamage(1000);
            // Debug.Log("You Died.");
         }
 

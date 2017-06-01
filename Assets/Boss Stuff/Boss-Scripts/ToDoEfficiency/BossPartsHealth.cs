@@ -46,11 +46,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             PM.NeedReset = false;
             Health = StartHealth;
 
-            //var BossStuff = Boss.GetComponent<BossHealth>();
-            //Boss.GetComponent<BossStateManagerTwo>().PylonCount--; 
-            //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
-            //Debug.Log("The Boss is Vulnerable");
-            //BossStuff.ResistDamage = 0;
+            
 
             Beam.Stop();
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;

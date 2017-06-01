@@ -8,7 +8,8 @@ public class AoEdmg : MonoBehaviour {
     public float AtkSpeed;
     private float StartSpeed;
     public float LifeTime;
-
+    private TimeManager DeltaTime;
+    float DT;
     void OnTriggerStay(Collider collider)
     {
         if (collider.tag == "Player")
@@ -33,13 +34,15 @@ public class AoEdmg : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        DeltaTime = FindObjectOfType<TimeManager>();
         StartSpeed = AtkSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        LifeTime -= Time.deltaTime;
+        DT = DeltaTime.DT;
+        LifeTime -= DT;
         if (LifeTime <= 0)
         {
             Destroy(gameObject);

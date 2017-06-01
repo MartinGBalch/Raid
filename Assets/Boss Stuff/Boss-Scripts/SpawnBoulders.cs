@@ -10,7 +10,8 @@ public class SpawnBoulders : MonoBehaviour {
     public float CoolDown;
     private float StartCD;
     public float Range;
-    public float height;
+    public float heightMax;
+    public float heightMin;
 
     public void RunMechanic()
     {
@@ -19,8 +20,9 @@ public class SpawnBoulders : MonoBehaviour {
             {
                 float RandX = Random.Range(-Range, Range);
                 float RandZ = Random.Range(-Range, Range);
+                float RandY = Random.Range(heightMin, heightMax);
                 var AoE = AoeEffect;
-                AoE.transform.position = new Vector3(transform.position.x + RandX, height, transform.position.z + RandZ);
+                AoE.transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
                 Instantiate(AoE);
             }
         

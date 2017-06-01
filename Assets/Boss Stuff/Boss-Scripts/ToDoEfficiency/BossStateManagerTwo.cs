@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossStateManagerTwo : MonoBehaviour
 {
+    private TimeManager DeltaTime;
+   
 
     AoEAttack AoeMechanic;
     FistSlam FistSlamMechanic;
@@ -56,6 +58,7 @@ public class BossStateManagerTwo : MonoBehaviour
     }
     void Start()
     {
+        DeltaTime = FindObjectOfType<TimeManager>();
         BulletSprayAmount = 0;
     }
 
@@ -63,7 +66,7 @@ public class BossStateManagerTwo : MonoBehaviour
     void BehaviorOne()
     {
         // Projectile Burst
-
+       
         Timer -= DT;
         if (Timer <= 0)
         {
@@ -161,7 +164,7 @@ public class BossStateManagerTwo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DT = Time.deltaTime;
+        DT = DeltaTime.DT;
         if (Health.Health <= 700) { State = 1;  }
         
         if (Health.Health <= 400) { State = 2; }
@@ -188,67 +191,14 @@ public class BossStateManagerTwo : MonoBehaviour
         if (Behaviour == 5) { BehaviorFive(); }
 
 
-        // -----------SWITCH METHOD ---------------
-        //Timer -= DT;
-
-        //if (Timer <= 0)
-        //{
-        //    Timer = StartTime;
-        //    int DoBlank = Random.Range(0, (1 + State));
-        //    switch (DoBlank)
-        //    {
-        //        case 0:
-        //            ProjectileMechanic.RunMechanic();
-        //            break;
-
-        //        case 1:
-        //            BoulderFallMechanic.RunMechanic();
-        //            break;
-        //        case 2:
-        //            AoeMechanic.RunMechanic();
-        //            break;
-        //            // -FIST SLAM-
-        //            //case 3:
-        //            //    FistSlamMechanic.RunMechanic();
-        //            //    break;
-        //    }
-
-        //}
-        //if (State == 2)
-        //{
-        //    Timer2 -= DT;
-        //    if (Timer2 <= 0)
-        //    {
-        //        Timer2 = StartTime;
-        //        int DoBlank2 = Random.Range(0, (1 + State));
-        //        switch (DoBlank2)
-        //        {
-        //            case 0:
-        //                AoeMechanic.RunMechanic();
-        //                break;
-
-        //            case 1:
-        //                BoulderFallMechanic.RunMechanic();
-        //                break;
-        //            case 2:
-        //                ProjectileMechanic.RunMechanic();
-        //                break;
-        //            // -FIST SLAM-
-        //           //case 3:
-        //           //    FistSlamMechanic.RunMechanic();
-        //           //    break;
-        //        }
-
-        //    }
-
+     
         // -WIPE MECHANIC -
         if(State == 2 && DoWipeMechanic == true)
         {
             WipeTimer -= DT;
             if (WipeTimer <= 0)
             {
-                //  Debug.Log("Charging...");
-                Debug.DrawLine(WipeMechanic.LazerHead.transform.position, WipeMechanic.Player.transform.position);
+
                 WipeDelay -= DT;
                 if (WipeDelay <= 0)
                 {
