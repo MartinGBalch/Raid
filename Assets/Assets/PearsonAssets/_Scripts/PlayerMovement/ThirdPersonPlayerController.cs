@@ -34,7 +34,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     private EnergyCharge Energy;
     Vector3 velocity = Vector3.zero;
     float forwardInput, turnInput, jumpInput;
-    public ParticleSystem LaserParticle;
+    public ParticleSystem LaserParticle, SuperCharged;
 
     bool Grounded()
     {
@@ -112,7 +112,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public float Charge;
     private float smoothTimer;
     private Vector3 moveVector;
-
+    public TimeManager TimerDT;
 
     public void AttackFunction()
     {
@@ -347,7 +347,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             Poof.Play();
             Poof.simulationSpace = ParticleSystemSimulationSpace.World;
             anim.SetTrigger("DashAttack");
-            AttackdashTime = .3f;
+            AttackdashTime = .15f;
             Energy.Energy -= 10;
             NonCombatState = States.DashAttackState;
         }
@@ -365,6 +365,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if ((Controller.SuperCharge || Input.GetMouseButtonDown(2)) && 
             NonCombatState != States.SuperState && Energy.Energy >= Energy.MaxEnergy && NonCombatState != States.DashAttackState)
         {
+            TimerDT.startSlowMotion(TimerDT.TestProperties);
+            SuperCharged.Play();
             NonCombatState = States.SuperState;
             beginSuper = true;
             tempPos = transform.position + new Vector3(0, .5f, 0);
@@ -372,7 +374,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             anim.SetTrigger("SuperIdle");
         }
         
-    }
+    } /// <summary>
+    /// ///////////////////////////////////////////////
+    /// </summary>
 
 
     float presstimer = 0;
@@ -612,10 +616,10 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             correct = true;
         }
-        if (SlashTime <= -1f)
+        if (SlashTime <= -.1f)
         {
             beginSuper = true;
-
+            SuperCharged.Stop();
             correct = false;
             inSuper = false;
             SuperAttackState = States.WaitingState;
@@ -901,7 +905,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     void FixedUpdate ()
     {
        
-        DT = Time.deltaTime;
+        DT = TimerDT.DT;
    
         AnimBlendControl();
         switch (CurrentState)
@@ -997,6 +1001,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     public void SuperSlash1()
     {
+        TimerDT.startSlowMotion(TimerDT.TestProperties);
         GameObject slasher = Instantiate(Slash1, transform.position + new Vector3(0,1,0),  transform.rotation);
     }
     public void SuperSlash2()

@@ -20,7 +20,7 @@ public class AttackDamage : MonoBehaviour
      
             if (other.CompareTag("Enemy"))
             {
-                var Stunnable = other.GetComponent<MinionMovement>();
+                //svar Stunnable = other.GetComponent<MinionMovement>();
                 var IsDamageable = other.GetComponent<IDamageable>();
               
                 if (IsDamageable != null)
@@ -28,10 +28,10 @@ public class AttackDamage : MonoBehaviour
                     IsDamageable.TakeDamage(DamageAmount);
                     Energy.Energy += EnergyRechargeAmt;
                 }
-                if(Stunnable != null)
-                {
-                    Stunnable.IsStunned = true;
-                }
+                //if(Stunnable != null)
+                //{
+                //    Stunnable.IsStunned = true;
+                //}
             }
             else if(other.CompareTag("Boss"))
             {

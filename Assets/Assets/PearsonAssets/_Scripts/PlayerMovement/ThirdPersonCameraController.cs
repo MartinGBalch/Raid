@@ -75,6 +75,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     }
 
+    public TimeManager DeltaTime;
+
     public States CurrentState, CurrentIdleState, CurrentMovingState, CurrentCombatMoveState, CurrentLockState;
 
     void Start()
@@ -239,8 +241,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
     {
         LockedOnTarget = false;
         RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.forward,Color.red,100);
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 100, 1 << 8))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 100, 1 << 8) || Physics.Raycast(Player.transform.position, Player.transform.forward, out hit, 100, 1 << 8))
         {
             target = hit.transform.gameObject;
         }
@@ -255,6 +256,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
                 target = null;
             }
         }
+
+       
         SetcamSmoothDampTime = camSmoothDampTimeNonLock;
 
         CameraLook();
@@ -330,10 +333,13 @@ public class ThirdPersonCameraController : MonoBehaviour {
         Vector3 negDistance;
         RaycastHit hit;
         
-        if (Physics.Linecast(follow.position, transform.position, out hit, 1 << 10) || Physics.Linecast(follow.position, transform.position, out hit, 1 << 9))
+        if (Physics.Linecast(follow.position, transform.position, out hit))
         {
-            distance -= hit.distance;
-            correct = true;
+            if (!hit.collider.isTrigger)
+            {
+                distance -= hit.distance;
+                correct = true;
+            }
         }
         if (correct)
         {
@@ -440,11 +446,13 @@ public class ThirdPersonCameraController : MonoBehaviour {
         distance = Vector3.Distance(follow.position, target.transform.position) + 5;
 
 
-        if (Physics.Linecast(follow.position, transform.position, out hit, 1 << 1) )
+        if (Physics.Linecast(follow.position, transform.position, out hit) )
         {
-
-            distance -= hit.distance;
-            correct = true;
+            if (!hit.collider.isTrigger)
+            {
+                distance -= hit.distance;
+                correct = true;
+            }
         }
         if (correct)
         {
@@ -542,7 +550,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
     CursorLockMode wantedMode;
     void LateUpdate ()
     {
-        DT = Time.deltaTime;
+        DT = DeltaTime.DT;
         playerWatch();
         KeyInput();
         switch (CurrentState)
