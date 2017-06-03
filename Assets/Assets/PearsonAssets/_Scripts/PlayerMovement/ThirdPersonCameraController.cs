@@ -226,7 +226,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
     {
    
        
-        if (target != null && CurrentLockState == States.NonLockedOnState && (Controller.Target >.1f || Input.GetKey(KeyCode.Q)))
+        if (target != null && CurrentLockState == States.NonLockedOnState && (Controller.Target >.1f || Input.GetKey(KeyCode.Q)) && Vector3.Distance(Player.transform.position, target.transform.position) < 20)
         {
             CurrentLockState = States.LockedOnState;
         }
@@ -241,7 +241,11 @@ public class ThirdPersonCameraController : MonoBehaviour {
     {
         LockedOnTarget = false;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 100, 1 << 8) || Physics.Raycast(Player.transform.position, Player.transform.forward, out hit, 100, 1 << 8))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 100, 1 << 8) )
+        {
+            target = hit.transform.gameObject;
+        }
+        if (Physics.Raycast(Player.transform.position - new Vector3(0, 0.5f, 0), Player.transform.forward, out hit, Mathf.Infinity, 1 << 8))
         {
             target = hit.transform.gameObject;
         }
@@ -269,7 +273,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
       
         
         CameraLock();
-        if ((target != null && Vector3.Distance(Player.transform.position, target.transform.position) > 35) || (target != null && Vector3.Distance(transform.position, follow.transform.position) > 35))
+        if ((target != null && Vector3.Distance(Player.transform.position, target.transform.position) > 20))
         {
             target = null;
             CurrentLockState = States.NonLockedOnState;
@@ -312,7 +316,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         //    CurrentIdleState = States.IdleCamMovementAFK;
         //}
 
-        y = ClampAngle(y, -50, 80);
+        y = ClampAngle(y, -30, 80);
 
         Vector3 position;
 
@@ -450,8 +454,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             if (!hit.collider.isTrigger)
             {
-                distance -= hit.distance;
-                correct = true;
+                //distance -= hit.distance;
+                //correct = true;
             }
         }
         if (correct)

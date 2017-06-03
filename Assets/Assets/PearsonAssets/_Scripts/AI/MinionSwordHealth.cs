@@ -9,7 +9,7 @@ public class MinionSwordHealth : MonoBehaviour, IDamageable {
     public float MaxHealth;
     
     public bool Imune;
-
+    private SwordSwingMinion minion;
     public CameraShake Shake;
     public GameObject Base;
     public ParticleSystem Damage;
@@ -18,6 +18,7 @@ public class MinionSwordHealth : MonoBehaviour, IDamageable {
     {
         MaxHealth = Health;
         Shake = FindObjectOfType<CameraShake>();
+        minion = GetComponent<SwordSwingMinion>();
     }
 
     public float EstimatedDamageTaken(float damageDealt)
@@ -29,11 +30,13 @@ public class MinionSwordHealth : MonoBehaviour, IDamageable {
         
             Shake.StartShake(Shake.AttackProperties);
             Health -= (damageDealt);
+            minion.MP.Damaged = true;
+            minion.In = true; ;
             if (Health <= 0)
             {
              Instantiate(blood, transform.position,transform.rotation);
             }
-           Damage.Play();
+            Damage.Play();
         
     }
 

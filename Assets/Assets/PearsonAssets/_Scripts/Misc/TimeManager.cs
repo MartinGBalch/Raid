@@ -77,21 +77,17 @@ public class TimeManager : MonoBehaviour
         
         float temp = properties.StartTime;
         bool returnNow = false;
+
+        Time.timeScale = 0;
+        speed = properties.speed;
         do
         {
             temp -= .1f;
-            if (temp <=0)
-            {
-                Time.timeScale = 1;
-               
-            }
-            else
-            {
 
-                Time.timeScale = 0;
-            }
+            Time.timeScale += 0.2f * speed;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, MinClamp, MaxClamp);
             returnNow = true;
-            yield return new WaitForSecondsRealtime(0.2f);
+            yield return new WaitForSecondsRealtime(0.1f);
         } while (!returnNow);
 
     }

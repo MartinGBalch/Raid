@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     public CameraShake Shake;
     public ParticleSystem Damage;
+    public AudioSource DamageSound;
+    public AudioClip[] Dmg;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -20,9 +22,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (!Imune)
         {
-            Shake.StartShake(Shake.testProperties);
+            Shake.StartShake(Shake.TakeDamageProperties);
             Health -= EstimatedDamageTaken(damageDealt);
             Damage.Play();
+            DamageSound.PlayOneShot(Dmg[Random.Range(0,3)]);
         }
     }
 

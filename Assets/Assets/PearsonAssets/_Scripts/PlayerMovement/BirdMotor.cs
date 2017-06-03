@@ -9,7 +9,7 @@ public class BirdMotor : MonoBehaviour
     public ThirdPersonCameraController CamController;
     private ThirdPersonPlayerController PlayerController;
     public EnergyCharge Energy;
-    public ParticleSystem PS;
+    public ParticleSystem PS, Charge1, charge2;
     public Vector3 velocityCamSmooth = Vector3.zero;
     [SerializeField]
     private float BirdSmoothDampAttack, BirdSmoothDampIdle;
@@ -17,6 +17,8 @@ public class BirdMotor : MonoBehaviour
     private float SetcamSmoothDampTime = 1;
     [SerializeField]
     public Transform Hoveroffset, SuperSet;
+    public AudioSource Chargeer, FireSource;
+    public AudioClip ChargSound, FireSound;
 
     public ControllerSupport Controller;
 
@@ -125,6 +127,9 @@ public class BirdMotor : MonoBehaviour
             if (ChargeAmount <= Energy.Energy)
             {
                 ChargeAmount += DT * 30;
+            Charge1.Play();
+            charge2.Play();
+            Chargeer.PlayOneShot(ChargSound);
             }
 
             attackDamage = ChargeAmount;
@@ -133,6 +138,8 @@ public class BirdMotor : MonoBehaviour
 
     }
     float AttackTimer = 3;
+
+    bool hitOnce = true;
     public void DoAttack()
     {
         if (TempTarget != null)
@@ -160,55 +167,61 @@ public class BirdMotor : MonoBehaviour
 
                     PS.simulationSpace = ParticleSystemSimulationSpace.World;
                     PS.Play();
+
+                    FireSource.PlayOneShot(FireSound);
+                    Chargeer.Stop();
                 }
 
                 transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp * 1.5f);
 
                 if (Vector3.Distance(transform.position, TempTarget.transform.position) < (tempDistance / 2) + 1.5f)
                 {
-                    RaycastHit hit;
+                    //RaycastHit hit;
 
-                    if (Physics.Linecast(transform.position, TempTarget.transform.position, out hit))
+                    //if (Physics.Linecast(transform.position, TempTarget.transform.position, out hit))
+                    //{
+                    //    if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
+                    //    {
+
+                    //        IDamageable dmg = hit.collider.GetComponent<IDamageable>();
+                    //        killpos = hit.collider.transform.position;
+                    //        killOffset = offset;
+                    //        AttackTimer = 3;
+                    //        Hit = true;
+                    //        dmg.TakeDamage(attackDamage);
+                    //        Energy.Energy = Energy.Energy - attackDamage;
+                    //        attackDamage = 0;
+                    //        ChargeAmount = 0;
+                    //        Controller.Charge = false;
+
+                    //    }
+
+                    //}
+                    //else
+                    //{
+                    //    if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
+                    //    {
+                    if (hitOnce)
                     {
-                        if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
-                        {
-                            
-                            IDamageable dmg = hit.collider.GetComponent<IDamageable>();
-                            killpos = hit.collider.transform.position;
-                            killOffset = offset;
-                            AttackTimer = 3;
-                            Hit = true;
-                            dmg.TakeDamage(attackDamage);
-                            Energy.Energy = Energy.Energy - attackDamage;
-                            attackDamage = 0;
-                            ChargeAmount = 0;
-                            Controller.Charge = false;
-                           
-                        }
-
+                        IDamageable dmg = TempTarget.GetComponent<IDamageable>();
+                        killpos = TempTarget.transform.position;
+                        killOffset = offset;
+                        AttackTimer = 3;
+                        Hit = true;
+                        dmg.TakeDamage(attackDamage);
+                        Energy.Energy = Energy.Energy - attackDamage;
+                        attackDamage = 0;
+                        ChargeAmount = 0;
+                        Controller.Charge = false;
+                        hitOnce = false;
                     }
-                    else
-                    {
-                        if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
-                        {
-
-                            IDamageable dmg = TempTarget.GetComponent<IDamageable>();
-                            killpos = TempTarget.transform.position;
-                            killOffset = offset;
-                            AttackTimer = 3;
-                            Hit = true;
-                            dmg.TakeDamage(attackDamage);
-                            Energy.Energy = Energy.Energy - attackDamage;
-                            attackDamage = 0;
-                            ChargeAmount = 0;
-                            Controller.Charge = false;
-
-                        }
-                    }
+                       // }
+                    //}
                 }
             }
             else
             {
+                hitOnce = true;
                 Vector3 oldPos = transform.position;
                 transform.position = Vector3.MoveTowards(transform.position, (TempTarget.transform.position + killOffset), DT * 7);
                 Vector3 dirMov = (transform.position - oldPos).normalized;
@@ -222,6 +235,7 @@ public class BirdMotor : MonoBehaviour
         }
         else
         {
+            hitOnce = true;
             Vector3 oldPos = transform.position;
             transform.position = Vector3.MoveTowards(transform.position, (killpos + killOffset), DT * 7);
             Vector3 dirMov = (transform.position - oldPos).normalized;
@@ -250,6 +264,11 @@ public class BirdMotor : MonoBehaviour
             if (Charge && PlayerController.BirdSuper == false)
             {
                 ChargeAttack();
+            }
+            else
+            {
+                Charge1.Stop();
+                charge2.Stop();
             }
 
             if (Fire)

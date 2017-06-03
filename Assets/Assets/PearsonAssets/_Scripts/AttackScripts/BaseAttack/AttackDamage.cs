@@ -10,7 +10,7 @@ public class AttackDamage : MonoBehaviour
     public ThirdPersonPlayerController PlayerController;
     private TimeManager Timer;
     public EnergyCharge Energy;
-   
+    public GameObject Sound;
     public float DamageAmount;
     public float EnergyRechargeAmt;
     private void Start()
@@ -28,7 +28,8 @@ public class AttackDamage : MonoBehaviour
               
                 if (IsDamageable != null)
                 {
-                    //Timer.startStopTime(Timer.StopProperties);
+                GameObject temp = Instantiate(Sound, other.transform.position,other.transform.rotation);
+                    Timer.startSlowMotion(Timer.StopProperties);
                     IsDamageable.TakeDamage(DamageAmount);
                     Energy.Energy += EnergyRechargeAmt;
                 }
@@ -38,9 +39,10 @@ public class AttackDamage : MonoBehaviour
                 //}s
             }
             else if(other.CompareTag("Boss"))
-            {
-                //other.GetComponent<BossHealth>().TakeDamage(DamageAmount);
-                var IsDamageable = other.GetComponent<IDamageable>();
+        {
+           GameObject temp = Instantiate(Sound, other.transform.position, other.transform.rotation);
+            //other.GetComponent<BossHealth>().TakeDamage(DamageAmount);
+            var IsDamageable = other.GetComponent<IDamageable>();
                 if (IsDamageable != null)
             {
                 Shake.StartShake(Shake.AttackProperties);
@@ -49,8 +51,9 @@ public class AttackDamage : MonoBehaviour
                 }
             }
             else if(other.GetComponent<IDamageable>() != null && !other.CompareTag("Player"))
-            {
-                var IsDamageable = other.GetComponent<IDamageable>();
+        {
+            GameObject temp = Instantiate(Sound, other.transform.position, other.transform.rotation);
+            var IsDamageable = other.GetComponent<IDamageable>();
                 IsDamageable.TakeDamage(DamageAmount);
                 Shake.StartShake(Shake.LightProperties);
             }

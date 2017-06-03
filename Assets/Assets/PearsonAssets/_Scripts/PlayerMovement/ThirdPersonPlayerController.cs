@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ThirdPersonPlayerController : MonoBehaviour {
 
+    public AudioSource Slashes, FootSteps, Dasher,SuperChargeSource;
+    public AudioClip[] SlashSound, Footstep, DashingSound, Teleport;
     public ControllerSupport Controller;
     [System.Serializable]
     public class MoveSettings
@@ -342,13 +344,14 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         DashAttack = ((Input.GetKey(KeyCode.LeftControl) || Controller.Dash > .1f) && (mouseAttack || Controller.Attack));
         Sprint = (Input.GetKey(KeyCode.LeftShift) || Controller.Sprint) && moved;
         Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Controller.Dash > .1f) && canDash && moved && !DashAttack && !attacking;
-
+    
         attackCooldown -= DT;
         ComboTime -= DT;
         smoothTimer -= DT;
         mouseAttack = Input.GetMouseButtonDown(0);
         if (DashAttack && NonCombatState != States.SuperState && Energy.Energy >= 10 && NonCombatState != States.DashAttackState)
         {
+            Dasher.PlayOneShot(Teleport[0]);
             Controller.Attack = false;
             mouseAttack = false;
             Poof.Play();
@@ -378,6 +381,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             beginSuper = true;
             tempPos = transform.position + new Vector3(0, .5f, 0);
             inSuper = true;
+            SuperChargeSource.Play();
             anim.SetTrigger("SuperIdle");
         }
         
@@ -470,7 +474,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if (Dash && canDash)
         {
             Dashing = true;
-
+            
             anim.SetBool("Dash", true);
         }
 
@@ -496,6 +500,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             if(DashAir.isPlaying == false)
             {
                 DashAir.Play();
+
+                Dasher.PlayOneShot(DashingSound[0]);
             }
         }
         if (dashTime >= 0 && Dashing)
@@ -628,6 +634,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
         if (SlashTime <= -.1f)
         {
+            SuperChargeSource.Stop();
             beginSuper = true;
             SuperCharged.Stop();
             correct = false;
@@ -645,10 +652,12 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         
         if ((Controller.Attack || mouseAttack) && beginSuper == true && Energy.SuperEnergy >= Energy.SuperMaxEnergy)
         {
+            
             Controller.Attack = false;
             mouseAttack = false;
             beginSuper = false;
             SlashTime = 1;
+            anim.ResetTrigger("EndSuper");
             LaserTime = 3;
             Energy.SuperEnergy -= Energy.SuperMaxEnergy;
             anim.SetTrigger("SuperAttack");
@@ -728,11 +737,12 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             if (correct)
             {
                 camRel.y = 0;
-              
+                
                 smoothCorrect = 3;
             }
             else
             {
+                
                 smoothCorrect = 6;
             }
             transform.forward = Vector3.Slerp(transform.forward, camRel, DT * smoothCorrect);
@@ -958,6 +968,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         
         if (NonCombatState == States.AttackState)
         {
+;
             if (buttonPress == false && AttackingState == States.AttackTwo)
             {
                 hitbox.SetActive(false);
@@ -999,15 +1010,22 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public void BeginAttack1()
     {
         Slash.Play();
+        Slashes.PlayOneShot(SlashSound[0]);
        
     }
     public void BeginAttack2()
     {
         if (attacking && NonCombatState != States.IdleState)
         {
+            Slashes.PlayOneShot(SlashSound[1]);
             SlashDown.Play();
         }
 
+    }
+    public void BeginAttack3()
+    {
+        SlashStraight.Play();
+        Slashes.PlayOneShot(SlashSound[2]);
     }
 
     public GameObject Slash1, Slash2, Laser;
@@ -1031,13 +1049,16 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         Laser.SetActive(true);
     }
 
-    public ParticleSystem StepLeft, StepRight;
+    public ParticleSystem StepLeft, StepRight,SlashStraight;
 
     public void RightFootStep()
     {
         if(Grounded())
         {
             StepRight.Play();
+
+            FootSteps.PlayOneShot(Footstep[Random.Range(0, 5)]);
+
         }
     }
     public void LeftFootStep()
@@ -1045,6 +1066,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if (Grounded())
         {
             StepLeft.Play();
+
+            FootSteps.PlayOneShot(Footstep[Random.Range(0, 5)]);
+
         }
     }
 

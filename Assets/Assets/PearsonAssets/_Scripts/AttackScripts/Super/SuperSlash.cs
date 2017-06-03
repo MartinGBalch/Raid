@@ -10,11 +10,14 @@ public class SuperSlash : MonoBehaviour {
     public float DamageAmount;
     public int X, Y, Z, TempY, TempX, TempZ;
     public Vector3 StartPos;
+    public AudioSource Sound;
+    
 	// Use this for initialization
 	void Awake () {
         Slash = GetComponent<GameObject>();
         RB = GetComponent<Rigidbody>();
         StartPos = transform.position;
+        Sound.Play();
 	}
 	
 	// Update is called once per frame

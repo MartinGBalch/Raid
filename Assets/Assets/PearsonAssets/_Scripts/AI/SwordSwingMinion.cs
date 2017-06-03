@@ -17,8 +17,8 @@ public class SwordSwingMinion : MonoBehaviour {
         public float strength;
         public float maxSpeed;
         public float minSpeed;
-
-
+        public bool Damaged;
+        public float jiggletime;
 
 
         public float HoverSpeed;
@@ -35,12 +35,19 @@ public class SwordSwingMinion : MonoBehaviour {
         public GameObject PlayerPos, Back;
         public ThirdPersonPlayerController Player;
         public MinionSwordController Sword;
+
         [System.Serializable]
         public class FloatParticles
         {
             public ParticleSystem Float;
         }
+        [System.Serializable]
+        public class MinionSounds
+        {
+            public AudioSource AttackSound;
+        }
 
+        public MinionSounds Sounds;
     }
     [System.Serializable]
     public class MinionAttackValues
@@ -121,7 +128,44 @@ public class SwordSwingMinion : MonoBehaviour {
         return bestTarget;
 
     }
-    bool up, Down, AttackUp;
+    bool up, Down, AttackUp, Out;
+    public bool In = true;
+    public float JiggleTime;
+    public void DamageJiggle()
+    {
+        
+        if (MP.Damaged)
+        {
+            if (In)
+            {
+                transform.localScale -= new Vector3(DT * 8, DT * 2, DT * 8);
+            }
+            else
+            {
+
+                transform.localScale += new Vector3(DT * 8, DT * 2, DT * 8);
+            }
+
+            if (transform.localScale.x > 1)
+            {
+                MP.Damaged = false;
+            }
+            else if (transform.localScale.x <= .6f)
+            {
+                In = false;
+            }
+            transform.localScale = new Vector3(Mathf.Clamp(transform.localScale.x, .4f, 1.1f), Mathf.Clamp(transform.localScale.y, .4f, 1.1f), Mathf.Clamp(transform.localScale.z, .4f, 1.1f));
+        }
+        else
+        {
+
+            transform.localScale += new Vector3(DT * 5, DT * 5, DT * 5);
+            transform.localScale = new Vector3(Mathf.Clamp(transform.localScale.x, .4f, 1f), Mathf.Clamp(transform.localScale.y, .4f, 1f), Mathf.Clamp(transform.localScale.z, .4f, 1));
+        }
+        
+
+    }
+
     public void Hover()
     {
       
@@ -194,6 +238,7 @@ public class SwordSwingMinion : MonoBehaviour {
 
         if (Vector3.Distance(Objects.PlayerPos.transform.position, transform.position) > 35)
         {
+            Objects.Sounds.AttackSound.Stop();
             CurrentState = States.IdleState;
             Objects.Sword.BoolValues.Idle = true;
             Objects.Sword.BoolValues.Attacking = false;
@@ -219,6 +264,7 @@ public class SwordSwingMinion : MonoBehaviour {
         {
             if (AttackCooldown < 0)
             {
+
                 Agent.isStopped = false;
                 if (Agent.baseOffset >= 2.49)
                 {
@@ -236,6 +282,11 @@ public class SwordSwingMinion : MonoBehaviour {
                 }
                 else 
                 {
+
+                    if (Objects.Sounds.AttackSound.isPlaying == false)
+                    {
+                        Objects.Sounds.AttackSound.Play();
+                    }
                     Objects.Sword.BoolValues.up = false;
                     Agent.SetDestination(Objects.PlayerPos.transform.position);
                     Agent.baseOffset -= DT * AV.AttackDownSpeed;
@@ -263,10 +314,13 @@ public class SwordSwingMinion : MonoBehaviour {
 
                 }
 
+                
                 Agent.baseOffset = Mathf.Clamp(Agent.baseOffset, .5f, 2.5f);
             }
             else
             {
+
+                Objects.Sounds.AttackSound.Stop();
                 AttackUp = true;
                 AttackDuration = AV.Attackduration;
                 Hover();
@@ -286,6 +340,8 @@ public class SwordSwingMinion : MonoBehaviour {
         }
         else
         {
+
+            Objects.Sounds.AttackSound.Stop();
             CurrentState = States.TrackState;
             Objects.Sword.BoolValues.Idle = true;
             Objects.Sword.BoolValues.Attacking = false;
@@ -325,6 +381,10 @@ public class SwordSwingMinion : MonoBehaviour {
         if(CurrentState != States.DeathState && CurrentState != States.AttackState)
         {
             Hover();
+        }
+        if(CurrentState != States.DeathState)
+        {
+            DamageJiggle();
         }
        
 
