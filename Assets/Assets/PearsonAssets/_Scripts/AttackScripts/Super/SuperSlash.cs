@@ -11,6 +11,7 @@ public class SuperSlash : MonoBehaviour {
     public int X, Y, Z, TempY, TempX, TempZ;
     public Vector3 StartPos;
     public AudioSource Sound;
+    public GameObject Sound2;
     
 	// Use this for initialization
 	void Awake () {
@@ -39,6 +40,7 @@ public class SuperSlash : MonoBehaviour {
         {
             var IsDamageable = other.GetComponent<IDamageable>();
             IsDamageable.TakeDamage(DamageAmount);
+            GameObject temp = Instantiate(Sound2, other.transform.position, other.transform.rotation);
         }
     }
 }

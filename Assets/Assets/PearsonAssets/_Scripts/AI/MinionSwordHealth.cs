@@ -13,7 +13,7 @@ public class MinionSwordHealth : MonoBehaviour, IDamageable {
     public CameraShake Shake;
     public GameObject Base;
     public ParticleSystem Damage;
-    public ParticleSystem blood;
+    public GameObject blood;
     void Start()
     {
         MaxHealth = Health;
@@ -34,7 +34,8 @@ public class MinionSwordHealth : MonoBehaviour, IDamageable {
             minion.In = true; ;
             if (Health <= 0)
             {
-             Instantiate(blood, transform.position,transform.rotation);
+            Instantiate(blood, transform.position,transform.rotation);
+           
             }
             Damage.Play();
         
