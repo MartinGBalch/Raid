@@ -15,7 +15,7 @@ public class HealthPack : MonoBehaviour
     {
         spawntime -= Time.deltaTime;
 
-        if (RespawnTime < 0 && Active == false)
+        if (spawntime < 0 && Active == false)
         {
 
             Active = true;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour
 {
     const float maxAngle = 10;
-    public Properties testProperties, TakeDamageProperties, AttackProperties, ShootProperties, SlamProperties, SuperProperties,LightProperties;
+    public Properties testProperties, TakeDamageProperties, AttackProperties, ShootProperties, SlamProperties, SuperProperties,LightProperties, BossRaiseProperties;
     float DT;
 
     IEnumerator CurrentShakeCoroutine;

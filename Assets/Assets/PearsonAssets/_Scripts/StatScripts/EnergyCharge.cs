@@ -13,9 +13,11 @@ public class EnergyCharge : MonoBehaviour
     public float SuperMaxEnergy;
     public Image SuperBar;
     public ParticleSystem Charge;
+    private ThirdPersonPlayerController player;
 
     void Start()
     {
+        player = FindObjectOfType<ThirdPersonPlayerController>();
         Energy = 100;
         SuperEnergy = 100;
         MaxEnergy = Energy;
@@ -30,17 +32,19 @@ public class EnergyCharge : MonoBehaviour
         SuperEnergy = Mathf.Clamp(SuperEnergy, 0, SuperMaxEnergy);
         SuperEnergy += Time.deltaTime * 2;
         SuperBar.fillAmount = SuperEnergy / SuperMaxEnergy;
-
-        if (SuperEnergy >= SuperMaxEnergy )
+        if (player.MV.Armed)
         {
-            if (Charge.isPlaying == false)
+            if (SuperEnergy >= SuperMaxEnergy)
             {
-                Charge.Play();
+                if (Charge.isPlaying == false)
+                {
+                    Charge.Play();
+                }
             }
-        }
-        else
-        {
-            Charge.Stop();
+            else
+            {
+                Charge.Stop();
+            }
         }
             // = SuperEnergy;
     }
