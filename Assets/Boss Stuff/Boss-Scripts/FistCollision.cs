@@ -28,7 +28,7 @@ public class FistCollision : MonoBehaviour {
             {
                 player.TakeDamage(Dmg);
                 IsDamage = false;
-                GetComponent<CapsuleCollider>().enabled = false;
+                Destroy(gameObject);
                 ActualTimer = timer;
             }
         }
@@ -45,6 +45,6 @@ public class FistCollision : MonoBehaviour {
         {
             IsDamage = true;
         }
-        if (ActualTimer <= -1) { /*Destroy(gameObject);*/ GetComponent<CapsuleCollider>().enabled = false; ActualTimer = timer; }
+        if (ActualTimer <= -1) { Destroy(gameObject);  }
     }
 }
