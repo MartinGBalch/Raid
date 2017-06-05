@@ -21,7 +21,7 @@ public class Bounce : MonoBehaviour {
             if (collision.transform.position.y - .5f > transform.position.y )
             {
 
-                collision.gameObject.GetComponent<ThirdPersonPlayerController>().jumpCount = 0;
+                collision.gameObject.GetComponent<ThirdPersonPlayerController>().MV.jumpCount = 0;
                 collision.gameObject.GetComponent<Rigidbody>().AddForce((Vector3.up ) * jumpVel);
             }
         }

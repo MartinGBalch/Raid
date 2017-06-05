@@ -9,7 +9,7 @@ public class BirdMotor : MonoBehaviour
     public ThirdPersonCameraController CamController;
     private ThirdPersonPlayerController PlayerController;
     public EnergyCharge Energy;
-    public ParticleSystem PS;
+    public ParticleSystem PS, Charge1, charge2;
     public Vector3 velocityCamSmooth = Vector3.zero;
     [SerializeField]
     private float BirdSmoothDampAttack, BirdSmoothDampIdle;
@@ -17,7 +17,9 @@ public class BirdMotor : MonoBehaviour
     private float SetcamSmoothDampTime = 1;
     [SerializeField]
     public Transform Hoveroffset, SuperSet;
-
+    public AudioSource Chargeer, FireSource;
+    public AudioClip ChargSound, FireSound;
+    private Transform Trans;
     public ControllerSupport Controller;
 
     enum States
@@ -34,6 +36,7 @@ public class BirdMotor : MonoBehaviour
 
     void Start()
     {
+        Trans = GetComponent<Transform>();
        // offset = Player.transform.position + transform.position;
         SetcamSmoothDampTime = BirdSmoothDampIdle;
         CurrentState = States.idleState;
@@ -74,7 +77,7 @@ public class BirdMotor : MonoBehaviour
     }
     public void smoothPosition(Vector3 fromPos, Vector3 toPos)
     {
-        transform.position = Vector3.SmoothDamp(fromPos, toPos, ref velocityCamSmooth, SetcamSmoothDampTime);
+        Trans.position = Vector3.SmoothDamp(fromPos, toPos, ref velocityCamSmooth, SetcamSmoothDampTime);
     }
     public float HorzSpeed, distance, MinDistance, MaxDistance;
     public float tempDamp;
@@ -82,27 +85,27 @@ public class BirdMotor : MonoBehaviour
     {
       
         Hit = false;
-        if (Vector3.Distance(transform.position, Player.transform.position) <= 5)
+        if (Vector3.Distance(Trans.position, Player.transform.position) <= 5)
         {
             canAttack = true;
         }
 
-        Vector3 oldPos = transform.position;
-        smoothPosition(transform.position, Hoveroffset.position);
-        Vector3 dirMov = (transform.position - oldPos).normalized;
+        Vector3 oldPos = Trans.position;
+        smoothPosition(Trans.position, Hoveroffset.position);
+        Vector3 dirMov = (Trans.position - oldPos).normalized;
        
-        if ( Vector3.Distance(transform.position, Hoveroffset.position) > 1.5f)
+        if ( Vector3.Distance(Trans.position, Hoveroffset.position) > 1.5f)
         {
-            var fwd = transform.forward;
+            var fwd = Trans.forward;
 
 
             var lkat = Vector3.Slerp(fwd, dirMov, DT * 2);
 
-            transform.LookAt(lkat + transform.position, Vector3.up);
+            Trans.LookAt(lkat + Trans.position, Vector3.up);
         }
         else
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Hoveroffset.rotation, DT * 40);
+            Trans.rotation = Quaternion.RotateTowards(Trans.rotation, Hoveroffset.rotation, DT * 40);
         }
         
     }
@@ -125,6 +128,9 @@ public class BirdMotor : MonoBehaviour
             if (ChargeAmount <= Energy.Energy)
             {
                 ChargeAmount += DT * 30;
+            Charge1.Play();
+            charge2.Play();
+            Chargeer.PlayOneShot(ChargSound);
             }
 
             attackDamage = ChargeAmount;
@@ -133,13 +139,15 @@ public class BirdMotor : MonoBehaviour
 
     }
     float AttackTimer = 3;
+
+    bool hitOnce = true;
     public void DoAttack()
     {
         if (TempTarget != null)
         {
             Vector3 offset = new Vector3(0, TempTarget.transform.localScale.y * 3, 0);
             killOffset = offset;
-            if (Vector3.Distance(transform.position, TempTarget.transform.position) > (tempDistance / 2) && Hit == false)
+            if (Vector3.Distance(Trans.position, TempTarget.transform.position) > (tempDistance / 2) && Hit == false)
             {
 
                 //var fwd = transform.forward;
@@ -150,71 +158,77 @@ public class BirdMotor : MonoBehaviour
 
                 //transform.LookAt(lkat + transform.position, Vector3.up);
 
-                Vector3 oldPos = transform.position;
-                transform.position = Vector3.Lerp(transform.position, TempTarget.transform.position, DT);
-                Vector3 dirMov = (transform.position - oldPos).normalized;
+                Vector3 oldPos = Trans.position;
+                Trans.position = Vector3.Lerp(Trans.position, TempTarget.transform.position, DT);
+                Vector3 dirMov = (Trans.position - oldPos).normalized;
 
 
-                if (Vector3.Distance(transform.position, TempTarget.transform.position) < (tempDistance / 2) + 5)
+                if (Vector3.Distance(Trans.position, TempTarget.transform.position) < (tempDistance / 2) + 5)
                 {
 
                     PS.simulationSpace = ParticleSystemSimulationSpace.World;
                     PS.Play();
+
+                    FireSource.PlayOneShot(FireSound);
+                    Chargeer.Stop();
                 }
 
-                transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp * 1.5f);
+                Trans.forward = Vector3.Slerp(Trans.forward, dirMov, DT * attackDamp * 1.5f);
 
-                if (Vector3.Distance(transform.position, TempTarget.transform.position) < (tempDistance / 2) + 1.5f)
+                if (Vector3.Distance(Trans.position, TempTarget.transform.position) < (tempDistance / 2) + 1.5f)
                 {
-                    RaycastHit hit;
+                    //RaycastHit hit;
 
-                    if (Physics.Linecast(transform.position, TempTarget.transform.position, out hit))
+                    //if (Physics.Linecast(transform.position, TempTarget.transform.position, out hit))
+                    //{
+                    //    if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
+                    //    {
+
+                    //        IDamageable dmg = hit.collider.GetComponent<IDamageable>();
+                    //        killpos = hit.collider.transform.position;
+                    //        killOffset = offset;
+                    //        AttackTimer = 3;
+                    //        Hit = true;
+                    //        dmg.TakeDamage(attackDamage);
+                    //        Energy.Energy = Energy.Energy - attackDamage;
+                    //        attackDamage = 0;
+                    //        ChargeAmount = 0;
+                    //        Controller.Charge = false;
+
+                    //    }
+
+                    //}
+                    //else
+                    //{
+                    //    if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
+                    //    {
+                    if (hitOnce)
                     {
-                        if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
-                        {
-                            
-                            IDamageable dmg = hit.collider.GetComponent<IDamageable>();
-                            killpos = hit.collider.transform.position;
-                            killOffset = offset;
-                            AttackTimer = 3;
-                            Hit = true;
-                            dmg.TakeDamage(attackDamage);
-                            Energy.Energy = Energy.Energy - attackDamage;
-                            attackDamage = 0;
-                            ChargeAmount = 0;
-                            Controller.Charge = false;
-                           
-                        }
-
+                        IDamageable dmg = TempTarget.GetComponent<IDamageable>();
+                        killpos = TempTarget.transform.position;
+                        killOffset = offset;
+                        AttackTimer = 3;
+                        Hit = true;
+                        dmg.TakeDamage(attackDamage);
+                        Energy.Energy = Energy.Energy - attackDamage;
+                        attackDamage = 0;
+                        ChargeAmount = 0;
+                        Controller.Charge = false;
+                        hitOnce = false;
                     }
-                    else
-                    {
-                        if (!Hit && hit.collider.GetComponent<IDamageable>() != null)
-                        {
-
-                            IDamageable dmg = TempTarget.GetComponent<IDamageable>();
-                            killpos = TempTarget.transform.position;
-                            killOffset = offset;
-                            AttackTimer = 3;
-                            Hit = true;
-                            dmg.TakeDamage(attackDamage);
-                            Energy.Energy = Energy.Energy - attackDamage;
-                            attackDamage = 0;
-                            ChargeAmount = 0;
-                            Controller.Charge = false;
-
-                        }
-                    }
+                       // }
+                    //}
                 }
             }
             else
             {
-                Vector3 oldPos = transform.position;
-                transform.position = Vector3.MoveTowards(transform.position, (TempTarget.transform.position + killOffset), DT * 7);
-                Vector3 dirMov = (transform.position - oldPos).normalized;
-                transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
+                hitOnce = true;
+                Vector3 oldPos = Trans.position;
+                Trans.position = Vector3.MoveTowards(Trans.position, (TempTarget.transform.position + killOffset), DT * 7);
+                Vector3 dirMov = (Trans.position - oldPos).normalized;
+                Trans.forward = Vector3.Slerp(Trans.forward, dirMov, DT * attackDamp);
                 AttackTimer -= DT;
-                if (Vector3.Distance(transform.position, (TempTarget.transform.position + killOffset)) < 1 || AttackTimer < 0)
+                if (Vector3.Distance(Trans.position, (TempTarget.transform.position + killOffset)) < 1 || AttackTimer < 0)
                 {
                     CurrentState = States.idleState;
                 }
@@ -222,12 +236,13 @@ public class BirdMotor : MonoBehaviour
         }
         else
         {
-            Vector3 oldPos = transform.position;
-            transform.position = Vector3.MoveTowards(transform.position, (killpos + killOffset), DT * 7);
-            Vector3 dirMov = (transform.position - oldPos).normalized;
-            transform.forward = Vector3.Slerp(transform.forward, dirMov, DT * attackDamp);
+            hitOnce = true;
+            Vector3 oldPos = Trans.position;
+            Trans.position = Vector3.MoveTowards(Trans.position, (killpos + killOffset), DT * 7);
+            Vector3 dirMov = (Trans.position - oldPos).normalized;
+            Trans.forward = Vector3.Slerp(Trans.forward, dirMov, DT * attackDamp);
             AttackTimer -= DT;
-            if (Vector3.Distance(transform.position, (killpos + killOffset)) < 1 || AttackTimer < 0)
+            if (Vector3.Distance(Trans.position, (killpos + killOffset)) < 1 || AttackTimer < 0)
             {
                 CurrentState = States.idleState;
             }
@@ -247,18 +262,23 @@ public class BirdMotor : MonoBehaviour
 
         if (Energy.Energy >= 20 )
         {
-            if (Charge && PlayerController.BirdSuper == false)
+            if (Charge && PlayerController.MV.BirdSuper == false)
             {
                 ChargeAttack();
+            }
+            else
+            {
+                Charge1.Stop();
+                charge2.Stop();
             }
 
             if (Fire)
             {
-                if (CamController.target != null && PlayerController.BirdSuper == false)
+                if (CamController.target != null && PlayerController.MV.BirdSuper == false)
                 {
                     TempTarget = CamController.target.gameObject;
                     SetcamSmoothDampTime = BirdSmoothDampAttack;
-                    tempDistance = Vector3.Distance(transform.position, TempTarget.transform.position);
+                    tempDistance = Vector3.Distance(Trans.position, TempTarget.transform.position);
                     CurrentState = States.AttackState;
                     Fire = false;
                     Controller.Fire = false;
@@ -268,7 +288,7 @@ public class BirdMotor : MonoBehaviour
                
             }
         }
-        if (PlayerController.BirdSuper == true)
+        if (PlayerController.MV.BirdSuper == true)
         {
             CurrentState = States.SuperState;
 
@@ -277,20 +297,20 @@ public class BirdMotor : MonoBehaviour
     }
     void DoSuper()
     {
-        if (Vector3.Distance(transform.position, SuperSet.position) >= -2f && Vector3.Distance(transform.position, SuperSet.position) <= 2f)
+        if (Vector3.Distance(Trans.position, SuperSet.position) >= -2f && Vector3.Distance(Trans.position, SuperSet.position) <= 2f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, SuperSet.position,4);
+            Trans.position = Vector3.MoveTowards(Trans.position, SuperSet.position,4);
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, SuperSet.rotation,  4);
+            Trans.rotation = Quaternion.RotateTowards(Trans.rotation, SuperSet.rotation,  4);
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, SuperSet.position, DT * 40);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, SuperSet.rotation, DT * 40);
+            Trans.position = Vector3.MoveTowards(Trans.position, SuperSet.position, DT * 40);
+            Trans.rotation = Quaternion.RotateTowards(Trans.rotation, SuperSet.rotation, DT * 40);
 
         }
 
-        if(PlayerController.inSuper == false)
+        if(PlayerController.MV.inSuper == false)
         {
             CurrentState = States.idleState;
         }

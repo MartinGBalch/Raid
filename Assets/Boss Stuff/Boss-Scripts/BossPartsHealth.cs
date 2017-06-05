@@ -17,7 +17,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public bool Alive = true;
     public float ResetTimer;
     private float StartTime;
-    public ParticleSystem Beam;
+    public ParticleSystem Beam,Damage;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -25,6 +25,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public void TakeDamage(float damageDealt)
     {
         Health -= EstimatedDamageTaken(damageDealt);
+        Damage.Play();
     }
 
     void Start ()

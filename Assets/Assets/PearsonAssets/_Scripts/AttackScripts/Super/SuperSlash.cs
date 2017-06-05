@@ -10,11 +10,15 @@ public class SuperSlash : MonoBehaviour {
     public float DamageAmount;
     public int X, Y, Z, TempY, TempX, TempZ;
     public Vector3 StartPos;
+    public AudioSource Sound;
+    public GameObject Sound2;
+    
 	// Use this for initialization
 	void Awake () {
         Slash = GetComponent<GameObject>();
         RB = GetComponent<Rigidbody>();
         StartPos = transform.position;
+        Sound.Play();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +40,7 @@ public class SuperSlash : MonoBehaviour {
         {
             var IsDamageable = other.GetComponent<IDamageable>();
             IsDamageable.TakeDamage(DamageAmount);
+            GameObject temp = Instantiate(Sound2, other.transform.position, other.transform.rotation);
         }
     }
 }

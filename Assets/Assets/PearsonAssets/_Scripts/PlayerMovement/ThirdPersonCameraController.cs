@@ -58,7 +58,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
     Vector3 CurrentRot, CurrentPos;
     float CurrentRotX, CurrentRotY;
     float XrotV, YrotV;
-
+    private Transform Trans;
     Vector3 CurrentV, CurrentRotV;
     float SmoothDamp = .05f;
     public Camera cam;
@@ -75,22 +75,24 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     }
 
+    public TimeManager DeltaTime;
+
     public States CurrentState, CurrentIdleState, CurrentMovingState, CurrentCombatMoveState, CurrentLockState;
 
     void Start()
     {
-        trans = GetComponent<Transform>();
+        Trans = GetComponent<Transform>();
        
-        Vector3 angles = transform.eulerAngles;
+        Vector3 angles = Trans.eulerAngles;
         x = angles.x;
         y = angles.y;
         RB = GetComponent<Rigidbody>();
 
-        CurrentPos = transform.position;
-        CurrentRot = transform.eulerAngles;
+        CurrentPos = Trans.position;
+        CurrentRot = Trans.eulerAngles;
 
-        CurrentRotY = transform.rotation.y;
-        CurrentRotX = transform.rotation.x;
+        CurrentRotY = Trans.rotation.y;
+        CurrentRotX = Trans.rotation.x;
 
         currentDist = distance;
         desiredDist = distance;
@@ -113,8 +115,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
     bool moving, combat;
     public void playerWatch()
     {
-        moving = PlayerController.moved;
-        combat = PlayerController.SwordDraw;
+        moving = PlayerController.MV.moved;
+        combat = PlayerController.MV.SwordDraw;
 
         if (!combat)
         {
@@ -160,7 +162,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     public void smoothPosition(Vector3 fromPos, Vector3 toPos)
     {
-        transform.position = Vector3.SmoothDamp(fromPos, toPos, ref velocityCamSmooth, SetcamSmoothDampTime);
+        Trans.position = Vector3.SmoothDamp(fromPos, toPos, ref velocityCamSmooth, SetcamSmoothDampTime);
     }
 
     public GameObject ClosetTargetView()
@@ -175,11 +177,11 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         //GameObject bestTarget = null;
         //float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
+        Vector3 currentPosition = Trans.position;
         foreach (GameObject potentialTarget in objects)
         {
 
-            Vector3 localPoint = transform.InverseTransformPoint(potentialTarget.transform.position).normalized;
+            Vector3 localPoint = Trans.InverseTransformPoint(potentialTarget.transform.position).normalized;
             Vector3 forward = Vector3.forward;
             float test = Vector3.Dot(localPoint, forward);
             if(test > dot)
@@ -224,7 +226,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
     {
    
        
-        if (target != null && CurrentLockState == States.NonLockedOnState && (Controller.Target >.1f || Input.GetKey(KeyCode.Q)))
+        if (target != null && CurrentLockState == States.NonLockedOnState && (Controller.Target >.1f || Input.GetKey(KeyCode.Q)) && Vector3.Distance(Player.transform.position, target.transform.position) < 20)
         {
             CurrentLockState = States.LockedOnState;
         }
@@ -239,8 +241,11 @@ public class ThirdPersonCameraController : MonoBehaviour {
     {
         LockedOnTarget = false;
         RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.forward,Color.red,100);
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 100, 1 << 8))
+        if (Physics.Raycast(Trans.position, Trans.forward, out hit, 100, 1 << 8) )
+        {
+            target = hit.transform.gameObject;
+        }
+        if (Physics.Raycast(Player.transform.position - new Vector3(0, 0.5f, 0), Player.transform.forward, out hit, Mathf.Infinity, 1 << 8))
         {
             target = hit.transform.gameObject;
         }
@@ -255,6 +260,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
                 target = null;
             }
         }
+
+       
         SetcamSmoothDampTime = camSmoothDampTimeNonLock;
 
         CameraLook();
@@ -266,7 +273,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
       
         
         CameraLock();
-        if ((target != null && Vector3.Distance(Player.transform.position, target.transform.position) > 35) || (target != null && Vector3.Distance(transform.position, follow.transform.position) > 35))
+        if ((target != null && Vector3.Distance(Player.transform.position, target.transform.position) > 20))
         {
             target = null;
             CurrentLockState = States.NonLockedOnState;
@@ -309,13 +316,13 @@ public class ThirdPersonCameraController : MonoBehaviour {
         //    CurrentIdleState = States.IdleCamMovementAFK;
         //}
 
-        y = ClampAngle(y, -50, 80);
+        y = ClampAngle(y, -30, 80);
 
         Vector3 position;
 
         Quaternion rotation = Quaternion.Euler(y, x, 0);
 
-        if (PlayerController.Sprint || PlayerController.Dash)
+        if (PlayerController.MV.Sprint || PlayerController.MV.Dash)
         {
             minViewDist = 3;
             maxViewDist = 4;
@@ -330,20 +337,23 @@ public class ThirdPersonCameraController : MonoBehaviour {
         Vector3 negDistance;
         RaycastHit hit;
         
-        if (Physics.Linecast(follow.position, transform.position, out hit, 1 << 10) || Physics.Linecast(follow.position, transform.position, out hit, 1 << 9))
+        if (Physics.Linecast(follow.position, Trans.position, out hit))
         {
-            distance -= hit.distance;
-            correct = true;
+            if (!hit.collider.isTrigger)
+            {
+                distance -= hit.distance;
+                correct = true;
+            }
         }
         if (correct)
         {
 
 
-            if (!Physics.Raycast(transform.position, -transform.forward, out hit, 3))
+            if (!Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
             {
                 distance += DT;
             }
-            else if (Physics.Raycast(transform.position, -transform.forward, out hit, 3))
+            else if (Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
             {
 
             }
@@ -357,7 +367,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         negDistance = new Vector3(0.0f, 0.0f, -distance);
         position = rotation * negDistance + follow.position;
-        if (!PlayerController.moved && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0))
+        if (!PlayerController.MV.moved && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0))
         {
             tempDamp = 50;
         }
@@ -371,15 +381,15 @@ public class ThirdPersonCameraController : MonoBehaviour {
         }
         tempDamp = Mathf.Clamp(tempDamp, 2, 50);
        
-        var fwd = transform.forward;
+        var fwd = Trans.forward;
 
-        var direct = (follow.position - transform.position).normalized;
+        var direct = (follow.position - Trans.position).normalized;
 
         var lkat = Vector3.Slerp(fwd, direct, DT * tempDamp);
 
-        transform.LookAt(lkat + transform.position, Vector3.up);
+        Trans.LookAt(lkat + Trans.position, Vector3.up);
 
-        smoothPosition(transform.position, position);
+        smoothPosition(Trans.position, position);
 
         x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .03f;
 
@@ -440,21 +450,23 @@ public class ThirdPersonCameraController : MonoBehaviour {
         distance = Vector3.Distance(follow.position, target.transform.position) + 5;
 
 
-        if (Physics.Linecast(follow.position, transform.position, out hit, 1 << 1) )
+        if (Physics.Linecast(follow.position, Trans.position, out hit) )
         {
-
-            distance -= hit.distance;
-            correct = true;
+            if (!hit.collider.isTrigger)
+            {
+                //distance -= hit.distance;
+                //correct = true;
+            }
         }
         if (correct)
         {
 
 
-            if (!Physics.Raycast(transform.position, -transform.forward, out hit, 3))
+            if (!Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
             {
                 distance += DT;
             }
-            else if (Physics.Raycast(transform.position, -transform.forward, out hit, 3))
+            else if (Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
             {
                
             }
@@ -468,13 +480,13 @@ public class ThirdPersonCameraController : MonoBehaviour {
         Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
         position = rotation * negDistance + target.transform.position;
        
-        var fwd = transform.forward;
-        var direct = (target.transform.position - transform.position).normalized;
+        var fwd = Trans.forward;
+        var direct = (target.transform.position - Trans.position).normalized;
         var lkat = Vector3.Slerp(fwd, direct, DT * TempTargetDamp);
 
-        transform.LookAt(lkat + transform.position, Vector3.up);
+        Trans.LookAt(lkat + Trans.position, Vector3.up);
 
-        smoothPosition(transform.position, position);
+        smoothPosition(Trans.position, position);
     }
 
     public void DoCamMove()
@@ -533,16 +545,15 @@ public class ThirdPersonCameraController : MonoBehaviour {
         position = Player.transform.position - (rotation * Vector3.forward * currentDist + new Vector3(0, -PlayerHeight, 0));
 
 
-        transform.rotation = rotation;
-        smoothPosition(transform.position,position);
+        Trans.rotation = rotation;
+        smoothPosition(Trans.position,position);
 
 
     }
-    private Transform trans;
     CursorLockMode wantedMode;
     void LateUpdate ()
     {
-        DT = Time.deltaTime;
+        DT = DeltaTime.DT;
         playerWatch();
         KeyInput();
         switch (CurrentState)

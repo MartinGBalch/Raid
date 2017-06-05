@@ -15,7 +15,8 @@ public class BossHealth : MonoBehaviour, IDamageable
     private float StartTimer;
     MinionSpawn BabySpawner;
     BossStateManagerTwo BossState;
-
+    public ParticleSystem Damage;
+    private CameraShake Shake;
     private float DamageToBeDealt = 0;
     public float EstimatedDamageTaken(float damageDealt)
     {
@@ -26,6 +27,8 @@ public class BossHealth : MonoBehaviour, IDamageable
         DamageToBeDealt = EstimatedDamageTaken(damageDealt);
         if(DamageToBeDealt >= 0)
         {
+            Damage.Play();
+            Shake.StartShake(Shake.LightProperties);
             Health -= DamageToBeDealt;
         }
         
@@ -35,7 +38,11 @@ public class BossHealth : MonoBehaviour, IDamageable
     // Use this for initialization
     void Start ()
     {
+<<<<<<< HEAD
         DeltaTime = FindObjectOfType<TimeManager>();
+=======
+        Shake = FindObjectOfType<CameraShake>();
+>>>>>>> Pearson
         BossState = GetComponent<BossStateManagerTwo>();
         BabySpawner = GetComponent<MinionSpawn>();
         StartResistance = ResistDamage;

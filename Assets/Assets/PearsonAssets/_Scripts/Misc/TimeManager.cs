@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public TimeProperties TestProperties;
+    public TimeProperties TestProperties,StopProperties;
     public float DT;
     public float ScaleTime;
     private float MinClamp;
     private float MaxClamp;
     private float speed = 1;
 
-    IEnumerator CurrentSlowMotionCoroutine;
+    IEnumerator CurrentSlowMotionCoroutine, CurrentStopTimeCoroutine;
 
     // Use this for initialization
     void Start()
@@ -42,6 +42,17 @@ public class TimeManager : MonoBehaviour
         CurrentSlowMotionCoroutine = SlowMotion(properties);
         StartCoroutine(SlowMotion(properties));
     }
+
+    public void startStopTime(TimeProperties properties)
+    {
+        if (CurrentStopTimeCoroutine != null)
+        {
+            StopCoroutine(CurrentStopTimeCoroutine);
+        }
+
+        CurrentStopTimeCoroutine = StopTime(properties);
+        StartCoroutine(StopTime(properties));
+    }
     public IEnumerator SlowMotion(TimeProperties properties)
     {
         Time.timeScale = properties.StartTime;
@@ -60,7 +71,27 @@ public class TimeManager : MonoBehaviour
         } while (Time.timeScale < MaxClamp);
        
     }
-   
+
+    public IEnumerator StopTime(TimeProperties properties)
+    {
+        
+        float temp = properties.StartTime;
+        bool returnNow = false;
+
+        Time.timeScale = 0;
+        speed = properties.speed;
+        do
+        {
+            temp -= .1f;
+
+            Time.timeScale += 0.2f * speed;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, MinClamp, MaxClamp);
+            returnNow = true;
+            yield return new WaitForSecondsRealtime(0.1f);
+        } while (!returnNow);
+
+    }
+
 
 
     [System.Serializable]

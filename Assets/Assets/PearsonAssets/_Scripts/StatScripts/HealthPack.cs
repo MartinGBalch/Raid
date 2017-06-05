@@ -4,16 +4,44 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
+    private bool shrink = false;
+    public ParticleSystem poof;
+    public bool Active;
+    public float RespawnTime;
+    float spawntime;
+    public GameObject Orb;
+    public AudioSource Sound;
+    private void Update()
+    {
+        spawntime -= Time.deltaTime;
+
+        if (spawntime < 0 && Active == false)
+        {
+
+            Active = true;
+
+            Orb.SetActive(true);
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
 
-        if(other.CompareTag("Player"))
-        {if (other.GetComponent<PlayerHealth>().Health < other.GetComponent<PlayerHealth>().MaxHealth)
+        if (other.CompareTag("Player"))
+        {
+            if (Active)
             {
-                other.GetComponent<PlayerHealth>().Health += (other.GetComponent<PlayerHealth>().MaxHealth * .2f);
-                Destroy(gameObject);
+                if (other.GetComponent<PlayerHealth>().Health < other.GetComponent<PlayerHealth>().MaxHealth)
+                {
+                    other.GetComponent<PlayerHealth>().Health += (other.GetComponent<PlayerHealth>().MaxHealth * .2f);
+                    spawntime = RespawnTime;
+                    poof.Play();
+                    Active = false;
+                    Sound.Play();
+                    Orb.SetActive(false);
+                }
+
             }
-           
         }
 
     }

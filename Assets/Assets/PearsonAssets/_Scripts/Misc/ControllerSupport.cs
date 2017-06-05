@@ -5,7 +5,7 @@ using UnityEngine;
 public class ControllerSupport : MonoBehaviour {
 
     public bool Xbox, PS4;
-    public bool Fire, Charge, Attack, Jump, Sprint, ChargeAttack, SuperCharge,SuperLaser,StartButton;
+    public bool Fire, Charge, Attack, Jump, Sprint, ChargeAttack, SuperCharge,SuperLaser,StartButton, GrabButton;
     public float Horizontal, Vertical,Dash,Target,RightStickHorizontal, RightStickVertical;
 
 	// Use this for initialization
@@ -19,6 +19,7 @@ public class ControllerSupport : MonoBehaviour {
     {
         if (Xbox && !PS4)
         {
+            GrabButton = Input.GetButtonDown("XboxRightBumper");
             StartButton = Input.GetButtonDown("XboxStartButton");
             SuperCharge = Input.GetButtonDown("Xbox Y Button");
             Charge = Input.GetButton("Xbox B Button");
@@ -38,6 +39,7 @@ public class ControllerSupport : MonoBehaviour {
         else if(PS4)
         {
 
+            GrabButton = Input.GetButtonDown("PS4RightBumper");
             StartButton = Input.GetButtonDown("PS4StartButton");
             SuperCharge = Input.GetButtonDown("PS4TriangleButton");
             Charge = Input.GetButton("PS4CircleButton");
