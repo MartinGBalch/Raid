@@ -9,9 +9,11 @@ public class FadeManager : MonoBehaviour
 {
     public static FadeManager Instance { set; get; }
 
-    public Canvas ButtonMenu;
-    public Canvas TitleMenu;
-    public Canvas SettingMenu;
+    public GameObject ButtonMenu;
+    public GameObject TitleMenu;
+    public GameObject SettingMenu;
+
+    public Canvas OptionsMenu;
 
     public Button b_play;
     public Button b_enter;
@@ -22,7 +24,7 @@ public class FadeManager : MonoBehaviour
     public Text title;
     public Text l_title;
     public Text c_line;
-    public Text play;
+    public Text GameName;
     public Text start;
     public Text quit;
     public Text setting;
@@ -58,11 +60,14 @@ public class FadeManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        play.enabled = false;
-        ButtonMenu.enabled = false;
-        SettingMenu.enabled = false;
+        GameName.enabled = false;
+        start.enabled = false;
+        setting.enabled = false;
+        quit.enabled = false;
+        ButtonMenu.SetActive(false);
+        SettingMenu.SetActive(false);
 
-      
+             
     }
 	// Update is called once per frame
 	void Update ()
@@ -72,12 +77,21 @@ public class FadeManager : MonoBehaviour
             Fade(true, 3);
             Cursor.visible = true;
             controller.StartButton = false;
-            play.enabled = true;
-            ButtonMenu.enabled = true;
-            TitleMenu.enabled = false;
+            
+            ButtonMenu.SetActive(true);
+            TitleMenu.SetActive(false);
+
+            GameName.enabled = true;
+            start.enabled = true;
+            setting.enabled = true;
+            quit.enabled = true;
         }
 
-
+        if (OptionsMenu.isActiveAndEnabled && controller.Fire)
+        {
+            SettingMenu.SetActive(false);
+            ButtonMenu.SetActive(true);
+        }
 
 
         if (!isInTransition)
@@ -86,7 +100,7 @@ public class FadeManager : MonoBehaviour
         transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
        
         //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
-        play.color = Color.Lerp(new Color(0,0,0,0), titleColor, transition);
+        GameName.color = Color.Lerp(new Color(0,0,0,0), titleColor, transition);
         start.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
         quit.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
         setting.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
@@ -110,21 +124,24 @@ public class FadeManager : MonoBehaviour
     {
         Fade(true, 2);
         Cursor.visible = true;
-        play.enabled = true;
-        ButtonMenu.enabled = true;
-        TitleMenu.enabled = false;
+        GameName.enabled = true;
+        start.enabled = true;
+        setting.enabled = true;
+        quit.enabled = true;
+        ButtonMenu.SetActive(true);
+        TitleMenu.SetActive(false);
     }
 
     public void Settings()
     {
-        SettingMenu.enabled = true;
-        ButtonMenu.enabled = false;
+        SettingMenu.SetActive(true);
+        ButtonMenu.SetActive(false);
     }
 
     public void Back()
     {
-        SettingMenu.enabled = false;
-        TitleMenu.enabled = true;
+        SettingMenu.SetActive(false);
+        TitleMenu.SetActive(true);
     }
 
     public void Exit()
