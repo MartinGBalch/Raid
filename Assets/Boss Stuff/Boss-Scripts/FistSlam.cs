@@ -7,16 +7,16 @@ public class FistSlam : MonoBehaviour
     public GameObject Target;
     public GameObject DMGCollider;
     public float ATKSpeed;
-    private float StartATKSpeed;
     
+    Animator anim;
 
     public void RunMechanic()
     {
-        
-
-        DMGCollider.transform.position = Target.transform.position;
-        DMGCollider.transform.rotation = Target.transform.rotation;
-        Instantiate(DMGCollider);
+        anim.SetTrigger("DoubleSlam");
+        DMGCollider.GetComponent<CapsuleCollider>().enabled = true;
+        //DMGCollider.transform.position = Target.transform.position;
+        //DMGCollider.transform.rotation = Target.transform.rotation;
+        //Instantiate(DMGCollider);
 
 
     }
@@ -24,7 +24,8 @@ public class FistSlam : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        StartATKSpeed = ATKSpeed;	
+        anim = GetComponent<Animator>();
+        	
 	}
 	
 	// Update is called once per frame
