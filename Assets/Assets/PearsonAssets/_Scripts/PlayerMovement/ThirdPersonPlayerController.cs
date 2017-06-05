@@ -899,13 +899,24 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     {
         if (canmove)
         {
-            Vector3 camRel = Objects.cam.transform.localToWorldMatrix * new Vector4(moveVector.x, moveVector.y, moveVector.z, 0);
+            var t = rb.velocity.normalized;
+            var e = new Vector4(t.x, t.y, t.z, 0);
+
+            Vector3 camRel = Objects.cam.transform.localToWorldMatrix * (new Vector4(moveVector.x, moveVector.y, moveVector.z, 0));
+
 
             camRel.y = 0;
             camRel.Normalize();
+            
 
             var force = camRel * MV.NonCombatMaxSpeed - rb.velocity;
-            var Lookforce = camRel + rb.velocity;
+
+            //if (Vector3.Dot(rb.velocity, camRel) > MV.HorzSpeed)
+                //force = Vector3.zero;
+            //if(force.magnitude * Vector3.Dot(camRel.normalized, rb.velocity.normalized) > MV.HorzSpeed);
+
+
+            var Lookforce = camRel;
             Lookforce.y = 0;
             rb.AddForce(force);
 
@@ -913,15 +924,33 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
             Quaternion dirQ = Quaternion.LookRotation(dir);
             Quaternion slerp = Quaternion.Slerp(Trans.rotation, dirQ, 0.5f);
-            Lookforce.y = 0;
+            //Lookforce.y = 0;
 
-            Trans.forward = (Vector3.Slerp(Trans.forward,Lookforce,20 * DT));
+            Trans.forward = (Vector3.Slerp(Trans.forward,Lookforce,.2f));
+
+            //Trans.forward = Lookforce;
             //rb.MoveRotation(slerp);
 
             RaycastHit hit;
 
-           
-            rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -MV.HorzSpeed, MV.HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -MV.vertSpeed, MV.vertSpeed));
+
+            //Truncate
+            //rb.velocity
+
+            //Vector3 crt = Objects.cam.transform.localToWorldMatrix * ();
+            float mag = new Vector4(MV.HorzSpeed, 0, MV.vertSpeed, 0).magnitude;
+
+
+            Vector3 vny = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+            if (vny.magnitude > mag)
+                vny = vny.normalized * mag;
+
+            rb.velocity = new Vector3(vny.x, rb.velocity.y, vny.z);
+            //  rb.velocity.z = vny.z;
+
+            //rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -crt.x,crt.x), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -crt.z,crt.z));
+            //rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -MV.HorzSpeed, MV.HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -MV.vertSpeed, MV.vertSpeed));
         }
     }
     

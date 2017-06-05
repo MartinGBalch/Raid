@@ -391,7 +391,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         smoothPosition(Trans.position, position);
 
-        x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .03f;
+        //x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .03f;
 
         if(target != null)
         {
