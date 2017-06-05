@@ -6,11 +6,15 @@ public class BoulderFall : MonoBehaviour {
 
     public float dmg;
     public bool Kinetic = true;
+    private CameraShake Shake;
+    public ParticleSystem land;
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "Floor")
         {
             Kinetic = false;
+            Shake.StartShake(Shake.BoulderFallProperties);
+            Instantiate(land, transform.position, land.transform.rotation);
             Destroy(gameObject, .5f);
         }
         if(collision.collider.tag == "Player" && Kinetic == true)
@@ -26,9 +30,9 @@ public class BoulderFall : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Start()
+    void Awake()
     {
-
+        Shake = FindObjectOfType<CameraShake>();
 		
 	}
 	
