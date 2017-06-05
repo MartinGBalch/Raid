@@ -49,12 +49,17 @@ public class BossTurning : MonoBehaviour
         
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 toOther = Player.transform.position - transform.position;
-        if (Vector3.Dot(forward, toOther) < 0)
+        //if (Vector3.Dot(forward, toOther) < 0)
+        //{
+            
+        //    IsTurning = true;
+            
+        //}
+        if (!FOVCheck(120))
         {
-            
             IsTurning = true;
-            
         }
+
        
        
             Vector3 Right = transform.TransformDirection(Vector3.right);
