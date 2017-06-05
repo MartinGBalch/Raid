@@ -117,7 +117,7 @@ public class FadeManager : MonoBehaviour
 
     public void  Play()
     {
-		SceneManager.LoadScene ("Alpha");
+		SceneManager.LoadScene ("DemoAlpha");
     }
 
     public void Enter()
