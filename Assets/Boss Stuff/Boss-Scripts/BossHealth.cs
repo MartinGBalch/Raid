@@ -38,11 +38,11 @@ public class BossHealth : MonoBehaviour, IDamageable
     // Use this for initialization
     void Start ()
     {
-<<<<<<< HEAD
+
         DeltaTime = FindObjectOfType<TimeManager>();
-=======
+
         Shake = FindObjectOfType<CameraShake>();
->>>>>>> Pearson
+
         BossState = GetComponent<BossStateManagerTwo>();
         BabySpawner = GetComponent<MinionSpawn>();
         StartResistance = ResistDamage;
