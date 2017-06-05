@@ -12,13 +12,16 @@ public class FadeManager : MonoBehaviour
     public GameObject ButtonMenu;
     public GameObject TitleMenu;
     public GameObject SettingMenu;
+    public GameObject ControlMenu;
 
-    public Canvas OptionsMenu;
+    public Canvas SettingsMenu;
+    public Canvas ControlsMenu;
 
     public Button b_play;
     public Button b_enter;
-    public Button b_exit;
     public Button b_setting;
+    public Button b_controls;
+    public Button b_exit;
     public Button b_back;
 
     public Text title;
@@ -26,9 +29,10 @@ public class FadeManager : MonoBehaviour
     public Text c_line;
     public Text GameName;
     public Text start;
-    public Text quit;
     public Text setting;
-
+    public Text controls;
+    public Text quit;
+    
     private bool isInTransition;
     private bool isShowing;
 
@@ -40,13 +44,7 @@ public class FadeManager : MonoBehaviour
 
     public ControllerSupport controller;
 
-    private void Awake()
-    {
-        Instance = this;
-
-       
-
-    }
+    private void Awake() {Instance = this;}
 
     public void Fade(bool showing, float duration)
     {
@@ -54,7 +52,6 @@ public class FadeManager : MonoBehaviour
         isInTransition = true;
         this.duration = duration;
         transition = (isShowing) ? 0 : 1;
-        
     }
 
 	// Use this for initialization
@@ -64,8 +61,10 @@ public class FadeManager : MonoBehaviour
         start.enabled = false;
         setting.enabled = false;
         quit.enabled = false;
+        
         ButtonMenu.SetActive(false);
         SettingMenu.SetActive(false);
+        ControlMenu.SetActive(false);
 
              
     }
@@ -87,7 +86,13 @@ public class FadeManager : MonoBehaviour
             quit.enabled = true;
         }
 
-        if (OptionsMenu.isActiveAndEnabled && controller.Fire)
+        if (SettingsMenu.isActiveAndEnabled && controller.Fire)
+        {
+            SettingMenu.SetActive(false);
+            ButtonMenu.SetActive(true);
+        }
+
+        if (ControlsMenu.isActiveAndEnabled && controller.Fire)
         {
             SettingMenu.SetActive(false);
             ButtonMenu.SetActive(true);
@@ -104,6 +109,7 @@ public class FadeManager : MonoBehaviour
         start.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
         quit.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
         setting.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+        controls.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
 
 
 
@@ -136,6 +142,12 @@ public class FadeManager : MonoBehaviour
     {
         SettingMenu.SetActive(true);
         ButtonMenu.SetActive(false);
+    }
+
+    public void Controls()
+    {
+        ButtonMenu.SetActive(false);
+        ControlMenu.SetActive(true);
     }
 
     public void Back()
