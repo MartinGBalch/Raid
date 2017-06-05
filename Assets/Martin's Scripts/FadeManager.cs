@@ -42,6 +42,8 @@ public class FadeManager : MonoBehaviour
     public Color buttonColor;
     public Color titleColor;
 
+    public float timer;
+
     public ControllerSupport controller;
 
     private void Awake() {Instance = this;}
@@ -73,7 +75,7 @@ public class FadeManager : MonoBehaviour
     {
         if (controller.StartButton)
         {
-            Fade(true, 3);
+            Fade(true, timer);
             Cursor.visible = true;
             controller.StartButton = false;
             
@@ -128,7 +130,7 @@ public class FadeManager : MonoBehaviour
 
     public void Enter()
     {
-        Fade(true, 2);
+        Fade(true, timer);
         Cursor.visible = true;
         GameName.enabled = true;
         start.enabled = true;
