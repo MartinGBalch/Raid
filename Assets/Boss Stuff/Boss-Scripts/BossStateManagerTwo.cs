@@ -60,6 +60,7 @@ public class BossStateManagerTwo : MonoBehaviour
     {
         DeltaTime = FindObjectOfType<TimeManager>();
         BulletSprayAmount = 0;
+        
     }
 
 
@@ -156,6 +157,7 @@ public class BossStateManagerTwo : MonoBehaviour
 
     public void PickBehavior()
     {
+        //Random.InitState(Behaviour);
         Behaviour = Random.Range(1, 3 + State);
         behaviorTimer = BehaviorStart;
     }

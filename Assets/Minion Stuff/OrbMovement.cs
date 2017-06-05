@@ -26,6 +26,9 @@ public class OrbMovement : MonoBehaviour
     private float DelayStart;
     public int BurstCount;
     private int StartCount;
+    public float HoverSpeed;
+    public float OffsetHover;
+    bool up, In;
     // Use this for initialization
     void Start ()
     {
@@ -39,9 +42,37 @@ public class OrbMovement : MonoBehaviour
         StartBulletCount = BulletCount;
         StartCount = BurstCount;
     }
-	
-	// Update is called once per frame
-	void Update ()
+    public void Hover()
+    {
+
+        if (OffsetHover <= 1.01f)
+        {
+            up = true;
+        }
+
+        else if (OffsetHover >= 1.49)
+        {
+            up = false;
+
+        }
+
+        if (up)
+        {
+            OffsetHover += DT * HoverSpeed;
+        }
+        else
+        {
+
+            OffsetHover -= DT * HoverSpeed;
+        }
+
+        agent.baseOffset = OffsetHover;
+
+        OffsetHover = Mathf.Clamp(OffsetHover, .5f, 2.5f);
+    }
+    
+    // Update is called once per frame
+    void Update ()
     {
         
 

@@ -17,9 +17,11 @@ public class PylonManager : MonoBehaviour {
     void Start ()
     {
         
-    DeltaTime = FindObjectOfType<TimeManager>();
-        DelayStart = DelayTimer;
+        DeltaTime = FindObjectOfType<TimeManager>();
+        
         Health = Boss.GetComponent<BossHealth>();
+        DelayTimer = Health.VulnerableTime;
+        DelayStart = DelayTimer;
     }
 	
 	// Update is called once per frame
