@@ -394,7 +394,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 Objects.Poof.Play();
                 Objects.Poof.simulationSpace = ParticleSystemSimulationSpace.World;
                 anim.SetTrigger("DashAttack");
-                AttackdashTime = .15f;
+                AttackdashTime = .2f;
                 Energy.Energy -= 10;
                 NonCombatState = States.DashAttackState;
 
@@ -915,7 +915,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             Quaternion slerp = Quaternion.Slerp(Trans.rotation, dirQ, 0.5f);
             Lookforce.y = 0;
 
-            Trans.forward = (Vector3.Slerp(Trans.forward,Lookforce,25 * DT));
+            Trans.forward = (Vector3.Slerp(Trans.forward,Lookforce,20 * DT));
             //rb.MoveRotation(slerp);
 
             RaycastHit hit;
