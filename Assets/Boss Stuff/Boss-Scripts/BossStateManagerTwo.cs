@@ -160,14 +160,11 @@ public class BossStateManagerTwo : MonoBehaviour
             {
                 Turning.IsTurning = false;
                 FistSlamMechanic.RunMechanic();
+                BoulderFallMechanic.RunMechanic();
                 Timer = StartTime / 2;
             }
                     }
-        if (Timer2 <= 0)
-        {
-            BoulderFallMechanic.RunMechanic();
-            Timer2 = StartTime / 2;
-        }
+       
     }
 
     public void PickBehavior()
