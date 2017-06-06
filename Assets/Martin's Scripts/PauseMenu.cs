@@ -7,29 +7,45 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     public Canvas PauseCanvas;
-    //public Canvas InGameSettings;
-    //public Canvas ControlsCanvas;
 
-    //public Image XboxControls;
-    //public Image KeyboardControls;
-    //public Image PS4Controls;
+    public GameObject pauseCanvas;
+    public GameObject InGameSettings;
+    public GameObject ControlsCanvas;
+
+    public GameObject ControlPicker;
+    public GameObject XboxControls;
+    public GameObject KeyboardControls;
+    public GameObject PS4Controls;
+    public GameObject pausePanel;
+    public GameObject sm_Background;
+    public GameObject Options;
+
+    public Image PausePanel;
+    public Image XboxControl;
+    public Image KeyboardControl;
+    public Image PS4Control;
+    public Image ControlsPicker;
+    public Image SM_background;
+
+    public ControllerSupport controller;
 
     public bool paused;
 
     float SetTime;
-
-    public ControllerSupport controller;
 
     // Use this for initialization
     public void Start()
     {
         
         paused = false;
-        PauseCanvas.enabled = false;
-        //InGameSettings.enabled = false;
-        //ControlsCanvas.enabled = false;
-        //ControlsCanvas.GetComponent<Canvas>().enabled = false;
-        //ControlsCanvas.
+        PauseCanvas.enabled = true;
+        XboxControls.SetActive(false);
+        KeyboardControls.SetActive(false);
+        PS4Controls.SetActive(false);
+        ControlPicker.SetActive(false);
+        pausePanel.SetActive(false);
+        sm_Background.SetActive(false);
+        Options.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,6 +56,7 @@ public class PauseMenu : MonoBehaviour
            //SetTime = Time.timeScale;
             paused = true;
             PauseCanvas.enabled = true;
+            pausePanel.SetActive(true);
             Cursor.visible = true;
         }
         if (paused)
@@ -57,50 +74,61 @@ public class PauseMenu : MonoBehaviour
     {
         PauseCanvas.enabled = false;
         paused = false;
+        pausePanel.SetActive(false);
+        Cursor.visible = false;
     }
-
+    public void Controls()
+    {
+        ControlsCanvas.SetActive(true);
+        ControlPicker.SetActive(true);
+        PauseCanvas.enabled = false;
+    }
+    public void Settings()
+    {
+        InGameSettings.SetActive(true);
+        Options.SetActive(true);
+        sm_Background.SetActive(true);
+        PauseCanvas.enabled = false;
+    }
     public void ExitToMenu()
     {
         SceneManager.LoadScene("Menu");
     }
 
-    //public void Settings()
-    //{
-    //    InGameSettings.enabled = true;
-    //}
+   
+    public void LoadXboxControls()
+    {
+        XboxControls.SetActive(true);
+        KeyboardControls.SetActive(false);
+        PS4Controls.SetActive(false);
+    }
+    public void LoadKeyboardControls()
+    {
+        XboxControls.SetActive(false);
+        KeyboardControls.SetActive(true);
+        PS4Controls.SetActive(false);
+    }
+    public void LoadPS4Controls()
+    {
+        XboxControls.SetActive(false);
+        KeyboardControls.SetActive(false);
+        PS4Controls.SetActive(true);
+    }
+    public void  ControlsBack()
+    {
+        ControlPicker.SetActive(true);
+        XboxControls.SetActive(false);
+        KeyboardControls.SetActive(false);
+        PS4Controls.SetActive(false);
+    }
 
-    //public void Controls()
-    //{
-    //    ControlsCanvas.enabled = true;
-    //}
-
-    //public void Back()
-    //{
-    //    PauseCanvas.enabled = true;
-    //    InGameSettings.enabled = false;
-    //    ControlsCanvas.enabled = false;
-        
-       
-    //}
-
-    //public void LoadXboxControls()
-    //{
-    //    XboxControls.enabled = true;
-    //    KeyboardControls.enabled = false;
-    //    PS4Controls.enabled = false;
-    //}
-
-    //public void LoadKeyboardControls()
-    //{
-    //    XboxControls.enabled = false;
-    //    KeyboardControls.enabled = true;
-    //    PS4Controls.enabled = false;
-    //}
-
-    //public void LoadPS4Controls()
-    //{
-    //    XboxControls.enabled = false;
-    //    KeyboardControls.enabled = false;
-    //    PS4Controls.enabled = true;
-    //}
+    public void Back()
+    {
+        pausePanel.SetActive(true);
+        ControlPicker.SetActive(false);
+        Options.SetActive(false);
+        sm_Background.SetActive(false);
+        InGameSettings.SetActive(false);
+        PauseCanvas.enabled = true;
+    }
 }
