@@ -18,6 +18,7 @@ public class ControlScreenManager : MonoBehaviour
 
 
     public FadeManager wayback;
+    public ControllerSupport controller;
     // Use this for initialization
     void Start ()
     {
@@ -28,7 +29,23 @@ public class ControlScreenManager : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update () {}
+	void Update ()
+    {
+        if(XboxControl.isActiveAndEnabled || KeyboardControl.isActiveAndEnabled || PS4Control.isActiveAndEnabled && controller.Fire)
+        {
+            ControlPicker.SetActive(true);
+            XboxControls.SetActive(false);
+            KeyboardControls.SetActive(false);
+            PS4Controls.SetActive(false);
+        }
+        
+        if (ControlsPicker.isActiveAndEnabled && controller.Fire)
+        {
+            wayback.ControlMenu.SetActive(false);
+            wayback.ButtonMenu.SetActive(true);
+        }
+
+    }
 
     public void LoadXboxControls()
     {
