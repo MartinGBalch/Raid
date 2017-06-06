@@ -35,10 +35,10 @@ public class OrbMovement : MonoBehaviour
         DeltaTime = FindObjectOfType<TimeManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
-        FollowDistance = AttackRange - 8;
+        FollowDistance = AttackRange - 5;
         StartSpeed = AttackSpeed;
         DelayStart = AtkSpeedDelay;
-        ArcDegree = 45 / BulletCount;
+        ArcDegree = 15 / BulletCount;
         StartBulletCount = BulletCount;
         StartCount = BurstCount;
     }
