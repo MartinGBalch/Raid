@@ -160,14 +160,11 @@ public class BossStateManagerTwo : MonoBehaviour
             {
                 Turning.IsTurning = false;
                 FistSlamMechanic.RunMechanic();
+                BoulderFallMechanic.RunMechanic();
                 Timer = StartTime / 2;
             }
                     }
-        if (Timer2 <= 0)
-        {
-            BoulderFallMechanic.RunMechanic();
-            Timer2 = StartTime / 2;
-        }
+       
     }
 
     public void PickBehavior()
@@ -182,9 +179,9 @@ public class BossStateManagerTwo : MonoBehaviour
     void Update()
     {
         DT = DeltaTime.DT;
-        if (Health.Health <= 700) { State = 1;  }
-        
-        if (Health.Health <= 400) { State = 2; }
+        //if (Health.Health <= 700) { State = 1;  }
+        State = Health.HealthStage;
+        //if (Health.Health <= 400) { State = 2; }
 
         if (Health.ResistDamage > 0) { behaviorTimer -= DT; }
         if (Health.ResistDamage == 0) { Turning.AdjustTimer = 2; }

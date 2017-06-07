@@ -8,32 +8,39 @@ public class FistSlam : MonoBehaviour
     public GameObject Target;
     public GameObject DMGCollider;
     public float ATKSpeed;
-    bool RunExtraMechanic = false;
+    
+    public bool SpawnRocks;
     Animator anim;
-    Vector3 SpawnPosition;
+    
+    public Vector3 SpawnPos;
     private TimeManager DeltaTime;
     public float Dist;
     public int counter;
     public float spawnDelay;
     private float startDelay;
-    public float TimeToKill;
+    
     float DT;
-    int i = 0;
+    int i;
+    public float distDIF;
     
     public void RunMechanic()
     {
+        SpawnRocks = true;
         anim.SetTrigger("DoubleSlam");
 
         DMGCollider.transform.position = Target.transform.position;
         DMGCollider.transform.rotation = Target.transform.rotation;
         Instantiate(DMGCollider);
-        RunExtraMechanic = true;
+        
         startDelay = spawnDelay;
     }
 
     // Use this for initialization
     void Start()
     {
+        i = 1;
+        SpawnRocks = false;
+
         anim = GetComponent<Animator>();
         DeltaTime = FindObjectOfType<TimeManager>();
     }
@@ -42,25 +49,44 @@ public class FistSlam : MonoBehaviour
     void Update()
     {
         DT = DeltaTime.DT;
-        if (RunExtraMechanic == true)
+        if (SpawnRocks == true)
         {
-            if (spawnDelay <= 0 && i <= 2)
+            spawnDelay -= DT;
+            if (spawnDelay <= 0 && i <= (counter + 1))
             {
-                spawnDelay -= DT;
 
-                SpawnPosition = Target.transform.position += (Target.transform.forward * Dist);
                 var Baby = Rocks;
-                Baby.transform.position = SpawnPosition;
+                SpawnPos = Target.transform.position + (Target.transform.forward * (Dist * i));
+
+                RaycastHit hit;
+                if (Physics.Raycast(SpawnPos, Vector3.down, out hit, 50))
+                {
+                    if (hit.collider.tag == "Floor")
+                    {
+                        distDIF = Mathf.Abs(hit.point.y - SpawnPos.y);
+
+                        Vector3 NewPos = new Vector3(SpawnPos.x, hit.point.y, SpawnPos.z);
+                        
+                        Baby.transform.position = NewPos;
+                    }
+                }
+
+
+                Baby.transform.localScale = new Vector3(1 * i, 1 * i, 1 * i);
+               
+
+                Rocks.transform.rotation = Target.transform.rotation;
+               
                 Instantiate(Baby);
-                Destroy(Baby, TimeToKill);
+               
                 spawnDelay = startDelay;
 
                 i++;
             }
 
-           if(i > counter)
-            { i = 0; }
-             
+            if (i > (counter + 1))
+            { i = 0; SpawnRocks = false; }
+
 
         }
     }
