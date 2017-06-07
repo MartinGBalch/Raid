@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseCanvas;
     public GameObject InGameSettings;
     public GameObject ControlsCanvas;
+    public GameObject GameUI;
 
     public GameObject ControlPicker;
     public GameObject XboxControls;
@@ -37,7 +38,7 @@ public class PauseMenu : MonoBehaviour
     // Use this for initialization
     public void Start()
     {
-        
+        GameUI.SetActive(true);
         paused = false;
         PauseCanvas.enabled = true;
         XboxControls.SetActive(false);
@@ -58,6 +59,7 @@ public class PauseMenu : MonoBehaviour
             paused = true;
             PauseCanvas.enabled = true;
             pausePanel.SetActive(true);
+            GameUI.SetActive(false);
             Cursor.visible = true;
         }
         if (paused)
@@ -75,6 +77,7 @@ public class PauseMenu : MonoBehaviour
     {
         PauseCanvas.enabled = false;
         paused = false;
+        GameUI.SetActive(true);
         pausePanel.SetActive(false);
         Cursor.visible = false;
     }

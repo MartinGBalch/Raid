@@ -11,7 +11,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     //public float DamageToBoss;
     //public GameObject Boss;
     public GameObject Mesh;
-    public GameObject Manager;
+    public GameObject Manager,placeholder;
     PylonManager PM;
     bool Reset = false;
     public bool Alive = true;
@@ -30,6 +30,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
     void Start ()
     {
+        placeholder = GameObject.FindGameObjectWithTag("PlaceHolder");
         StartHealth = Health;
         StartTime = ResetTimer;
         PM = Manager.GetComponent<PylonManager>();
@@ -40,6 +41,14 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     {
 
         //if (Health > 0) { Debug.DrawLine(transform.position, Boss.transform.position); }
+
+        if(placeholder.transform.position.y >= 20)
+        {
+            if(Beam.isPlaying == false && Health > 0)
+            {
+                Beam.Play();
+            }
+        }
 
         if (Health <= 0)
         {
