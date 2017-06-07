@@ -43,6 +43,7 @@ public class FadeManager : MonoBehaviour
     public Color titleColor;
 
     public float timer;
+    public string PlayScene;
 
     public ControllerSupport controller;
 
@@ -125,7 +126,8 @@ public class FadeManager : MonoBehaviour
 
     public void  Play()
     {
-		SceneManager.LoadScene ("DemoAlpha");
+	
+		SceneManager.LoadScene (PlayScene);
     }
 
     public void Enter()

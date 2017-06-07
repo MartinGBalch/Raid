@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
     public ControllerSupport controller;
 
     public bool paused;
+    public string MenuScene;
 
     float SetTime;
 
@@ -92,7 +93,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void ExitToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(MenuScene);
     }
 
    
