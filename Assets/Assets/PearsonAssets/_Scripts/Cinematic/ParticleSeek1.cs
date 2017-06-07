@@ -49,7 +49,10 @@ public class ParticleSeek1 : MonoBehaviour {
 
         else if (PSMainModule.simulationSpace == ParticleSystemSimulationSpace.World)
         {
-            targetPosition = target.position;
+            if (target != null)
+            {
+                targetPosition = target.position;
+            }
         }
 
         for (int i =0; i < Particles.Length; i++)
@@ -64,6 +67,10 @@ public class ParticleSeek1 : MonoBehaviour {
             Vector3 seekForce = directionToTarget * forceDeltaTime;
 
             Particles[i].velocity += seekForce;
+            if(Vector3.Distance(Particles[i].position,target.position) <= .5f)
+            {
+               Particles[i].startSize = 0;
+            }
         }
 
         PS.SetParticles(Particles, Particles.Length);
