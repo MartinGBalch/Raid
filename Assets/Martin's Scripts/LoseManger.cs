@@ -28,7 +28,8 @@ public class LoseManger : MonoBehaviour
     public Color overlayColor;
 
     public float timer;
-
+    public string RestartScene;
+    public string MenuScene;
 
     private void Awake() { Instance = this; }
 
@@ -99,11 +100,11 @@ public class LoseManger : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Alpha");
+        SceneManager.LoadScene(RestartScene);
     }
 
     public void GoToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(MenuScene);
     }
 }
