@@ -48,46 +48,46 @@ public class FistSlam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DT = DeltaTime.DT;
-        if (SpawnRocks == true)
-        {
-            spawnDelay -= DT;
-            if (spawnDelay <= 0 && i <= (counter + 1))
-            {
+        //DT = DeltaTime.DT;
+        //if (SpawnRocks == true)
+        //{
+        //    spawnDelay -= DT;
+        //    if (spawnDelay <= 0 && i <= (counter + 1))
+        //    {
 
-                var Baby = Rocks;
-                SpawnPos = Target.transform.position + (Target.transform.forward * (Dist * i));
+        //        var Baby = Rocks;
+        //        SpawnPos = Target.transform.position + (Target.transform.forward * (Dist * i));
 
-                RaycastHit hit;
-                if (Physics.Raycast(SpawnPos, Vector3.down, out hit, 50))
-                {
-                    if (hit.collider.tag == "Floor")
-                    {
-                        distDIF = Mathf.Abs(hit.point.y - SpawnPos.y);
+        //        RaycastHit hit;
+        //        if (Physics.Raycast(SpawnPos, Vector3.down, out hit, 50))
+        //        {
+        //            if (hit.collider.tag == "Floor")
+        //            {
+        //                distDIF = Mathf.Abs(hit.point.y - SpawnPos.y);
 
-                        Vector3 NewPos = new Vector3(SpawnPos.x, hit.point.y, SpawnPos.z);
-                        
-                        Baby.transform.position = NewPos;
-                    }
-                }
+        //                Vector3 NewPos = new Vector3(SpawnPos.x, hit.point.y, SpawnPos.z);
 
-
-                Baby.transform.localScale = new Vector3(1 * i, 1 * i, 1 * i);
-               
-
-                Rocks.transform.rotation = Target.transform.rotation;
-               
-                Instantiate(Baby);
-               
-                spawnDelay = startDelay;
-
-                i++;
-            }
-
-            if (i > (counter + 1))
-            { i = 0; SpawnRocks = false; }
+        //                Baby.transform.position = NewPos;
+        //            }
+        //        }
 
 
+        //        Baby.transform.localScale = new Vector3(1 * i, 1 * i, 1 * i);
+
+
+        //        Rocks.transform.rotation = Target.transform.rotation;
+
+        //        Instantiate(Baby);
+
+        //        spawnDelay = startDelay;
+
+        //        i++;
+        //    }
+
+        //    if (i > (counter + 1))
+        //    { i = 0; SpawnRocks = false; }
+
+    
         }
     }
-}
+
