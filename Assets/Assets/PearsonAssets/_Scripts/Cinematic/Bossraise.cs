@@ -56,7 +56,7 @@ public class Bossraise : MonoBehaviour {
                 transform.position += new Vector3(0, DT*3, 0);
                 Pylons.transform.position += new Vector3(0, DT * 2, 0);
                 SpotLight.intensity -=  DT * 20;
-                SpotLight.spotAngle += DT * 4;
+                SpotLight.spotAngle += DT * 20;
                 DirectionalLight.intensity += DT * .5f;
 
                 SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 10, 100);
@@ -67,7 +67,7 @@ public class Bossraise : MonoBehaviour {
 
                 transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -13f, 11f), transform.position.z);
                 Pylons.transform.position = new Vector3(Pylons.transform.position.x, Mathf.Clamp(Pylons.transform.position.y, 15, 21f), Pylons.transform.position.z);
-                if (SpotLight.spotAngle >= 114.9)
+                if (SpotLight.spotAngle >= 114.9 && Pylons.transform.position.y >= 20.9f)
                 {
                     music.Play();
                     for (int i = 0; i < beam.Length; i++)
@@ -105,7 +105,7 @@ public class Bossraise : MonoBehaviour {
                 transform.position -= new Vector3(0, DT * 3, 0);
                 Pylons.transform.position -= new Vector3(0, DT *2, 0);
                 SpotLight.intensity += DT * 20;
-                SpotLight.spotAngle -= DT * 4;
+                SpotLight.spotAngle -= DT * 20;
                 DirectionalLight.intensity -= DT * .5f;
 
                 SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 10, 100);
@@ -116,7 +116,7 @@ public class Bossraise : MonoBehaviour {
 
                 transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -13f, 11f), transform.position.z);
                 Pylons.transform.position = new Vector3(Pylons.transform.position.x, Mathf.Clamp(Pylons.transform.position.y, 15, 21.16f), Pylons.transform.position.z);
-                if (SpotLight.spotAngle <= 2.27)
+                if (SpotLight.spotAngle <= 2.27 && Pylons.transform.position.y <= 15.01f)
                 {
                     music.Stop();
                     for (int i = 0; i < beam.Length; i++)
