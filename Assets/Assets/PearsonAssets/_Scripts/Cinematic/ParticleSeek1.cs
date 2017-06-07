@@ -49,7 +49,10 @@ public class ParticleSeek1 : MonoBehaviour {
 
         else if (PSMainModule.simulationSpace == ParticleSystemSimulationSpace.World)
         {
-            targetPosition = target.position;
+            if (target != null)
+            {
+                targetPosition = target.position;
+            }
         }
 
         for (int i =0; i < Particles.Length; i++)

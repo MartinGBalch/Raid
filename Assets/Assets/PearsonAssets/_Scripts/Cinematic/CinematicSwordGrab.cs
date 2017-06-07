@@ -9,16 +9,40 @@ public class CinematicSwordGrab : MonoBehaviour {
     public bool Grabbed;
     public ThirdPersonPlayerController Player;
     public ParticleSystem Obsorb;
-
+    public ParticleSeek1 seek;
     public AudioSource obsorb;
-
+    public bool die;
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    float DT;
+    // Update is called once per frame
+    void Update () {
+
+        DT = Time.deltaTime;
+        if (die)
+        {
+
+            if (sword.transform.localScale.x <= .01f)
+            {
+                seek.enabled = false;
+                Obsorb.Play();
+                gameObject.SetActive(true);
+            }
+                sword.transform.localScale += new Vector3(DT * .2f, DT * .2f, DT * .2f);
+
+
+            if (sword.transform.localScale.x >= .99f)
+            {
+                Obsorb.Stop();
+            }
+
+
+
+            sword.transform.localScale = new Vector3(Mathf.Clamp(sword.transform.localScale.x, 0, 1), Mathf.Clamp(sword.transform.localScale.y, 0, 1), Mathf.Clamp(sword.transform.localScale.z, 0, 1));
+          
+        }
 	}
 
 
@@ -26,8 +50,6 @@ public class CinematicSwordGrab : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
             {
-            float DT;
-            DT = Time.deltaTime;
             if (Input.GetKey(KeyCode.E) || Controller.GrabButton)
             {
 
@@ -53,13 +75,12 @@ public class CinematicSwordGrab : MonoBehaviour {
                 Player.MV.Armed = true;
                 Player.anim.SetTrigger("EndGrab");
                 Player.MV.grabed = false;
-                Destroy(Obsorb);
-                Destroy(gameObject);
+                Obsorb.Stop();
+                gameObject.SetActive(false);
+                seek.enabled = false;
                
             }
 
-            sword.transform.localScale = new Vector3(Mathf.Clamp(sword.transform.localScale.x, 0, 1), Mathf.Clamp(sword.transform.localScale.y, 0, 1), Mathf.Clamp(sword.transform.localScale.z, 0, 1));
-            sword2.transform.localScale = new Vector3(Mathf.Clamp(sword2.transform.localScale.x, 0, 1), Mathf.Clamp(sword2.transform.localScale.y, 0, 1), Mathf.Clamp(sword2.transform.localScale.z, 0, 1));
         }
     }
 }
