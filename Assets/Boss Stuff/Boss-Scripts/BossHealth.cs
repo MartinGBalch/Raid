@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class BossHealth : MonoBehaviour, IDamageable
 {
+    public Canvas UIBar;
     private TimeManager DeltaTime;
     float DT;
 
     Animator anim;
     public float Health;
+
+    public float Stage1Health;
+    public float Stage2Health;
+    public float Stage3Health;
+    public float MaxHealth;
+    public int HealthStage;
+
     public float ResistDamage;
     private float StartResistance;
     public float VulnerableTime;
@@ -19,6 +27,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     private CameraShake Shake;
     private float DamageToBeDealt = 0;
     bool IsVulner = false;
+    
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -30,7 +39,18 @@ public class BossHealth : MonoBehaviour, IDamageable
         {
             Damage.Play();
             Shake.StartShake(Shake.LightProperties);
-            Health -= DamageToBeDealt;
+            if(HealthStage == 0)
+            {
+                Stage1Health -= DamageToBeDealt;
+            }
+            if (HealthStage == 1)
+            {
+                Stage2Health -= DamageToBeDealt;
+            }
+            if (HealthStage == 2)
+            {
+                Stage3Health -= DamageToBeDealt;
+            }
         }
         
     }
@@ -39,6 +59,8 @@ public class BossHealth : MonoBehaviour, IDamageable
     // Use this for initialization
     void Start ()
     {
+       
+
         anim = GetComponent<Animator>();
         DeltaTime = FindObjectOfType<TimeManager>();
 
@@ -48,7 +70,12 @@ public class BossHealth : MonoBehaviour, IDamageable
         BabySpawner = GetComponent<MinionSpawn>();
         StartResistance = ResistDamage;
         StartTimer = VulnerableTime;
-	}
+        MaxHealth = Health;
+        Stage1Health = MaxHealth / 3;
+        Stage2Health = MaxHealth / 3;
+        Stage3Health = MaxHealth / 3;
+       
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -57,9 +84,11 @@ public class BossHealth : MonoBehaviour, IDamageable
 
 		if(ResistDamage == 0)
         {
+            
             IsVulner = true;
             if (IsVulner == true)
             {
+                
                 anim.SetBool("IsVul", IsVulner);
                 IsVulner = false;
             }
@@ -67,9 +96,34 @@ public class BossHealth : MonoBehaviour, IDamageable
             
             BossState.Behaviour = 69;
             VulnerableTime -= DT;
-            if(VulnerableTime <= 0)
+
+            if(Stage1Health <= 0 && HealthStage == 0)
             {
-                
+               
+                anim.SetBool("IsVul", IsVulner);
+                BabySpawner.RunMechanic();
+                BossState.PickBehavior();
+                ResistDamage = StartResistance;
+                VulnerableTime = StartTimer;
+                HealthStage++;
+            }
+            else if (Stage2Health <= 0 && HealthStage == 1)
+            {
+               
+                anim.SetBool("IsVul", IsVulner);
+                BabySpawner.RunMechanic();
+                BossState.PickBehavior();
+                ResistDamage = StartResistance;
+                VulnerableTime = StartTimer;
+                HealthStage++;
+            }
+            else if (Stage3Health <= 0 && HealthStage == 2)
+            {
+                Destroy(gameObject);
+            }
+            else if(VulnerableTime <= 0)
+            {
+               
                 anim.SetBool("IsVul", IsVulner);
                 BabySpawner.RunMechanic();
                 BossState.PickBehavior();
@@ -77,11 +131,7 @@ public class BossHealth : MonoBehaviour, IDamageable
                 VulnerableTime = StartTimer;
             }
         }
-        if(Health <= 0)
-        {
-            
-            Destroy(gameObject);
-        }
+       
         
 	}
 }
