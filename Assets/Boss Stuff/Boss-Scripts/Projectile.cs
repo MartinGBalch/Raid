@@ -6,8 +6,10 @@ public class Projectile : MonoBehaviour {
 
     public GameObject Bullet;
     public GameObject Gun;
-    public float CoolDown;
-    private float StartCD;
+
+    List<GameObject> ListOFun;
+
+
     private float ArcDegree;
     public int BulletCount;
     private int StartBulletCount;
@@ -15,7 +17,7 @@ public class Projectile : MonoBehaviour {
     public float bulletSpeed;
     Quaternion rotationCache;
     public float BulletLifetime;
-    
+    public int PooledObjectCount;
     public void RunMechanic()
     {
         
@@ -23,19 +25,19 @@ public class Projectile : MonoBehaviour {
             
             for (int i = 0; i < BulletCount; i++)
             {
-                Gun.transform.Rotate(new Vector3(0, ArcDegree, 0));
-                var projectile = (GameObject)Instantiate(Bullet, Gun.transform.position, Gun.transform.rotation);
-                projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward) * bulletSpeed;
-
-                Destroy(projectile, BulletLifetime);
-                //Rigidbody PBR = projectile.GetComponent<Rigidbody>();
-                //projectile.transform.position = transform.position;
-                //Instantiate(projectile);
-
-                //PBR.AddForce(transform.forward * bulletSpeed);
-
-            }
+                for(int j = 0; j < ListOFun.Count; j++)
+                {
+                  if(!ListOFun[i].activeInHierarchy)
+                    {
+                      Gun.transform.Rotate(new Vector3(0, ArcDegree, 0));
+                      ListOFun[i].transform.position = Gun.transform.position;
+                      ListOFun[i].transform.rotation = Gun.transform.rotation;
+                      ListOFun[i].GetComponent<Rigidbody>().velocity = (ListOFun[i].transform.forward * bulletSpeed);
+                    }
+                }
             Gun.transform.rotation = rotationCache;
+            }
+           
        
 
     }
@@ -43,36 +45,18 @@ public class Projectile : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        
+        ListOFun = new List<GameObject>();
+        for(int i = 0; i < PooledObjectCount; i++)
+        {
+            GameObject baby = (GameObject)Instantiate(Bullet);
+            baby.SetActive(false);
+            ListOFun.Add(baby);
+        }
         rb = Bullet.GetComponent<Rigidbody>();
-        StartCD = CoolDown;
+        
         ArcDegree = 180 / BulletCount;
         StartBulletCount = BulletCount;
 	}
 	
-	// Update is called once per frame
-	//void Update ()
- //   {
- //       CoolDown -= Time.deltaTime;
- //       if(CoolDown <= 0)
- //       {
- //           rotationCache = transform.rotation;
- //           CoolDown = StartCD;
- //           for(int i = 0; i < BulletCount; i++)
- //           {
- //               transform.Rotate(new Vector3(0, ArcDegree , 0));
- //               var projectile = (GameObject)Instantiate(Bullet, transform.position,transform.rotation);
- //               projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward )* bulletSpeed;
-
- //               Destroy(projectile, BulletLifetime);
- //               //Rigidbody PBR = projectile.GetComponent<Rigidbody>();
- //               //projectile.transform.position = transform.position;
- //               //Instantiate(projectile);
-                
- //               //PBR.AddForce(transform.forward * bulletSpeed);
-
- //           }
- //           transform.rotation = rotationCache;
- //       }
-	//}
+	
 }
