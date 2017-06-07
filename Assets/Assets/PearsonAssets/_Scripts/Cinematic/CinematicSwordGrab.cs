@@ -30,7 +30,7 @@ public class CinematicSwordGrab : MonoBehaviour {
                 Obsorb.Play();
                 gameObject.SetActive(true);
             }
-                sword.transform.localScale += new Vector3(DT * .2f, DT * .2f, DT * .2f);
+                sword.transform.localScale += new Vector3(DT , DT , DT );
 
 
             if (sword.transform.localScale.x >= .99f)
@@ -65,8 +65,8 @@ public class CinematicSwordGrab : MonoBehaviour {
             }
             if (Grabbed == true)
             {
-                sword.transform.localScale -= new Vector3(DT * .2f, DT * .2f, DT * .2f);
-                sword2.transform.localScale += new Vector3(DT * .2f, DT * .2f, DT * .2f);
+                sword.transform.localScale -= new Vector3(DT , DT  , DT );
+                sword2.transform.localScale += new Vector3(DT , DT  , DT );
             }
             if (sword.transform.localScale.x <= 0)
             {

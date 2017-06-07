@@ -65,7 +65,7 @@ public class Bossraise : MonoBehaviour {
                 DirectionalLight.intensity = Mathf.Clamp(DirectionalLight.intensity, 0, 5);
 
                 transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -13f, 11f), transform.position.z);
-                Pylons.transform.position = new Vector3(Pylons.transform.position.x, Mathf.Clamp(Pylons.transform.position.y, 15, 21.16f), Pylons.transform.position.z);
+                Pylons.transform.position = new Vector3(Pylons.transform.position.x, Mathf.Clamp(Pylons.transform.position.y, 15, 21f), Pylons.transform.position.z);
                 if (transform.position.y >= 10.5f)
                 {
                     music.Play();

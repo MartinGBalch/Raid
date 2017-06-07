@@ -50,7 +50,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         public bool fall;
         public bool mouseAttack = false;
-
+        public float CooldownDash;
 
         public bool attacking = false;
         public float attackTime;
@@ -125,9 +125,10 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     }
 
     public States CurrentState, NonCombatState, CombatState, AttackingState, SuperAttackState;
-
+    float DashCooldown;
     void Start()
     {
+        DashCooldown = MV.CooldownDash;
         Shake = FindObjectOfType<CameraShake>();
         Trans = GetComponent<Transform>();
         Energy = GetComponent<EnergyCharge>();
@@ -382,7 +383,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             MV.DashAttack = ((Input.GetKey(KeyCode.LeftControl) || Objects.Controller.Dash > .1f) && (Input.GetMouseButton(0) || Objects.Controller.Attack));
             MV.Sprint = (Input.GetKey(KeyCode.LeftShift) || Objects.Controller.Sprint) && MV.moved;
-            MV.Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Objects.Controller.Dash > .1f) && canDash && MV.moved && !MV.DashAttack && !MV.attacking;
+            MV.Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Objects.Controller.Dash > .1f) && canDash && MV.moved && !MV.DashAttack && !MV.attacking && DashCooldown <= 0 ;
 
 
             MV.mouseAttack = Input.GetMouseButtonDown(0);
@@ -486,7 +487,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     public void SprintFunction()
     {
-
+        DashCooldown -= DT;
         if (MV.Sprint)
         {
             MV.NonCombatMaxSpeed = 60;
@@ -533,6 +534,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         if (Dashing)
         {
+            DashCooldown = MV.CooldownDash;
             MV.dashTime -= DT;
             if (Objects.DashAir.isPlaying == false)
             {
@@ -543,6 +545,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
             if (!MV.DashAttack)
             {
+                if(Energy.SuperEnergy >= Energy.SuperMaxEnergy - .01f)
                 Objects.DashDust.Play();
             }
 
@@ -703,6 +706,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             SuperAttackState = States.WaitingState;
             NonCombatState = States.IdleState;
             anim.SetTrigger("EndSuper");
+            anim.ResetTrigger("SuperAttack");
         }
     }
  
@@ -711,7 +715,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public void SuperFunction()
     {
         
-        if ((Objects.Controller.Attack || MV.mouseAttack) && beginSuper == true && Energy.SuperEnergy >= Energy.SuperMaxEnergy)
+        if ( beginSuper == true )
         {
 
             Objects.Controller.Attack = false;

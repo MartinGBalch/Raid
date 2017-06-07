@@ -408,54 +408,33 @@ public class ThirdPersonCameraController : MonoBehaviour {
     public void CameraLock()
     {
 
-        
-
-        Vector3 screenPoint = cam.WorldToViewportPoint(follow.position);
-        bool onScreenRight = screenPoint.x > .51f;
-        bool onScreenLeft = screenPoint.x < .49f;
-
-        
-        if(screenPoint.x > .6f)
-        {
-            x -= HorzSpeed * DT * 7;
-        }
-        else if (screenPoint.x > .51f)
-        {
-            x -= HorzSpeed * DT * 2;
-        }
-        else if(screenPoint.x < .3f)
-        {
-            x += HorzSpeed * DT * 7;
-        }
-        else if (screenPoint.x < .49f)
-        {
-            x += HorzSpeed * DT * 2;
-        }
-        if (screenPoint.y < .5f)
-        {
-           y -= HorzSpeed * DT * 3;
-        }
-
-        y = ClampAngle(y,10, 80);
+        y = ClampAngle(y, -30, 80);
 
         Vector3 position;
-       
+
         Quaternion rotation = Quaternion.Euler(y, x, 0);
-        
 
-        distance = Mathf.Clamp(distance, 1, 100);
+        if (PlayerController.MV.Sprint || PlayerController.MV.Dash)
+        {
+            minViewDist = 3;
+            maxViewDist = 4;
+        }
+        else
+        {
+            minViewDist = 1;
+            maxViewDist = 3;
+        }
 
+        distance = Mathf.Clamp(distance, minViewDist, maxViewDist);
+        Vector3 negDistance;
         RaycastHit hit;
 
-        distance = Vector3.Distance(follow.position, target.transform.position) + 5;
-
-
-        if (Physics.Linecast(follow.position, Trans.position, out hit) )
+        if (Physics.Linecast(follow.position, Trans.position, out hit))
         {
             if (!hit.collider.isTrigger)
             {
-                //distance -= hit.distance;
-                //correct = true;
+                distance -= hit.distance;
+                correct = true;
             }
         }
         if (correct)
@@ -468,7 +447,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
             }
             else if (Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
             {
-               
+
             }
 
             if (distance >= maxViewDist)
@@ -477,16 +456,120 @@ public class ThirdPersonCameraController : MonoBehaviour {
             }
         }
 
-        Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
-        position = rotation * negDistance + target.transform.position;
-       
+
+        negDistance = new Vector3(0.0f, 0.0f, -distance);
+        position = rotation * negDistance + follow.position;
+        if (!PlayerController.MV.moved && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0))
+        {
+            tempDamp = 50;
+        }
+        else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0)
+        {
+            tempDamp += DT * 50;
+        }
+        else
+        {
+            tempDamp -= DT * 50;
+        }
+        tempDamp = Mathf.Clamp(tempDamp, 2, 50);
+
         var fwd = Trans.forward;
+
         var direct = (target.transform.position - Trans.position).normalized;
-        var lkat = Vector3.Slerp(fwd, direct, DT * TempTargetDamp);
+
+        var lkat = Vector3.Slerp(fwd, direct, DT * tempDamp *2);
 
         Trans.LookAt(lkat + Trans.position, Vector3.up);
 
         smoothPosition(Trans.position, position);
+
+        //x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .03f;
+
+        if (target != null)
+        {
+           // Vector3 screenPoint = cam.WorldToViewportPoint(target.transform.position);
+
+            //if (screenPoint.x < 0 || screenPoint.x > 1 || screenPoint.y < 0 || screenPoint.y > 1)
+            //{
+            //    target = null;
+            //}
+
+        }
+
+
+        Vector3 screenPoint = cam.WorldToViewportPoint(follow.position);
+        bool onScreenRight = screenPoint.x > .51f;
+        bool onScreenLeft = screenPoint.x < .49f;
+
+
+        if (screenPoint.x > .6f)
+        {
+            x -= HorzSpeed * DT * 7;
+        }
+        if (screenPoint.x < .3f)
+        {
+            x += HorzSpeed * DT * 7;
+        }
+        //else if (screenPoint.x < .49f)
+        //{
+        //    x += HorzSpeed * DT * 2;
+        //}
+        //if (screenPoint.y < .5f)
+        //{
+        //   y -= HorzSpeed * DT * 3;
+        //}
+
+        //y = ClampAngle(y,10, 80);
+
+        //Vector3 position;
+
+        //Quaternion rotation = Quaternion.Euler(y, x, 0);
+
+
+        //distance = Mathf.Clamp(distance, 1, 100);
+
+        //RaycastHit hit;
+
+        //distance = Vector3.Distance(follow.position, target.transform.position) + 5;
+
+
+        //if (Physics.Linecast(follow.position, Trans.position, out hit) )
+        //{
+        //    if (!hit.collider.isTrigger)
+        //    {
+        //        //distance -= hit.distance;
+        //        //correct = true;
+        //    }
+        //}
+        //if (correct)
+        //{
+
+
+        //    if (!Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
+        //    {
+        //        distance += DT;
+        //    }
+        //    else if (Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
+        //    {
+
+        //    }
+
+        //    if (distance >= maxViewDist)
+        //    {
+        //        correct = false;
+        //    }
+        //}
+
+        //Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+        //position = rotation * negDistance + target.transform.position;
+
+        //var fwd = Trans.forward;
+        //var direct = (target.transform.position - Trans.position).normalized;
+        //var lkat = Vector3.Slerp(fwd, direct, DT * TempTargetDamp);
+
+        //Trans.LookAt(lkat + Trans.position, Vector3.up);
+
+        //smoothPosition(Trans.position, position);
     }
 
     public void DoCamMove()
