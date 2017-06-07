@@ -13,13 +13,15 @@ public class FistCollision : MonoBehaviour {
     private GameObject hit;
     private ParticleSystem poof;
     private CameraShake Shake;
-    void Awake ()
+    
+    void Start ()
     {
-        Shake = FindObjectOfType<CameraShake>();
-        hit = GameObject.FindGameObjectWithTag("Hiiter");
-        poof = hit.GetComponent<ParticleSystem>();
         ActualTimer = timer;
         DeltaTime = FindObjectOfType<TimeManager>();
+        Shake = FindObjectOfType<CameraShake>();
+        hit = GameObject.FindGameObjectWithTag("Hitter");
+        poof = hit.GetComponent<ParticleSystem>();
+
         if (!poof.isPlaying)
         {
             poof.Play();

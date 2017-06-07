@@ -10,13 +10,16 @@ public class PylonManager : MonoBehaviour {
     public bool NeedReset = false;
     public GameObject Boss;
     BossHealth Health;
+    AudioSource Sound;
     public float DelayTimer;
     private float DelayStart;
     float DT;
+    bool Matt = false;
+    bool Matt2 = false;
     // Use this for initialization
     void Start ()
     {
-        
+        Sound = GetComponent<AudioSource>();
         DeltaTime = FindObjectOfType<TimeManager>();
         
         Health = Boss.GetComponent<BossHealth>();
@@ -30,10 +33,12 @@ public class PylonManager : MonoBehaviour {
         DT = DeltaTime.DT;
         if (PylonCount <= 0)
         {
+            Matt = true;
             Health.ResistDamage = 0;
             DelayTimer -= DT;
             if(DelayTimer <= 0)
             {
+                Matt2 = false;
                 NeedReset = true;
                 PylonCount = 4;
                 DelayTimer = DelayStart;
@@ -41,6 +46,13 @@ public class PylonManager : MonoBehaviour {
            
             
         }
+        if (Matt == true && Matt2 == false)
+        {
+            Matt2 = true;
+            Matt = false;
+            Sound.Play();
+        }
+
 
 	}
 }
