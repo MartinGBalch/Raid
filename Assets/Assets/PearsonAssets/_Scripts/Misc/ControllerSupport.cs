@@ -17,7 +17,7 @@ public class ControllerSupport : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Xbox && !PS4)
+        if (Xbox)
         {
             GrabButton = Input.GetButtonDown("XboxRightBumper");
             StartButton = Input.GetButtonDown("XboxStartButton");
@@ -36,7 +36,7 @@ public class ControllerSupport : MonoBehaviour {
             RightStickHorizontal = Input.GetAxis("XboxRightStickX");
             RightStickVertical = Input.GetAxis("XboxRightStickY");
         }
-        else if(PS4)
+        else
         {
 
             GrabButton = Input.GetButtonDown("PS4RightBumper");
