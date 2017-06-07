@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour {
     Rigidbody rb;
     public float bulletSpeed;
     Quaternion rotationCache;
-    public float BulletLifetime;
+    //public float BulletLifetime;
     public int PooledObjectCount;
     public void RunMechanic()
     {
@@ -25,20 +25,24 @@ public class Projectile : MonoBehaviour {
             
             for (int i = 0; i < BulletCount; i++)
             {
-                for(int j = 0; j < ListOFun.Count; j++)
+            Gun.transform.Rotate(new Vector3(0, ArcDegree, 0));
+                for (int j = 0; j < ListOFun.Count; j++)
                 {
-                  if(!ListOFun[i].activeInHierarchy)
+                  if(!ListOFun[j].activeInHierarchy)
                     {
-                      Gun.transform.Rotate(new Vector3(0, ArcDegree, 0));
-                      ListOFun[i].transform.position = Gun.transform.position;
-                      ListOFun[i].transform.rotation = Gun.transform.rotation;
-                      ListOFun[i].GetComponent<Rigidbody>().velocity = (ListOFun[i].transform.forward * bulletSpeed);
+                     
+                      ListOFun[j].SetActive(true);
+                      ListOFun[j].transform.position = Gun.transform.position;
+                      ListOFun[j].transform.rotation = Gun.transform.rotation;
+                      ListOFun[j].GetComponent<Rigidbody>().velocity = (ListOFun[j].transform.forward * bulletSpeed);
+                      break;
                     }
+                
                 }
-            Gun.transform.rotation = rotationCache;
+            
             }
-           
-       
+        Gun.transform.rotation = rotationCache;
+
 
     }
 
@@ -50,6 +54,7 @@ public class Projectile : MonoBehaviour {
         {
             GameObject baby = (GameObject)Instantiate(Bullet);
             baby.SetActive(false);
+            
             ListOFun.Add(baby);
         }
         rb = Bullet.GetComponent<Rigidbody>();

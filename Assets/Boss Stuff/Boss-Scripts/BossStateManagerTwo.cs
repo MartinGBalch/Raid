@@ -73,8 +73,8 @@ public class BossStateManagerTwo : MonoBehaviour
         {
             BulletSprayAmount++;
             ProjectileMechanic.RunMechanic();
-            if (BulletSprayAmount <= 5) { Timer = StartTime / 3; }
-            else { Timer = StartTime; }  
+            Timer = StartTime / 2;
+           
         }
 
 
@@ -91,7 +91,7 @@ public class BossStateManagerTwo : MonoBehaviour
                 FistSlamMechanic.RunMechanic();
                 Timer = StartTime;
             }
-            AoeMechanic.RunMechanic();
+            //AoeMechanic.RunMechanic();
             BoulderFallMechanic.RunMechanic();
             Timer = StartTime;
         }
@@ -128,7 +128,7 @@ public class BossStateManagerTwo : MonoBehaviour
         if (Timer <= 0)
         {
             ProjectileMechanic.RunMechanic();
-            AoeMechanic.RunMechanic();
+            //AoeMechanic.RunMechanic();
            
             Timer = StartTime;
         }
