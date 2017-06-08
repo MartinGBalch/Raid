@@ -74,7 +74,7 @@ public class OrbMovement : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        
+        Hover();
 
 
         DT = DeltaTime.DT;

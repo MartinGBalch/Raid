@@ -42,23 +42,16 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
         //if (Health > 0) { Debug.DrawLine(transform.position, Boss.transform.position); }
 
-        if(placeholder.transform.position.y >= 20)
-        {
-            if(Beam.isPlaying == false && Health > 0)
-            {
-                Beam.Play();
-            }
-        }
-
+     
         if (Health <= 0)
         {
             Alive = false;
             PM.NeedReset = false;
             Health = StartHealth;
 
-            
-
             Beam.Stop();
+
+
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             PM.PylonCount--;
@@ -73,12 +66,20 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
                 Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
 
-            Beam.Play();
+                Beam.Play();
 
 
 
 
         }
+        if (placeholder.transform.position.y >= 20)
+        {
+            if (Beam.isPlaying == false && Health > 0 && Alive)
+            {
+                Beam.Play();
+            }
+        }
+
     }
 }
  //var BossStuff = Boss.GetComponent<BossHealth>();

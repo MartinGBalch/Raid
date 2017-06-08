@@ -317,8 +317,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             Objects.mesh.SetActive(true);
 
             Objects.hitbox2.SetActive(false);
-            anim.SetTrigger("EndDashAttack");
-
+            anim.ResetTrigger("Grab");
+            anim.SetTrigger("EndGrab");
+           
             Objects.DashDust.Stop();
             Objects.DashAir.Stop();
             anim.SetBool("Dash", false);
@@ -394,7 +395,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 MV.mouseAttack = false;
                 Objects.Poof.Play();
                 Objects.Poof.simulationSpace = ParticleSystemSimulationSpace.World;
-                anim.SetTrigger("DashAttack");
+                anim.ResetTrigger("EndGrab");
+                anim.SetTrigger("Grab");
                 AttackdashTime = .2f;
                 Energy.Energy -= 10;
                 NonCombatState = States.DashAttackState;
@@ -1061,7 +1063,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if (buttonPress == false)
         {
             Objects.hitbox.SetActive(false);
-        
+            anim.ResetTrigger("Attack");
             anim.SetTrigger("EndAttack");
             MV.attacking = false;
             AttackingState = States.AttackOne;
@@ -1085,7 +1087,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             if (buttonPress == false && AttackingState == States.AttackTwo)
             {
                 Objects.hitbox.SetActive(false);
-               
+                anim.ResetTrigger("Attack");
                 anim.SetTrigger("EndAttack");
                 MV.attacking = false;
                 AttackingState = States.AttackOne;
@@ -1109,7 +1111,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             {
 
                 Objects.hitbox2.SetActive(false);
-               
+                anim.ResetTrigger("Attack");
                 anim.SetTrigger("EndAttack");
                 MV.attacking = false;
                 buttonPress = false;
