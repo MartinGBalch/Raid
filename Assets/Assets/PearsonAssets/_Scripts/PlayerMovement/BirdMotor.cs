@@ -293,11 +293,15 @@ public class BirdMotor : MonoBehaviour
             CurrentState = States.SuperState;
 
         }
+        if (PlayerController.MV.inSuper == false)
+        {
+            CurrentState = States.idleState;
+        }
 
     }
     void DoSuper()
     {
-        if (Vector3.Distance(Trans.position, SuperSet.position) >= -2f && Vector3.Distance(Trans.position, SuperSet.position) <= 2f)
+        if (Vector3.Distance(Trans.position, SuperSet.position) >= -1f && Vector3.Distance(Trans.position, SuperSet.position) <= 1f)
         {
             Trans.position = Vector3.MoveTowards(Trans.position, SuperSet.position,4);
 
