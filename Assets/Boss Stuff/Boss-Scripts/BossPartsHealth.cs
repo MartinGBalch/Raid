@@ -21,6 +21,8 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     private PylonChargeScript Charge;
     private EnergyCharge Energy;
 
+    public GameObject[] SpwnPts,Minions;
+
     public GameObject[] Pylons;
     private Projectile gun;
     public float EstimatedDamageTaken(float damageDealt)
@@ -75,10 +77,20 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         {
 
            
-                Alive = true;
                 
-                
-                Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
+
+
+            if (Alive == false)
+            {
+                for (int i = 0; i < SpwnPts.Length; i++)
+                {
+                    Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
+                }
+            }
+
+            Alive = true;
+
+            Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
             
 

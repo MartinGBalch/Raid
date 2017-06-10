@@ -360,34 +360,40 @@ public class SwordSwingMinion : MonoBehaviour {
     void Update ()
     {
         DT = Objects.DeltaTime.DT;
-        switch (CurrentState)
+        if (Objects.Player != null)
         {
-            case States.IdleState:
-                DoIdle();
-                break;
-            case States.TrackState:
-                DoTrack();
-                break;
-            case States.AttackState:
-                DoAttack();
-                break;
-            case States.DeathState:
-                DoDie();
-                break;
+            switch (CurrentState)
+            {
+                case States.IdleState:
+                    DoIdle();
+                    break;
+                case States.TrackState:
+                    DoTrack();
+                    break;
+                case States.AttackState:
+                    DoAttack();
+                    break;
+                case States.DeathState:
+                    DoDie();
+                    break;
 
+
+            }
+
+            if (CurrentState != States.DeathState && CurrentState != States.AttackState)
+            {
+                Hover();
+            }
+            if (CurrentState != States.DeathState)
+            {
+                DamageJiggle();
+            }
 
         }
-
-        if(CurrentState != States.DeathState && CurrentState != States.AttackState)
+        else
         {
-            Hover();
+            Agent.baseOffset -= DT;
         }
-        if(CurrentState != States.DeathState)
-        {
-            DamageJiggle();
-        }
-       
-
 
     }
 }

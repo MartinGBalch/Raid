@@ -11,7 +11,7 @@ public class FistCollision : MonoBehaviour {
     private TimeManager DeltaTime;
     float DT;
     private GameObject hit;
-    private ParticleSystem poof;
+    public ParticleSystem poof;
     private CameraShake Shake;
     
     void Start ()
@@ -20,15 +20,14 @@ public class FistCollision : MonoBehaviour {
         DeltaTime = FindObjectOfType<TimeManager>();
         Shake = FindObjectOfType<CameraShake>();
         hit = GameObject.FindGameObjectWithTag("Hitter");
-        poof = hit.GetComponent<ParticleSystem>();
 
-        if (!poof.isPlaying)
-        {
-            poof.Play();
-        }
     }
-	
-    void OnTriggerStay(Collider collider)
+
+    private void Awake()
+    {
+    }
+
+    void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
@@ -39,8 +38,8 @@ public class FistCollision : MonoBehaviour {
             {
                 player.TakeDamage(Dmg);
                 IsDamage = false;
-                Destroy(gameObject);
-                ActualTimer = timer;
+              //  Destroy(gameObject,.5f);
+               
             }
         }
             
@@ -49,15 +48,18 @@ public class FistCollision : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        DT = DeltaTime.DT;
-        ActualTimer -= DT;
-      
+        Shake.StartShake(Shake.BoulderFallProperties);
 
-        if (ActualTimer <= 0)
+        IsDamage = true;
+        if (!poof.isPlaying)
         {
-            Shake.StartShake(Shake.BoulderFallProperties);
-                IsDamage = true;
+            poof.Play();
         }
-        if (ActualTimer <= -1) { Destroy(gameObject);  }
+
+        Destroy(gameObject, 2);
+       
+
+        DT = DeltaTime.DT;
+       
     }
 }
