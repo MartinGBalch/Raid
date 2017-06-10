@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnBoulders : MonoBehaviour {
 
+    List<GameObject> ListOFun;
+    public int PooledObjectCount;
 
     public GameObject AoeEffect;
     public float spawnCount;
@@ -20,13 +22,20 @@ public class SpawnBoulders : MonoBehaviour {
        
             for (int i = 0; i < spawnCount; i++)
             {
+<<<<<<< HEAD
                 for(int j = 0; j < ListOFun.Count; j++)
             {
                 if(!ListOFun[j].activeInHierarchy)
+=======
+            for (int j = 0; j < ListOFun.Count; j++)
+            {
+                if (!ListOFun[j].activeInHierarchy)
+>>>>>>> test-build
                 {
                     float RandX = Random.Range(-Range, Range);
                     float RandZ = Random.Range(-Range, Range);
                     float RandY = Random.Range(heightMin, heightMax);
+<<<<<<< HEAD
                     ListOFun[j].SetActive(true);
                     ListOFun[j].transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
                     break;
@@ -36,6 +45,19 @@ public class SpawnBoulders : MonoBehaviour {
                 }
             }
                 
+=======
+                    ListOFun[j].transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
+                    ListOFun[j].SetActive(true);
+
+                    break;
+                }
+
+            }
+
+
+
+           
+>>>>>>> test-build
             }
         
     }

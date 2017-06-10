@@ -23,7 +23,10 @@ public class BoulderFall : MonoBehaviour {
             Shake.StartShake(Shake.BoulderFallProperties);
             Instantiate(land, transform.position, land.transform.rotation);
             Invoke("Destroy", .5f);
+<<<<<<< HEAD
             
+=======
+>>>>>>> test-build
         }
         if(collision.collider.tag == "Player" && Kinetic == true)
         {
@@ -36,7 +39,10 @@ public class BoulderFall : MonoBehaviour {
             }
         }
     }
-
+    void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Awake()
     {
