@@ -45,7 +45,7 @@ public class SpawnBoulders : MonoBehaviour {
 
                 //ListOFun[j].transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
                 //ListOFun[j].SetActive(true);
-
+                //COMENTED THIS OUT DURING MERGE
                 break;
             }
 

@@ -23,6 +23,7 @@ public class BoulderFall : MonoBehaviour {
             Shake.StartShake(Shake.BoulderFallProperties);
             Instantiate(land, transform.position, land.transform.rotation);
             Invoke("Destroythis", .5f);
+            //CHANGED "DESTROY" to "Destroythis" TO FIX AN ERROR YOU HAD
 
         }
         if(collision.collider.tag == "Player" && Kinetic == true)
