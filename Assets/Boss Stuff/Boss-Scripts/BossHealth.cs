@@ -26,7 +26,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     public ParticleSystem Damage;
     private CameraShake Shake;
     private float DamageToBeDealt = 0;
-    bool IsVulner = false;
+    public bool IsVulner = false;
     
     public float EstimatedDamageTaken(float damageDealt)
     {

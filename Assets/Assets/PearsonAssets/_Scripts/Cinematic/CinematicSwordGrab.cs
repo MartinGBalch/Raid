@@ -65,6 +65,7 @@ public class CinematicSwordGrab : MonoBehaviour {
             }
             if (Grabbed == true)
             {
+                Player.rb.velocity = new Vector3(0, Player.rb.velocity.y, 0);
                 sword.transform.localScale -= new Vector3(DT , DT  , DT );
                 sword2.transform.localScale += new Vector3(DT , DT  , DT );
             }

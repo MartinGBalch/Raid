@@ -11,6 +11,7 @@ public class BossStateManagerTwo : MonoBehaviour
     FistSlam FistSlamMechanic;
     SpawnBoulders BoulderFallMechanic;
     Projectile ProjectileMechanic;
+    public Animator anim;
     BossHealth Health;
     BeamAttack WipeMechanic;
     BossTurning Turning;
@@ -69,12 +70,12 @@ public class BossStateManagerTwo : MonoBehaviour
         // Projectile Burst
        
         Timer -= DT;
-        if (Timer <= 0)
+        if (Timer <= 0 && !anim.GetBool("Cinematic"))
         {
             BulletSprayAmount++;
             ProjectileMechanic.RunMechanic();
             Timer = StartTime / 2;
-           
+            ProjectileMechanic.enter = true;
         }
 
 
@@ -113,7 +114,7 @@ public class BossStateManagerTwo : MonoBehaviour
                 Timer = StartTime;
             }
         }
-        if (Timer2 <= 0)
+        if (Timer2 <= 0 && !anim.GetBool("Cinematic"))
         {
             ProjectileMechanic.RunMechanic();
             Timer2 = StartTime2;
@@ -125,7 +126,7 @@ public class BossStateManagerTwo : MonoBehaviour
         // Mass AoE and Projectile
         Timer -= DT;
         Timer2 -= DT;
-        if (Timer <= 0)
+        if (Timer <= 0 && !anim.GetBool("Cinematic"))
         {
             ProjectileMechanic.RunMechanic();
             //AoeMechanic.RunMechanic();
@@ -170,6 +171,11 @@ public class BossStateManagerTwo : MonoBehaviour
     public void PickBehavior()
     {
         //Random.InitState(Behaviour);
+        if (Behaviour == 1)
+        {
+            anim.ResetTrigger("IsShooting");
+
+        }
         Behaviour = Random.Range(1, 3 + State);
         behaviorTimer = BehaviorStart;
     }

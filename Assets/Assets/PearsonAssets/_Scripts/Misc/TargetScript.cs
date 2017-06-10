@@ -20,33 +20,50 @@ public class TargetScript : MonoBehaviour {
         healthBar.enabled = false;
         if (Cam.target != null)
         {
-            
-
-            if(Cam.target.GetComponent<BossPartsHealth>() != null)
+            if (Cam.target.tag == "Enemy" || Cam.target.tag == "Pylon")
             {
-                healthBar.fillAmount = Cam.target.GetComponent<BossPartsHealth>().Health / Cam.target.GetComponent<BossPartsHealth>().StartHealth;
+                if (Cam.target.GetComponent<BossPartsHealth>() != null)
+                {
+                    healthBar.fillAmount = Cam.target.GetComponent<BossPartsHealth>().Health / Cam.target.GetComponent<BossPartsHealth>().StartHealth;
+                }
+                else if (Cam.target.GetComponent<MinionSwordHealth>() != null)
+                {
+                    healthBar.fillAmount = Cam.target.GetComponent<MinionSwordHealth>().Health / Cam.target.GetComponent<MinionSwordHealth>().MaxHealth;
+                }
+
+
+                //ebug.Log("TRRRRRRRACK");
+
+                Vector3 screenPos = PlayerCamera.WorldToScreenPoint(Cam.target.transform.position);
+
+                if (screenPos.z <= 0.0f)
+                {
+                    return;
+                }
+
+                Picture.enabled = true;
+                healthBar.enabled = true;
+
+                Picture.rectTransform.position = screenPos;
             }
-            else if(Cam.target.GetComponent<MinionSwordHealth>() != null)
+
+            if ( Cam.target.tag == "Boss")
             {
-                healthBar.fillAmount = Cam.target.GetComponent<MinionSwordHealth>().Health / Cam.target.GetComponent<MinionSwordHealth>().MaxHealth;
+
+                
+                Vector3 screenPos = PlayerCamera.WorldToScreenPoint(Cam.target.transform.position);
+
+                if (screenPos.z <= 0.0f)
+                {
+                    return;
+                }
+
+                Picture.enabled = true;
+                healthBar.enabled = false;
+
+                Picture.rectTransform.position = screenPos;
             }
-            else if (Cam.target.GetComponent<BossHealth>() != null)
-            {
-                healthBar.fillAmount = Cam.target.GetComponent<BossHealth>().Health / 1000;
-            }
 
-            //ebug.Log("TRRRRRRRACK");
-
-            Vector3 screenPos = PlayerCamera.WorldToScreenPoint(Cam.target.transform.position);
-
-            if(screenPos.z <= 0.0f)
-            {
-                return;
-            }
-
-            Picture.enabled = true;
-            healthBar.enabled = true;
-            Picture.rectTransform.position = screenPos;
         }
 		
 	}

@@ -12,11 +12,12 @@ public class EnergyCharge : MonoBehaviour
     public float SuperEnergy;
     public float SuperMaxEnergy;
     public Image SuperBar;
-    public ParticleSystem Charge;
+    public ParticleSystem[] Charge;
     private ThirdPersonPlayerController player;
-
+    public SuperState super;
     void Start()
     {
+        super = GetComponent<SuperState>();
         player = FindObjectOfType<ThirdPersonPlayerController>();
         Energy = 100;
         SuperEnergy = 100;
@@ -36,14 +37,28 @@ public class EnergyCharge : MonoBehaviour
         {
             if (SuperEnergy >= SuperMaxEnergy)
             {
-                if (Charge.isPlaying == false)
+                if (super.Charge != 0)
                 {
-                    Charge.Play();
+                    if (Charge[super.Charge - 1].isPlaying == false)
+                    {
+                        Charge[super.Charge - 1].Play();
+                        for (int i = 0; i < Charge.Length; i++)
+                        {
+                            if (super.Charge != 0)
+                            {
+                                if (i != super.Charge - 1)
+                                {
+                                
+                                    Charge[i].Stop();
+                                }
+                            }
+                        }
+                    }
                 }
             }
             else
             {
-                Charge.Stop();
+                Charge[super.Charge - 1].Stop();
             }
         }
             // = SuperEnergy;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SuperState : MonoBehaviour
 {
 
-    private ThirdPersonPlayerController Player;
+    public ThirdPersonPlayerController Player;
     public float SlashTime;
     private TimeManager DeltaTime;
     private IceSpawn ice;
@@ -48,7 +48,8 @@ public class SuperState : MonoBehaviour
         {
             Player.Objects.SuperChargeSource.Stop();
             Player.beginSuper = true;
-            Player.Objects.SuperCharged.Stop();
+            Player.Objects.SuperCharged[Charge - 1].Stop();
+            Player.MV.BirdSuper = false;
             Player.correct = false;
             Player.MV.inSuper = false;
             Player.anim.SetTrigger("EndSuper");
@@ -71,8 +72,9 @@ public class SuperState : MonoBehaviour
         {
             Player.Objects.SuperChargeSource.Stop();
             Player.beginSuper = true;
-            Player.Objects.SuperCharged.Stop();
+            Player.Objects.SuperCharged[Charge - 1].Stop();
             Player.correct = false;
+            Player.MV.BirdSuper = false;
             Player.MV.inSuper = false;
             Player.anim.SetTrigger("EndSuper");
             Player.anim.SetInteger("SuperNumb", 0);
@@ -93,7 +95,7 @@ public class SuperState : MonoBehaviour
         {
             Player.Objects.SuperChargeSource.Stop();
             Player.beginSuper = true;
-            Player.Objects.SuperCharged.Stop();
+            Player.Objects.SuperCharged[Charge - 1].Stop();
 
             Player.MV.BirdSuper = false;
             Player.Objects.Laser.SetActive(false);
@@ -119,7 +121,8 @@ public class SuperState : MonoBehaviour
         {
             Player.Objects.SuperChargeSource.Stop();
             Player.beginSuper = true;
-            Player.Objects.SuperCharged.Stop();
+            Player.Objects.SuperCharged[Charge - 1].Stop();
+            Player.MV.BirdSuper = false;
             Player.correct = false;
             Player.MV.inSuper = false;
             Player.anim.SetTrigger("EndSuper");

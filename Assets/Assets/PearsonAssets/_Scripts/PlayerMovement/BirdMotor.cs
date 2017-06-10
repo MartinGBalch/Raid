@@ -21,7 +21,8 @@ public class BirdMotor : MonoBehaviour
     public AudioClip ChargSound, FireSound;
     private Transform Trans;
     public ControllerSupport Controller;
-
+    private TimeManager DeltaTime;
+    public float attackSpeedDive, AttackSpeed;
     enum States
     {
         idleState,
@@ -36,6 +37,7 @@ public class BirdMotor : MonoBehaviour
 
     void Start()
     {
+        DeltaTime = FindObjectOfType<TimeManager>();
         Trans = GetComponent<Transform>();
        // offset = Player.transform.position + transform.position;
         SetcamSmoothDampTime = BirdSmoothDampIdle;
@@ -159,7 +161,7 @@ public class BirdMotor : MonoBehaviour
                 //transform.LookAt(lkat + transform.position, Vector3.up);
 
                 Vector3 oldPos = Trans.position;
-                Trans.position = Vector3.Lerp(Trans.position, TempTarget.transform.position, DT);
+                Trans.position = Vector3.MoveTowards(Trans.position, TempTarget.transform.position, DT * attackSpeedDive);
                 Vector3 dirMov = (Trans.position - oldPos).normalized;
 
 
@@ -224,7 +226,7 @@ public class BirdMotor : MonoBehaviour
             {
                 hitOnce = true;
                 Vector3 oldPos = Trans.position;
-                Trans.position = Vector3.MoveTowards(Trans.position, (TempTarget.transform.position + killOffset), DT * 7);
+                Trans.position = Vector3.MoveTowards(Trans.position, (TempTarget.transform.position + killOffset), DT * AttackSpeed);
                 Vector3 dirMov = (Trans.position - oldPos).normalized;
                 Trans.forward = Vector3.Slerp(Trans.forward, dirMov, DT * attackDamp);
                 AttackTimer -= DT;
@@ -238,7 +240,7 @@ public class BirdMotor : MonoBehaviour
         {
             hitOnce = true;
             Vector3 oldPos = Trans.position;
-            Trans.position = Vector3.MoveTowards(Trans.position, (killpos + killOffset), DT * 7);
+            Trans.position = Vector3.MoveTowards(Trans.position, (killpos + killOffset), DT * AttackSpeed);
             Vector3 dirMov = (Trans.position - oldPos).normalized;
             Trans.forward = Vector3.Slerp(Trans.forward, dirMov, DT * attackDamp);
             AttackTimer -= DT;
@@ -288,12 +290,12 @@ public class BirdMotor : MonoBehaviour
                
             }
         }
-        if (PlayerController.MV.BirdSuper == true)
+        if (PlayerController.MV.BirdSuper == true && CurrentState != States.SuperState  && PlayerController.MV.inSuper)
         {
             CurrentState = States.SuperState;
 
         }
-        if (PlayerController.MV.inSuper == false)
+        if (PlayerController.MV.inSuper == false && CurrentState != States.SuperState && CurrentState != States.AttackState)
         {
             CurrentState = States.idleState;
         }
@@ -314,7 +316,7 @@ public class BirdMotor : MonoBehaviour
 
         }
 
-        if(PlayerController.MV.inSuper == false)
+        if(PlayerController.MV.BirdSuper == false)
         {
             CurrentState = States.idleState;
         }
@@ -325,25 +327,33 @@ public class BirdMotor : MonoBehaviour
     {
         KeyInput();
     }
-
+    public bool cinematic = false;
+    public GameObject holdpos;
     void FixedUpdate()
     {
-       
-        DT = Time.deltaTime;
-        switch(CurrentState)
+
+        DT = DeltaTime.DT ;
+        if (!cinematic)
         {
-            case States.idleState:
-                DoIdle();
-                break;
+            switch (CurrentState)
+            {
+                case States.idleState:
+                    DoIdle();
+                    break;
 
-           
-            case States.AttackState:
-                DoAttack();
-                break;
 
-            case States.SuperState:
-                DoSuper();
-                break;
+                case States.AttackState:
+                    DoAttack();
+                    break;
+
+                case States.SuperState:
+                    DoSuper();
+                    break;
+            }
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, holdpos.transform.position, DT * 20);
         }
     }
 }

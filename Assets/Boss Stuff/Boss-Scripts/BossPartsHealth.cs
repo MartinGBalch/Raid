@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossPartsHealth : MonoBehaviour, IDamageable
 {
-
+    private SuperState State;
     public float Health;
     public float StartHealth;
     private float ResistDamage = 0;
@@ -18,6 +18,11 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public float ResetTimer;
     private float StartTime;
     public ParticleSystem Beam,Damage;
+    private PylonChargeScript Charge;
+    private EnergyCharge Energy;
+
+    public GameObject[] Pylons;
+    private Projectile gun;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -30,6 +35,11 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
     void Start ()
     {
+        Pylons = GameObject.FindGameObjectsWithTag("Pylon");
+        gun = FindObjectOfType<Projectile>();
+        Energy = FindObjectOfType<EnergyCharge>();
+        Charge = GetComponent<PylonChargeScript>();
+        State = FindObjectOfType<SuperState>();
         placeholder = GameObject.FindGameObjectWithTag("PlaceHolder");
         StartHealth = Health;
         StartTime = ResetTimer;
@@ -50,8 +60,13 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             Health = StartHealth;
 
             Beam.Stop();
-
-
+            if (State.Charge != 0)
+            {
+                State.Player.Objects.SuperCharged[State.Charge - 1].Stop();
+                Energy.Charge[Energy.super.Charge - 1].Stop();
+            }
+            State.Charge = Charge.chargeNumber;
+            gun.newobj = true;
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             PM.PylonCount--;
@@ -65,8 +80,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
                 
                 Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
-
-                Beam.Play();
+            
 
 
 

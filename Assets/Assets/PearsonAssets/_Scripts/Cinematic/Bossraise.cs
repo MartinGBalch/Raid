@@ -6,6 +6,7 @@ public class Bossraise : MonoBehaviour {
 
     private CameraShake Shake;
     private ThirdPersonPlayerController Player;
+    private ThirdPersonCameraController Cam;
     public Light SpotLight, DirectionalLight;
     float DT;
     bool runOnce = true;
@@ -19,7 +20,8 @@ public class Bossraise : MonoBehaviour {
     public Animator boss;
 	// Use this for initialization
 	void Start () {
-        
+        Cam = FindObjectOfType<ThirdPersonCameraController>();
+     
         Boss.SetActive(false);
         Shake = FindObjectOfType<CameraShake>();
         Player = FindObjectOfType<ThirdPersonPlayerController>();
@@ -36,9 +38,11 @@ public class Bossraise : MonoBehaviour {
         {
             if (run == true)
             {
+                Cam.openinglock = true;
                 DT = Time.deltaTime;
                 if (runOnce)
                 {
+                    FindObjectOfType<BirdMotor>().cinematic = true;
                     runOnce = false;
                     Shake.StartShake(Shake.BossRaiseProperties);
                     Quake.Play();
