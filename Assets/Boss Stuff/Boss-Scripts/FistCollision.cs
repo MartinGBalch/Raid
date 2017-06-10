@@ -25,9 +25,10 @@ public class FistCollision : MonoBehaviour {
 
     private void Awake()
     {
+
     }
 
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerStay(Collider collider)
     {
         if (collider.tag == "Player")
         {
@@ -38,7 +39,7 @@ public class FistCollision : MonoBehaviour {
             {
                 player.TakeDamage(Dmg);
                 IsDamage = false;
-              //  Destroy(gameObject,.5f);
+                Destroy(gameObject);
                
             }
         }
@@ -48,9 +49,18 @@ public class FistCollision : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        DT = DeltaTime.DT;
         Shake.StartShake(Shake.BoulderFallProperties);
+        ActualTimer -= DT;
 
-        IsDamage = true;
+        if(ActualTimer <= 0)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            IsDamage = true;
+        }
+        
+
+
         if (!poof.isPlaying)
         {
             poof.Play();
@@ -59,7 +69,7 @@ public class FistCollision : MonoBehaviour {
         Destroy(gameObject, 2);
        
 
-        DT = DeltaTime.DT;
+        
        
     }
 }
