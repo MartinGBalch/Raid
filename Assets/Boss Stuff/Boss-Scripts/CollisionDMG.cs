@@ -68,6 +68,6 @@ public class CollisionDMG : MonoBehaviour {
            
             
         }
-        Debug.DrawLine(transform.position, hit.transform.position);
+        
     }
 }
