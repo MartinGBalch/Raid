@@ -186,55 +186,61 @@ public class BossStateManagerTwo : MonoBehaviour
     void Update()
     {
         DT = DeltaTime.DT;
-        //if (Health.Health <= 700) { State = 1;  }
-        State = Health.HealthStage;
-        //if (Health.Health <= 400) { State = 2; }
-
-        if (Health.ResistDamage > 0) { behaviorTimer -= DT; }
-        if (Health.ResistDamage == 0) { Turning.AdjustTimer = 2; }
-        
-        
-        if(behaviorTimer <= 0)
+        if (anim.GetBool("Cinematic") == false)
         {
+            //if (Health.Health <= 700) { State = 1;  }
+            State = Health.HealthStage;
+            //if (Health.Health <= 400) { State = 2; }
 
-            PickBehavior();
-
-            Behaviour++;
-           // Behaviour = Random.Range(1, 3 + State);
-            behaviorTimer = BehaviorStart;
-
-        }
-
-        if (Behaviour == 1) {  BehaviorOne(); }
-        if (Behaviour == 2) { BehaviorTwo(); }
-        if (Behaviour == 3) { BehaviorThree(); }
-        if (Behaviour == 4) { BehaviorFour(); }
-        if (Behaviour == 5) { BehaviorFive(); }
+            if (Health.ResistDamage > 0) { behaviorTimer -= DT; }
+            if (Health.ResistDamage == 0) { Turning.AdjustTimer = 2; }
 
 
-     
-        // -WIPE MECHANIC -
-        if(State == 2 && DoWipeMechanic == true)
-        {
-            WipeTimer -= DT;
-            if (WipeTimer <= 0)
+            if (behaviorTimer <= 0)
             {
 
-                WipeDelay -= DT;
-                if (WipeDelay <= 0)
-                {
-                    //Debug.Log("Firing");
-                    WipeMechanic.RunMechanic();
-                    WipeDelay = StartDelay;
-                    WipeTimer = StartWipe;
-                }
+                PickBehavior();
+
+                Behaviour++;
+                // Behaviour = Random.Range(1, 3 + State);
+                behaviorTimer = BehaviorStart;
 
             }
+
+            if (Behaviour == 1) { BehaviorOne(); }
+            if (Behaviour == 2) { BehaviorTwo(); }
+            if (Behaviour == 3) { BehaviorThree(); }
+            if (Behaviour == 4) { BehaviorFour(); }
+            if (Behaviour == 5) { BehaviorFive(); }
+
+
+
+            // -WIPE MECHANIC -
+            if (State == 2 && DoWipeMechanic == true)
+            {
+                WipeTimer -= DT;
+                if (WipeTimer <= 0)
+                {
+
+                    WipeDelay -= DT;
+                    if (WipeDelay <= 0)
+                    {
+                        //Debug.Log("Firing");
+                        WipeMechanic.RunMechanic();
+                        WipeDelay = StartDelay;
+                        WipeTimer = StartWipe;
+                    }
+
+                }
+            }
+
+
         }
-        
+        else
+        {
+            behaviorTimer -= DT;
+        }
 
     }
-
-
     }
 
