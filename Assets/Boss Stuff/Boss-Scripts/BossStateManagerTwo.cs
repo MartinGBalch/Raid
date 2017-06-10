@@ -74,6 +74,7 @@ public class BossStateManagerTwo : MonoBehaviour
         {
             BulletSprayAmount++;
             ProjectileMechanic.RunMechanic();
+            anim.SetTrigger("IsShooting");
             Timer = StartTime / 2;
             ProjectileMechanic.enter = true;
         }
@@ -117,6 +118,7 @@ public class BossStateManagerTwo : MonoBehaviour
         if (Timer2 <= 0 && !anim.GetBool("Cinematic"))
         {
             ProjectileMechanic.RunMechanic();
+            anim.SetTrigger("IsShooting");
             Timer2 = StartTime2;
         }
 
@@ -129,8 +131,9 @@ public class BossStateManagerTwo : MonoBehaviour
         if (Timer <= 0 && !anim.GetBool("Cinematic"))
         {
             ProjectileMechanic.RunMechanic();
+            anim.SetTrigger("IsShooting");
             //AoeMechanic.RunMechanic();
-           
+
             Timer = StartTime;
         }
         if (Timer2 <= 0)
@@ -171,11 +174,9 @@ public class BossStateManagerTwo : MonoBehaviour
     public void PickBehavior()
     {
         //Random.InitState(Behaviour);
-        if (Behaviour == 1)
-        {
+       
             anim.ResetTrigger("IsShooting");
-
-        }
+            
         Behaviour = Random.Range(1, 3 + State);
         behaviorTimer = BehaviorStart;
     }
