@@ -14,53 +14,49 @@ public class SpawnBoulders : MonoBehaviour {
     public float Range;
     public float heightMax;
     public float heightMin;
-    List<GameObject> ListOFun;
-    public int PooledObjectCount;
 
     public void RunMechanic()
     {
-       
-            for (int i = 0; i < spawnCount; i++)
-            {
-<<<<<<< HEAD
-                for(int j = 0; j < ListOFun.Count; j++)
-            {
-                if(!ListOFun[j].activeInHierarchy)
-=======
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+
             for (int j = 0; j < ListOFun.Count; j++)
             {
                 if (!ListOFun[j].activeInHierarchy)
->>>>>>> test-build
-                {
-                    float RandX = Random.Range(-Range, Range);
-                    float RandZ = Random.Range(-Range, Range);
-                    float RandY = Random.Range(heightMin, heightMax);
-<<<<<<< HEAD
-                    ListOFun[j].SetActive(true);
-                    ListOFun[j].transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
-                    break;
-                    //var AoE = AoeEffect;
-                    //AoE.transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
-                    //Instantiate(AoE);
-                }
+
+                    for (int g = 0; g < ListOFun.Count; g++)
+                    {
+                        if (!ListOFun[g].activeInHierarchy)
+
+                        {
+                            float RandX = Random.Range(-Range, Range);
+                            float RandZ = Random.Range(-Range, Range);
+                            float RandY = Random.Range(heightMin, heightMax);
+
+                            ListOFun[g].SetActive(true);
+                            ListOFun[g].transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
+                            break;
+                            //var AoE = AoeEffect;
+                            //AoE.transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
+                            //Instantiate(AoE);
+                        }
+                    }
+
+                //ListOFun[j].transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
+                //ListOFun[j].SetActive(true);
+
+                break;
             }
-                
-=======
-                    ListOFun[j].transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
-                    ListOFun[j].SetActive(true);
 
-                    break;
-                }
+        }
 
-            }
-
-
+    }
 
            
->>>>>>> test-build
-            }
+            
         
-    }
+    
     // Use this for initialization
     void Start ()
     {
