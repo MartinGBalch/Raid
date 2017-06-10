@@ -87,15 +87,17 @@ public class BossStateManagerTwo : MonoBehaviour
         Timer -= DT;
         if (Timer <= 0)
         {
+            Turning.IsTurning = true;
             if (Turning.FOVCheck(15))
             {
                 Turning.IsTurning = false;
                 FistSlamMechanic.RunMechanic();
                 Timer = StartTime;
+                BoulderFallMechanic.RunMechanic();
             }
             //AoeMechanic.RunMechanic();
-            BoulderFallMechanic.RunMechanic();
-            Timer = StartTime;
+            
+            
         }
 
     }
@@ -106,6 +108,7 @@ public class BossStateManagerTwo : MonoBehaviour
         Timer2 -= DT;
         if (Timer <= 0)
         {
+            Turning.IsTurning = true;
             Turning.AdjustTimer = 0;
             if (Turning.FOVCheck(15))
             {
@@ -138,6 +141,7 @@ public class BossStateManagerTwo : MonoBehaviour
         }
         if (Timer2 <= 0)
         {
+            Turning.IsTurning = true;
             if (Turning.FOVCheck(15))
             {
                 Turning.IsTurning = false;
@@ -167,7 +171,7 @@ public class BossStateManagerTwo : MonoBehaviour
                 BoulderFallMechanic.RunMechanic();
                 Timer = StartTime / 2;
             }
-                    }
+       }
        
     }
 
@@ -175,7 +179,7 @@ public class BossStateManagerTwo : MonoBehaviour
     {
         //Random.InitState(Behaviour);
        
-            anim.ResetTrigger("IsShooting");
+        anim.ResetTrigger("IsShooting");
             
         Behaviour = Random.Range(1, 3 + State);
         behaviorTimer = BehaviorStart;
