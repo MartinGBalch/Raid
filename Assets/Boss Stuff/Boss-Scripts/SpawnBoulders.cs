@@ -23,8 +23,7 @@ public class SpawnBoulders : MonoBehaviour {
 
             for (int j = 0; j < ListOFun.Count; j++)
             {
-                if (!ListOFun[j].activeInHierarchy)
-
+               
                     for (int g = 0; g < ListOFun.Count; g++)
                     {
                         if (!ListOFun[g].activeInHierarchy)
