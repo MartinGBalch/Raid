@@ -34,7 +34,7 @@ public class PylonManager : MonoBehaviour {
         if (PylonCount <= 0)
         {
             Matt = true;
-            Health.ResistDamage = 0;
+           
             DelayTimer -= DT;
             if(DelayTimer <= 0)
             {
@@ -48,6 +48,7 @@ public class PylonManager : MonoBehaviour {
         }
         if (Matt == true && Matt2 == false)
         {
+            Health.ResistDamage = 0;
             Matt2 = true;
             Matt = false;
             Sound.Play();

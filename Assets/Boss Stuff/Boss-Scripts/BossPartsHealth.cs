@@ -96,8 +96,4 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
     }
 }
- //var BossStuff = Boss.GetComponent<BossHealth>();
-           // //Boss.GetComponent<BossStateManagerTwo>().PylonCount--; 
-           // //BossStuff.TakeDamage(DamageToBoss + BossStuff.ResistDamage);
-           // Debug.Log("The Boss is Vulnerable");
-           // BossStuff.ResistDamage = 0;
+ 
