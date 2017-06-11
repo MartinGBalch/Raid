@@ -8,7 +8,7 @@ public class FistSlam : MonoBehaviour
     public GameObject Target;
     public GameObject DMGCollider;
     public float ATKSpeed;
-    
+    private GameObject Boss;
     public bool SpawnRocks;
     Animator anim;
     
@@ -39,7 +39,7 @@ public class FistSlam : MonoBehaviour
     {
         
         SpawnRocks = false;
-
+        
         anim = GetComponent<Animator>();
         DeltaTime = FindObjectOfType<TimeManager>();
     }
@@ -50,7 +50,7 @@ public class FistSlam : MonoBehaviour
         var Baby = Rocks;
         SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
         SpawnPos.y = 20;
-        Rocks.transform.rotation = Target.transform.rotation;
+        Rocks.transform.rotation = transform.rotation;
 
         Instantiate(Baby);
 

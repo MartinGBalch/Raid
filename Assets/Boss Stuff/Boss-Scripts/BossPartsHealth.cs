@@ -76,8 +76,8 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         if (PM.NeedReset == true)
         {
 
-           
-                
+
+
 
 
             if (Alive == false)
@@ -86,12 +86,13 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
                 {
                     Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
                 }
+                Alive = true;
             }
 
-            Alive = true;
+
 
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                gameObject.GetComponent<CapsuleCollider>().enabled = true;
+            gameObject.GetComponent<CapsuleCollider>().enabled = true;
             
 
 
