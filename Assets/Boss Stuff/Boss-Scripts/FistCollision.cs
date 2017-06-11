@@ -55,7 +55,7 @@ public class FistCollision : MonoBehaviour {
 
         if(ActualTimer <= 0)
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
+           
             IsDamage = true;
         }
         

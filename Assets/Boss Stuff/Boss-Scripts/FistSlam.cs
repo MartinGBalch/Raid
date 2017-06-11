@@ -29,7 +29,7 @@ public class FistSlam : MonoBehaviour
         anim.SetTrigger("DoubleSlam");
 
         Instantiate(DMGCollider, Target.transform.position, Target.transform.rotation);
-       // SpawnRockz();
+        SpawnRockz();
 
         startDelay = spawnDelay;
     }
@@ -50,7 +50,7 @@ public class FistSlam : MonoBehaviour
         var Baby = Rocks;
         SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
         SpawnPos.y = 20;
-        Rocks.transform.rotation = transform.rotation;
+        Rocks.transform.rotation = Target.transform.rotation;
 
         Instantiate(Baby);
 
