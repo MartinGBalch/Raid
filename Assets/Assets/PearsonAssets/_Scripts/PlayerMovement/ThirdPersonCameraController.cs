@@ -43,7 +43,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
     private Vector3 offset = new Vector3(0f, 0, 0f);
     private Vector3 lookDir;
     private Vector3 TargetPos;
-
+    public bool die;
     private Vector3 velocityCamSmooth = Vector3.zero;
     [SerializeField]
     private float camSmoothDampTimeNonLock, camSmoothDampTimeLock;
@@ -293,6 +293,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     }
     bool correct = false;
+    float startTime = 3;
     public void CameraLook()
     {
 
@@ -301,7 +302,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         x += Controller.RightStickHorizontal * MouseXSpeed * distance * 0.01f;
         y += Controller.RightStickVertical * MouseYSpeed * 0.1f;
-        
+
         //if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || moving == true || Input.GetAxis("XboxRightStickX") > 0|| Input.GetAxis("XboxRightStickY") > 0 || Input.GetAxis("XboxRightStickX") < 0 || Input.GetAxis("XboxRightStickY") < 0)
         //{
         //    SetAfkTime = AfkTime;
@@ -315,9 +316,9 @@ public class ThirdPersonCameraController : MonoBehaviour {
         //{
         //    CurrentIdleState = States.IdleCamMovementAFK;
         //}
-
-        y = ClampAngle(y, -30, 80);
-
+      
+            y = ClampAngle(y, -30, 80);
+        
         Vector3 position;
 
         Quaternion rotation = Quaternion.Euler(y, x, 0);
@@ -388,12 +389,17 @@ public class ThirdPersonCameraController : MonoBehaviour {
         var lkat = Vector3.Slerp(fwd, direct, DT * tempDamp);
 
         Trans.LookAt(lkat + Trans.position, Vector3.up);
-
-        smoothPosition(Trans.position, position);
-
+        if (!die)
+        {
+            smoothPosition(Trans.position, position);
+        }
+        else
+        {
+            transform.position = stopPos;
+        }
         //x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .03f;
 
-        if(target != null)
+        if (target != null)
         {
             Vector3 screenPoint = cam.WorldToViewportPoint(target.transform.position);
 
@@ -404,7 +410,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
             
         }
     }
-
+    public Vector3 stopPos;
     public void CameraLock()
     {
 
@@ -480,9 +486,14 @@ public class ThirdPersonCameraController : MonoBehaviour {
         var lkat = Vector3.Slerp(fwd, direct, DT * tempDamp *2);
 
         Trans.LookAt(lkat + Trans.position, Vector3.up);
-
-        smoothPosition(Trans.position, position);
-
+        if (!die)
+        {
+            smoothPosition(Trans.position, position);
+        }
+        else
+        {
+            transform.position = stopPos;
+        }
         //x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .03f;
 
         if (target != null)

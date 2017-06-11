@@ -22,7 +22,7 @@ public class AttackDamage : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (CanDamage.CanDamage)
+        if (CanDamage.CanDamage && PlayerController.MV.attacking)
         {
             if (other.CompareTag("Enemy"))
             {

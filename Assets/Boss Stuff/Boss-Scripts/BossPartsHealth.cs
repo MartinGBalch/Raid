@@ -18,9 +18,10 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public float ResetTimer;
     private float StartTime;
     public ParticleSystem Beam,Damage;
+    private BossHealth bossHealth;
     private PylonChargeScript Charge;
     private EnergyCharge Energy;
-
+    private PlayformFall faller;
     public GameObject[] SpwnPts,Minions;
 
     public GameObject[] Pylons;
@@ -37,6 +38,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
     void Start ()
     {
+        faller = FindObjectOfType<PlayformFall>();
         Pylons = GameObject.FindGameObjectsWithTag("Pylon");
         gun = FindObjectOfType<Projectile>();
         Energy = FindObjectOfType<EnergyCharge>();
@@ -46,6 +48,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         StartHealth = Health;
         StartTime = ResetTimer;
         PM = Manager.GetComponent<PylonManager>();
+        bossHealth = FindObjectOfType<BossHealth>();
 	}
 
     // Update is called once per frame
@@ -60,6 +63,30 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             Alive = false;
             PM.NeedReset = false;
             Health = StartHealth;
+            if (bossHealth.HealthStage == 2)
+            {
+
+
+
+                if (Charge.chargeNumber == 3)
+                {
+                    faller.dieNumb = 0;
+                }
+                if (Charge.chargeNumber == 2)
+                {
+                    faller.dieNumb = 1;
+                }
+                if (Charge.chargeNumber == 1)
+                {
+                    faller.dieNumb = 2;
+                }
+                if (Charge.chargeNumber == 4)
+                {
+                    faller.dieNumb = 3;
+                }
+                faller.die = true;
+                faller.faller = faller.fallTime;
+            }
 
             Beam.Stop();
             if (State.Charge != 0)
@@ -75,28 +102,30 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         }
         if (PM.NeedReset == true)
         {
-
-           
-                
-
-
-            if (Alive == false)
+            if (bossHealth.HealthStage != 2)
             {
-                for (int i = 0; i < SpwnPts.Length; i++)
+
+
+
+
+
+                if (Alive == false)
                 {
-                    Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
+                    for (int i = 0; i < SpwnPts.Length; i++)
+                    {
+                        Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
+                    }
                 }
-            }
 
-            Alive = true;
+                Alive = true;
 
-            Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
-            
 
 
 
 
+            }
         }
         if (placeholder.transform.position.y >= 20)
         {

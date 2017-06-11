@@ -34,7 +34,7 @@ public class SuperState : MonoBehaviour
     }
     public void DoNull()
     {
-
+        Player.correct = false;
     }
     public void DoDarkness()
     {

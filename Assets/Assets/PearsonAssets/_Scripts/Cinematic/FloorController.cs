@@ -16,6 +16,7 @@ public class FloorController : MonoBehaviour {
     bool grow = true;
 	// Use this for initialization
 	void Start () {
+        DT = FindObjectOfType<TimeManager>();
         dust = GetComponent<ParticleSystem>();
         BossState = FindObjectOfType<BossStateManagerTwo>();
 	}
@@ -28,7 +29,7 @@ public class FloorController : MonoBehaviour {
             if(fall == false)
             {
                 falltime = falldelay;
-                fall = false;
+                fall = true;
                 raise = true;
                 if (dust.isPlaying == false)
                 {
@@ -41,7 +42,7 @@ public class FloorController : MonoBehaviour {
             {
                 if (fall)
                 {
-                    if (falltime > -5)
+                    if (falltime > -9)
                     {
                         transform.position -= new Vector3(0, DT.DT * fallspeed, 0);
                     }
@@ -49,8 +50,8 @@ public class FloorController : MonoBehaviour {
                 if (raise)
                 {
                     platforms.transform.position += new Vector3(0, DT.DT * raisespeed, 0);
-                    platforms.transform.position = new Vector3(platforms.transform.position.x, Mathf.Clamp(platforms.transform.position.y, -12.2f, -10.5f), 0);
-                    if(platforms.transform.position.y > -10.49f)
+                    platforms.transform.position = new Vector3(platforms.transform.position.x, Mathf.Clamp(platforms.transform.position.y, 9.5f, 10.5f), platforms.transform.position.z);
+                    if(platforms.transform.position.y > 10.49f)
                     {
                         raise = false;
                     }
@@ -59,12 +60,12 @@ public class FloorController : MonoBehaviour {
                 {
                     if (grow)
                     {
-                        if (smallPads.transform.localScale.y >= .99f)
+                        if (smallPads.transform.localScale.x > .99f && smallPads.transform.localScale.y > .99f && smallPads.transform.localScale.z > .99f)
                         {
                             grow = false;
                         }
                         
-                        smallPads.transform.localScale += new Vector3(DT.DT, DT.DT, DT.DT);
+                        smallPads.transform.localScale += new Vector3(DT.DT * 3f, DT.DT * 3f, DT.DT * 3f);
                         smallPads.transform.localScale = new Vector3(Mathf.Clamp(smallPads.transform.localScale.x, 0, 1), Mathf.Clamp(platforms.transform.position.y, 0,1), Mathf.Clamp(smallPads.transform.localScale.z, 0, 1));
                     }
                 }

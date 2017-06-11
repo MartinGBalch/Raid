@@ -11,10 +11,11 @@ public class Die : MonoBehaviour {
     private Bossraise boss;
     public GameObject PlayerCam;
     public GameObject Rock;
-
+    public BossStateManagerTwo boss2;
 
     public float time = 1;
 	void Start () {
+        boss2 = FindObjectOfType<BossStateManagerTwo>();
         Rock = GameObject.FindGameObjectWithTag("Rock");
         PlayerCam = FindObjectOfType<ThirdPersonCameraController>().gameObject;
         boss = FindObjectOfType<Bossraise>();
@@ -56,9 +57,10 @@ public class Die : MonoBehaviour {
             if (!obsorb.isPlaying)
             {
                 obsorb.Play();
+                
             }
         }
-
+        boss2.anim.SetTrigger("Win");
         PlayerCam.transform.forward = Vector3.Slerp(PlayerCam.transform.forward, -(PlayerCam.transform.position - Rock.transform.position), Time.deltaTime * 2 );
     }
 }
