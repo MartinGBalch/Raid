@@ -47,14 +47,16 @@ public class FistSlam : MonoBehaviour
 
     void SpawnRockz()
     {
+     
+
+
         var Baby = Rocks;
+        Baby.transform.position = Target.transform.position + (Target.transform.forward * Dist);
+        Baby.transform.rotation = Target.transform.rotation;
         SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
         SpawnPos.y = 20;
-        Rocks.transform.rotation = Target.transform.rotation;
-
         Instantiate(Baby);
-
-        spawnDelay = startDelay;
+       
     }
 
     // Update is called once per frame
@@ -125,21 +127,21 @@ public class FistSlam : MonoBehaviour
 
 
     }
-    //public void DoubleSlamLand()
-    //{
-    //    Instantiate(DMGCollider, Target.transform.position, DMGCollider.transform.rotation);
+    public void DoubleSlamLand()
+    {
+        Instantiate(DMGCollider, Target.transform.position, DMGCollider.transform.rotation);
 
-    //    var Baby = Rocks;
-    //    SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
-    //    SpawnPos.y = 20;
-    //    //Rocks.transform.rotation = Target.transform.rotation;
+        var Baby = Rocks;
+        SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
+        SpawnPos.y = 20;
+        //Rocks.transform.rotation = Target.transform.rotation;
 
-    //    Instantiate(Rocks, Target.transform.position + (Target.transform.forward * Dist), Target.transform.rotation);
+        Instantiate(Rocks, Target.transform.position + (Target.transform.forward * Dist), Target.transform.rotation);
 
-    //    spawnDelay = startDelay;
+        spawnDelay = startDelay;
 
 
-    //}
+    }
 
 }
 
