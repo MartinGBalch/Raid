@@ -26,6 +26,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     public ParticleSystem Damage;
     private CameraShake Shake;
     private float DamageToBeDealt = 0;
+    
     public bool IsVulner = false;
     
     public float EstimatedDamageTaken(float damageDealt)
@@ -59,8 +60,8 @@ public class BossHealth : MonoBehaviour, IDamageable
     // Use this for initialization
     void Start ()
     {
-       
 
+        
         anim = GetComponent<Animator>();
         DeltaTime = FindObjectOfType<TimeManager>();
 
@@ -114,6 +115,7 @@ public class BossHealth : MonoBehaviour, IDamageable
                 BabySpawner.RunMechanic();
                 BossState.PickBehavior();
                 ResistDamage = StartResistance;
+                
                 VulnerableTime = StartTimer;
                 HealthStage++;
             }

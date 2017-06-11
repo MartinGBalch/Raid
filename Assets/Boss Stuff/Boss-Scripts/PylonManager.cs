@@ -34,6 +34,7 @@ public class PylonManager : MonoBehaviour {
         if (PylonCount <= 0)
         {
             Matt = true;
+            if (Health.HealthStage == 2) { Health.VulnerableTime = Mathf.Infinity; }
             Health.ResistDamage = 0;
             DelayTimer -= DT;
             if(DelayTimer <= 0)
