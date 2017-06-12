@@ -20,7 +20,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     public float ResistDamage;
     private float StartResistance;
     public float VulnerableTime;
-    private float StartTimer;
+    public float StartTimer;
     MinionSpawn BabySpawner;
     BossStateManagerTwo BossState;
     public ParticleSystem Damage;
@@ -96,18 +96,18 @@ public class BossHealth : MonoBehaviour, IDamageable
     {
         DT = DeltaTime.DT;
 
-        //if(FuckBugs == true)
-        //{
-        //    BugTimer -= DT;
-        //    if(BugTimer <= 0)
-        //    {
-        //        FuckBugs = true;
-        //        BugTimer = 3;
-        //    }
-        //}
-       
+        if (FuckBugs == true)
+        {
+            BugTimer -= DT;
+            if (BugTimer <= 0)
+            {
+                FuckBugs = false;
+                BugTimer = 3;
+            }
+        }
+        VulnerableTime -= DT;
 
-		if(ResistDamage == 0 && FuckBugs == false)
+        if (ResistDamage == 0 && FuckBugs == false)
         {
          
             IsVulner = true;
@@ -123,7 +123,7 @@ public class BossHealth : MonoBehaviour, IDamageable
 
             
             BossState.Behaviour = 69;
-            VulnerableTime -= DT;
+            
 
             if(Stage1Health <= 0 && HealthStage == 0)
             {

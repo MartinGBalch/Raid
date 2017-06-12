@@ -52,6 +52,28 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         bossHealth = FindObjectOfType<BossHealth>();
 	}
 
+
+    public void ResetPylon()
+    {
+        if (bossHealth.HealthStage != 2)
+        {
+            if (Alive == false)
+            {
+
+                for (int i = 0; i < SpwnPts.Length; i++)
+                {
+                    Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
+                }
+            }
+
+            Alive = true;
+        }
+        Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.GetComponent<CapsuleCollider>().enabled = true;
+
+        PM.PylonCount++;
+}
+
     // Update is called once per frame
     void Update()
     {
@@ -109,32 +131,32 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             PM.PylonCount--;
         }
-        if (PM.NeedReset == true)
-        {
-            
+        //if (PM.NeedReset == true)
+        //{
+           
 
-            if (bossHealth.HealthStage != 2)
-            {
-
-
+        //    if (bossHealth.HealthStage != 2)
+        //    {
 
 
-                if (Alive == false)
-                {
+
+
+        //        if (Alive == false)
+        //        {
                   
-                    for (int i = 0; i < SpwnPts.Length; i++)
-                    {
-                        Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
-                    }
-                }
+        //            for (int i = 0; i < SpwnPts.Length; i++)
+        //            {
+        //                Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
+        //            }
+        //        }
 
-                Alive = true;
-            }
+        //        Alive = true;
+        //    }
 
 
 
-            Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponent<CapsuleCollider>().enabled = true;
+        //    Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        //    gameObject.GetComponent<CapsuleCollider>().enabled = true;
 
            
            
@@ -142,7 +164,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
 
 
-        }
+        //}
         }
 
      

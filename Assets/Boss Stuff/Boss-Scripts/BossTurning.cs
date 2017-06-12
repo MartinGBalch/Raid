@@ -15,13 +15,16 @@ public class BossTurning : MonoBehaviour
     public float AngleBtwn;
     private TimeManager DeltaTime;
     float DT;
-    // Use this for initialization
 
+    Animator Anim;
+    // Use this for initialization
+    public float TurningFloat;
 
 
 
     void Start ()
     {
+        Anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         AdjustStart = AdjustTimer;
         DeltaTime = FindObjectOfType<TimeManager>();
@@ -44,7 +47,6 @@ public class BossTurning : MonoBehaviour
 	void Update ()
     {
         DT = DeltaTime.DT;
-        
 
         
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -73,23 +75,31 @@ public class BossTurning : MonoBehaviour
                 Direction = true;
             }
 
-            
-                
+        TurningFloat = Vector3.Dot(Right, toOther);
+
         if (IsTurning == true)
         {
-            AdjustTimer -= DT;
-            if(AdjustTimer <= 0)
-            {
+
+            //AdjustTimer -= DT;
+            //if(AdjustTimer <= 0)
+            //{
+
+            Anim.SetFloat("Turn", TurningFloat);
+
                 if (Direction) { transform.Rotate(0, Speed, 0);  }
                 if (!Direction) { transform.Rotate(0, -Speed, 0);  }
 
-                if (FOVCheck(15)) { IsTurning = false; AdjustTimer = AdjustStart; }
-            }
+                if (FOVCheck(15)) { IsTurning = false; Anim.SetTrigger("StopTurning");/*AdjustTimer = AdjustStart;*/ }
+
+
+
+           // }
            
            
             
         }
-        
+       
+
 
 
 

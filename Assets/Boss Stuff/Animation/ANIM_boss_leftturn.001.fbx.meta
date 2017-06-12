@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 32abc0f98b2728c4c8fc59d4ae0e6887
-timeCreated: 1497283161
-licenseType: Pro
+guid: f366e476cb1788a46a520d7f1f187334
+timeCreated: 1497290411
+licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -524,7 +524,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 40
+      lastFrame: 14
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -543,21 +543,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0
-        functionName: BossAttackScream
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.4317645
-        functionName: DoubleSlamLand
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask:
       - path: 
         weight: 1

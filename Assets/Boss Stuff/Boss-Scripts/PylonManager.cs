@@ -17,9 +17,13 @@ public class PylonManager : MonoBehaviour {
     bool Matt = false;
     bool Matt2 = false;
     public OverheadLaser laser;
+
+    public GameObject[] Pylon;
     // Use this for initialization
     void Start ()
     {
+        Pylon = GameObject.FindGameObjectsWithTag("Pylon");
+
         Sound = GetComponent<AudioSource>();
         DeltaTime = FindObjectOfType<TimeManager>();
         laser = FindObjectOfType<OverheadLaser>();
@@ -32,9 +36,12 @@ public class PylonManager : MonoBehaviour {
 
     public void Dela()
     {
-       
-        NeedReset = true;
-        PylonCount = 4;
+       for(int i = 0; i < Pylon.Length; i++)
+        {
+            Pylon[i].GetComponent<BossPartsHealth>().ResetPylon();
+        }
+        //NeedReset = true;
+       // PylonCount = 4;
         laser.charge = true;
     }
 
@@ -54,7 +61,11 @@ public class PylonManager : MonoBehaviour {
             // Sound.Play();
         }
 
-      
+
+        if (PylonCount > 0)
+        {
+            Health.ResistDamage = 500;
+        }
 
 
         if (PylonCount <= 0)
@@ -89,7 +100,7 @@ public class PylonManager : MonoBehaviour {
         }
         else
         {
-            
+            Health.VulnerableTime = Health.StartTimer;
             Health.ResistDamage = 500;
         }
        
