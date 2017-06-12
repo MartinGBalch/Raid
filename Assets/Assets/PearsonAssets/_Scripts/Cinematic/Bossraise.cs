@@ -6,6 +6,7 @@ public class Bossraise : MonoBehaviour {
 
     private CameraShake Shake;
     private ThirdPersonPlayerController Player;
+    private ThirdPersonCameraController Cam;
     public Light SpotLight, DirectionalLight;
     float DT;
     bool runOnce = true;
@@ -19,7 +20,8 @@ public class Bossraise : MonoBehaviour {
     public Animator boss;
 	// Use this for initialization
 	void Start () {
-        
+        Cam = FindObjectOfType<ThirdPersonCameraController>();
+     
         Boss.SetActive(false);
         Shake = FindObjectOfType<CameraShake>();
         Player = FindObjectOfType<ThirdPersonPlayerController>();
@@ -36,9 +38,11 @@ public class Bossraise : MonoBehaviour {
         {
             if (run == true)
             {
+                Cam.openinglock = true;
                 DT = Time.deltaTime;
                 if (runOnce)
                 {
+                    FindObjectOfType<BirdMotor>().cinematic = true;
                     runOnce = false;
                     Shake.StartShake(Shake.BossRaiseProperties);
                     Quake.Play();
@@ -55,19 +59,19 @@ public class Bossraise : MonoBehaviour {
                 
                 transform.position += new Vector3(0, DT*3, 0);
                 Pylons.transform.position += new Vector3(0, DT * 2, 0);
-                SpotLight.intensity -=  DT * 20;
+                SpotLight.intensity -=  DT * 30;
                 SpotLight.spotAngle += DT * 20;
-                DirectionalLight.intensity += DT * .5f;
+                DirectionalLight.intensity += DT * 5;
 
-                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 10, 100);
+                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 1, 50);
 
-                SpotLight.spotAngle = Mathf.Clamp(SpotLight.spotAngle, 2.250593f, 115);
+                SpotLight.spotAngle = Mathf.Clamp(SpotLight.spotAngle, 2.250593f, 100);
 
-                DirectionalLight.intensity = Mathf.Clamp(DirectionalLight.intensity, 0, 5);
+                DirectionalLight.intensity = Mathf.Clamp(DirectionalLight.intensity, 0, 6);
 
                 transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -13f, 11f), transform.position.z);
                 Pylons.transform.position = new Vector3(Pylons.transform.position.x, Mathf.Clamp(Pylons.transform.position.y, 15, 21f), Pylons.transform.position.z);
-                if (SpotLight.spotAngle >= 114.9 && Pylons.transform.position.y >= 20.9f)
+                if (SpotLight.spotAngle >= 99.9f && Pylons.transform.position.y >= 20.9f)
                 {
                     music.Play();
                     for (int i = 0; i < beam.Length; i++)
@@ -104,15 +108,15 @@ public class Bossraise : MonoBehaviour {
 
                 transform.position -= new Vector3(0, DT * 3, 0);
                 Pylons.transform.position -= new Vector3(0, DT *2, 0);
-                SpotLight.intensity += DT * 20;
+                //SpotLight.intensity += DT * 10;
                 SpotLight.spotAngle -= DT * 20;
-                DirectionalLight.intensity -= DT * .5f;
+                DirectionalLight.intensity -= DT * 5;
 
-                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 10, 100);
+                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 1, 50);
 
                 SpotLight.spotAngle = Mathf.Clamp(SpotLight.spotAngle, 2.250593f, 115);
 
-                DirectionalLight.intensity = Mathf.Clamp(DirectionalLight.intensity, 0, 5);
+                DirectionalLight.intensity = Mathf.Clamp(DirectionalLight.intensity, 0, 6);
 
                 transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -13f, 11f), transform.position.z);
                 Pylons.transform.position = new Vector3(Pylons.transform.position.x, Mathf.Clamp(Pylons.transform.position.y, 15, 21.16f), Pylons.transform.position.z);

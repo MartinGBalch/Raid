@@ -8,6 +8,13 @@ public class BoulderFall : MonoBehaviour {
     public bool Kinetic = true;
     private CameraShake Shake;
     public ParticleSystem land;
+
+    void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
+   
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "Floor")
@@ -15,7 +22,9 @@ public class BoulderFall : MonoBehaviour {
             Kinetic = false;
             Shake.StartShake(Shake.BoulderFallProperties);
             Instantiate(land, transform.position, land.transform.rotation);
-            Destroy(gameObject, .5f);
+            Invoke("Destroythis", .5f);
+            //CHANGED "DESTROY" to "Destroythis" TO FIX AN ERROR YOU HAD
+
         }
         if(collision.collider.tag == "Player" && Kinetic == true)
         {
@@ -24,11 +33,14 @@ public class BoulderFall : MonoBehaviour {
             {
                
                 player.TakeDamage(dmg);
-                Destroy(gameObject, .5f);
+                Invoke("Destroythis", .5f);
             }
         }
     }
-
+    void Destroythis()
+    {
+        gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Awake()
     {

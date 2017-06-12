@@ -510,66 +510,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             x += HorzSpeed * DT * 7;
         }
-        //else if (screenPoint.x < .49f)
-        //{
-        //    x += HorzSpeed * DT * 2;
-        //}
-        //if (screenPoint.y < .5f)
-        //{
-        //   y -= HorzSpeed * DT * 3;
-        //}
-
-        //y = ClampAngle(y,10, 80);
-
-        //Vector3 position;
-
-        //Quaternion rotation = Quaternion.Euler(y, x, 0);
-
-
-        //distance = Mathf.Clamp(distance, 1, 100);
-
-        //RaycastHit hit;
-
-        //distance = Vector3.Distance(follow.position, target.transform.position) + 5;
-
-
-        //if (Physics.Linecast(follow.position, Trans.position, out hit) )
-        //{
-        //    if (!hit.collider.isTrigger)
-        //    {
-        //        //distance -= hit.distance;
-        //        //correct = true;
-        //    }
-        //}
-        //if (correct)
-        //{
-
-
-        //    if (!Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
-        //    {
-        //        distance += DT;
-        //    }
-        //    else if (Physics.Raycast(Trans.position, -Trans.forward, out hit, 3))
-        //    {
-
-        //    }
-
-        //    if (distance >= maxViewDist)
-        //    {
-        //        correct = false;
-        //    }
-        //}
-
-        //Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
-        //position = rotation * negDistance + target.transform.position;
-
-        //var fwd = Trans.forward;
-        //var direct = (target.transform.position - Trans.position).normalized;
-        //var lkat = Vector3.Slerp(fwd, direct, DT * TempTargetDamp);
-
-        //Trans.LookAt(lkat + Trans.position, Vector3.up);
-
-        //smoothPosition(Trans.position, position);
+        
     }
 
     public void DoCamMove()
@@ -633,22 +574,31 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
 
     }
-    CursorLockMode wantedMode;
+    
+    public bool openinglock = false;
+    public GameObject look;
     void LateUpdate ()
     {
         DT = DeltaTime.DT;
         playerWatch();
         KeyInput();
-        switch (CurrentState)
+        if (openinglock == false)
         {
-            case States.NonCombatCamState:
-                CamMoveState();
-                break;  
-            case States.CombatCamState:
-                CombatMoveCamState();
-                break;
+            switch (CurrentState)
+            {
+                case States.NonCombatCamState:
+                    CamMoveState();
+                    break;
+                case States.CombatCamState:
+                    CombatMoveCamState();
+                    break;
+            }
         }
-
+        else
+        {
+            target = look;
+            CameraLock();
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == true)
         {

@@ -8,7 +8,7 @@ public class FistSlam : MonoBehaviour
     public GameObject Target;
     public GameObject DMGCollider;
     public float ATKSpeed;
-    
+    private GameObject Boss;
     public bool SpawnRocks;
     Animator anim;
     
@@ -20,7 +20,7 @@ public class FistSlam : MonoBehaviour
     private float startDelay;
     
     float DT;
-    int i;
+    
     public float distDIF;
     
     public void RunMechanic()
@@ -28,66 +28,120 @@ public class FistSlam : MonoBehaviour
         SpawnRocks = true;
         anim.SetTrigger("DoubleSlam");
 
-        DMGCollider.transform.position = Target.transform.position;
-        DMGCollider.transform.rotation = Target.transform.rotation;
-        Instantiate(DMGCollider);
-        
+        Instantiate(DMGCollider, Target.transform.position, Target.transform.rotation);
+        SpawnRockz();
+
         startDelay = spawnDelay;
     }
 
     // Use this for initialization
     void Start()
     {
-        i = 1;
+        
         SpawnRocks = false;
-
+        
         anim = GetComponent<Animator>();
         DeltaTime = FindObjectOfType<TimeManager>();
+    }
+
+
+    void SpawnRockz()
+    {
+     
+
+
+        var Baby = Rocks;
+        Baby.transform.position = Target.transform.position + (Target.transform.forward * Dist);
+        Baby.transform.rotation = Target.transform.rotation;
+        SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
+        SpawnPos.y = 20;
+        Instantiate(Baby);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        DT = DeltaTime.DT;
-        if (SpawnRocks == true)
-        {
-            spawnDelay -= DT;
-            if (spawnDelay <= 0 && i <= (counter + 1))
-            {
+        //DT = DeltaTime.DT;
+        //if (SpawnRocks == true)
+        //{
+        //    var Baby = Rocks;
+        //    SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
 
-                var Baby = Rocks;
-                SpawnPos = Target.transform.position + (Target.transform.forward * (Dist * i));
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(SpawnPos, Vector3.down, out hit, 50))
+        //    {
+        //        if (hit.collider.tag == "Floor")
+        //        {
+        //            distDIF = Mathf.Abs(hit.point.y - SpawnPos.y);
 
-                RaycastHit hit;
-                if (Physics.Raycast(SpawnPos, Vector3.down, out hit, 50))
-                {
-                    if (hit.collider.tag == "Floor")
-                    {
-                        distDIF = Mathf.Abs(hit.point.y - SpawnPos.y);
+        //            Vector3 NewPos = new Vector3(SpawnPos.x, hit.point.y, SpawnPos.z);
 
-                        Vector3 NewPos = new Vector3(SpawnPos.x, hit.point.y, SpawnPos.z);
-                        
-                        Baby.transform.position = NewPos;
-                    }
-                }
+        //            Baby.transform.position = NewPos;
+        //        }
+        //    }
+        //    Rocks.transform.rotation = Target.transform.rotation;
 
-
-                Baby.transform.localScale = new Vector3(1 * i, 1 * i, 1 * i);
-               
-
-                Rocks.transform.rotation = Target.transform.rotation;
-               
-                Instantiate(Baby);
-               
-                spawnDelay = startDelay;
-
-                i++;
-            }
-
-            if (i > (counter + 1))
-            { i = 0; SpawnRocks = false; }
+        //    Instantiate(Baby);
+        
+        //    spawnDelay = startDelay;
 
 
-        }
+            //spawnDelay -= DT;
+            //if (spawnDelay <= 0 && i <= (counter + 1))
+            //{
+
+            //    var Baby = Rocks;
+            //    SpawnPos = Target.transform.position + (Target.transform.forward * (Dist * i));
+
+            //    RaycastHit hit;
+            //    if (Physics.Raycast(SpawnPos, Vector3.down, out hit, 50))
+            //    {
+            //        if (hit.collider.tag == "Floor")
+            //        {
+            //            distDIF = Mathf.Abs(hit.point.y - SpawnPos.y);
+
+            //            Vector3 NewPos = new Vector3(SpawnPos.x, hit.point.y, SpawnPos.z);
+
+            //            Baby.transform.position = NewPos;
+            //        }
+            //    }
+
+
+            //    Baby.transform.localScale = new Vector3(1 * i, 1 * i, 1 * i);
+
+
+            //    Rocks.transform.rotation = Target.transform.rotation;
+
+            //    Instantiate(Baby);
+
+            //    spawnDelay = startDelay;
+
+            //    i++;
+            //}
+
+            //if (i > (counter + 1))
+            //{ i = 0; SpawnRocks = false; }
+
+        
+
+
     }
+    public void DoubleSlamLand()
+    {
+        Instantiate(DMGCollider, Target.transform.position, DMGCollider.transform.rotation);
+
+        var Baby = Rocks;
+        SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
+        SpawnPos.y = 20;
+        //Rocks.transform.rotation = Target.transform.rotation;
+
+        Instantiate(Rocks, Target.transform.position + (Target.transform.forward * Dist), Target.transform.rotation);
+
+        spawnDelay = startDelay;
+
+
+    }
+
 }
+

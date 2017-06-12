@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThirdPersonPlayerController : MonoBehaviour {
 
     private Transform Trans;
+    private SuperState Super;
     [System.Serializable]
     public class MoveSettings
     {
@@ -76,8 +77,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         public AudioSource Slashes, FootSteps, Dasher, SuperChargeSource;
         public AudioClip[] SlashSound, Footstep, DashingSound, Teleport, fall;
         public ControllerSupport Controller;
-        public ParticleSystem Slash, SlashDown, Poof, DashAir,LaserParticle, SuperCharged, StepLeft, StepRight, SlashStraight,DashDust,Land;
-
+        public ParticleSystem Slash, SlashDown, Poof, DashAir,LaserParticle , StepLeft, StepRight, SlashStraight,DashDust,Land;
+        public ParticleSystem[] SuperCharged,Poofs,DashParticles;
         public PlayerHealth health;
 
     }
@@ -122,12 +123,14 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         WaitingState,
         DashAttackState,
 
+
     }
 
     public States CurrentState, NonCombatState, CombatState, AttackingState, SuperAttackState;
     float DashCooldown;
     void Start()
     {
+        Super = GetComponent<SuperState>();
         DashCooldown = MV.CooldownDash;
         Shake = FindObjectOfType<CameraShake>();
         Trans = GetComponent<Transform>();
@@ -311,21 +314,26 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             MV.DashAttack = false;
             MV.attacking = false;
             Objects.health.Imune = false;
-            Objects.Poof.Play();
-
-            Objects.Poof.simulationSpace = ParticleSystemSimulationSpace.World;
+            Objects.Poofs[Super.Charge].Play();
+            
             Objects.mesh.SetActive(true);
 
             Objects.hitbox2.SetActive(false);
-            anim.SetTrigger("EndDashAttack");
-
-            Objects.DashDust.Stop();
+            anim.ResetTrigger("Grab");
+            anim.SetTrigger("EndGrab");
+            if (Super.Charge != 0)
+            {
+                Objects.DashParticles[Super.Charge - 1].Stop();
+            }
             Objects.DashAir.Stop();
             anim.SetBool("Dash", false);
         }
         else
         {
-            Objects.DashDust.Stop();
+            if (Super.Charge != 0)
+            {
+                Objects.DashParticles[Super.Charge - 1].Stop();
+            }
             Objects.DashAir.Stop();
             Objects.health.Imune = true;
             MV.Dash = false;
@@ -338,7 +346,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
        
     }
     float AttackdashTime;
-    bool beginSuper;
+    public bool beginSuper;
  
     public void KeyInput()
     {
@@ -392,9 +400,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 Objects.Dasher.PlayOneShot(Objects.Teleport[0]);
                 Objects.Controller.Attack = false;
                 MV.mouseAttack = false;
-                Objects.Poof.Play();
-                Objects.Poof.simulationSpace = ParticleSystemSimulationSpace.World;
-                anim.SetTrigger("DashAttack");
+                Objects.Poofs[Super.Charge].Play();
+                anim.ResetTrigger("EndGrab");
+                anim.SetTrigger("Grab");
                 AttackdashTime = .2f;
                 Energy.Energy -= 10;
                 NonCombatState = States.DashAttackState;
@@ -412,10 +420,10 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
             }
             if ((Objects.Controller.SuperCharge || Input.GetMouseButtonDown(2)) &&
-                NonCombatState != States.SuperState && Energy.SuperEnergy >= Energy.SuperMaxEnergy && NonCombatState != States.DashAttackState)
+                NonCombatState != States.SuperState && Energy.SuperEnergy >= Energy.SuperMaxEnergy && NonCombatState != States.DashAttackState && Super.Charge != 0)
             {
                 Objects.TimerDT.startSlowMotion(Objects.TimerDT.TestProperties);
-                Objects.SuperCharged.Play();
+                Objects.SuperCharged[Super.Charge - 1].Play();
                 NonCombatState = States.SuperState;
                 beginSuper = true;
                 tempPos = Trans.position + new Vector3(0, .5f, 0);
@@ -545,8 +553,13 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
             if (!MV.DashAttack)
             {
-                if(Energy.SuperEnergy >= Energy.SuperMaxEnergy - .01f)
-                Objects.DashDust.Play();
+                if (Energy.SuperEnergy >= Energy.SuperMaxEnergy - .01f)
+                {
+                    if (Super.Charge != 0)
+                    {
+                        Objects.DashParticles[Super.Charge - 1].Play();
+                    }
+                }
             }
 
             
@@ -669,26 +682,26 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     }
     private float LaserTime, SlashTime;
-    bool correct;
-    public void SuperBird()
-    {
-        LaserTime -= DT;
-        if(LaserTime <= 0 )
-        {
-            correct = true;
-        }
-        if(LaserTime <= -1f)
-        {
-            beginSuper = true;
-            MV.BirdSuper = false;
-            correct = false;
-            Objects.Laser.SetActive(false);
-            MV.inSuper = false;
-            SuperAttackState = States.WaitingState;
-            NonCombatState = States.IdleState;
-            anim.SetTrigger("EndSuper");
-        }
-    }
+    public bool correct;
+    //public void SuperBird()
+    //{
+    //    LaserTime -= DT;
+    //    if(LaserTime <= 0 )
+    //    {
+    //        correct = true;
+    //    }
+    //    if(LaserTime <= -1f)
+    //    {
+    //        beginSuper = true;
+          
+    //        correct = false;
+    //        Objects.Laser.SetActive(false);
+    //        MV.inSuper = false;
+    //        SuperAttackState = States.WaitingState;
+    //        NonCombatState = States.IdleState;
+    //        anim.SetTrigger("EndSuper");
+    //    }
+    //}
     public void SuperWeapon()
     {
         SlashTime -= DT;
@@ -700,7 +713,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             Objects.SuperChargeSource.Stop();
             beginSuper = true;
-            Objects.SuperCharged.Stop();
+            Objects.SuperCharged[Super.Charge - 1].Stop();
             correct = false;
             MV.inSuper = false;
             SuperAttackState = States.WaitingState;
@@ -712,22 +725,12 @@ public class ThirdPersonPlayerController : MonoBehaviour {
  
     Vector3 tempPos;
     float smoothCorrect;
+    
+    public bool SuperStateChange,StopSuper;
     public void SuperFunction()
     {
-        
-        if ( beginSuper == true )
-        {
-
-            Objects.Controller.Attack = false;
-            MV.mouseAttack = false;
-            beginSuper = false;
-            SlashTime = 1;
-            anim.ResetTrigger("EndSuper");
-            LaserTime = 3;
-            Energy.SuperEnergy -= Energy.SuperMaxEnergy;
-            anim.SetTrigger("SuperAttack");
-            SuperAttackState = States.SuperAttackWeapon;
-        }
+    
+     
         //if((Controller.SuperLaser || Input.GetMouseButtonDown(1)) && beginSuper == true && Energy.Energy >= Energy.MaxEnergy)
         //{
 
@@ -743,31 +746,13 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         //    SuperAttackState = States.SuperAttackBird;
         //}
 
-        switch (SuperAttackState)
-        {
-            case States.WaitingState:
-                Wait();
-                break;
-            case States.SuperAttackWeapon:
-                SuperWeapon();
-                break;
-            case States.SuperAttackBird:
-                SuperBird();
-                break;
-         
-
-        }
+     
         Trans.position = Vector3.Lerp(Trans.position, tempPos, DT * 6);
         
         if (cam1.target != null)
         {
 
             Vector3 camRel = Objects.cam.transform.forward;
-
-
-            //camRel.y = 0;
-
-            //transform.forward = Vector3.Slerp(transform.forward, camRel, DT * 6);
 
 
 
@@ -788,7 +773,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 smoothCorrect = 6;
             }
             var lkat = Vector3.Slerp(fwd, direct, DT * smoothCorrect);
-         
+            lkat.y = 0;
             Trans.LookAt(lkat + Trans.position, Vector3.up);
 
 
@@ -810,13 +795,29 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 
                 smoothCorrect = 6;
             }
+            camRel.y = 0;
             Trans.forward = Vector3.Slerp(Trans.forward, camRel, DT * smoothCorrect);
-
+       
 
             rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -MV.HorzSpeed, MV.HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -MV.vertSpeed, MV.vertSpeed));
 
         }
         rb.velocity = new Vector3(0, 0, 0);
+        if (StopSuper == true)
+        {
+            NonCombatState = States.IdleState;
+        }
+        if (beginSuper == true)
+        {
+            anim.ResetTrigger("EndSuper");
+            anim.SetInteger("SuperNumb", 0);
+            StopSuper = false;
+            SuperStateChange = true;
+            beginSuper = false;
+            Energy.SuperEnergy -= Energy.SuperMaxEnergy;
+        }
+      
+
 
     }
 
@@ -1061,7 +1062,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if (buttonPress == false)
         {
             Objects.hitbox.SetActive(false);
-        
+            anim.ResetTrigger("Attack");
             anim.SetTrigger("EndAttack");
             MV.attacking = false;
             AttackingState = States.AttackOne;
@@ -1085,7 +1086,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             if (buttonPress == false && AttackingState == States.AttackTwo)
             {
                 Objects.hitbox.SetActive(false);
-               
+                anim.ResetTrigger("Attack");
                 anim.SetTrigger("EndAttack");
                 MV.attacking = false;
                 AttackingState = States.AttackOne;
@@ -1109,7 +1110,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             {
 
                 Objects.hitbox2.SetActive(false);
-               
+                anim.ResetTrigger("Attack");
                 anim.SetTrigger("EndAttack");
                 MV.attacking = false;
                 buttonPress = false;
@@ -1159,6 +1160,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public void SuperLaser()
     {
         Objects.Laser.SetActive(true);
+        Objects.LaserParticle.GetComponent<ParticleSeek1>().enabled = true;
+        Objects.LaserParticle.Play();
     }
 
 

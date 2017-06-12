@@ -6,73 +6,101 @@ public class Projectile : MonoBehaviour {
 
     public GameObject Bullet;
     public GameObject Gun;
-    public float CoolDown;
-    private float StartCD;
+
+    List<GameObject> ListOFun;
+    public GameObject[] Pylons;
+    public int desiredObject;
     private float ArcDegree;
     public int BulletCount;
     private int StartBulletCount;
     Rigidbody rb;
+    public Animator anim;
     public float bulletSpeed;
     Quaternion rotationCache;
-    public float BulletLifetime;
-    
+    //public float BulletLifetime;
+    public int PooledObjectCount;
+    public bool newobj;
+    public bool enter;
     public void RunMechanic()
     {
-        
+        if(enter)
+        {
+            anim.ResetTrigger("stopShooting");
+            anim.SetTrigger("IsShooting");
+            enter = false;
+        }
             rotationCache = Gun.transform.rotation;
-            
-            for (int i = 0; i < BulletCount; i++)
+        if (newobj)
+        {
+
+            for (int f = 0; f < Pylons.Length; f++)
             {
-                Gun.transform.Rotate(new Vector3(0, ArcDegree, 0));
-                var projectile = (GameObject)Instantiate(Bullet, Gun.transform.position, Gun.transform.rotation);
-                projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward) * bulletSpeed;
 
-                Destroy(projectile, BulletLifetime);
-                //Rigidbody PBR = projectile.GetComponent<Rigidbody>();
-                //projectile.transform.position = transform.position;
-                //Instantiate(projectile);
+                if (Pylons[f].GetComponent<BossPartsHealth>().Alive)
+                {
 
-                //PBR.AddForce(transform.forward * bulletSpeed);
+                    desiredObject = Pylons[f].GetComponent<PylonChargeScript>().chargeNumber -1;
+                    break;
+                }
 
+                if (f == Pylons.Length - 1)
+                {
+                    desiredObject = 0;
+                }
             }
-            Gun.transform.rotation = rotationCache;
-       
+            newobj = false;
+        }
+
+        for (int i = 0; i < BulletCount; i++)
+            {
+            Gun.transform.Rotate(new Vector3(0, ArcDegree, 0));
+                for (int j = 0; j < ListOFun.Count; j++)
+                {
+                  if(!ListOFun[j].activeInHierarchy)
+                    {
+
+
+
+                      ListOFun[j].SetActive(true);
+
+                  
+
+
+
+                      ListOFun[j].GetComponent<BossOrbSetEffect>().change = true;
+                      ListOFun[j].GetComponent<BossOrbSetEffect>().desiredObject = desiredObject;
+                      ListOFun[j].transform.position = Gun.transform.position;
+                      ListOFun[j].transform.rotation = Gun.transform.rotation;
+                      ListOFun[j].GetComponent<Rigidbody>().velocity = (ListOFun[j].transform.forward * bulletSpeed);
+                      break;
+                    }
+                
+                }
+            
+            }
+        Gun.transform.rotation = rotationCache;
+
 
     }
 
 	// Use this for initialization
 	void Start ()
     {
-        
+        Pylons = GameObject.FindGameObjectsWithTag("Pylon");
+        anim = GetComponent<Animator>();
+        ListOFun = new List<GameObject>();
+        for(int i = 0; i < PooledObjectCount; i++)
+        {
+            GameObject baby = (GameObject)Instantiate(Bullet);
+            baby.SetActive(false);
+            
+            ListOFun.Add(baby);
+        }
         rb = Bullet.GetComponent<Rigidbody>();
-        StartCD = CoolDown;
+        
         ArcDegree = 180 / BulletCount;
         StartBulletCount = BulletCount;
 	}
 	
-	// Update is called once per frame
-	//void Update ()
- //   {
- //       CoolDown -= Time.deltaTime;
- //       if(CoolDown <= 0)
- //       {
- //           rotationCache = transform.rotation;
- //           CoolDown = StartCD;
- //           for(int i = 0; i < BulletCount; i++)
- //           {
- //               transform.Rotate(new Vector3(0, ArcDegree , 0));
- //               var projectile = (GameObject)Instantiate(Bullet, transform.position,transform.rotation);
- //               projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward )* bulletSpeed;
-
- //               Destroy(projectile, BulletLifetime);
- //               //Rigidbody PBR = projectile.GetComponent<Rigidbody>();
- //               //projectile.transform.position = transform.position;
- //               //Instantiate(projectile);
-                
- //               //PBR.AddForce(transform.forward * bulletSpeed);
-
- //           }
- //           transform.rotation = rotationCache;
- //       }
-	//}
+	
 }

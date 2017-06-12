@@ -15,4 +15,5 @@ public class SuperLaser : MonoBehaviour {
             IsDamageable.TakeDamage(DamageAmount);
         }
     }
+  
 }

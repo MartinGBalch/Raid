@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class CollisionDMG : MonoBehaviour {
 
+
+    private TimeManager DeltaTime;
+
+    float DT;
     public float Dmg;
     float distDIF;
     public float LerpSpeed;
     Transform MyT;
-    
-
+  
     void OnTriggerEnter(Collider collider)
     {
         if(collider.tag == "Player")
@@ -18,28 +21,39 @@ public class CollisionDMG : MonoBehaviour {
             if (player != null)
             {
                 player.TakeDamage(Dmg);
-                Destroy(gameObject);
+                Destroy();
             }
         }
-        if (collider.tag == "Pylon") { Destroy(gameObject); }
-        if (collider.tag == "Pillar") { Destroy(gameObject); }
+        if (collider.tag == "Pylon") { Destroy(); }
+        if (collider.tag == "Pillar") { Destroy(); }
 
     }
-
-
+    void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
+    void OnEnable()
+    {
+       
+        Invoke("Destroy", 8);
+    }
+ 
     // Use this for initialization
     void Start()
     {
+
+        DeltaTime = FindObjectOfType<TimeManager>();
         MyT = GetComponent<Transform>();
-      
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        DT = DeltaTime.DT;
         
         RaycastHit hit;
-        if (Physics.Raycast(MyT.position, -MyT.up, out hit, 50))
+        if (Physics.Raycast(MyT.position, -MyT.up, out hit, 100))
         {
             if (hit.collider.tag == "Floor")
             {
@@ -50,10 +64,11 @@ public class CollisionDMG : MonoBehaviour {
                 Vector3 POS = new Vector3(MyT.position.x, MyT.position.y - distDIF + (MyT.localScale.y / 2), MyT.position.z);
 
 
-                MyT.position = Vector3.Lerp(MyT.position, POS, Time.deltaTime * LerpSpeed);
+                MyT.position = Vector3.Lerp(MyT.position, POS, DT * LerpSpeed);
             }
            
             
         }
+        
     }
 }
