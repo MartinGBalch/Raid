@@ -23,10 +23,17 @@ public class PylonManager : MonoBehaviour {
         DeltaTime = FindObjectOfType<TimeManager>();
         
         Health = Boss.GetComponent<BossHealth>();
-        DelayTimer = Health.VulnerableTime;
+       // DelayTimer = Health.VulnerableTime;
         DelayStart = DelayTimer;
     }
 	
+    public void Dela()
+    {
+        Matt2 = false;
+        NeedReset = true;
+        PylonCount = 4;
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -35,24 +42,25 @@ public class PylonManager : MonoBehaviour {
         {
             Matt = true;
             if (Health.HealthStage == 2) { Health.VulnerableTime = Mathf.Infinity; }
-            Health.ResistDamage = 0;
-            DelayTimer -= DT;
-            if(DelayTimer <= 0)
-            {
-                Matt2 = false;
-                NeedReset = true;
-                PylonCount = 4;
-                DelayTimer = DelayStart;
-            }
-           
-            
+
+            //DelayTimer -= DT;
+            //if(DelayTimer <= 0)
+            //{
+            //    // Take out Timer and call the Pylon Reset in Health script
+            //    Matt2 = false;
+            //    NeedReset = true;
+            //    PylonCount = 4;
+            //    DelayTimer = DelayStart;
+            //}
+
+
         }
         if (Matt == true && Matt2 == false)
         {
-            if(Health.HealthStage != 2)
-            {
-                Health.RunAnim();
-            }
+            Health.ResistDamage = 0;
+            
+            Health.RunAnim();
+            
            
             Matt2 = true;
             Matt = false;

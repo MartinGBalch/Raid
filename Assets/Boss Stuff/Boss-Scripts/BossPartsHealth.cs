@@ -55,12 +55,12 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         //if (Health > 0) { Debug.DrawLine(transform.position, Boss.transform.position); }
 
      
-        if (Health <= 0)
+        if (Health <= 0 && Alive == true)
         {
             Alive = false;
             PM.NeedReset = false;
+           
             Health = StartHealth;
-
             Beam.Stop();
             if (State.Charge != 0)
             {
@@ -76,7 +76,8 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         if (PM.NeedReset == true)
         {
 
-
+           
+            
 
 
 

@@ -28,7 +28,10 @@ public class BossHealth : MonoBehaviour, IDamageable
     private float DamageToBeDealt = 0;
     bool done = false;
     public bool IsVulner = false;
-    
+    public PylonManager Manager;
+
+    public bool FuckBugs = false;
+    float BugTimer = 3;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -61,7 +64,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     void Start ()
     {
 
-        
+        Manager = FindObjectOfType<PylonManager>();
         anim = GetComponent<Animator>();
         DeltaTime = FindObjectOfType<TimeManager>();
 
@@ -77,10 +80,15 @@ public class BossHealth : MonoBehaviour, IDamageable
         Stage3Health = MaxHealth / 3;
        
     }
-	
+
     public void RunAnim()
     {
-        anim.SetTrigger("GoToVul");
+        //if (HealthStage != 2)
+        //{
+            anim.SetTrigger("GoToVul");
+        //}
+        //else { anim.SetTrigger("Scream"); }
+       
     }
 
 	// Update is called once per frame
@@ -88,9 +96,18 @@ public class BossHealth : MonoBehaviour, IDamageable
     {
         DT = DeltaTime.DT;
 
+        if(FuckBugs == true)
+        {
+            BugTimer -= DT;
+            if(BugTimer <= 0)
+            {
+                FuckBugs = true;
+                BugTimer = 3;
+            }
+        }
        
 
-		if(ResistDamage == 0)
+		if(ResistDamage == 0 && FuckBugs == false)
         {
          
             IsVulner = true;
@@ -110,9 +127,10 @@ public class BossHealth : MonoBehaviour, IDamageable
 
             if(Stage1Health <= 0 && HealthStage == 0)
             {
-
+                FuckBugs = true;
+                Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);
-                BabySpawner.RunMechanic();
+             //   BabySpawner.RunMechanic();
                 BossState.PickBehavior();
                 ResistDamage = StartResistance;
                 VulnerableTime = StartTimer;
@@ -121,9 +139,10 @@ public class BossHealth : MonoBehaviour, IDamageable
             }
             else if (Stage2Health <= 0 && HealthStage == 1)
             {
-
+                FuckBugs = true;
+                Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);
-                BabySpawner.RunMechanic();
+               // BabySpawner.RunMechanic();
                 BossState.PickBehavior();
                 ResistDamage = StartResistance;
                 
@@ -135,11 +154,13 @@ public class BossHealth : MonoBehaviour, IDamageable
                 
                 Destroy(gameObject);
             }
-            else if(VulnerableTime <= 0)
+
+            if(VulnerableTime <= 0)
             {
-                
+                FuckBugs = true;
+                Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);
-                BabySpawner.RunMechanic();
+                //BabySpawner.RunMechanic();
                 BossState.PickBehavior();
                 ResistDamage = StartResistance;
                 VulnerableTime = StartTimer;
