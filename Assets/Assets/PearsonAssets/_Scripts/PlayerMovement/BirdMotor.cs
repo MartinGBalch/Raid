@@ -17,7 +17,7 @@ public class BirdMotor : MonoBehaviour
     private float SetcamSmoothDampTime = 1;
     [SerializeField]
     public Transform Hoveroffset, SuperSet;
-    public AudioSource Chargeer, FireSource;
+    public AudioSource Chargeer, FireSource,SuperSound;
     public AudioClip ChargSound, FireSound;
     private Transform Trans;
     public ControllerSupport Controller;
@@ -305,6 +305,10 @@ public class BirdMotor : MonoBehaviour
     {
         if (Vector3.Distance(Trans.position, SuperSet.position) >= -1f && Vector3.Distance(Trans.position, SuperSet.position) <= 1f)
         {
+            if(SuperSound.isPlaying == false)
+            {
+                SuperSound.Play();
+            }
             Trans.position = Vector3.MoveTowards(Trans.position, SuperSet.position,4);
 
             Trans.rotation = Quaternion.RotateTowards(Trans.rotation, SuperSet.rotation,  4);
@@ -318,6 +322,7 @@ public class BirdMotor : MonoBehaviour
 
         if(PlayerController.MV.BirdSuper == false)
         {
+            SuperSound.Stop();
             CurrentState = States.idleState;
         }
     }

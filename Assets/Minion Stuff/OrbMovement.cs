@@ -28,7 +28,7 @@ public class OrbMovement : MonoBehaviour
     private int StartCount;
     public float HoverSpeed;
     public float OffsetHover;
-    bool up, In;
+    public bool up, In;
     // Use this for initialization
     void Start()
     {
@@ -109,6 +109,41 @@ public class OrbMovement : MonoBehaviour
         return bestTarget;
 
     }
+    public bool Damaged;
+    public void DamageJiggle()
+    {
+
+        if (Damaged)
+        {
+            if (In)
+            {
+                transform.localScale -= new Vector3(DT * 8, DT * 2, DT * 8);
+            }
+            else
+            {
+
+                transform.localScale += new Vector3(DT * 8, DT * 2, DT * 8);
+            }
+
+            if (transform.localScale.x > 1)
+            {
+                Damaged = false;
+            }
+            else if (transform.localScale.x <= .6f)
+            {
+                In = false;
+            }
+            transform.localScale = new Vector3(Mathf.Clamp(transform.localScale.x, .4f, 1.1f), Mathf.Clamp(transform.localScale.y, .4f, 1.1f), Mathf.Clamp(transform.localScale.z, .4f, 1.1f));
+        }
+        else
+        {
+
+            transform.localScale += new Vector3(DT * 5, DT * 5, DT * 5);
+            transform.localScale = new Vector3(Mathf.Clamp(transform.localScale.x, .4f, 1f), Mathf.Clamp(transform.localScale.y, .4f, 1f), Mathf.Clamp(transform.localScale.z, .4f, 1));
+        }
+
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -118,7 +153,7 @@ public class OrbMovement : MonoBehaviour
         if (Player != null)
         {
             Hover();
-
+            DamageJiggle();
 
             if (Vector3.Distance(transform.position, Player.transform.position) < 20)
             {

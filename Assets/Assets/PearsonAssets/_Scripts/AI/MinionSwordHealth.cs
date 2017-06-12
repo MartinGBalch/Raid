@@ -31,7 +31,7 @@ public class MinionSwordHealth : MonoBehaviour, IDamageable {
             Shake.StartShake(Shake.AttackProperties);
             Health -= (damageDealt);
             minion.MP.Damaged = true;
-            minion.In = true; ;
+            minion.In = true; 
             if (Health <= 0)
             {
             Instantiate(blood, transform.position,transform.rotation);

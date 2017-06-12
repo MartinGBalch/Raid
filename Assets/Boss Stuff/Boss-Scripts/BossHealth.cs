@@ -119,7 +119,8 @@ public class BossHealth : MonoBehaviour, IDamageable
             }
             else if (Stage3Health <= 0 && HealthStage == 2)
             {
-                Destroy(gameObject);
+
+                anim.SetTrigger("ShiNe");
             }
             else if(VulnerableTime <= 0)
             {

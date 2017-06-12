@@ -8,7 +8,7 @@ public class BoulderFall : MonoBehaviour {
     public bool Kinetic = true;
     private CameraShake Shake;
     public ParticleSystem land;
-
+    public AudioClip[] landsounds;
     void Destroy()
     {
         gameObject.SetActive(false);
@@ -21,7 +21,8 @@ public class BoulderFall : MonoBehaviour {
         {
             Kinetic = false;
             Shake.StartShake(Shake.BoulderFallProperties);
-            Instantiate(land, transform.position, land.transform.rotation);
+            ParticleSystem landing = Instantiate(land, transform.position, land.transform.rotation);
+            landing.GetComponent<AudioSource>().PlayOneShot(landsounds[Random.Range(0, landsounds.Length)]);
             Invoke("Destroythis", .5f);
             //CHANGED "DESTROY" to "Destroythis" TO FIX AN ERROR YOU HAD
 

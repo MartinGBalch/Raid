@@ -10,7 +10,7 @@ public class TimeManager : MonoBehaviour
     private float MinClamp;
     private float MaxClamp;
     private float speed = 1;
-
+    public AudioSource SlowMowSound;
     IEnumerator CurrentSlowMotionCoroutine, CurrentStopTimeCoroutine;
 
     // Use this for initialization
@@ -56,7 +56,7 @@ public class TimeManager : MonoBehaviour
     public IEnumerator SlowMotion(TimeProperties properties)
     {
         Time.timeScale = properties.StartTime;
-
+        SlowMowSound.Play();
         speed = properties.speed;
         MinClamp = properties.MinClamp;
         MaxClamp = properties.MaxClamp;

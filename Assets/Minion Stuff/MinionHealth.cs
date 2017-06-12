@@ -7,7 +7,9 @@ public class MinionHealth : MonoBehaviour, IDamageable {
 
     public float Health;
     private float ResistDamage = 0;
-    
+    public OrbMovement minion;
+    public ParticleSystem Damage;
+    public GameObject blood;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -17,10 +19,17 @@ public class MinionHealth : MonoBehaviour, IDamageable {
        
         Health -= EstimatedDamageTaken(damageDealt);
 
+        minion.Damaged = true;
+        minion.In = true;
+        if (Health <= 0)
+        {
+            Instantiate(blood, transform.position, transform.rotation);
+
+        }
+        Damage.Play();
     }
     void Start ()
     {
-		
 	}
 	
 	// Update is called once per frame

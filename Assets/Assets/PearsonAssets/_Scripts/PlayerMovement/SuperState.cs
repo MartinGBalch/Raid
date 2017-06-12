@@ -28,7 +28,9 @@ public class SuperState : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ice = FindObjectOfType<IceSpawn>();
+        SlashTime = -6;
+        CurrentSuperState = States.WaitingState;
+           ice = FindObjectOfType<IceSpawn>();
         DeltaTime = FindObjectOfType<TimeManager>();
         Player = FindObjectOfType<ThirdPersonPlayerController>();
     }
@@ -38,8 +40,7 @@ public class SuperState : MonoBehaviour
     }
     public void DoDarkness()
     {
-
-        SlashTime -= DT;
+        
         if (SlashTime <= 0)
         {
             Player.correct = true;
@@ -61,9 +62,7 @@ public class SuperState : MonoBehaviour
     public void DoElectricity()
     {
 
-
-
-        SlashTime -= DT;
+        
         if (SlashTime <= 0)
         {
             Player.correct = true;
@@ -85,8 +84,6 @@ public class SuperState : MonoBehaviour
     }
     public void DoFire()
     {
-
-        SlashTime -= DT;
         if (SlashTime <= 0)
         {
             Player.correct = true;
@@ -111,8 +108,6 @@ public class SuperState : MonoBehaviour
     }
     public void DoIce()
     {
-
-        SlashTime -= DT;
         if (SlashTime <= 0)
         {
             Player.correct = true;
@@ -136,8 +131,8 @@ public class SuperState : MonoBehaviour
 
     public void watchPlayer()
     {
-
-        if (Player.SuperStateChange == true)
+        SlashTime -= DeltaTime.DT;
+        if (Player.SuperStateChange == true && CurrentSuperState == States.WaitingState && SlashTime < -5f)
         {
             Player.SuperStateChange = false;
             Player.Objects.Controller.Attack = false;
@@ -177,6 +172,7 @@ public class SuperState : MonoBehaviour
                 case 4:
                     CurrentSuperState = States.IceState;
                     SlashTime = WaterTimer;
+                    
                     ice.launch = true;
                     Player.anim.SetInteger("SuperNumb", 4);
                     break;

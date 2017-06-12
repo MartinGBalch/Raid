@@ -22,45 +22,48 @@ public class AttackDamage : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (CanDamage.CanDamage && PlayerController.MV.attacking)
+        if (CanDamage != null && PlayerController != null)
         {
-            if (other.CompareTag("Enemy"))
+            if (CanDamage.CanDamage && PlayerController.MV.attacking)
             {
-                //svar Stunnable = other.GetComponent<MinionMovement>();
-                var IsDamageable = other.GetComponent<IDamageable>();
+                if (other.CompareTag("Enemy"))
+                {
+                    //svar Stunnable = other.GetComponent<MinionMovement>();
+                    var IsDamageable = other.GetComponent<IDamageable>();
 
-                if (IsDamageable != null)
+                    if (IsDamageable != null)
+                    {
+                        GameObject temp = Instantiate(Sound, other.transform.position, other.transform.rotation);
+
+                        Shake.StartShake(Shake.AttackProperties);
+                        IsDamageable.TakeDamage(DamageAmount);
+                        Energy.Energy += EnergyRechargeAmt;
+                    }
+                    //if(Stunnable != null)
+                    //{
+                    //    Stunnable.IsStunned = true;
+                    //}s
+                }
+                else if (other.CompareTag("Boss"))
                 {
                     GameObject temp = Instantiate(Sound, other.transform.position, other.transform.rotation);
-                    Timer.startSlowMotion(Timer.StopProperties);
-                    IsDamageable.TakeDamage(DamageAmount);
-                    Energy.Energy += EnergyRechargeAmt;
-                }
-                //if(Stunnable != null)
-                //{
-                //    Stunnable.IsStunned = true;
-                //}s
-            }
-            else if (other.CompareTag("Boss"))
-            {
-                GameObject temp = Instantiate(Sound, other.transform.position, other.transform.rotation);
-                //other.GetComponent<BossHealth>().TakeDamage(DamageAmount);
-                var IsDamageable = other.GetComponent<IDamageable>();
-                if (IsDamageable != null)
-                {
-                    Shake.StartShake(Shake.AttackProperties);
+                    //other.GetComponent<BossHealth>().TakeDamage(DamageAmount);
+                    var IsDamageable = other.GetComponent<IDamageable>();
+                    if (IsDamageable != null)
+                    {
+                        Shake.StartShake(Shake.AttackProperties);
 
-                    IsDamageable.TakeDamage(DamageAmount);
+                        IsDamageable.TakeDamage(DamageAmount);
+                    }
                 }
-            }
-            else if (other.GetComponent<IDamageable>() != null && !other.CompareTag("Player"))
-            {
-                GameObject temp = Instantiate(Sound, other.transform.position, other.transform.rotation);
-                var IsDamageable = other.GetComponent<IDamageable>();
-                IsDamageable.TakeDamage(DamageAmount);
-                Shake.StartShake(Shake.LightProperties);
+                else if (other.GetComponent<IDamageable>() != null && !other.CompareTag("Player"))
+                {
+                    GameObject temp = Instantiate(Sound, other.transform.position, other.transform.rotation);
+                    var IsDamageable = other.GetComponent<IDamageable>();
+                    IsDamageable.TakeDamage(DamageAmount);
+                    Shake.StartShake(Shake.LightProperties);
+                }
             }
         }
     }
-
 }

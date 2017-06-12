@@ -48,7 +48,7 @@ public class FistCollision : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Shake.StartShake(Shake.BoulderFallProperties);
+        Shake.StartShake(Shake.SlamProperties);
 
         IsDamage = true;
         if (!poof.isPlaying)
