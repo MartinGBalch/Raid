@@ -49,6 +49,7 @@ public class FistCollision : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
         DT = DeltaTime.DT;
         Shake.StartShake(Shake.BoulderFallProperties);
         ActualTimer -= DT;
@@ -60,6 +61,9 @@ public class FistCollision : MonoBehaviour {
         }
         
 
+=======
+        Shake.StartShake(Shake.SlamProperties);
+>>>>>>> Pearson
 
         if (!poof.isPlaying)
         {

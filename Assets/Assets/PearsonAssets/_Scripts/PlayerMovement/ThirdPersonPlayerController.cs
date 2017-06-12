@@ -42,6 +42,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         public float jumpVel;
         public int jumpCount;
+        public int AirDashCount;
         public float fallMultiplier = 2.5f;
         public float lowJumpMultiplier = 2f;
 
@@ -55,7 +56,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         public bool attacking = false;
         public float attackTime;
-
+        public float blinkTime;
 
         public float Charge;
         public int comboNumb = 0;
@@ -391,8 +392,12 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             MV.DashAttack = ((Input.GetKey(KeyCode.LeftControl) || Objects.Controller.Dash > .1f) && (Input.GetMouseButton(0) || Objects.Controller.Attack));
             MV.Sprint = (Input.GetKey(KeyCode.LeftShift) || Objects.Controller.Sprint) && MV.moved;
-            MV.Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Objects.Controller.Dash > .1f) && canDash && MV.moved && !MV.DashAttack && !MV.attacking && DashCooldown <= 0 ;
+            MV.Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Objects.Controller.Dash > .1f) && canDash && MV.moved && !MV.DashAttack && !MV.attacking && DashCooldown <= 0 && MV.AirDashCount > 0;
+            if(MV.Dash && !Grounded())
+            {
 
+                MV.AirDashCount--;
+            }
 
             MV.mouseAttack = Input.GetMouseButtonDown(0);
             if (MV.DashAttack && NonCombatState != States.SuperState && Energy.Energy >= 10 && NonCombatState != States.DashAttackState)
@@ -403,8 +408,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 Objects.Poofs[Super.Charge].Play();
                 anim.ResetTrigger("EndGrab");
                 anim.SetTrigger("Grab");
-                AttackdashTime = .2f;
-                Energy.Energy -= 10;
+                AttackdashTime = MV.blinkTime;
+                Energy.Energy -= 25;
                 NonCombatState = States.DashAttackState;
 
             }
@@ -426,6 +431,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 Objects.SuperCharged[Super.Charge - 1].Play();
                 NonCombatState = States.SuperState;
                 beginSuper = true;
+                StopSuper = false;
                 tempPos = Trans.position + new Vector3(0, .5f, 0);
                 MV.inSuper = true;
                 Objects.SuperChargeSource.Play();
@@ -529,6 +535,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             if (MV.Dash)
             {
                 canDash = false;
+                
             }
         }
         else
@@ -590,6 +597,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if ((MV.Jump) && MV.jumpCount > 0 && jumptime < 0 && !Dashing)
         {
             MV.jumpCount--;
+
             anim.SetBool("Jumping", true);
 
             this.rb.AddForce(Vector3.up * MV.jumpVel);
@@ -713,6 +721,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             Objects.SuperChargeSource.Stop();
             beginSuper = true;
+
             Objects.SuperCharged[Super.Charge - 1].Stop();
             correct = false;
             MV.inSuper = false;
@@ -729,8 +738,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public bool SuperStateChange,StopSuper;
     public void SuperFunction()
     {
-    
-     
+
+        rb.velocity = new Vector3(0, 0, 0);
+
         //if((Controller.SuperLaser || Input.GetMouseButtonDown(1)) && beginSuper == true && Energy.Energy >= Energy.MaxEnergy)
         //{
 
@@ -740,13 +750,13 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         //    BirdSuper = true;
         //    Energy.Energy -= Energy.MaxEnergy;
         //    Controller.SuperLaser = false;
-            
+
         //    beginSuper = false;
 
         //    SuperAttackState = States.SuperAttackBird;
         //}
 
-     
+
         Trans.position = Vector3.Lerp(Trans.position, tempPos, DT * 6);
         
         if (cam1.target != null)
@@ -802,7 +812,6 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -MV.HorzSpeed, MV.HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -MV.vertSpeed, MV.vertSpeed));
 
         }
-        rb.velocity = new Vector3(0, 0, 0);
         if (StopSuper == true)
         {
             NonCombatState = States.IdleState;
@@ -967,6 +976,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             canmove = true;
             MV.jumpCount = 1;
+            MV.AirDashCount = 1;
         }
         else
         {
@@ -980,6 +990,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
             canmove = false;
             MV.jumpCount = 1;
+
+            MV.AirDashCount = 1;
         }
         else
         {

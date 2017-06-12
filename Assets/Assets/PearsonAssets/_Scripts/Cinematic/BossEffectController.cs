@@ -18,6 +18,7 @@ public class BossEffectController : MonoBehaviour {
     public int PylonCount;
     public float lookTime;
     float countdown;
+    public GameObject BossByeBye;
     bool fix = false;
     bool start = true;
 	// Use this for initialization
@@ -36,6 +37,14 @@ public class BossEffectController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         countdown -= DeltaTime.DT;
+        if(shrink == true)
+        {
+            transform.localScale -= new Vector3(DeltaTime.DT * 1.5f, DeltaTime.DT * 1.5f, DeltaTime.DT * 1.5f);
+            if(transform.localScale.y <= .01)
+            {
+                Destroy(gameObject);
+            }
+        }
 		if(opening == true)
         {
             
@@ -103,5 +112,24 @@ public class BossEffectController : MonoBehaviour {
     }
     public void BossStopScream()
     {
+    }
+
+    public void BeginDie()
+    {
+        anim.SetBool("Cinematic", true);
+
+    }
+    public float offset;
+    bool shrink;
+    public void BossDie()
+    {
+        Instantiate(BossByeBye, transform.position + new Vector3(0, offset, 0), BossByeBye.transform.rotation);
+        shrink = true;
+    }
+    public AudioSource BossMouth;
+    public AudioClip[] Screams;
+    public void BossAttackScream()
+    {
+        BossMouth.PlayOneShot(Screams[0]);
     }
 }

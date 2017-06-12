@@ -94,8 +94,7 @@ public class Bossraise : MonoBehaviour {
                 {
                     runOnce = false;
                     Shake.StartShake(Shake.BossRaiseProperties);
-                    Quake.Play();
-                    Boss.SetActive(true);
+                    Quake.Play();;
                     for (int i = 0; i < dust.Length; i++)
                     {
                         if (dust[i] != null)
@@ -105,8 +104,7 @@ public class Bossraise : MonoBehaviour {
                     }
                 }
 
-
-                transform.position -= new Vector3(0, DT * 3, 0);
+                
                 Pylons.transform.position -= new Vector3(0, DT *2, 0);
                 //SpotLight.intensity += DT * 10;
                 SpotLight.spotAngle -= DT * 20;

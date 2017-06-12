@@ -16,12 +16,13 @@ public class PylonManager : MonoBehaviour {
     float DT;
     bool Matt = false;
     bool Matt2 = false;
+    public OverheadLaser laser;
     // Use this for initialization
     void Start ()
     {
         Sound = GetComponent<AudioSource>();
         DeltaTime = FindObjectOfType<TimeManager>();
-        
+        laser = FindObjectOfType<OverheadLaser>();
         Health = Boss.GetComponent<BossHealth>();
        // DelayTimer = Health.VulnerableTime;
         DelayStart = DelayTimer;
@@ -41,6 +42,7 @@ public class PylonManager : MonoBehaviour {
         if (PylonCount <= 0)
         {
             Matt = true;
+<<<<<<< HEAD
             if (Health.HealthStage == 2) { Health.VulnerableTime = Mathf.Infinity; }
 
             //DelayTimer -= DT;
@@ -54,6 +56,20 @@ public class PylonManager : MonoBehaviour {
             //}
 
 
+=======
+           
+            DelayTimer -= DT;
+            if(DelayTimer <= 0)
+            {
+                Matt2 = false;
+                NeedReset = true;
+                PylonCount = 4;
+                DelayTimer = DelayStart;
+                laser.charge = true;
+            }
+           
+            
+>>>>>>> Pearson
         }
         if (Matt == true && Matt2 == false)
         {

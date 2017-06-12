@@ -14,7 +14,10 @@ public class MinionOrbDamage : MonoBehaviour {
         target = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
     }
-
+    private void Awake()
+    {
+        
+    }
     void Update()
     {
         Vector3 dir = ((target.transform.position + new Vector3(0,1,0)) - transform.position).normalized;

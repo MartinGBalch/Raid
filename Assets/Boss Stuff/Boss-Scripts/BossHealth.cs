@@ -151,8 +151,13 @@ public class BossHealth : MonoBehaviour, IDamageable
             }
             else if (Stage3Health <= 0 && HealthStage == 2)
             {
+<<<<<<< HEAD
                 
                 Destroy(gameObject);
+=======
+
+                anim.SetTrigger("ShiNe");
+>>>>>>> Pearson
             }
 
             if(VulnerableTime <= 0)
