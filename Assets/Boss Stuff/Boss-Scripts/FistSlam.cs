@@ -25,13 +25,13 @@ public class FistSlam : MonoBehaviour
     
     public void RunMechanic()
     {
-        SpawnRocks = true;
+       
         anim.SetTrigger("DoubleSlam");
 
-        Instantiate(DMGCollider, Target.transform.position, Target.transform.rotation);
-        SpawnRockz();
+        //Instantiate(DMGCollider, Target.transform.position, Target.transform.rotation);
+        //SpawnRockz();
 
-        startDelay = spawnDelay;
+        //startDelay = spawnDelay;
     }
 
     // Use this for initialization
@@ -131,13 +131,13 @@ public class FistSlam : MonoBehaviour
     {
         Instantiate(DMGCollider, Target.transform.position, DMGCollider.transform.rotation);
 
-        var Baby = Rocks;
-        SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
-        SpawnPos.y = 20;
-        //Rocks.transform.rotation = Target.transform.rotation;
+        //var Baby = Rocks;
+        //SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
+        //SpawnPos.y = 20;
+        ////Rocks.transform.rotation = Target.transform.rotation;
 
-        Instantiate(Rocks, Target.transform.position + (Target.transform.forward * Dist), Target.transform.rotation);
-
+        //Instantiate(Rocks, Target.transform.position + (Target.transform.forward * Dist), Target.transform.rotation);
+        Invoke("SpawnRockz", .3f);
         spawnDelay = startDelay;
 
 

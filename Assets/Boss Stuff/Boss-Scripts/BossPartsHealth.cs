@@ -25,6 +25,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public GameObject[] SpwnPts,Minions;
 
     public GameObject[] Pylons;
+    
     private Projectile gun;
     public float EstimatedDamageTaken(float damageDealt)
     {
@@ -54,18 +55,23 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-
+        if (placeholder.transform.position.y >= 20)
+        {
+            if (Beam.isPlaying == false && Health > 0 && Alive)
+            {
+                Beam.Play();
+            }
+        }
         //if (Health > 0) { Debug.DrawLine(transform.position, Boss.transform.position); }
 
-     
+
         if (Health <= 0 && Alive == true)
         {
             Alive = false;
             PM.NeedReset = false;
-           
+
             Health = StartHealth;
-<<<<<<< HEAD
-=======
+
             if (bossHealth.HealthStage == 2)
             {
 
@@ -90,8 +96,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
                 faller.die = true;
                 faller.faller = faller.fallTime;
             }
-
->>>>>>> Pearson
+            
             Beam.Stop();
             if (State.Charge != 0)
             {
@@ -106,27 +111,23 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         }
         if (PM.NeedReset == true)
         {
-            if (bossHealth.HealthStage != 2)
-            {
-
-<<<<<<< HEAD
-           
             
 
-=======
->>>>>>> Pearson
+            if (bossHealth.HealthStage != 2)
+            {
 
 
 
 
                 if (Alive == false)
                 {
+                  
                     for (int i = 0; i < SpwnPts.Length; i++)
                     {
                         Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
                     }
                 }
-<<<<<<< HEAD
+
                 Alive = true;
             }
 
@@ -134,28 +135,18 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
             gameObject.GetComponent<CapsuleCollider>().enabled = true;
-            
-=======
 
-                Alive = true;
-
-                Mesh.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                gameObject.GetComponent<CapsuleCollider>().enabled = true;
->>>>>>> Pearson
+           
+           
 
 
 
 
-            }
         }
-        if (placeholder.transform.position.y >= 20)
-        {
-            if (Beam.isPlaying == false && Health > 0 && Alive)
-            {
-                Beam.Play();
-            }
         }
 
-    }
+     
+
+    
 }
  

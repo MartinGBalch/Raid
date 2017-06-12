@@ -96,15 +96,15 @@ public class BossHealth : MonoBehaviour, IDamageable
     {
         DT = DeltaTime.DT;
 
-        if(FuckBugs == true)
-        {
-            BugTimer -= DT;
-            if(BugTimer <= 0)
-            {
-                FuckBugs = true;
-                BugTimer = 3;
-            }
-        }
+        //if(FuckBugs == true)
+        //{
+        //    BugTimer -= DT;
+        //    if(BugTimer <= 0)
+        //    {
+        //        FuckBugs = true;
+        //        BugTimer = 3;
+        //    }
+        //}
        
 
 		if(ResistDamage == 0 && FuckBugs == false)
@@ -133,6 +133,7 @@ public class BossHealth : MonoBehaviour, IDamageable
              //   BabySpawner.RunMechanic();
                 BossState.PickBehavior();
                 ResistDamage = StartResistance;
+               
                 VulnerableTime = StartTimer;
                 HealthStage++;
                 
@@ -151,13 +152,13 @@ public class BossHealth : MonoBehaviour, IDamageable
             }
             else if (Stage3Health <= 0 && HealthStage == 2)
             {
-<<<<<<< HEAD
+
                 
-                Destroy(gameObject);
-=======
+               // Destroy(gameObject);
+
 
                 anim.SetTrigger("ShiNe");
->>>>>>> Pearson
+
             }
 
             if(VulnerableTime <= 0)
@@ -167,6 +168,7 @@ public class BossHealth : MonoBehaviour, IDamageable
                 anim.SetBool("IsVul", IsVulner);
                 //BabySpawner.RunMechanic();
                 BossState.PickBehavior();
+               
                 ResistDamage = StartResistance;
                 VulnerableTime = StartTimer;
             }

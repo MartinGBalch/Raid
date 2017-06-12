@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 4c8a3bfecceef3141a5a00a1ccf8839e
-timeCreated: 1494642156
-licenseType: Free
 VideoClipImporter:
   serializedVersion: 2
   useLegacyImporter: 0
@@ -24,20 +22,11 @@ VideoClipImporter:
   importAudio: 0
   sourceAudioChannelCount: 
   sourceAudioSampleRate: 
-  targetSettings:
-    0:
-      enableTranscoding: 1
-      codec: 0
-      resizeFormat: 0
-      aspectRatio: 0
-      customWidth: 270
-      customHeight: 480
-      bitrateMode: 2
-      spatialQuality: 2
+  targetSettings: {}
   output:
     format: 1
     settings:
-      enableTranscoding: 1
+      enableTranscoding: 0
       codec: 0
       resizeFormat: 0
       aspectRatio: 0
@@ -50,13 +39,9 @@ VideoClipImporter:
     encodedStartFrame: 0
     encodedEndFrame: 743
     streamedResource:
-      source: library/metadata/4c/4c8a3bfecceef3141a5a00a1ccf8839e.resource
+      source: 
       offset: 0
-<<<<<<< HEAD
-      size: 1836903
-=======
-      size: 1878646
->>>>>>> Pearson
+      size: 7486447
   userData: 
   assetBundleName: 
   assetBundleVariant: 

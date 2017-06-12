@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 11daf483f2d8baa458f4af089990dc95
-timeCreated: 1497102983
-licenseType: Free
+guid: 32abc0f98b2728c4c8fc59d4ae0e6887
+timeCreated: 1497283161
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -543,25 +543,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-<<<<<<< HEAD
-      events: []
-=======
       events:
-      - time: 0.4838362
-        functionName: DoubleSlamLand
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.0034403664
+      - time: 0
         functionName: BossAttackScream
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
->>>>>>> Pearson
+      - time: 0.46354935
+        functionName: DoubleSlamLand
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

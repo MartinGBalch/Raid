@@ -28,21 +28,39 @@ public class PylonManager : MonoBehaviour {
         DelayStart = DelayTimer;
     }
 	
+ 
+
     public void Dela()
     {
-        Matt2 = false;
+       
         NeedReset = true;
         PylonCount = 4;
+        laser.charge = true;
     }
 
 	// Update is called once per frame
 	void Update ()
     {
         DT = DeltaTime.DT;
+        if (Matt == true)
+        {
+            Health.ResistDamage = 0;
+
+            Health.RunAnim();
+
+
+
+            Matt = false;
+            // Sound.Play();
+        }
+
+      
+
+
         if (PylonCount <= 0)
         {
             Matt = true;
-<<<<<<< HEAD
+
             if (Health.HealthStage == 2) { Health.VulnerableTime = Mathf.Infinity; }
 
             //DelayTimer -= DT;
@@ -56,32 +74,25 @@ public class PylonManager : MonoBehaviour {
             //}
 
 
-=======
-           
-            DelayTimer -= DT;
-            if(DelayTimer <= 0)
-            {
-                Matt2 = false;
-                NeedReset = true;
-                PylonCount = 4;
-                DelayTimer = DelayStart;
-                laser.charge = true;
-            }
-           
-            
->>>>>>> Pearson
+
+            //DelayTimer -= DT;
+            //if (DelayTimer <= 0)
+            //{
+            //    Matt2 = false;
+            //    NeedReset = true;
+            //    PylonCount = 4;
+            //    DelayTimer = DelayStart;
+               
+            //}
+
+
         }
-        if (Matt == true && Matt2 == false)
+        else
         {
-            Health.ResistDamage = 0;
             
-            Health.RunAnim();
-            
-           
-            Matt2 = true;
-            Matt = false;
-           // Sound.Play();
+            Health.ResistDamage = 500;
         }
+       
 
 
 	}

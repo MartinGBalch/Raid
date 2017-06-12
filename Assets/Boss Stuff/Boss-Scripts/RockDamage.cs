@@ -16,18 +16,10 @@ public class RockDamage : MonoBehaviour {
     float DT;
     Transform MyT;
     public float HeightUnderFloor;
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            var player = other.GetComponent<PlayerHealth>();
-            player.TakeDamage(Damage);
-        }
-        if (other.tag == "Pylon") { Destroy(gameObject); }
-        if (other.tag == "Pillar") { Destroy(gameObject); }
-    }
 
 
+
+  
 	// Use this for initialization
 	void Start ()
     {
@@ -63,4 +55,65 @@ public class RockDamage : MonoBehaviour {
         MyT.position = Vector3.Lerp(MyT.position, ForPos, ForSpeed * DT);
 
 	}
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag);
+        if (other.tag == "Player")
+        {
+            var player = other.GetComponent<PlayerHealth>();
+            player.TakeDamage(Damage);
+        }
+        if (other.CompareTag("Pylon"))
+        { Destroy(gameObject); }
+
+        Debug.Log(other.tag);
+        if (other.CompareTag("Pillar"))
+        { Destroy(gameObject); }
+
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+
+        Debug.Log(other.collider.tag);
+        if (other.collider.tag == "Player")
+        {
+            var player = other.collider.GetComponent<PlayerHealth>();
+            player.TakeDamage(Damage);
+        }
+        if (other.collider.tag == "Pylon")
+        { Destroy(gameObject); }
+        if (other.collider.tag == "Pillar")
+        { Destroy(gameObject); }
+    }
+    private void OnCollisionEnter(Collider other)
+    {
+
+        Debug.Log(other.tag);
+        if (other.tag == "Player")
+        {
+            var player = other.GetComponent<PlayerHealth>();
+            player.TakeDamage(Damage);
+        }
+        if (other.tag == "Pylon")
+        { Destroy(gameObject); }
+        if (other.tag == "Pillar")
+        { Destroy(gameObject); }
+    }
+
+
+    private void OnTriggerEnter(Collision other)
+    {
+        Debug.Log(other.collider.tag);
+        if (other.collider.tag == "Player")
+        {
+            var player = other.collider.GetComponent<PlayerHealth>();
+            player.TakeDamage(Damage);
+        }
+        if (other.collider.tag == "Pylon")
+        { Destroy(gameObject); }
+        if (other.collider.tag == "Pillar")
+        { Destroy(gameObject); }
+
+    }
 }

@@ -35,7 +35,7 @@ public class FistCollision : MonoBehaviour {
             var player = collider.GetComponent<PlayerHealth>();
 
 
-            if (IsDamage == true && player != null)
+            if ( player != null)
             {
                 player.TakeDamage(Dmg);
                 IsDamage = false;
@@ -49,28 +49,24 @@ public class FistCollision : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
-        DT = DeltaTime.DT;
-        Shake.StartShake(Shake.BoulderFallProperties);
-        ActualTimer -= DT;
+        //DT = DeltaTime.DT;
+        //ActualTimer -= DT;
 
-        if(ActualTimer <= 0)
-        {
+        //if(ActualTimer <= 0)
+        //{
            
-            IsDamage = true;
-        }
+        //    IsDamage = true;
+        //}
         
-
-=======
+        
         Shake.StartShake(Shake.SlamProperties);
->>>>>>> Pearson
 
         if (!poof.isPlaying)
         {
             poof.Play();
         }
 
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 1);
        
 
         
