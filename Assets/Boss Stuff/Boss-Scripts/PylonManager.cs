@@ -49,6 +49,10 @@ public class PylonManager : MonoBehaviour {
         }
         if (Matt == true && Matt2 == false)
         {
+            if(Health.HealthStage != 2)
+            {
+                Health.RunAnim();
+            }
            
             Matt2 = true;
             Matt = false;

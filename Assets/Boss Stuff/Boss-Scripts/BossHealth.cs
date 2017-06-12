@@ -26,7 +26,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     public ParticleSystem Damage;
     private CameraShake Shake;
     private float DamageToBeDealt = 0;
-    
+    bool done = false;
     public bool IsVulner = false;
     
     public float EstimatedDamageTaken(float damageDealt)
@@ -78,17 +78,27 @@ public class BossHealth : MonoBehaviour, IDamageable
        
     }
 	
+    public void RunAnim()
+    {
+        anim.SetTrigger("GoToVul");
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
         DT = DeltaTime.DT;
 
+       
+
 		if(ResistDamage == 0)
         {
-            
+         
             IsVulner = true;
-            if (IsVulner == true)
+             
+            
+            if (IsVulner == true )
             {
+
                 
                 anim.SetBool("IsVul", IsVulner);
                 IsVulner = false;
@@ -107,6 +117,7 @@ public class BossHealth : MonoBehaviour, IDamageable
                 ResistDamage = StartResistance;
                 VulnerableTime = StartTimer;
                 HealthStage++;
+                
             }
             else if (Stage2Health <= 0 && HealthStage == 1)
             {
@@ -121,11 +132,12 @@ public class BossHealth : MonoBehaviour, IDamageable
             }
             else if (Stage3Health <= 0 && HealthStage == 2)
             {
+                
                 Destroy(gameObject);
             }
             else if(VulnerableTime <= 0)
             {
-
+                
                 anim.SetBool("IsVul", IsVulner);
                 BabySpawner.RunMechanic();
                 BossState.PickBehavior();
