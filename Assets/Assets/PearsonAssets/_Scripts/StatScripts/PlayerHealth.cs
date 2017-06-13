@@ -9,13 +9,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float MaxHealth;
     public Image Circle;
     public bool Imune;
-    
+    private ThirdPersonPlayerController controller;
     public CameraShake Shake;
     public ParticleSystem Damage, Death;
     public AudioSource DamageSound;
     public GameObject Boss;
     public GameObject Camera,Bird;
     public AudioClip[] Dmg;
+    public float imunity,damagemultiply;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -24,8 +25,28 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (!Imune)
         {
+            if(controller.Abilites[3] == false )
+            {
+                Health -= EstimatedDamageTaken(damageDealt);
+            }
+            else
+            {
+                if (controller.Abilites[3])
+                {
+                    if ((damageDealt - imunity) <= 0)
+                    {
+
+                        Health -= EstimatedDamageTaken(5);
+                    }
+                    else
+                    {
+
+                        Health -= EstimatedDamageTaken(damageDealt - imunity);
+                    }
+                }
+            }
             Shake.StartShake(Shake.TakeDamageProperties);
-            Health -= EstimatedDamageTaken(damageDealt);
+           
             Damage.Play();
             DamageSound.PlayOneShot(Dmg[Random.Range(0,3)]);
         }
@@ -33,15 +54,22 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void Start ()
     {
+        controller = GetComponent<ThirdPersonPlayerController>();
         MaxHealth = Health;	
 	}
-	
+    public float damageOverTime;
+    public float burnamount;
+    float timer;
+    bool startDamage;
 	// Update is called once per frame
 	void Update ()
     {
         Health = Mathf.Clamp(Health, 0, MaxHealth);
+       
         if(Health <= 0)
         {
+
+
 
             Instantiate(Death, transform.position, Death.transform.rotation);
             Instantiate(Death, Bird.transform.position, Death.transform.rotation);

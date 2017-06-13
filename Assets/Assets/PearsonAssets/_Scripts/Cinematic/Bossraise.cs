@@ -63,11 +63,11 @@ public class Bossraise : MonoBehaviour {
                 SpotLight.spotAngle += DT * 20;
                 DirectionalLight.intensity += DT * 5;
 
-                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 1, 50);
+                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 1, 70);
 
                 SpotLight.spotAngle = Mathf.Clamp(SpotLight.spotAngle, 2.250593f, 100);
 
-                DirectionalLight.intensity = Mathf.Clamp(DirectionalLight.intensity, 0, 6);
+                DirectionalLight.intensity = Mathf.Clamp(DirectionalLight.intensity, 0, 13);
 
                 transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -13f, 11f), transform.position.z);
                 Pylons.transform.position = new Vector3(Pylons.transform.position.x, Mathf.Clamp(Pylons.transform.position.y, 15, 21f), Pylons.transform.position.z);

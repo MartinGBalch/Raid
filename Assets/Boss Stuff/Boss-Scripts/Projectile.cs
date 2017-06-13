@@ -30,26 +30,7 @@ public class Projectile : MonoBehaviour {
             enter = false;
         }
             rotationCache = Gun.transform.rotation;
-        if (newobj)
-        {
-
-            for (int f = 0; f < Pylons.Length; f++)
-            {
-
-                if (Pylons[f].GetComponent<BossPartsHealth>().Alive)
-                {
-
-                    desiredObject = Pylons[f].GetComponent<PylonChargeScript>().chargeNumber -1;
-                    break;
-                }
-
-                if (f == Pylons.Length - 1)
-                {
-                    desiredObject = 0;
-                }
-            }
-            newobj = false;
-        }
+       
 
         for (int i = 0; i < BulletCount; i++)
             {

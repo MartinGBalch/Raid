@@ -27,7 +27,6 @@ public class SpawnBoulders : MonoBehaviour {
                     for (int g = 0; g < ListOFun.Count; g++)
                     {
                         if (!ListOFun[g].activeInHierarchy)
-
                         {
                             float RandX = Random.Range(-Range, Range);
                             float RandZ = Random.Range(-Range, Range);
@@ -40,6 +39,16 @@ public class SpawnBoulders : MonoBehaviour {
                             //AoE.transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);
                             //Instantiate(AoE);
                         }
+                        else
+                        {
+                            if(g == ListOFun.Count -1)
+                        {
+                            Debug.Log("No Boulders Left");
+                        }
+                        
+                        }
+
+
                     }
 
                 //ListOFun[j].transform.position = new Vector3(transform.position.x + RandX, RandY, transform.position.z + RandZ);

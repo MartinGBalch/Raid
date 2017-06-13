@@ -10,6 +10,7 @@ public class MinionHealth : MonoBehaviour, IDamageable {
     public OrbMovement minion;
     public ParticleSystem Damage;
     public GameObject blood;
+    public GameObject sword;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -24,7 +25,7 @@ public class MinionHealth : MonoBehaviour, IDamageable {
         if (Health <= 0)
         {
             Instantiate(blood, transform.position, transform.rotation);
-
+            Destroy(sword);
         }
         Damage.Play();
     }
