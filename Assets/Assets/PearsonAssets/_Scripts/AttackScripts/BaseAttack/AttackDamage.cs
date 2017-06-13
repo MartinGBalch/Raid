@@ -24,7 +24,7 @@ public class AttackDamage : MonoBehaviour
     {
         if (CanDamage != null && PlayerController != null)
         {
-            if (CanDamage.CanDamage && PlayerController.MV.attacking)
+            if (CanDamage.CanDamage && PlayerController.MV.attacking || CanDamage.CanDamage && PlayerController.MV.DashAttack)
             {
                 if (other.CompareTag("Enemy"))
                 {

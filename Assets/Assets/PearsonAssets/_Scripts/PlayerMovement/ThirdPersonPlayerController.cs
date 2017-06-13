@@ -283,7 +283,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
    
     void DashAttackMovement()
     {
-        AttackdashTime -= DT;
+        AttackdashTime -= nonFixedDT;
         MV.HorzSpeed = 60;
         MV.vertSpeed = 60;
         MV.NonCombatMaxSpeed = 80;
@@ -308,7 +308,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
        
 
 
-        if(AttackdashTime <= 0)
+        if(AttackdashTime < 0)
         {
 
             NonCombatState = States.IdleState;
@@ -319,7 +319,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             
             Objects.mesh.SetActive(true);
 
-            Objects.hitbox2.SetActive(false);
+            Objects.hitbox.SetActive(false);
             anim.ResetTrigger("Grab");
             anim.SetTrigger("EndGrab");
             if (Super.Charge != 0)
@@ -340,7 +340,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             MV.Dash = false;
             canDash = false;
             Dashing = false;
-            Objects.hitbox2.SetActive(true);
+            Objects.hitbox.SetActive(true);
             NonCombatState = States.DashAttackState;
             Objects.mesh.SetActive(false);
         }
@@ -404,6 +404,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             {
                 Objects.Dasher.PlayOneShot(Objects.Teleport[0]);
                 Objects.Controller.Attack = false;
+                MV.attacking = true;
                 MV.mouseAttack = false;
                 Objects.Poofs[Super.Charge].Play();
                 anim.ResetTrigger("EndGrab");
@@ -501,7 +502,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     public void SprintFunction()
     {
-        DashCooldown -= DT;
+        DashCooldown -= nonFixedDT;
         if (MV.Sprint)
         {
             MV.NonCombatMaxSpeed = 60;
@@ -967,8 +968,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             //rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -MV.HorzSpeed, MV.HorzSpeed), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -MV.vertSpeed, MV.vertSpeed));
         }
     }
-    
-    
+
+    float nonFixedDT;
    
     private void OnCollisionEnter(Collision collision)
     {
@@ -1028,6 +1029,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     }
     void Update()
     {
+
+        thirdattackcooldown -= DT;
+        nonFixedDT = Objects.TimerDT.DT;
         if (MV.grabed == false)
         {
             KeyInput();
@@ -1041,11 +1045,14 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     }
     public GameObject sword;
+    public float setattackCoolown;
+    float thirdattackcooldown;
     void FixedUpdate ()
     {
-       
+
         DT = Objects.TimerDT.DT;
-   
+
+
         AnimBlendControl();
         if (MV.grabed == false)
         {
@@ -1070,7 +1077,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
     public void EndAttackOne()
     {
-        
+
         if (buttonPress == false)
         {
             Objects.hitbox.SetActive(false);
@@ -1091,10 +1098,10 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     }
     public void EndAttackTwo()
     {
-        
+
         if (NonCombatState == States.AttackState)
         {
-;
+            ;
             if (buttonPress == false && AttackingState == States.AttackTwo)
             {
                 Objects.hitbox.SetActive(false);
@@ -1132,7 +1139,6 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             }
         }
     }
-   
     public void BeginAttack1()
     {
         Objects.Slash.Play();

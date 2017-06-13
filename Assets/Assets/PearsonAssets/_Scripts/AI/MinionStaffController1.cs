@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinionStaffController : MonoBehaviour {
+public class MinionStaffController1 : MonoBehaviour {
     private float DT;
     private float DamageTimer;
 
@@ -71,11 +71,6 @@ public class MinionStaffController : MonoBehaviour {
         if (BoolValues.Idle == true)
         {
             CurrentsState = States.MoveState;
-        }
-        if (BoolValues.Attacking == true)
-        {
-
-            CurrentsState = States.AttackState;
         }
         if (BoolValues.Die == true)
         {
