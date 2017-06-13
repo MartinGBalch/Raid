@@ -9,21 +9,24 @@ public class BoulderFall : MonoBehaviour {
     private CameraShake Shake;
     public ParticleSystem land;
     public AudioClip[] landsounds;
+    public AudioSource lander;
     void Destroy()
     {
         gameObject.SetActive(false);
     }
-   
-
+    public Transform hold;
+    Vector3 setpos;
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "Floor")
         {
+            setpos = land.transform.position;
             Kinetic = false;
-            Shake.StartShake(Shake.BoulderFallProperties);
-            ParticleSystem landing = Instantiate(land, transform.position, land.transform.rotation);
-            landing.GetComponent<AudioSource>().PlayOneShot(landsounds[Random.Range(0, landsounds.Length)]);
-            Invoke("Destroythis", .5f);
+            Shake.StartShake(Shake.SlamProperties);
+            land.transform.position = setpos;
+            land.Play();
+            lander.PlayOneShot(landsounds[Random.Range(0, landsounds.Length)]);
+            Invoke("DisableThis", .5f);
             //CHANGED "DESTROY" to "Destroythis" TO FIX AN ERROR YOU HAD
 
         }
@@ -38,8 +41,17 @@ public class BoulderFall : MonoBehaviour {
             }
         }
     }
+    void DisableThis()
+    {
+        GetComponent<SphereCollider>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false;
+        Invoke("Destroythis", 1);
+    }
     void Destroythis()
     {
+        land.transform.position = hold.position;
+        GetComponent<SphereCollider>().enabled = true;
+        GetComponent<MeshRenderer>().enabled = true;
         gameObject.SetActive(false);
     }
     // Update is called once per frame

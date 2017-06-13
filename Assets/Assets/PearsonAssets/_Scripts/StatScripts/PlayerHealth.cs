@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public GameObject Boss;
     public GameObject Camera,Bird;
     public AudioClip[] Dmg;
-    public float imunity;
+    public float imunity,damagemultiply;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -25,23 +25,30 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (!Imune)
         {
-            if(controller.Abilites[3] == false)
+            if(controller.Abilites[3] == false && controller.Debuffs[3] == false)
             {
                 Health -= EstimatedDamageTaken(damageDealt);
             }
             else
             {
-                if((damageDealt - imunity) <= 0)
+                if (controller.Abilites[3])
+                {
+                    if ((damageDealt - imunity) <= 0)
+                    {
+
+                        Health -= EstimatedDamageTaken(5);
+                    }
+                    else
+                    {
+
+                        Health -= EstimatedDamageTaken(damageDealt - imunity);
+                    }
+                }
+                else if(controller.Debuffs[3])
                 {
 
-                    Health -= EstimatedDamageTaken(5);
+                    Health -= EstimatedDamageTaken(damageDealt + damagemultiply);
                 }
-                else
-                {
-
-                    Health -= EstimatedDamageTaken(damageDealt);
-                }
-                Health -= EstimatedDamageTaken(damageDealt);
             }
             Shake.StartShake(Shake.TakeDamageProperties);
            
@@ -55,13 +62,33 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         controller = GetComponent<ThirdPersonPlayerController>();
         MaxHealth = Health;	
 	}
-	
+    public float damageOverTime;
+    public float burnamount;
+    float timer;
+    bool startDamage;
 	// Update is called once per frame
 	void Update ()
     {
         Health = Mathf.Clamp(Health, 0, MaxHealth);
+        if(controller.Debuffs[2])
+        {
+            timer -= Time.deltaTime;
+            if(startDamage == true)
+            {
+                startDamage = false;
+                timer = damageOverTime;
+            }
+            if(timer <= 0)
+            {
+                TakeDamage(burnamount);
+                startDamage = true;
+            }
+            
+        }
         if(Health <= 0)
         {
+
+
 
             Instantiate(Death, transform.position, Death.transform.rotation);
             Instantiate(Death, Bird.transform.position, Death.transform.rotation);

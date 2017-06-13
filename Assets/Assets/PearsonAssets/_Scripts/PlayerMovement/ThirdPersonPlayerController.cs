@@ -391,7 +391,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if (MV.Armed)
         {
             MV.DashAttack = ((Input.GetKey(KeyCode.LeftControl) || Objects.Controller.Dash > .1f) && (Input.GetMouseButton(0) || Objects.Controller.Attack));
-            MV.Sprint = (Input.GetKey(KeyCode.LeftShift) || Objects.Controller.Sprint) && MV.moved;
+            MV.Sprint = (Input.GetKey(KeyCode.LeftShift) || Objects.Controller.Sprint) && MV.moved && Abilites[0] == false;
             MV.Dash = (Input.GetKeyDown(KeyCode.LeftControl) || Objects.Controller.Dash > .1f) && canDash && MV.moved && !MV.DashAttack && !MV.attacking && DashCooldown <= 0 && MV.AirDashCount > 0;
             if(MV.Dash && !Grounded())
             {
@@ -507,12 +507,21 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             if (Abilites[0])
             {
-            //    MV.NonCombatMaxSpeed = 90;
+                MV.NonCombatMaxSpeed = 90;
 
-            //    anim.SetBool("jogging", false);
-            //    anim.speed = 3f;
-            //    MV.vertSpeed = 12;
-            //    MV.HorzSpeed = 12;
+                anim.SetBool("jogging", false);
+                anim.speed = 3f;
+                MV.vertSpeed = 12;
+                MV.HorzSpeed = 12;
+            }
+            else if (Debuffs[0])
+            {
+
+                anim.speed = .5f;
+                MV.NonCombatMaxSpeed = 40;
+                MV.HorzSpeed = 3;
+                MV.vertSpeed = 3;
+                anim.SetBool("jogging", false);
             }
             else
             {
@@ -525,12 +534,22 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             }
         }
         if (!MV.Sprint && !Dashing && !MV.attacking)
-        {   if(Abilites[0])
+        {   if (Abilites[0])
             {
                 anim.speed = 2.5f;
                 MV.NonCombatMaxSpeed = 90;
                 MV.HorzSpeed = 9;
                 MV.vertSpeed = 9;
+                anim.SetBool("jogging", false);
+            }
+
+            else if (Debuffs[0])
+            {
+
+                anim.speed = .5f;
+                MV.NonCombatMaxSpeed = 40;
+                MV.HorzSpeed = 2;
+                MV.vertSpeed = 2;
                 anim.SetBool("jogging", false);
             }
             else
@@ -607,6 +626,17 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 MV.vertSpeed = 45;
                 MV.HorzSpeed = 45;
             }
+            else if(Debuffs[0])
+            {
+                
+
+                    MV.NonCombatMaxSpeed = 40;
+
+
+                    MV.vertSpeed = 20;
+                    MV.HorzSpeed = 20;
+                
+            }
             else
             {
 
@@ -625,7 +655,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
 
     }
-    public float EnhanceJump, changespeed;
+    public float EnhanceJump, changespeed,debufJump;
     public void JumpFunction()
     {
         MV.fall = Grounded();
@@ -661,6 +691,39 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
                 rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - 1) * DT;
             }
+        }
+        else if(Debuffs[1])
+        {
+            
+                if ((MV.Jump) && MV.jumpCount > 0 && jumptime < 0 && !Dashing)
+                {
+                    MV.jumpCount--;
+
+                    anim.SetBool("Jumping", true);
+
+                    this.rb.AddForce(Vector3.up * (MV.jumpVel ));
+
+
+
+                    jumptime = 1f;
+                    canmove = true;
+
+                }
+
+                if (rb.velocity.y < 0 && !Grounded() && !Dashing && !(MV.Jump))
+                {
+                    rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - (1 + debufJump)) * DT;
+                }
+                else if (rb.velocity.y > 0 && !Dashing && !(MV.Jump))
+                {
+                    rb.velocity += Vector3.up * Physics.gravity.y * (MV.lowJumpMultiplier - (1 + debufJump)) * DT;
+                }
+                else if (Grounded() == false && !Dashing && !(MV.Jump))
+                {
+
+                    rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - (1 + debufJump)) * DT;
+                }
+            
         }
         else
         {
@@ -784,7 +847,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
  
     Vector3 tempPos;
     float smoothCorrect;
-    public bool[] Abilites;
+    public bool[] Abilites, Debuffs;
 
     public bool SuperStateChange,StopSuper;
     public void SuperFunction()

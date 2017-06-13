@@ -23,6 +23,7 @@ public class BirdMotor : MonoBehaviour
     public ControllerSupport Controller;
     private TimeManager DeltaTime;
     public float attackSpeedDive, AttackSpeed;
+    public Animator anim;
     enum States
     {
         idleState,
@@ -89,6 +90,7 @@ public class BirdMotor : MonoBehaviour
         Hit = false;
         if (Vector3.Distance(Trans.position, Player.transform.position) <= 5)
         {
+            anim.SetTrigger("Idle");
             canAttack = true;
         }
 
@@ -224,6 +226,9 @@ public class BirdMotor : MonoBehaviour
             }
             else
             {
+                anim.ResetTrigger("Attack");
+
+                anim.ResetTrigger("Idle");
                 hitOnce = true;
                 Vector3 oldPos = Trans.position;
                 Trans.position = Vector3.MoveTowards(Trans.position, (TempTarget.transform.position + killOffset), DT * AttackSpeed);
@@ -278,6 +283,9 @@ public class BirdMotor : MonoBehaviour
             {
                 if (CamController.target != null && PlayerController.MV.BirdSuper == false)
                 {
+                    
+                    anim.ResetTrigger("Idle");
+                    anim.SetTrigger("Attack");
                     TempTarget = CamController.target.gameObject;
                     SetcamSmoothDampTime = BirdSmoothDampAttack;
                     tempDistance = Vector3.Distance(Trans.position, TempTarget.transform.position);

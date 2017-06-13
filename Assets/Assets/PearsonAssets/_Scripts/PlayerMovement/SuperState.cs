@@ -131,10 +131,14 @@ public class SuperState : MonoBehaviour
     public float abilitytime;
     public float timer;
     public int abilityCharge;
+    public float DebuffTimer;
+    public float timer2;
+    public int debuffCharge;
     public void watchPlayer()
     {
         SlashTime -= DeltaTime.DT;
         timer -= DT;
+        timer2 -= DT;
         if (Player.SuperStateChange == true && CurrentSuperState == States.WaitingState && SlashTime < -5f)
         {
             Player.SuperStateChange = false;
@@ -184,7 +188,7 @@ public class SuperState : MonoBehaviour
 
         }
 
-        switch (Charge)
+        switch (abilityCharge)
         {
             case 0:
                 
@@ -203,7 +207,7 @@ public class SuperState : MonoBehaviour
                     {
                         Player.Abilites[i] = false;
                     }
-                    Player.Abilites[1] = true;
+                    Player.Abilites[0] = true;
                 }
                 else
                 {
@@ -219,7 +223,7 @@ public class SuperState : MonoBehaviour
                     {
                         Player.Abilites[i] = false;
                     }
-                    Player.Abilites[2] = true;
+                    Player.Abilites[1] = true;
                 }
                 else
                 {
@@ -235,7 +239,7 @@ public class SuperState : MonoBehaviour
                     {
                         Player.Abilites[i] = false;
                     }
-                    Player.Abilites[3] = true;
+                    Player.Abilites[2] = true;
                 }
                 else
                 {
@@ -251,11 +255,87 @@ public class SuperState : MonoBehaviour
                     {
                         Player.Abilites[i] = false;
                     }
-                    Player.Abilites[4] = true;
+                    Player.Abilites[3] = true;
                 }
                 else
                 {
                     abilityCharge = 0;
+                }
+                break;
+        }
+
+        switch (debuffCharge)
+        {
+            case 0:
+
+                for (int i = 0; i < Player.Debuffs.Length; i++)
+                {
+                    Player.Debuffs[i] = false;
+                }
+
+                break;
+
+            case 1:
+                if (timer2 > 0)
+                {
+
+                    for (int i = 0; i < Player.Debuffs.Length; i++)
+                    {
+                        Player.Debuffs[i] = false;
+                    }
+                    Player.Debuffs[0] = true;
+                }
+                else
+                {
+                    debuffCharge = 0;
+                }
+                break;
+
+            case 2:
+                if (timer2 > 0)
+                {
+
+                    for (int i = 0; i < Player.Debuffs.Length; i++)
+                    {
+                        Player.Debuffs[i] = false;
+                    }
+                    Player.Debuffs[1] = true;
+                }
+                else
+                {
+                    debuffCharge = 0;
+                }
+                break;
+
+            case 3:
+                if (timer2 > 0)
+                {
+
+                    for (int i = 0; i < Player.Debuffs.Length; i++)
+                    {
+                        Player.Debuffs[i] = false;
+                    }
+                    Player.Debuffs[2] = true;
+                }
+                else
+                {
+                    debuffCharge = 0;
+                }
+                break;
+
+            case 4:
+                if (timer2 > 0)
+                {
+
+                    for (int i = 0; i < Player.Debuffs.Length; i++)
+                    {
+                        Player.Debuffs[i] = false;
+                    }
+                    Player.Debuffs[3] = true;
+                }
+                else
+                {
+                    debuffCharge = 0;
                 }
                 break;
         }
