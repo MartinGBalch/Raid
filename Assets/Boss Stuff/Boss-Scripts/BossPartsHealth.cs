@@ -27,6 +27,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public GameObject[] Pylons;
     private MaterialChangeScript changer;
     private Projectile gun;
+    public ParticleSystem die;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -72,7 +73,10 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
             PM.NeedReset = false;
 
             Health = StartHealth;
-
+            if(die.isPlaying == false)
+            {
+                die.Play();
+            }
             if (bossHealth.HealthStage == 2)
             {
 

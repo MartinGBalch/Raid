@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (!Imune)
         {
-            if(controller.Abilites[3] == false && controller.Debuffs[3] == false)
+            if(controller.Abilites[3] == false )
             {
                 Health -= EstimatedDamageTaken(damageDealt);
             }
@@ -43,11 +43,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
                         Health -= EstimatedDamageTaken(damageDealt - imunity);
                     }
-                }
-                else if(controller.Debuffs[3])
-                {
-
-                    Health -= EstimatedDamageTaken(damageDealt + damagemultiply);
                 }
             }
             Shake.StartShake(Shake.TakeDamageProperties);
@@ -70,21 +65,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 	void Update ()
     {
         Health = Mathf.Clamp(Health, 0, MaxHealth);
-        if(controller.Debuffs[2])
-        {
-            timer -= Time.deltaTime;
-            if(startDamage == true)
-            {
-                startDamage = false;
-                timer = damageOverTime;
-            }
-            if(timer <= 0)
-            {
-                TakeDamage(burnamount);
-                startDamage = true;
-            }
-            
-        }
+       
         if(Health <= 0)
         {
 

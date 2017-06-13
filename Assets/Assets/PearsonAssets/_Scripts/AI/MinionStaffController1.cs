@@ -5,7 +5,7 @@ using UnityEngine;
 public class MinionStaffController1 : MonoBehaviour {
     private float DT;
     private float DamageTimer;
-
+    public bool die;
     enum States
     {
         MoveState,
