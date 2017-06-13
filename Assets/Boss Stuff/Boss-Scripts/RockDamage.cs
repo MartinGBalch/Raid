@@ -16,14 +16,14 @@ public class RockDamage : MonoBehaviour {
     float DT;
     Transform MyT;
     public float HeightUnderFloor;
-
+    Rigidbody rb;
     public float GrowAmount;
     float distDIF;
 
     // Use this for initialization
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
         MyT = GetComponent<Transform>();
         DeltaTime = FindObjectOfType<TimeManager>();
         //UpPos = MyT.position + (MyT.up*UpDistance);
@@ -63,9 +63,11 @@ public class RockDamage : MonoBehaviour {
         DT = DeltaTime.DT;
        // MyT.position = Vector3.Lerp(MyT.position, UpPos, UpSpeed * DT);
         MyT.position = Vector3.Lerp(MyT.position, ForPos, ForSpeed * DT);
+        //rb.MovePosition(Vector3.Lerp(MyT.position, ForPos, ForSpeed * DT));
         MyT.localScale += new Vector3(GrowAmount,GrowAmount,GrowAmount);
         MyT.localScale = new Vector3(Mathf.Clamp(MyT.localScale.x, 0, 6), Mathf.Clamp(MyT.localScale.y, 0, 6), Mathf.Clamp(MyT.localScale.z, 0, 6));
-	}
+       
+    }
     private void OnTriggerEnter(Collider other)
     {
         
@@ -74,12 +76,12 @@ public class RockDamage : MonoBehaviour {
             var player = other.GetComponent<PlayerHealth>();
             player.TakeDamage(Damage);
         }
-        //if (other.tag == "Pylon")
-        //{ Destroy(gameObject); }
+        if (other.tag == "Pylon")
+        { Destroy(gameObject); }
 
-       
-        //if (other.tag == "Pillar")
-        //{ Destroy(gameObject); }
+
+        if (other.tag == "Pillar")
+        { Destroy(gameObject); }
 
     }
 

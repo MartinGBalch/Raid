@@ -196,7 +196,7 @@ public class BossStateManagerTwo : MonoBehaviour
             State = Health.HealthStage;
             //if (Health.Health <= 400) { State = 2; }
 
-            if (Health.ResistDamage > 0) { behaviorTimer -= DT; }
+            if (Health.ResistDamage > 0 ) { behaviorTimer -= DT; }
             if (Health.ResistDamage == 0) { Turning.AdjustTimer = 2; }
 
 

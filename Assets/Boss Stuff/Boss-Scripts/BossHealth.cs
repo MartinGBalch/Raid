@@ -113,7 +113,7 @@ public class BossHealth : MonoBehaviour, IDamageable
             IsVulner = true;
              
             
-            if (IsVulner == true )
+            if (IsVulner == true && HealthStage != 2)
             {
 
                 
@@ -143,8 +143,8 @@ public class BossHealth : MonoBehaviour, IDamageable
                 FuckBugs = true;
                 Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);
-               // BabySpawner.RunMechanic();
-                BossState.PickBehavior();
+                // BabySpawner.RunMechanic();
+                BossState.Behaviour = 1;
                 ResistDamage = StartResistance;
                 
                 VulnerableTime = StartTimer;
