@@ -25,7 +25,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
     public GameObject[] SpwnPts,Minions;
 
     public GameObject[] Pylons;
-    
+    private MaterialChangeScript changer;
     private Projectile gun;
     public float EstimatedDamageTaken(float damageDealt)
     {
@@ -39,6 +39,7 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
     void Start ()
     {
+        changer = FindObjectOfType<MaterialChangeScript>();
         faller = FindObjectOfType<PlayformFall>();
         Pylons = GameObject.FindGameObjectsWithTag("Pylon");
         gun = FindObjectOfType<Projectile>();
@@ -104,7 +105,11 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
                 Energy.Charge[Energy.super.Charge - 1].Stop();
             }
             State.Charge = Charge.chargeNumber;
+            State.abilityCharge = Charge.chargeNumber;
+            State.timer = State.abilitytime;
             gun.newobj = true;
+            changer.newobj = true;
+
             Mesh.gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             PM.PylonCount--;

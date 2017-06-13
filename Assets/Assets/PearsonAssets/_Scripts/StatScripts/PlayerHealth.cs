@@ -9,13 +9,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float MaxHealth;
     public Image Circle;
     public bool Imune;
-    
+    private ThirdPersonPlayerController controller;
     public CameraShake Shake;
     public ParticleSystem Damage, Death;
     public AudioSource DamageSound;
     public GameObject Boss;
     public GameObject Camera,Bird;
     public AudioClip[] Dmg;
+    public float imunity;
     public float EstimatedDamageTaken(float damageDealt)
     {
         return damageDealt - ResistDamage;
@@ -24,8 +25,26 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (!Imune)
         {
+            if(controller.Abilites[3] == false)
+            {
+                Health -= EstimatedDamageTaken(damageDealt);
+            }
+            else
+            {
+                if((damageDealt - imunity) <= 0)
+                {
+
+                    Health -= EstimatedDamageTaken(5);
+                }
+                else
+                {
+
+                    Health -= EstimatedDamageTaken(damageDealt);
+                }
+                Health -= EstimatedDamageTaken(damageDealt);
+            }
             Shake.StartShake(Shake.TakeDamageProperties);
-            Health -= EstimatedDamageTaken(damageDealt);
+           
             Damage.Play();
             DamageSound.PlayOneShot(Dmg[Random.Range(0,3)]);
         }
@@ -33,6 +52,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void Start ()
     {
+        controller = GetComponent<ThirdPersonPlayerController>();
         MaxHealth = Health;	
 	}
 	

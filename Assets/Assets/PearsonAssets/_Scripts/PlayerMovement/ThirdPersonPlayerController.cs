@@ -505,19 +505,42 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         DashCooldown -= nonFixedDT;
         if (MV.Sprint)
         {
-            MV.NonCombatMaxSpeed = 60;
+            if (Abilites[0])
+            {
+            //    MV.NonCombatMaxSpeed = 90;
 
-            anim.SetBool("jogging", true);
-
-            MV.vertSpeed = 7;
-            MV.HorzSpeed = 7;
+            //    anim.SetBool("jogging", false);
+            //    anim.speed = 3f;
+            //    MV.vertSpeed = 12;
+            //    MV.HorzSpeed = 12;
+            }
+            else
+            {
+                MV.NonCombatMaxSpeed = 60;
+                anim.speed = 1;
+                anim.SetBool("jogging", true);
+                
+                MV.vertSpeed = 7;
+                MV.HorzSpeed = 7;
+            }
         }
         if (!MV.Sprint && !Dashing && !MV.attacking)
-        {
-            MV.NonCombatMaxSpeed = 50;
-            MV.HorzSpeed = 4;
-            MV.vertSpeed = 4;
-            anim.SetBool("jogging", false);
+        {   if(Abilites[0])
+            {
+                anim.speed = 2.5f;
+                MV.NonCombatMaxSpeed = 90;
+                MV.HorzSpeed = 9;
+                MV.vertSpeed = 9;
+                anim.SetBool("jogging", false);
+            }
+            else
+            {
+                anim.speed = 1;
+                MV.NonCombatMaxSpeed = 50;
+                MV.HorzSpeed = 4;
+                MV.vertSpeed = 4;
+                anim.SetBool("jogging", false);
+            }
         }
 
         if (!Dashing)
@@ -575,11 +598,24 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
         if (MV.dashTime >= 0 && Dashing)
         {
-            MV.NonCombatMaxSpeed = 60;
+            if(Abilites[0])
+            {
+
+                MV.NonCombatMaxSpeed = 80;
 
 
-            MV.vertSpeed = 35;
-            MV.HorzSpeed = 35;
+                MV.vertSpeed = 45;
+                MV.HorzSpeed = 45;
+            }
+            else
+            {
+
+                MV.NonCombatMaxSpeed = 60;
+
+
+                MV.vertSpeed = 35;
+                MV.HorzSpeed = 35;
+            }
         }
         else if (MV.dashTime < 0)
         {
@@ -589,41 +625,74 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
 
     }
-  
+    public float EnhanceJump, changespeed;
     public void JumpFunction()
     {
         MV.fall = Grounded();
         jumptime -= DT;
-
-        if ((MV.Jump) && MV.jumpCount > 0 && jumptime < 0 && !Dashing)
-        {
-            MV.jumpCount--;
-
-            anim.SetBool("Jumping", true);
-
-            this.rb.AddForce(Vector3.up * MV.jumpVel);
-
-
-
-            jumptime = 1f;
-            canmove = true;
-
-        }
-
-        if (rb.velocity.y < 0 && !Grounded() && !Dashing && !(MV.Jump))
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - 1) * DT;
-        }
-        else if (rb.velocity.y > 0 && !Dashing && !(MV.Jump))
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (MV.lowJumpMultiplier - 1) * DT;
-        }
-        else if (Grounded() == false && !Dashing && !(MV.Jump))
+        if (Abilites[1])
         {
 
-            rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - 1) * DT;
-        }
+            if ((MV.Jump) && MV.jumpCount > 0 && jumptime < 0 && !Dashing)
+            {
+                MV.jumpCount--;
 
+                anim.SetBool("Jumping", true);
+
+                this.rb.AddForce(Vector3.up * (MV.jumpVel + EnhanceJump));
+
+
+
+                jumptime = 1f;
+                canmove = true;
+
+            }
+
+            if (rb.velocity.y < 0 && !Grounded() && !Dashing && !(MV.Jump))
+            {
+                rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - 1) * DT;
+            }
+            else if (rb.velocity.y > 0 && !Dashing && !(MV.Jump))
+            {
+                rb.velocity += Vector3.up * Physics.gravity.y * (MV.lowJumpMultiplier - 1) * DT;
+            }
+            else if (Grounded() == false && !Dashing && !(MV.Jump))
+            {
+
+                rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - 1) * DT;
+            }
+        }
+        else
+        {
+            if ((MV.Jump) && MV.jumpCount > 0 && jumptime < 0 && !Dashing)
+            {
+                MV.jumpCount--;
+
+                anim.SetBool("Jumping", true);
+
+                this.rb.AddForce(Vector3.up * MV.jumpVel);
+
+
+
+                jumptime = 1f;
+                canmove = true;
+
+            }
+
+            if (rb.velocity.y < 0 && !Grounded() && !Dashing && !(MV.Jump))
+            {
+                rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - 1) * DT;
+            }
+            else if (rb.velocity.y > 0 && !Dashing && !(MV.Jump))
+            {
+                rb.velocity += Vector3.up * Physics.gravity.y * (MV.lowJumpMultiplier - 1) * DT;
+            }
+            else if (Grounded() == false && !Dashing && !(MV.Jump))
+            {
+
+                rb.velocity += Vector3.up * Physics.gravity.y * (MV.fallMultiplier - 1) * DT;
+            }
+        }
         if (Grounded())
         {
 
@@ -711,31 +780,12 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     //        anim.SetTrigger("EndSuper");
     //    }
     //}
-    public void SuperWeapon()
-    {
-        SlashTime -= DT;
-        if (SlashTime <= 0)
-        {
-            correct = true;
-        }
-        if (SlashTime <= -.1f)
-        {
-            Objects.SuperChargeSource.Stop();
-            beginSuper = true;
-
-            Objects.SuperCharged[Super.Charge - 1].Stop();
-            correct = false;
-            MV.inSuper = false;
-            SuperAttackState = States.WaitingState;
-            NonCombatState = States.IdleState;
-            anim.SetTrigger("EndSuper");
-            anim.ResetTrigger("SuperAttack");
-        }
-    }
+  
  
     Vector3 tempPos;
     float smoothCorrect;
-    
+    public bool[] Abilites;
+
     public bool SuperStateChange,StopSuper;
     public void SuperFunction()
     {
@@ -970,7 +1020,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     }
 
     float nonFixedDT;
-   
+    public float enhanceDamage;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
@@ -1030,6 +1080,15 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     void Update()
     {
 
+        if(Abilites[2])
+        {
+            Objects.hitbox.GetComponent<AttackDamage>().DamageAmount = enhanceDamage;
+            Objects.hitbox2.GetComponent<AttackDamage>().DamageAmount = enhanceDamage + 5;
+
+            Objects.hitbox.GetComponent<AttackDamage>().ability = true;
+            Objects.hitbox2.GetComponent<AttackDamage>().ability = true;
+        }
+        
         thirdattackcooldown -= DT;
         nonFixedDT = Objects.TimerDT.DT;
         if (MV.grabed == false)
@@ -1101,8 +1160,15 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         if (NonCombatState == States.AttackState)
         {
-            ;
-            if (buttonPress == false && AttackingState == States.AttackTwo)
+          
+            if(buttonPress == true && NonCombatState == States.AttackState && thirdattackcooldown <= 0)
+            {
+                thirdattackcooldown = setattackCoolown;
+                Objects.hitbox.SetActive(false);
+                anim.SetTrigger("Combo2");
+                AttackingState = States.AttackThree;
+            }
+            else if(AttackingState == States.AttackTwo)
             {
                 Objects.hitbox.SetActive(false);
                 anim.ResetTrigger("Attack");
@@ -1110,13 +1176,6 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 MV.attacking = false;
                 AttackingState = States.AttackOne;
                 NonCombatState = States.IdleState;
-            }
-            else
-            {
-
-                Objects.hitbox.SetActive(false);
-                anim.SetTrigger("Combo2");
-                AttackingState = States.AttackThree;
             }
         }
         buttonPress = false;

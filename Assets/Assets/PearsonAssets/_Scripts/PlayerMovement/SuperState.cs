@@ -48,7 +48,7 @@ public class SuperState : MonoBehaviour
         if (SlashTime <= -.1f)
         {
             Player.Objects.SuperChargeSource.Stop();
-            Player.beginSuper = true;
+      
             Player.Objects.SuperCharged[Charge - 1].Stop();
             Player.MV.BirdSuper = false;
             Player.correct = false;
@@ -70,7 +70,7 @@ public class SuperState : MonoBehaviour
         if (SlashTime <= -.5f)
         {
             Player.Objects.SuperChargeSource.Stop();
-            Player.beginSuper = true;
+            
             Player.Objects.SuperCharged[Charge - 1].Stop();
             Player.correct = false;
             Player.MV.BirdSuper = false;
@@ -91,7 +91,7 @@ public class SuperState : MonoBehaviour
         if (SlashTime <= -.1f)
         {
             Player.Objects.SuperChargeSource.Stop();
-            Player.beginSuper = true;
+            
             Player.Objects.SuperCharged[Charge - 1].Stop();
 
             Player.MV.BirdSuper = false;
@@ -115,7 +115,7 @@ public class SuperState : MonoBehaviour
         if (SlashTime <= -.1f)
         {
             Player.Objects.SuperChargeSource.Stop();
-            Player.beginSuper = true;
+           
             Player.Objects.SuperCharged[Charge - 1].Stop();
             Player.MV.BirdSuper = false;
             Player.correct = false;
@@ -128,10 +128,13 @@ public class SuperState : MonoBehaviour
         }
     }
 
-
+    public float abilitytime;
+    public float timer;
+    public int abilityCharge;
     public void watchPlayer()
     {
         SlashTime -= DeltaTime.DT;
+        timer -= DT;
         if (Player.SuperStateChange == true && CurrentSuperState == States.WaitingState && SlashTime < -5f)
         {
             Player.SuperStateChange = false;
@@ -180,8 +183,85 @@ public class SuperState : MonoBehaviour
 
 
         }
+
+        switch (Charge)
+        {
+            case 0:
+                
+                    for (int i = 0; i < Player.Abilites.Length; i++)
+                    {
+                        Player.Abilites[i] = false;
+                    }
+               
+                break;
+
+            case 1:
+                if (timer > 0)
+                {
+
+                    for (int i = 0; i < Player.Abilites.Length; i++)
+                    {
+                        Player.Abilites[i] = false;
+                    }
+                    Player.Abilites[1] = true;
+                }
+                else
+                {
+                    abilityCharge = 0;
+                }
+                break;
+
+            case 2:
+                if (timer > 0)
+                {
+
+                    for (int i = 0; i < Player.Abilites.Length; i++)
+                    {
+                        Player.Abilites[i] = false;
+                    }
+                    Player.Abilites[2] = true;
+                }
+                else
+                {
+                    abilityCharge = 0;
+                }
+                break;
+
+            case 3:
+                if (timer > 0)
+                {
+
+                    for (int i = 0; i < Player.Abilites.Length; i++)
+                    {
+                        Player.Abilites[i] = false;
+                    }
+                    Player.Abilites[3] = true;
+                }
+                else
+                {
+                    abilityCharge = 0;
+                }
+                break;
+
+            case 4:
+                if (timer > 0)
+                {
+
+                    for (int i = 0; i < Player.Abilites.Length; i++)
+                    {
+                        Player.Abilites[i] = false;
+                    }
+                    Player.Abilites[4] = true;
+                }
+                else
+                {
+                    abilityCharge = 0;
+                }
+                break;
+        }
     }
     public GameObject BlackHole, placeholder;
+    
     // Update is called once per frame
     void Update()
     {

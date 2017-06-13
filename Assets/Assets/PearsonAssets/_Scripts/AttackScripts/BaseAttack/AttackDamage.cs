@@ -14,11 +14,21 @@ public class AttackDamage : MonoBehaviour
     public float DamageAmount;
     public float EnergyRechargeAmt;
     public Bossraise CanDamage;
+    float setDamageAmount;
+    public bool ability;
     private void Start()
     {
+        setDamageAmount = DamageAmount;
         CanDamage = FindObjectOfType<Bossraise>();
         Shake = FindObjectOfType<CameraShake>();
         Timer = FindObjectOfType<TimeManager>();
+    }
+    public void Update()
+    {
+        if(ability == false)
+        {
+            DamageAmount = setDamageAmount;
+        }
     }
     public void OnTriggerEnter(Collider other)
     {
