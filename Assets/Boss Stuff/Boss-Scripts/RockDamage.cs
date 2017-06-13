@@ -19,30 +19,13 @@ public class RockDamage : MonoBehaviour {
     Rigidbody rb;
     public float GrowAmount;
     float distDIF;
-
+    
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         MyT = GetComponent<Transform>();
-        DeltaTime = FindObjectOfType<TimeManager>();
-        //UpPos = MyT.position + (MyT.up*UpDistance);
-        ForPos = MyT.position + (MyT.forward * ForDistance);
 
-        Destroy(gameObject, TimeToKill);
-
-        //if (Physics.Raycast(MyT.position, Vector3.up, out hit, 50))
-        //{
-        //    if (hit.collider.tag == "Floor")
-        //    {
-        //        float distDIF = Mathf.Abs(hit.point.y - MyT.position.y);
-
-        //        Vector3 NewPos = new Vector3(MyT.position.x, hit.point.y, MyT.position.z);
-        //        UpPos = NewPos;
-        //        NewPos.y -= HeightUnderFloor;
-        //        MyT.position = NewPos;
-        //    }
-        //}
         RaycastHit hit;
         if (Physics.Raycast(MyT.position, -Vector3.up, out hit, 50))
         {
@@ -51,6 +34,15 @@ public class RockDamage : MonoBehaviour {
             Vector3 NewPos = new Vector3(transform.position.x, transform.position.y - distDIF, transform.position.z);
             transform.position = NewPos;
         }
+
+        DeltaTime = FindObjectOfType<TimeManager>();
+        //UpPos = MyT.position + (MyT.up*UpDistance);
+        ForPos = MyT.position + (MyT.forward * ForDistance);
+
+        Destroy(gameObject, TimeToKill);
+
+    
+       
 
         MyT.localScale = new Vector3(.5f, .5f, .5f);
     }

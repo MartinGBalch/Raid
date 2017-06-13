@@ -11,7 +11,7 @@ public class FistSlam : MonoBehaviour
     private GameObject Boss;
     public bool SpawnRocks;
     Animator anim;
-    
+    public float Arc;
     public Vector3 SpawnPos;
     private TimeManager DeltaTime;
     public float Dist;
@@ -47,17 +47,48 @@ public class FistSlam : MonoBehaviour
 
     void SpawnRockz()
     {
-     
+        
+        
+            var Baby = Rocks;
+            //Baby.transform.position = Target.transform.position + (Target.transform.forward * Dist);
+            Baby.transform.rotation = Target.transform.rotation;
 
-
-        var Baby = Rocks;
-        Baby.transform.position = Target.transform.position + (Target.transform.forward * Dist);
-        Baby.transform.rotation = Target.transform.rotation;
-        SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
-        SpawnPos.y = 20;
-        Instantiate(Baby);
-       
+            
+            
+            SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
+            SpawnPos.y = 20;
+            Baby.transform.position = SpawnPos;
+           Instantiate(Baby);
+        
+        
     }
+    void SpawnRockz2()
+    {
+        var Baby = Rocks;
+       // Baby.transform.position = Target.transform.position + (Target.transform.forward * Dist) + (Target.transform.right * (Dist * 2));
+        Baby.transform.rotation = Target.transform.rotation;
+
+        Baby.transform.Rotate(0, Arc, 0);
+
+        SpawnPos = Target.transform.position + (Target.transform.forward * Dist) + (Target.transform.right * (Dist * 2));
+        SpawnPos.y = 20;
+        Baby.transform.position = SpawnPos;
+       Instantiate(Baby);
+    }
+    void SpawnRockz3()
+    {
+        var Baby = Rocks;
+        // Baby.transform.position = Target.transform.position + (Target.transform.forward * Dist) + (Target.transform.right * (Dist * 2));
+        Baby.transform.rotation = Target.transform.rotation;
+
+        Baby.transform.Rotate(0, -Arc, 0);
+
+        SpawnPos = Target.transform.position + (Target.transform.forward * Dist) + (Target.transform.right * (-Dist * 2));
+        SpawnPos.y = 20;
+        Baby.transform.position = SpawnPos;
+        Instantiate(Baby);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -138,6 +169,8 @@ public class FistSlam : MonoBehaviour
 
         //Instantiate(Rocks, Target.transform.position + (Target.transform.forward * Dist), Target.transform.rotation);
         Invoke("SpawnRockz", .3f);
+        Invoke("SpawnRockz2", .3f);
+        Invoke("SpawnRockz3", .3f);
         spawnDelay = startDelay;
 
 

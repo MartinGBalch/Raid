@@ -25,7 +25,7 @@ public class MinionOrbDamage : MonoBehaviour {
 
 
         Vector3 steeringForce = desiredVelocity - rb.velocity;
-        rb.AddForce(steeringForce *= .75f);
+        rb.AddForce(steeringForce *= .85f);
         transform.LookAt(target.transform.position);
     }
 

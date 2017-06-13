@@ -30,7 +30,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     public bool IsVulner = false;
     public PylonManager Manager;
 
-    public bool FuckBugs = false;
+    public bool Bugs = false;
     float BugTimer = 3;
     public float EstimatedDamageTaken(float damageDealt)
     {
@@ -96,18 +96,18 @@ public class BossHealth : MonoBehaviour, IDamageable
     {
         DT = DeltaTime.DT;
 
-        if (FuckBugs == true)
+        if (Bugs == true)
         {
             BugTimer -= DT;
             if (BugTimer <= 0)
             {
-                FuckBugs = false;
+                Bugs = false;
                 BugTimer = 3;
             }
         }
         VulnerableTime -= DT;
 
-        if (ResistDamage == 0 && FuckBugs == false)
+        if (ResistDamage == 0 && Bugs == false)
         {
          
             IsVulner = true;
@@ -127,7 +127,7 @@ public class BossHealth : MonoBehaviour, IDamageable
 
             if(Stage1Health <= 0 && HealthStage == 0)
             {
-                FuckBugs = true;
+                Bugs = true;
                 Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);
              //   BabySpawner.RunMechanic();
@@ -140,7 +140,7 @@ public class BossHealth : MonoBehaviour, IDamageable
             }
             else if (Stage2Health <= 0 && HealthStage == 1)
             {
-                FuckBugs = true;
+                Bugs = true;
                 Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);
                 // BabySpawner.RunMechanic();
@@ -163,7 +163,7 @@ public class BossHealth : MonoBehaviour, IDamageable
 
             if(VulnerableTime <= 0)
             {
-                FuckBugs = true;
+                Bugs = true;
                 Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);
                 //BabySpawner.RunMechanic();
