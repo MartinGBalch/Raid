@@ -8,7 +8,10 @@ public class LoseManger : MonoBehaviour
 {
     public static LoseManger Instance { set; get; }
 
+    bool die;
+
     public Canvas LoseOverlay;
+    public GameObject GameUI;
 
     public Text LoseText;
     public Text restart;
@@ -16,12 +19,14 @@ public class LoseManger : MonoBehaviour
     public Image Overlay;
 
     public ControllerSupport controller;
+    private PlayerHealth hp;
 
     private bool isInTransition;
     private bool isShowing;
 
     private float transition;
     private float duration;
+   
 
     public Color buttonColor;
     public Color titleColor;
@@ -46,18 +51,22 @@ public class LoseManger : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        GameUI.SetActive(true);
         LoseOverlay.enabled = false;
         LoseText.enabled = false;
         restart.enabled = false;
         Menu.enabled = false;
         Overlay.enabled = false;
+        hp = FindObjectOfType<PlayerHealth>();
     }
 	
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+       
+
+        if (hp.Health <= 0 && die == false)
         {
             Fade(true, timer);
             Cursor.visible = true;
@@ -66,7 +75,8 @@ public class LoseManger : MonoBehaviour
             restart.enabled = true;
             Menu.enabled = true;
             Overlay.enabled = true;
-            
+            GameUI.SetActive(false);
+            die = true;
         }
 
             if (!isInTransition)
@@ -96,6 +106,7 @@ public class LoseManger : MonoBehaviour
         restart.enabled = true;
         Menu.enabled = true;
         Overlay.enabled = true;
+        GameUI.SetActive(false);
     }
 
     public void Restart()

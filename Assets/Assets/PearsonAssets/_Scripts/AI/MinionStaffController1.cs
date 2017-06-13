@@ -59,7 +59,7 @@ public class MinionStaffController1 : MonoBehaviour {
     {
         transform.position = Vector3.Lerp(transform.position, Objects.Goal.position, MV.MoveSpeed * DT);
         transform.rotation = Quaternion.Slerp(transform.rotation, Objects.Goal.rotation,DT * MV.RotSpeed);
-        Objects.ROT.Rotate = false;
+       
        
     }
     public void DoDIe()

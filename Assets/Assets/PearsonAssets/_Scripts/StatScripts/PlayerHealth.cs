@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public ParticleSystem Damage, Death;
     public AudioSource DamageSound;
     public GameObject Boss;
+    public BossStateManagerTwo bosser;
     public GameObject Camera,Bird;
     public AudioClip[] Dmg;
     public float imunity,damagemultiply;
@@ -54,6 +55,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void Start ()
     {
+     
         controller = GetComponent<ThirdPersonPlayerController>();
         MaxHealth = Health;	
 	}
@@ -77,7 +79,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             BossShit.Behaviour = 69;
             BossShit.behaviorTimer = 300;
             Boss.GetComponent<BossTurning>().enabled = false;
-           
+            Boss.GetComponent<Animator>().SetTrigger("Win");
+            Boss.GetComponent<Animator>().SetBool("Cinematic", true);
             Camera.GetComponent<ThirdPersonCameraController>().enabled = false;
             Bird.GetComponent<BirdMotor>().enabled = false;
             Destroy(gameObject);
