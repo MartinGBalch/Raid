@@ -14,17 +14,27 @@ public class AttackDamage : MonoBehaviour
     public float DamageAmount;
     public float EnergyRechargeAmt;
     public Bossraise CanDamage;
+    float setDamageAmount;
+    public bool ability;
     private void Start()
     {
+        setDamageAmount = DamageAmount;
         CanDamage = FindObjectOfType<Bossraise>();
         Shake = FindObjectOfType<CameraShake>();
         Timer = FindObjectOfType<TimeManager>();
+    }
+    public void Update()
+    {
+        if(ability == false)
+        {
+            DamageAmount = setDamageAmount;
+        }
     }
     public void OnTriggerEnter(Collider other)
     {
         if (CanDamage != null && PlayerController != null)
         {
-            if (CanDamage.CanDamage && PlayerController.MV.attacking)
+            if (CanDamage.CanDamage && PlayerController.MV.attacking || CanDamage.CanDamage && PlayerController.MV.DashAttack)
             {
                 if (other.CompareTag("Enemy"))
                 {

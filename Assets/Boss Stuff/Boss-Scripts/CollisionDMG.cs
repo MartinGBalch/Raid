@@ -17,9 +17,13 @@ public class CollisionDMG : MonoBehaviour {
     {
         if(collider.tag == "Player")
         {
+            
             var player = collider.GetComponent<PlayerHealth>();
-            if (player != null)
+            var playercontroller = collider.GetComponent<SuperState>();
+            if (player != null && playercontroller != null)
             {
+                playercontroller.debuffCharge = GetComponent<BossOrbSetEffect>().desiredObject + 1;
+                playercontroller.timer2 = playercontroller.DebuffTimer;
                 player.TakeDamage(Dmg);
                 Destroy();
             }

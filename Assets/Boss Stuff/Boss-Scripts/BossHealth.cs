@@ -29,6 +29,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     bool done = false;
     public bool IsVulner = false;
     public PylonManager Manager;
+  
 
     public bool Bugs = false;
     float BugTimer = 3;
