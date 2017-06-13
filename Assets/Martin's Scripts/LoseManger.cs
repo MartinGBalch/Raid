@@ -78,7 +78,7 @@ public class LoseManger : MonoBehaviour
             LoseText.color = Color.Lerp(new Color(0, 0, 0, 0), titleColor, transition);
             restart.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
             Menu.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
-            Overlay.color = Color.Lerp(new Color(0, 0, 0, 0), overlayColor, transition);
+            Overlay.color = Color.Lerp(new Color(1, 1, 1, 1), overlayColor, transition);
     
             if (transition > 1 || transition < 0)
             {

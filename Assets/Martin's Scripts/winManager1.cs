@@ -4,18 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class WinManger : MonoBehaviour
-{
-    public static WinManger Instance { set; get; }
+public class winManager1 : MonoBehaviour {
 
+    public static winManager1 Instance { get; set; }
     public Canvas LoseOverlay;
-    public GameObject Credits; 
+    public GameObject Credits;
 
     public Text WinText;
     public Text credits;
     public Text Menu;
     public Image Overlay;
-   
+
     public ControllerSupport controller;
 
     private bool isInTransition;
@@ -58,7 +57,7 @@ public class WinManger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Numlock))
         {
             Fade(true, timer);
             Cursor.visible = true;
@@ -89,7 +88,7 @@ public class WinManger : MonoBehaviour
     }
 
 
-    public void AmKill()
+    public void Winning()
     {
         Fade(true, timer);
         Cursor.visible = true;
@@ -99,7 +98,7 @@ public class WinManger : MonoBehaviour
         Overlay.enabled = true;
     }
 
-    public void Restart()
+    public void CreditsTime()
     {
         SceneManager.LoadScene(CreditsScene);
     }

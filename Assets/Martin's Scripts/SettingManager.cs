@@ -26,8 +26,8 @@ public class SettingManager : MonoBehaviour
      
    void OnEnable()
    {
-        controller.Xbox = false;
-        controller.PS4 = false;
+        //controller.Xbox = false;
+      //  controller.PS4 = false;
 
         gameSettings = new GameSettings();
 
@@ -54,14 +54,27 @@ public class SettingManager : MonoBehaviour
         gameSettings.fullscreen = Screen.fullScreen = fullscreenToggle.isOn;
     }
 
-    public void OnControllerSelect()
+    public void OnControllerSelect(int selection)
     {
-        controller.Xbox = true;
-        if (controller.Xbox == true)
+       switch (selection)
         {
-            controller.PS4 = true;
-            controller.Xbox = false;
+            case 0:
+                controller.Xbox = false;
+                controller.PS4 = false;
+                break;
+            case 1:
+                controller.Xbox = true;
+                controller.PS4 = false;
+                break;
+            case 2:
+                controller.Xbox = false;
+                controller.PS4 = true;
+                break;
+            default:
+                break;
         }
+
+        //Debug.Log(selection);
     } 
 
     public void OnResolutionChange()
