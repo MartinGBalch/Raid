@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LoseManger : MonoBehaviour
-{
-    public static LoseManger Instance { set; get; }
+public class winManager1 : MonoBehaviour {
 
+    public static winManager1 Instance { get; set; }
     public Canvas LoseOverlay;
+    public GameObject Credits;
 
-    public Text LoseText;
-    public Text restart;
+    public Text WinText;
+    public Text credits;
     public Text Menu;
     public Image Overlay;
 
@@ -28,8 +28,8 @@ public class LoseManger : MonoBehaviour
     public Color overlayColor;
 
     public float timer;
-    public string RestartScene;
     public string MenuScene;
+    public string CreditsScene;
 
     private void Awake() { Instance = this; }
 
@@ -44,63 +44,63 @@ public class LoseManger : MonoBehaviour
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         LoseOverlay.enabled = false;
-        LoseText.enabled = false;
-        restart.enabled = false;
+        WinText.enabled = false;
+        credits.enabled = false;
         Menu.enabled = false;
         Overlay.enabled = false;
     }
-	
-	
-	// Update is called once per frame
-	void Update ()
+
+
+    // Update is called once per frame
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Numlock))
         {
             Fade(true, timer);
             Cursor.visible = true;
             LoseOverlay.enabled = true;
-            LoseText.enabled = true;
-            restart.enabled = true;
+            WinText.enabled = true;
+            credits.enabled = true;
             Menu.enabled = true;
             Overlay.enabled = true;
-            
+
         }
 
-            if (!isInTransition)
-                return;
+        if (!isInTransition)
+            return;
 
-            transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
+        transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
 
-            //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
-            LoseText.color = Color.Lerp(new Color(0, 0, 0, 0), titleColor, transition);
-            restart.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
-            Menu.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
-            Overlay.color = Color.Lerp(new Color(1, 1, 1, 1), overlayColor, transition);
-    
-            if (transition > 1 || transition < 0)
-            {
-                isInTransition = false;
-            }
-        
+        //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
+        WinText.color = Color.Lerp(new Color(0, 0, 0, 0), titleColor, transition);
+        credits.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+        Menu.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+        Overlay.color = Color.Lerp(new Color(1, 1, 1, 1), overlayColor, transition);
+
+        if (transition > 1 || transition < 0)
+        {
+            isInTransition = false;
+        }
+
     }
-	
 
-    public void AmKill()
+
+    public void Winning()
     {
         Fade(true, timer);
         Cursor.visible = true;
-        LoseText.enabled = true;
-        restart.enabled = true;
+        WinText.enabled = true;
+        credits.enabled = true;
         Menu.enabled = true;
         Overlay.enabled = true;
     }
 
-    public void Restart()
+    public void CreditsTime()
     {
-        SceneManager.LoadScene(RestartScene);
+        SceneManager.LoadScene(CreditsScene);
     }
 
     public void GoToMenu()

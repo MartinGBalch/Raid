@@ -7,11 +7,13 @@ using System.IO;
 public class SettingManager : MonoBehaviour
 {
     public Toggle fullscreenToggle;
+    public Dropdown ControllerSelect;
     public Dropdown resolutionDropdown;
     public Dropdown textureQualityDropdown;
     public Dropdown antiAliasingDropdown;
     public Dropdown vSyncDropdown;
     public Slider musicVolumeSlider;
+    
 
     public Button b_apply;
 
@@ -20,10 +22,13 @@ public class SettingManager : MonoBehaviour
 
     public AudioSource musicSource;
 
-
- 
+    public ControllerSupport controller;
+     
    void OnEnable()
    {
+        //controller.Xbox = false;
+      //  controller.PS4 = false;
+
         gameSettings = new GameSettings();
 
         fullscreenToggle.onValueChanged.AddListener(delegate { OnFullscreenToggle(); });
@@ -48,6 +53,29 @@ public class SettingManager : MonoBehaviour
     {
         gameSettings.fullscreen = Screen.fullScreen = fullscreenToggle.isOn;
     }
+
+    public void OnControllerSelect(int selection)
+    {
+       switch (selection)
+        {
+            case 0:
+                controller.Xbox = false;
+                controller.PS4 = false;
+                break;
+            case 1:
+                controller.Xbox = true;
+                controller.PS4 = false;
+                break;
+            case 2:
+                controller.Xbox = false;
+                controller.PS4 = true;
+                break;
+            default:
+                break;
+        }
+
+        //Debug.Log(selection);
+    } 
 
     public void OnResolutionChange()
     {

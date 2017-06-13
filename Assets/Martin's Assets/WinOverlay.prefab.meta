@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 12890859b3d9f0c4f820dc1fa49fe839
 timeCreated: 1496856951
+=======
+guid: db31a2300b272524d811aaec5febdc4f
+timeCreated: 1496860164
+>>>>>>> Martin
 licenseType: Pro
 NativeFormatImporter:
   mainObjectFileID: 100100000
