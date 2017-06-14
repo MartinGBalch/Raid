@@ -57,9 +57,20 @@ public class CollisionDMG : MonoBehaviour {
         DT = DeltaTime.DT;
         
         RaycastHit hit;
-        if (Physics.Raycast(MyT.position, -MyT.up, out hit, 100))
+        if (Physics.Raycast(MyT.position, -MyT.up, out hit, 20))
         {
             if (hit.collider.tag == "Floor")
+            {
+
+                distDIF = Mathf.Abs(hit.point.y - MyT.position.y);
+
+
+                Vector3 POS = new Vector3(MyT.position.x, MyT.position.y - distDIF + (MyT.localScale.y / 2), MyT.position.z);
+
+
+                MyT.position = Vector3.Lerp(MyT.position, POS, DT * LerpSpeed);
+            }
+            else if (hit.collider.tag == "FakeFloor")
             {
                 
                 distDIF = Mathf.Abs(hit.point.y - MyT.position.y);
