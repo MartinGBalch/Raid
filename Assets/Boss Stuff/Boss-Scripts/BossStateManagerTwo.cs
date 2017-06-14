@@ -234,11 +234,20 @@ public class BossStateManagerTwo : MonoBehaviour
         {
             //if (Health.Health <= 700) { State = 1;  }
             State = Health.HealthStage;
-            Behaviour = State + 1;
+            
+            
             //if (Health.Health <= 400) { State = 2; }
 
-            if (Health.ResistDamage > 0 ) { behaviorTimer -= DT; }
-            if (Health.ResistDamage == 0) { Turning.AdjustTimer = 2; }
+            //if (Health.ResistDamage > 0 ) { behaviorTimer -= DT; }
+
+            if (Health.ResistDamage == 0)
+            {
+                Turning.AdjustTimer = 2;
+            }
+            else
+            {
+                Behaviour = State + 1;
+            }
 
             
 
