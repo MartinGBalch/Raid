@@ -53,7 +53,11 @@ public class PylonManager : MonoBehaviour {
         {
             Health.ResistDamage = 0;
 
-            Health.RunAnim();
+            if(Health.HealthStage != 2)
+            {
+                Health.RunAnim();
+            }
+            
 
 
 

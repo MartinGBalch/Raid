@@ -29,7 +29,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     bool done = false;
     public bool IsVulner = false;
     public PylonManager Manager;
-  
+    bool end = false;
 
     public bool Bugs = false;
     float BugTimer = 3;
@@ -151,10 +151,10 @@ public class BossHealth : MonoBehaviour, IDamageable
                 VulnerableTime = StartTimer;
                 HealthStage++;
             }
-            else if (Stage3Health <= 0 && HealthStage == 2)
+            else if (Stage3Health <= 0 && HealthStage == 2 && end == false)
             {
-
-                
+               
+                end = true;
                // Destroy(gameObject);
 
 
