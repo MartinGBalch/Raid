@@ -60,7 +60,11 @@ public class FadeManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+<<<<<<< HEAD
         Time.timeScale = 1;
+=======
+        Time.timeScale = 1.0f;
+>>>>>>> 6709966adbfbfa24b64ab35e75c184e8b37b2e06
         GameName.enabled = false;
         start.enabled = false;
         setting.enabled = false;
@@ -106,7 +110,7 @@ public class FadeManager : MonoBehaviour
         if (!isInTransition)
             return;
 
-        transition += (isShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
+        transition += ((isShowing) ? 1 : -1) * Time.deltaTime * (1 / duration);
        
         //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
         GameName.color = Color.Lerp(new Color(0,0,0,0), titleColor, transition);
@@ -127,8 +131,7 @@ public class FadeManager : MonoBehaviour
 
     public void  Play()
     {
-	
-		SceneManager.LoadScene (PlayScene);
+		SceneManager.LoadScene(PlayScene);
     }
 
     public void Enter()
