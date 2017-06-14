@@ -107,8 +107,7 @@ public class Bossraise : MonoBehaviour {
                 
                 Pylons.transform.position -= new Vector3(0, DT *2, 0);
                 //SpotLight.intensity += DT * 10;
-                SpotLight.spotAngle -= DT * 20;
-                DirectionalLight.intensity -= DT * 5;
+               
 
                 SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 1, 50);
 
@@ -125,7 +124,7 @@ public class Bossraise : MonoBehaviour {
                     {
                         if (beam[i] != null)
                         {
-                            beam[i].enableEmission = false;
+                            beam[i].Stop();
                         }
                     }
                     for (int i = 0; i < dust.Length; i++)
