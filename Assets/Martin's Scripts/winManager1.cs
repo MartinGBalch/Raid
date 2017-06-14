@@ -10,6 +10,8 @@ public class winManager1 : MonoBehaviour {
     public Canvas LoseOverlay;
     public GameObject Credits;
 
+    bool die;
+
     public Text WinText;
     public Text credits;
     public Text Menu;
@@ -22,6 +24,7 @@ public class winManager1 : MonoBehaviour {
 
     private float transition;
     private float duration;
+    private BossHealth b_hp;
 
     public Color buttonColor;
     public Color titleColor;
@@ -46,6 +49,7 @@ public class winManager1 : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        b_hp = FindObjectOfType<BossHealth>();
         LoseOverlay.enabled = false;
         WinText.enabled = false;
         credits.enabled = false;
@@ -57,7 +61,7 @@ public class winManager1 : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Numlock))
+        if (b_hp.Stage3Health <= 0 && die == false)
         {
             Fade(true, timer);
             Cursor.visible = true;
@@ -66,7 +70,7 @@ public class winManager1 : MonoBehaviour {
             credits.enabled = true;
             Menu.enabled = true;
             Overlay.enabled = true;
-
+            die = true;
         }
 
         if (!isInTransition)
