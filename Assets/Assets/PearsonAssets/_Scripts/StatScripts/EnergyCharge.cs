@@ -32,7 +32,7 @@ public class EnergyCharge : MonoBehaviour
 
         SuperEnergy = Mathf.Clamp(SuperEnergy, 0, SuperMaxEnergy);
         SuperEnergy += Time.deltaTime * 2;
-        SuperBar.fillAmount = SuperEnergy / SuperMaxEnergy;
+        //SuperBar.fillAmount = SuperEnergy / SuperMaxEnergy;
         if (player.MV.Armed)
         {
             if (SuperEnergy >= SuperMaxEnergy)

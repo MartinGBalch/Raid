@@ -19,6 +19,8 @@ public class FloorController : MonoBehaviour {
     public GameObject[] props;
     public ParticleSystem[] element;
     public GameObject floor;
+    public GameObject Floor2;
+    public Animator flooranim;
     // Use this for initialization
     void Start () {
         DT = FindObjectOfType<TimeManager>();
@@ -43,6 +45,8 @@ public class FloorController : MonoBehaviour {
                     //{
                     //    props[i].SetActive(false);
                     //}
+                    Floor2.SetActive(true);
+                    flooranim.SetTrigger("Fall");
                     shake.StartShake(shake.GroundFallProperties);
                     floor.SetActive(false);
                     if (dust.isPlaying == false)
@@ -64,9 +68,9 @@ public class FloorController : MonoBehaviour {
                 {
                     if (fall)
                     {
-                        if (falltime > -9)
+                        if (falltime < -6)
                         {
-                            //transform.position -= new Vector3(0, DT.DT * fallspeed, 0);
+                            Floor2.SetActive(false);
                         }
                     }
                     if (raise)
