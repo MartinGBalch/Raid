@@ -122,8 +122,11 @@ public class BossHealth : MonoBehaviour, IDamageable
                 
             }
 
-            
-            BossState.Behaviour = 69;
+            if(HealthStage != 2)
+            {
+                BossState.Behaviour = 69;
+            }
+           
             
 
             if(Stage1Health <= 0 && HealthStage == 0)
