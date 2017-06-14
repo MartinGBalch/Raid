@@ -519,7 +519,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 MV.NonCombatMaxSpeed = 90;
 
                 anim.SetBool("jogging", false);
-                anim.speed = 3f;
+                anim.speed = 2f;
                 MV.vertSpeed = 12;
                 MV.HorzSpeed = 12;
             }
@@ -536,7 +536,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if (!MV.Sprint && !Dashing && !MV.attacking)
         {   if (Abilites[0])
             {
-                anim.speed = 2.5f;
+                anim.speed = 1.5f;
                 MV.NonCombatMaxSpeed = 90;
                 MV.HorzSpeed = 9;
                 MV.vertSpeed = 9;
