@@ -421,9 +421,11 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 MV.mouseAttack = false;
                 MV.attacking = true;
                 anim.SetTrigger("Attack");
+                anim.ResetTrigger("EndAttack");
                 presstimer = .005f;
+               
                 NonCombatState = States.AttackState;
-
+               
             }
             if ((Objects.Controller.SuperCharge || Input.GetMouseButtonDown(2)) &&
                 NonCombatState != States.SuperState && Energy.SuperEnergy >= Energy.SuperMaxEnergy && NonCombatState != States.DashAttackState && Super.Charge != 0)
@@ -447,15 +449,17 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     float presstimer = 0;
     void AttackOne()
     {
-        MV.HorzSpeed = 5;
-        MV.vertSpeed = 5;
-        MV.attackTime = .5f;
+
+        MV.HorzSpeed =  10;
+        MV.vertSpeed = 10;
+        MV.attackTime = 1;
         Objects.hitbox.SetActive(true);
+
         if ((MV.mouseAttack || Objects.Controller.Attack) && presstimer <= 0)
         {
             MV.mouseAttack = false;
             Objects.Controller.Attack = false;
-            presstimer = .01f;
+            presstimer = 1;
             buttonPress = true;
         }
 
@@ -463,21 +467,25 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     }
     void AttackTwo()
     {
-        MV.attackTime = .4f;
-        MV.HorzSpeed = 3;
-        MV.vertSpeed = 3;
+
+        MV.attackTime = 1;
+        MV.HorzSpeed = 0;
+        MV.vertSpeed = 0;
         Objects.hitbox.SetActive(true);
+
         if (MV.mouseAttack || Objects.Controller.Attack)
         {
             MV.mouseAttack = false;
             Objects.Controller.Attack = false;
-            presstimer = .01f;
+            presstimer = 1;
             buttonPress = true;
         }
+
     }
     void AttackThree()
     {
-        MV.attackTime = .5f;
+
+        MV.attackTime = 1;
         MV.HorzSpeed = 5;
         MV.vertSpeed = 5;
         Objects.hitbox2.SetActive(true);
@@ -492,9 +500,10 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         {
             MV.mouseAttack = false;
             Objects.Controller.Attack = false;
-            presstimer = .01f;
+            presstimer = 1f;
             buttonPress = true;
         }
+
     }
 
 
@@ -1113,6 +1122,14 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
 
         AnimBlendControl();
+
+        if(stop == true)
+        {
+            NonCombatState = States.IdleState;
+            AttackingState = States.AttackOne;
+            stop = false;
+        }
+
         if (MV.grabed == false)
         {
             switch (CurrentState)
@@ -1137,32 +1154,63 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     public void EndAttackOne()
     {
 
-        if (buttonPress == false)
+        Debug.Log("InAttack1");
+
+        if (AttackingState == States.AttackOne && NonCombatState == States.AttackState)
         {
+            if (buttonPress == false)
+            {
+                buttonPress = false;
+                Debug.Log("StopAttack1");
+                Objects.hitbox.SetActive(false);
+                anim.ResetTrigger("Attack");
+                anim.SetTrigger("EndAttack");
+                MV.attacking = false;
+                AttackingState = States.AttackOne;
+                NonCombatState = States.IdleState;
+                buttonPress = false;
+                return;
+            }
+            if (buttonPress == true && NonCombatState == States.AttackState)
+            {
+                Debug.Log("MoveToAttack2");
+                Objects.hitbox.SetActive(false);
+                anim.ResetTrigger("EndAttack");
+                anim.SetTrigger("Combo1");
+                AttackingState = States.AttackTwo;
+                NonCombatState = States.AttackState;
+                return;
+            }
+        }
+        else
+        {
+
+            buttonPress = false;
+            Debug.Log("StopAttack1");
             Objects.hitbox.SetActive(false);
             anim.ResetTrigger("Attack");
             anim.SetTrigger("EndAttack");
             MV.attacking = false;
             AttackingState = States.AttackOne;
             NonCombatState = States.IdleState;
+            buttonPress = false;
+            return;
         }
-        else
-        {
-            Objects.hitbox.SetActive(false);
-            anim.SetTrigger("Combo1");
-            AttackingState = States.AttackTwo;
-        }
-
         buttonPress = false;
     }
+    public bool stop;
     public void EndAttackTwo()
     {
 
+        Debug.Log("EnterAttack2");
         if (NonCombatState == States.AttackState)
         {
-          
-            if(buttonPress == true && NonCombatState == States.AttackState && thirdattackcooldown <= 0)
+
+            Debug.Log("InAttack2");
+            if (buttonPress == true  && thirdattackcooldown <= 0)
             {
+
+                Debug.Log("StopAttack2");
                 thirdattackcooldown = setattackCoolown;
                 Objects.hitbox.SetActive(false);
                 anim.SetTrigger("Combo2");
@@ -1170,10 +1218,14 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             }
             else if(AttackingState == States.AttackTwo)
             {
+
+                Debug.Log("MoveToAttack3");
                 Objects.hitbox.SetActive(false);
                 anim.ResetTrigger("Attack");
                 anim.SetTrigger("EndAttack");
+                stop = true;
                 MV.attacking = false;
+                buttonPress = false;
                 AttackingState = States.AttackOne;
                 NonCombatState = States.IdleState;
             }
@@ -1184,20 +1236,25 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     {
         if (NonCombatState == States.AttackState)
         {
+
+            Debug.Log("InAttack3");
             if (AttackingState == States.AttackThree)
             {
 
+                Debug.Log("EndAttack3");
                 Objects.hitbox2.SetActive(false);
                 anim.ResetTrigger("Attack");
-                anim.SetTrigger("EndAttack");
+              
                 MV.attacking = false;
                 buttonPress = false;
                 AttackingState = States.AttackOne;
                 NonCombatState = States.IdleState;
 
+                anim.SetTrigger("EndAttack");
             }
         }
     }
+
     public void BeginAttack1()
     {
         Objects.Slash.Play();
@@ -1215,8 +1272,11 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     }
     public void BeginAttack3()
     {
-        Objects.SlashStraight.Play();
-        Objects.Slashes.PlayOneShot(Objects.SlashSound[2]);
+        if (AttackingState == States.AttackThree)
+        {
+            Objects.SlashStraight.Play();
+            Objects.Slashes.PlayOneShot(Objects.SlashSound[2]);
+        }
     }
 
 

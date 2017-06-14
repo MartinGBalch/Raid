@@ -1,0 +1,1791 @@
+fileFormatVersion: 2
+guid: 83622766ea276124c83518077c181ff2
+timeCreated: 1497457858
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: chest
+    100004: chestCtrl
+    100006: chestGrp
+    100008: CTRL_GRP
+    100010: FK_L_ankle
+    100012: FK_L_ankleCtrl
+    100014: FK_L_ankleGrp
+    100016: FK_L_arm
+    100018: FK_L_armCtrl
+    100020: FK_L_armGrp
+    100022: FK_L_ball
+    100024: FK_L_ball_end
+    100026: FK_L_ballCtrl
+    100028: FK_L_ballCtrl_ncl1_1
+    100030: FK_L_ballGrp
+    100032: FK_L_ballGrp_ncl1_1
+    100034: FK_L_elbow
+    100036: FK_L_elbowCtrl
+    100038: FK_L_elbowGrp
+    100040: FK_L_hand
+    100042: FK_L_handCtrl
+    100044: FK_L_handCtrl_ncl1_1
+    100046: FK_L_handGrp
+    100048: FK_L_handGrp1
+    100050: FK_L_index1
+    100052: FK_L_index1Ctrl
+    100054: FK_L_index1Ctrl_ncl1_1
+    100056: FK_L_index1Grp
+    100058: FK_L_index1Grp_ncl1_1
+    100060: FK_L_index2
+    100062: FK_L_index2Ctrl
+    100064: FK_L_index2Ctrl_ncl1_1
+    100066: FK_L_index2Grp
+    100068: FK_L_index2Grp_ncl1_1
+    100070: FK_L_index3
+    100072: FK_L_index3Ctrl
+    100074: FK_L_index3Ctrl_ncl1_1
+    100076: FK_L_index3Grp
+    100078: FK_L_index3Grp_ncl1_1
+    100080: FK_L_index_end
+    100082: FK_L_knee
+    100084: FK_L_kneeCtrl
+    100086: FK_L_kneeGrp
+    100088: FK_L_middle1
+    100090: FK_L_middle1Ctrl
+    100092: FK_L_middle1Ctrl_ncl1_1
+    100094: FK_L_middle1Grp
+    100096: FK_L_middle1Grp_ncl1_1
+    100098: FK_L_middle2
+    100100: FK_L_middle2Ctrl
+    100102: FK_L_middle2Ctrl_ncl1_1
+    100104: FK_L_middle2Grp
+    100106: FK_L_middle2Grp_ncl1_1
+    100108: FK_L_middle3
+    100110: FK_L_middle3Ctrl
+    100112: FK_L_middle3Ctrl_ncl1_1
+    100114: FK_L_middle3Grp
+    100116: FK_L_middle3Grp_ncl1_1
+    100118: FK_L_middle_end
+    100120: FK_L_pinky1
+    100122: FK_L_pinky1Ctrl
+    100124: FK_L_pinky1Ctrl_ncl1_1
+    100126: FK_L_pinky1Grp
+    100128: FK_L_pinky1Grp_ncl1_1
+    100130: FK_L_pinky2
+    100132: FK_L_pinky2Ctrl
+    100134: FK_L_pinky2Ctrl_ncl1_1
+    100136: FK_L_pinky2Grp
+    100138: FK_L_pinky2Grp_ncl1_1
+    100140: FK_L_pinky3
+    100142: FK_L_pinky3Ctrl
+    100144: FK_L_pinky3Grp
+    100146: FK_L_pinky_end
+    100148: FK_L_ring1
+    100150: FK_L_ring1Ctrl
+    100152: FK_L_ring1Ctrl_ncl1_1
+    100154: FK_L_ring1Grp
+    100156: FK_L_ring1Grp_ncl1_1
+    100158: FK_L_ring2
+    100160: FK_L_ring2Ctrl
+    100162: FK_L_ring2Ctrl_ncl1_1
+    100164: FK_L_ring2Grp
+    100166: FK_L_ring2Grp_ncl1_1
+    100168: FK_L_ring3
+    100170: FK_L_ring3Ctrl
+    100172: FK_L_ring3Ctrl_ncl1_1
+    100174: FK_L_ring3Grp
+    100176: FK_L_ring3Grp_ncl1_1
+    100178: FK_L_ring_end
+    100180: FK_L_thigh
+    100182: FK_L_thighCtrl
+    100184: FK_L_thighGrp
+    100186: FK_L_thumb1
+    100188: FK_L_thumb1Ctrl
+    100190: FK_L_thumb1Ctrl_ncl1_1
+    100192: FK_L_thumb1Grp
+    100194: FK_L_thumb1Grp_ncl1_1
+    100196: FK_L_thumb2
+    100198: FK_L_thumb2Ctrl
+    100200: FK_L_thumb2Ctrl_ncl1_1
+    100202: FK_L_thumb2Grp
+    100204: FK_L_thumb2Grp_ncl1_1
+    100206: FK_L_thumb3
+    100208: FK_L_thumb3Ctrl
+    100210: FK_L_thumb3Ctrl_ncl1_1
+    100212: FK_L_thumb3Grp
+    100214: FK_L_thumb3Grp_ncl1_1
+    100216: FK_L_thumb_end
+    100218: FK_L_wrist
+    100220: FK_L_wristCtrl
+    100222: FK_L_wristGrp
+    100224: FK_R_ankle
+    100226: FK_R_ankleCtrl
+    100228: FK_R_ankleGrp
+    100230: FK_R_arm
+    100232: FK_R_armCtrl
+    100234: FK_R_armGrp
+    100236: FK_R_ball
+    100238: FK_R_ball_end
+    100240: FK_R_ballCtrl
+    100242: FK_R_ballCtrl_ncl1_1
+    100244: FK_R_ballGrp
+    100246: FK_R_ballGrp_ncl1_1
+    100248: FK_R_elbow
+    100250: FK_R_elbowCtrl
+    100252: FK_R_elbowGrp
+    100254: FK_R_hand
+    100256: FK_R_handCtrl
+    100258: FK_R_handCtrl_ncl1_1
+    100260: FK_R_handGrp
+    100262: FK_R_handGrp1
+    100264: FK_R_index1
+    100266: FK_R_index1Ctrl
+    100268: FK_R_index1Ctrl_ncl1_1
+    100270: FK_R_index1Grp
+    100272: FK_R_index1Grp_ncl1_1
+    100274: FK_R_index2
+    100276: FK_R_index2Ctrl
+    100278: FK_R_index2Ctrl_ncl1_1
+    100280: FK_R_index2Grp
+    100282: FK_R_index2Grp_ncl1_1
+    100284: FK_R_index3
+    100286: FK_R_index3Ctrl
+    100288: FK_R_index3Ctrl_ncl1_1
+    100290: FK_R_index3Grp
+    100292: FK_R_index3Grp_ncl1_1
+    100294: FK_R_index_end
+    100296: FK_R_knee
+    100298: FK_R_kneeCtrl
+    100300: FK_R_kneeGrp
+    100302: FK_R_middle1
+    100304: FK_R_middle1Ctrl
+    100306: FK_R_middle1Ctrl_ncl1_1
+    100308: FK_R_middle1Grp
+    100310: FK_R_middle1Grp_ncl1_1
+    100312: FK_R_middle2
+    100314: FK_R_middle2Ctrl
+    100316: FK_R_middle2Ctrl_ncl1_1
+    100318: FK_R_middle2Grp
+    100320: FK_R_middle2Grp_ncl1_1
+    100322: FK_R_middle3
+    100324: FK_R_middle3Ctrl
+    100326: FK_R_middle3Ctrl_ncl1_1
+    100328: FK_R_middle3Grp
+    100330: FK_R_middle3Grp_ncl1_1
+    100332: FK_R_middle_end
+    100334: FK_R_pinky1
+    100336: FK_R_pinky1Ctrl
+    100338: FK_R_pinky1Ctrl_ncl1_1
+    100340: FK_R_pinky1Grp
+    100342: FK_R_pinky1Grp_ncl1_1
+    100344: FK_R_pinky2
+    100346: FK_R_pinky2Ctrl
+    100348: FK_R_pinky2Ctrl_ncl1_1
+    100350: FK_R_pinky2Grp
+    100352: FK_R_pinky2Grp_ncl1_1
+    100354: FK_R_pinky3
+    100356: FK_R_pinky3Ctrl
+    100358: FK_R_pinky3Ctrl_ncl1_1
+    100360: FK_R_pinky3Grp
+    100362: FK_R_pinky3Grp_ncl1_1
+    100364: FK_R_pinky_end
+    100366: FK_R_ring1
+    100368: FK_R_ring1Ctrl
+    100370: FK_R_ring1Ctrl_ncl1_1
+    100372: FK_R_ring1Grp
+    100374: FK_R_ring1Grp_ncl1_1
+    100376: FK_R_ring2
+    100378: FK_R_ring2Ctrl
+    100380: FK_R_ring2Ctrl_ncl1_1
+    100382: FK_R_ring2Grp
+    100384: FK_R_ring2Grp_ncl1_1
+    100386: FK_R_ring3
+    100388: FK_R_ring3Ctrl
+    100390: FK_R_ring3Ctrl_ncl1_1
+    100392: FK_R_ring3Grp
+    100394: FK_R_ring3Grp_ncl1_1
+    100396: FK_R_ring_end
+    100398: FK_R_thigh
+    100400: FK_R_thighCtrl
+    100402: FK_R_thighGrp
+    100404: FK_R_thumb1
+    100406: FK_R_thumb1Ctrl
+    100408: FK_R_thumb1Ctrl_ncl1_1
+    100410: FK_R_thumb1Grp
+    100412: FK_R_thumb1Grp_ncl1_1
+    100414: FK_R_thumb2
+    100416: FK_R_thumb2Ctrl
+    100418: FK_R_thumb2Ctrl_ncl1_1
+    100420: FK_R_thumb2Grp
+    100422: FK_R_thumb2Grp_ncl1_1
+    100424: FK_R_thumb3
+    100426: FK_R_thumb3Ctrl
+    100428: FK_R_thumb3Ctrl_ncl1_1
+    100430: FK_R_thumb3Grp
+    100432: FK_R_thumb3Grp_ncl1_1
+    100434: FK_R_thumb_end
+    100436: FK_R_wrist
+    100438: FK_R_wristCtrl
+    100440: FK_R_wristGrp
+    100442: head
+    100444: hip
+    100446: hipCtrl
+    100448: hipGrp
+    100450: IK_L_ankle
+    100452: IK_L_ankleCtrl
+    100454: IK_L_arm
+    100456: IK_L_armGrp
+    100458: IK_L_ball
+    100460: IK_L_ball_end
+    100462: IK_L_elbow
+    100464: IK_L_hand
+    100466: IK_L_index1
+    100468: IK_L_index2
+    100470: IK_L_index3
+    100472: IK_L_index_end
+    100474: IK_L_knee
+    100476: IK_L_middle1
+    100478: IK_L_middle2
+    100480: IK_L_middle3
+    100482: IK_L_middle_end
+    100484: IK_L_pinky1
+    100486: IK_L_pinky2
+    100488: IK_L_pinky3
+    100490: IK_L_pinky_end
+    100492: IK_L_ring1
+    100494: IK_L_ring2
+    100496: IK_L_ring3
+    100498: IK_L_ring_end
+    100500: IK_L_thigh
+    100502: IK_L_thighGrp
+    100504: IK_L_thumb1
+    100506: IK_L_thumb2
+    100508: IK_L_thumb3
+    100510: IK_L_thumb_end
+    100512: IK_L_wrist
+    100514: IK_R_ankle
+    100516: IK_R_ankleCtrl
+    100518: IK_R_arm
+    100520: IK_R_armGrp
+    100522: IK_R_ball
+    100524: IK_R_ball_end
+    100526: IK_R_elbow
+    100528: IK_R_hand
+    100530: IK_R_index1
+    100532: IK_R_index2
+    100534: IK_R_index3
+    100536: IK_R_index_end
+    100538: IK_R_knee
+    100540: IK_R_middle1
+    100542: IK_R_middle2
+    100544: IK_R_middle3
+    100546: IK_R_middle_end
+    100548: IK_R_pinky1
+    100550: IK_R_pinky2
+    100552: IK_R_pinky3
+    100554: IK_R_pinky_end
+    100556: IK_R_ring1
+    100558: IK_R_ring2
+    100560: IK_R_ring3
+    100562: IK_R_ring_end
+    100564: IK_R_thigh
+    100566: IK_R_thighGrp
+    100568: IK_R_thumb1
+    100570: IK_R_thumb2
+    100572: IK_R_thumb3
+    100574: IK_R_thumb_end
+    100576: IK_R_wrist
+    100578: L_ankle
+    100580: L_arm
+    100582: L_arm_FKIKswitch
+    100584: L_arm_IK_CTRL
+    100586: L_ball
+    100588: L_ball_end
+    100590: L_clav
+    100592: L_clav_CTRL
+    100594: L_clavGrp
+    100596: L_elbow
+    100598: L_hand
+    100600: L_index1
+    100602: L_index2
+    100604: L_index3
+    100606: L_index_end
+    100608: L_JIGGLE_BREAST
+    100610: L_JIGGLE_BUTT
+    100612: L_knee
+    100614: L_leg_FKIKswitch
+    100616: L_leg_Grp
+    100618: L_middle1
+    100620: L_middle2
+    100622: L_middle3
+    100624: L_middle_end
+    100626: L_pinky1
+    100628: L_pinky2
+    100630: L_pinky3
+    100632: L_pinky_end
+    100634: L_ring1
+    100636: L_ring2
+    100638: L_ring3
+    100640: L_ring_end
+    100642: L_scarf_DRIVER1
+    100644: L_scarf_DRIVER10
+    100646: L_scarf_DRIVER11
+    100648: L_scarf_DRIVER12
+    100650: L_scarf_DRIVER2
+    100652: L_scarf_DRIVER3
+    100654: L_scarf_DRIVER4
+    100656: L_scarf_DRIVER5
+    100658: L_scarf_DRIVER6
+    100660: L_scarf_DRIVER7
+    100662: L_scarf_DRIVER8
+    100664: L_scarf_DRIVER9
+    100666: L_thigh
+    100668: L_thumb1
+    100670: L_thumb2
+    100672: L_thumb3
+    100674: L_thumb_end
+    100676: L_wrist
+    100678: neck1
+    100680: neck2
+    100682: neck3
+    100684: R_ankle
+    100686: R_arm
+    100688: R_arm_FKIKswitch
+    100690: R_arm_IK_CTRL
+    100692: R_ball
+    100694: R_ball_end
+    100696: R_clav
+    100698: R_clav_CTRL
+    100700: R_clavGrp
+    100702: R_elbow
+    100704: R_hand
+    100706: R_index1
+    100708: R_index2
+    100710: R_index3
+    100712: R_index_end
+    100714: R_JIGGLE_BREAST
+    100716: R_JIGGLE_BUTT
+    100718: R_knee
+    100720: R_leg_FKIKswitch
+    100722: R_leg_grp
+    100724: R_middle1
+    100726: R_middle2
+    100728: R_middle3
+    100730: R_middle_end
+    100732: R_pinky1
+    100734: R_pinky2
+    100736: R_pinky3
+    100738: R_pinky_end
+    100740: R_ring1
+    100742: R_ring2
+    100744: R_ring3
+    100746: R_ring_end
+    100748: R_scarf_DRIVER1
+    100750: R_scarf_DRIVER2
+    100752: R_scarf_DRIVER3
+    100754: R_scarf_DRIVER4
+    100756: R_scarf_DRIVER5
+    100758: R_scarf_DRIVER6
+    100760: R_scarf_DRIVER7
+    100762: R_scarf_DRIVER8
+    100764: R_scarf_DRIVER9
+    100766: R_thigh
+    100768: R_thumb1
+    100770: R_thumb2
+    100772: R_thumb3
+    100774: R_thumb_end
+    100776: R_wrist
+    100778: shoulder_cluster1
+    100780: shoulder_cluster2
+    100782: shoulder_cluster3
+    100784: shoulder_cluster4
+    100786: shoulder_cluster5
+    100788: shoulder_clusters
+    100790: shoulder_DRIVER1
+    100792: shoulder_DRIVER2
+    100794: shoulder_DRIVER3
+    100796: shoulder_DRIVER4
+    100798: shoulder_DRIVER5
+    100800: shoulderarmor_deform
+    100802: shoulderarmor_ikHandle
+    100804: shoulderarmor_PV
+    100806: shoulderstrap_cluster1
+    100808: shoulderstrap_cluster2
+    100810: shoulderstrap_cluster3
+    100812: shoulderstrap_cluster4
+    100814: shoulderstrap_cluster5
+    100816: shoulderstrap_cluster6
+    100818: shoulderstrap_cluster7
+    100820: shoulderstrap_cluster8
+    100822: spine1
+    100824: spine1Ctrl
+    100826: spine1Grp
+    100828: spine2
+    100830: spine2Ctrl
+    100832: spine2Grp
+    100834: spine3
+    100836: spine3Ctrl
+    100838: spine3Grp
+    100840: switches_and_PV
+    400000: //RootNode
+    400002: chest
+    400004: chestCtrl
+    400006: chestGrp
+    400008: CTRL_GRP
+    400010: FK_L_ankle
+    400012: FK_L_ankleCtrl
+    400014: FK_L_ankleGrp
+    400016: FK_L_arm
+    400018: FK_L_armCtrl
+    400020: FK_L_armGrp
+    400022: FK_L_ball
+    400024: FK_L_ball_end
+    400026: FK_L_ballCtrl
+    400028: FK_L_ballCtrl_ncl1_1
+    400030: FK_L_ballGrp
+    400032: FK_L_ballGrp_ncl1_1
+    400034: FK_L_elbow
+    400036: FK_L_elbowCtrl
+    400038: FK_L_elbowGrp
+    400040: FK_L_hand
+    400042: FK_L_handCtrl
+    400044: FK_L_handCtrl_ncl1_1
+    400046: FK_L_handGrp
+    400048: FK_L_handGrp1
+    400050: FK_L_index1
+    400052: FK_L_index1Ctrl
+    400054: FK_L_index1Ctrl_ncl1_1
+    400056: FK_L_index1Grp
+    400058: FK_L_index1Grp_ncl1_1
+    400060: FK_L_index2
+    400062: FK_L_index2Ctrl
+    400064: FK_L_index2Ctrl_ncl1_1
+    400066: FK_L_index2Grp
+    400068: FK_L_index2Grp_ncl1_1
+    400070: FK_L_index3
+    400072: FK_L_index3Ctrl
+    400074: FK_L_index3Ctrl_ncl1_1
+    400076: FK_L_index3Grp
+    400078: FK_L_index3Grp_ncl1_1
+    400080: FK_L_index_end
+    400082: FK_L_knee
+    400084: FK_L_kneeCtrl
+    400086: FK_L_kneeGrp
+    400088: FK_L_middle1
+    400090: FK_L_middle1Ctrl
+    400092: FK_L_middle1Ctrl_ncl1_1
+    400094: FK_L_middle1Grp
+    400096: FK_L_middle1Grp_ncl1_1
+    400098: FK_L_middle2
+    400100: FK_L_middle2Ctrl
+    400102: FK_L_middle2Ctrl_ncl1_1
+    400104: FK_L_middle2Grp
+    400106: FK_L_middle2Grp_ncl1_1
+    400108: FK_L_middle3
+    400110: FK_L_middle3Ctrl
+    400112: FK_L_middle3Ctrl_ncl1_1
+    400114: FK_L_middle3Grp
+    400116: FK_L_middle3Grp_ncl1_1
+    400118: FK_L_middle_end
+    400120: FK_L_pinky1
+    400122: FK_L_pinky1Ctrl
+    400124: FK_L_pinky1Ctrl_ncl1_1
+    400126: FK_L_pinky1Grp
+    400128: FK_L_pinky1Grp_ncl1_1
+    400130: FK_L_pinky2
+    400132: FK_L_pinky2Ctrl
+    400134: FK_L_pinky2Ctrl_ncl1_1
+    400136: FK_L_pinky2Grp
+    400138: FK_L_pinky2Grp_ncl1_1
+    400140: FK_L_pinky3
+    400142: FK_L_pinky3Ctrl
+    400144: FK_L_pinky3Grp
+    400146: FK_L_pinky_end
+    400148: FK_L_ring1
+    400150: FK_L_ring1Ctrl
+    400152: FK_L_ring1Ctrl_ncl1_1
+    400154: FK_L_ring1Grp
+    400156: FK_L_ring1Grp_ncl1_1
+    400158: FK_L_ring2
+    400160: FK_L_ring2Ctrl
+    400162: FK_L_ring2Ctrl_ncl1_1
+    400164: FK_L_ring2Grp
+    400166: FK_L_ring2Grp_ncl1_1
+    400168: FK_L_ring3
+    400170: FK_L_ring3Ctrl
+    400172: FK_L_ring3Ctrl_ncl1_1
+    400174: FK_L_ring3Grp
+    400176: FK_L_ring3Grp_ncl1_1
+    400178: FK_L_ring_end
+    400180: FK_L_thigh
+    400182: FK_L_thighCtrl
+    400184: FK_L_thighGrp
+    400186: FK_L_thumb1
+    400188: FK_L_thumb1Ctrl
+    400190: FK_L_thumb1Ctrl_ncl1_1
+    400192: FK_L_thumb1Grp
+    400194: FK_L_thumb1Grp_ncl1_1
+    400196: FK_L_thumb2
+    400198: FK_L_thumb2Ctrl
+    400200: FK_L_thumb2Ctrl_ncl1_1
+    400202: FK_L_thumb2Grp
+    400204: FK_L_thumb2Grp_ncl1_1
+    400206: FK_L_thumb3
+    400208: FK_L_thumb3Ctrl
+    400210: FK_L_thumb3Ctrl_ncl1_1
+    400212: FK_L_thumb3Grp
+    400214: FK_L_thumb3Grp_ncl1_1
+    400216: FK_L_thumb_end
+    400218: FK_L_wrist
+    400220: FK_L_wristCtrl
+    400222: FK_L_wristGrp
+    400224: FK_R_ankle
+    400226: FK_R_ankleCtrl
+    400228: FK_R_ankleGrp
+    400230: FK_R_arm
+    400232: FK_R_armCtrl
+    400234: FK_R_armGrp
+    400236: FK_R_ball
+    400238: FK_R_ball_end
+    400240: FK_R_ballCtrl
+    400242: FK_R_ballCtrl_ncl1_1
+    400244: FK_R_ballGrp
+    400246: FK_R_ballGrp_ncl1_1
+    400248: FK_R_elbow
+    400250: FK_R_elbowCtrl
+    400252: FK_R_elbowGrp
+    400254: FK_R_hand
+    400256: FK_R_handCtrl
+    400258: FK_R_handCtrl_ncl1_1
+    400260: FK_R_handGrp
+    400262: FK_R_handGrp1
+    400264: FK_R_index1
+    400266: FK_R_index1Ctrl
+    400268: FK_R_index1Ctrl_ncl1_1
+    400270: FK_R_index1Grp
+    400272: FK_R_index1Grp_ncl1_1
+    400274: FK_R_index2
+    400276: FK_R_index2Ctrl
+    400278: FK_R_index2Ctrl_ncl1_1
+    400280: FK_R_index2Grp
+    400282: FK_R_index2Grp_ncl1_1
+    400284: FK_R_index3
+    400286: FK_R_index3Ctrl
+    400288: FK_R_index3Ctrl_ncl1_1
+    400290: FK_R_index3Grp
+    400292: FK_R_index3Grp_ncl1_1
+    400294: FK_R_index_end
+    400296: FK_R_knee
+    400298: FK_R_kneeCtrl
+    400300: FK_R_kneeGrp
+    400302: FK_R_middle1
+    400304: FK_R_middle1Ctrl
+    400306: FK_R_middle1Ctrl_ncl1_1
+    400308: FK_R_middle1Grp
+    400310: FK_R_middle1Grp_ncl1_1
+    400312: FK_R_middle2
+    400314: FK_R_middle2Ctrl
+    400316: FK_R_middle2Ctrl_ncl1_1
+    400318: FK_R_middle2Grp
+    400320: FK_R_middle2Grp_ncl1_1
+    400322: FK_R_middle3
+    400324: FK_R_middle3Ctrl
+    400326: FK_R_middle3Ctrl_ncl1_1
+    400328: FK_R_middle3Grp
+    400330: FK_R_middle3Grp_ncl1_1
+    400332: FK_R_middle_end
+    400334: FK_R_pinky1
+    400336: FK_R_pinky1Ctrl
+    400338: FK_R_pinky1Ctrl_ncl1_1
+    400340: FK_R_pinky1Grp
+    400342: FK_R_pinky1Grp_ncl1_1
+    400344: FK_R_pinky2
+    400346: FK_R_pinky2Ctrl
+    400348: FK_R_pinky2Ctrl_ncl1_1
+    400350: FK_R_pinky2Grp
+    400352: FK_R_pinky2Grp_ncl1_1
+    400354: FK_R_pinky3
+    400356: FK_R_pinky3Ctrl
+    400358: FK_R_pinky3Ctrl_ncl1_1
+    400360: FK_R_pinky3Grp
+    400362: FK_R_pinky3Grp_ncl1_1
+    400364: FK_R_pinky_end
+    400366: FK_R_ring1
+    400368: FK_R_ring1Ctrl
+    400370: FK_R_ring1Ctrl_ncl1_1
+    400372: FK_R_ring1Grp
+    400374: FK_R_ring1Grp_ncl1_1
+    400376: FK_R_ring2
+    400378: FK_R_ring2Ctrl
+    400380: FK_R_ring2Ctrl_ncl1_1
+    400382: FK_R_ring2Grp
+    400384: FK_R_ring2Grp_ncl1_1
+    400386: FK_R_ring3
+    400388: FK_R_ring3Ctrl
+    400390: FK_R_ring3Ctrl_ncl1_1
+    400392: FK_R_ring3Grp
+    400394: FK_R_ring3Grp_ncl1_1
+    400396: FK_R_ring_end
+    400398: FK_R_thigh
+    400400: FK_R_thighCtrl
+    400402: FK_R_thighGrp
+    400404: FK_R_thumb1
+    400406: FK_R_thumb1Ctrl
+    400408: FK_R_thumb1Ctrl_ncl1_1
+    400410: FK_R_thumb1Grp
+    400412: FK_R_thumb1Grp_ncl1_1
+    400414: FK_R_thumb2
+    400416: FK_R_thumb2Ctrl
+    400418: FK_R_thumb2Ctrl_ncl1_1
+    400420: FK_R_thumb2Grp
+    400422: FK_R_thumb2Grp_ncl1_1
+    400424: FK_R_thumb3
+    400426: FK_R_thumb3Ctrl
+    400428: FK_R_thumb3Ctrl_ncl1_1
+    400430: FK_R_thumb3Grp
+    400432: FK_R_thumb3Grp_ncl1_1
+    400434: FK_R_thumb_end
+    400436: FK_R_wrist
+    400438: FK_R_wristCtrl
+    400440: FK_R_wristGrp
+    400442: head
+    400444: hip
+    400446: hipCtrl
+    400448: hipGrp
+    400450: IK_L_ankle
+    400452: IK_L_ankleCtrl
+    400454: IK_L_arm
+    400456: IK_L_armGrp
+    400458: IK_L_ball
+    400460: IK_L_ball_end
+    400462: IK_L_elbow
+    400464: IK_L_hand
+    400466: IK_L_index1
+    400468: IK_L_index2
+    400470: IK_L_index3
+    400472: IK_L_index_end
+    400474: IK_L_knee
+    400476: IK_L_middle1
+    400478: IK_L_middle2
+    400480: IK_L_middle3
+    400482: IK_L_middle_end
+    400484: IK_L_pinky1
+    400486: IK_L_pinky2
+    400488: IK_L_pinky3
+    400490: IK_L_pinky_end
+    400492: IK_L_ring1
+    400494: IK_L_ring2
+    400496: IK_L_ring3
+    400498: IK_L_ring_end
+    400500: IK_L_thigh
+    400502: IK_L_thighGrp
+    400504: IK_L_thumb1
+    400506: IK_L_thumb2
+    400508: IK_L_thumb3
+    400510: IK_L_thumb_end
+    400512: IK_L_wrist
+    400514: IK_R_ankle
+    400516: IK_R_ankleCtrl
+    400518: IK_R_arm
+    400520: IK_R_armGrp
+    400522: IK_R_ball
+    400524: IK_R_ball_end
+    400526: IK_R_elbow
+    400528: IK_R_hand
+    400530: IK_R_index1
+    400532: IK_R_index2
+    400534: IK_R_index3
+    400536: IK_R_index_end
+    400538: IK_R_knee
+    400540: IK_R_middle1
+    400542: IK_R_middle2
+    400544: IK_R_middle3
+    400546: IK_R_middle_end
+    400548: IK_R_pinky1
+    400550: IK_R_pinky2
+    400552: IK_R_pinky3
+    400554: IK_R_pinky_end
+    400556: IK_R_ring1
+    400558: IK_R_ring2
+    400560: IK_R_ring3
+    400562: IK_R_ring_end
+    400564: IK_R_thigh
+    400566: IK_R_thighGrp
+    400568: IK_R_thumb1
+    400570: IK_R_thumb2
+    400572: IK_R_thumb3
+    400574: IK_R_thumb_end
+    400576: IK_R_wrist
+    400578: L_ankle
+    400580: L_arm
+    400582: L_arm_FKIKswitch
+    400584: L_arm_IK_CTRL
+    400586: L_ball
+    400588: L_ball_end
+    400590: L_clav
+    400592: L_clav_CTRL
+    400594: L_clavGrp
+    400596: L_elbow
+    400598: L_hand
+    400600: L_index1
+    400602: L_index2
+    400604: L_index3
+    400606: L_index_end
+    400608: L_JIGGLE_BREAST
+    400610: L_JIGGLE_BUTT
+    400612: L_knee
+    400614: L_leg_FKIKswitch
+    400616: L_leg_Grp
+    400618: L_middle1
+    400620: L_middle2
+    400622: L_middle3
+    400624: L_middle_end
+    400626: L_pinky1
+    400628: L_pinky2
+    400630: L_pinky3
+    400632: L_pinky_end
+    400634: L_ring1
+    400636: L_ring2
+    400638: L_ring3
+    400640: L_ring_end
+    400642: L_scarf_DRIVER1
+    400644: L_scarf_DRIVER10
+    400646: L_scarf_DRIVER11
+    400648: L_scarf_DRIVER12
+    400650: L_scarf_DRIVER2
+    400652: L_scarf_DRIVER3
+    400654: L_scarf_DRIVER4
+    400656: L_scarf_DRIVER5
+    400658: L_scarf_DRIVER6
+    400660: L_scarf_DRIVER7
+    400662: L_scarf_DRIVER8
+    400664: L_scarf_DRIVER9
+    400666: L_thigh
+    400668: L_thumb1
+    400670: L_thumb2
+    400672: L_thumb3
+    400674: L_thumb_end
+    400676: L_wrist
+    400678: neck1
+    400680: neck2
+    400682: neck3
+    400684: R_ankle
+    400686: R_arm
+    400688: R_arm_FKIKswitch
+    400690: R_arm_IK_CTRL
+    400692: R_ball
+    400694: R_ball_end
+    400696: R_clav
+    400698: R_clav_CTRL
+    400700: R_clavGrp
+    400702: R_elbow
+    400704: R_hand
+    400706: R_index1
+    400708: R_index2
+    400710: R_index3
+    400712: R_index_end
+    400714: R_JIGGLE_BREAST
+    400716: R_JIGGLE_BUTT
+    400718: R_knee
+    400720: R_leg_FKIKswitch
+    400722: R_leg_grp
+    400724: R_middle1
+    400726: R_middle2
+    400728: R_middle3
+    400730: R_middle_end
+    400732: R_pinky1
+    400734: R_pinky2
+    400736: R_pinky3
+    400738: R_pinky_end
+    400740: R_ring1
+    400742: R_ring2
+    400744: R_ring3
+    400746: R_ring_end
+    400748: R_scarf_DRIVER1
+    400750: R_scarf_DRIVER2
+    400752: R_scarf_DRIVER3
+    400754: R_scarf_DRIVER4
+    400756: R_scarf_DRIVER5
+    400758: R_scarf_DRIVER6
+    400760: R_scarf_DRIVER7
+    400762: R_scarf_DRIVER8
+    400764: R_scarf_DRIVER9
+    400766: R_thigh
+    400768: R_thumb1
+    400770: R_thumb2
+    400772: R_thumb3
+    400774: R_thumb_end
+    400776: R_wrist
+    400778: shoulder_cluster1
+    400780: shoulder_cluster2
+    400782: shoulder_cluster3
+    400784: shoulder_cluster4
+    400786: shoulder_cluster5
+    400788: shoulder_clusters
+    400790: shoulder_DRIVER1
+    400792: shoulder_DRIVER2
+    400794: shoulder_DRIVER3
+    400796: shoulder_DRIVER4
+    400798: shoulder_DRIVER5
+    400800: shoulderarmor_deform
+    400802: shoulderarmor_ikHandle
+    400804: shoulderarmor_PV
+    400806: shoulderstrap_cluster1
+    400808: shoulderstrap_cluster2
+    400810: shoulderstrap_cluster3
+    400812: shoulderstrap_cluster4
+    400814: shoulderstrap_cluster5
+    400816: shoulderstrap_cluster6
+    400818: shoulderstrap_cluster7
+    400820: shoulderstrap_cluster8
+    400822: spine1
+    400824: spine1Ctrl
+    400826: spine1Grp
+    400828: spine2
+    400830: spine2Ctrl
+    400832: spine2Grp
+    400834: spine3
+    400836: spine3Ctrl
+    400838: spine3Grp
+    400840: switches_and_PV
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CTRL_GRP
+        weight: 1
+      - path: CTRL_GRP/hipGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp/FK_L_thighGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp/FK_L_thighGrp/FK_L_thighCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp/FK_L_thighGrp/FK_L_thighCtrl/FK_L_kneeGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp/FK_L_thighGrp/FK_L_thighCtrl/FK_L_kneeGrp/FK_L_kneeCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp/FK_L_thighGrp/FK_L_thighCtrl/FK_L_kneeGrp/FK_L_kneeCtrl/FK_L_ankleGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp/FK_L_thighGrp/FK_L_thighCtrl/FK_L_kneeGrp/FK_L_kneeCtrl/FK_L_ankleGrp/FK_L_ankleCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp/FK_L_thighGrp/FK_L_thighCtrl/FK_L_kneeGrp/FK_L_kneeCtrl/FK_L_ankleGrp/FK_L_ankleCtrl/FK_L_ballGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/L_leg_Grp/FK_L_thighGrp/FK_L_thighCtrl/FK_L_kneeGrp/FK_L_kneeCtrl/FK_L_ankleGrp/FK_L_ankleCtrl/FK_L_ballGrp/FK_L_ballCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp/FK_R_thighGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp/FK_R_thighGrp/FK_R_thighCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp/FK_R_thighGrp/FK_R_thighCtrl/FK_R_kneeGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp/FK_R_thighGrp/FK_R_thighCtrl/FK_R_kneeGrp/FK_R_kneeCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp/FK_R_thighGrp/FK_R_thighCtrl/FK_R_kneeGrp/FK_R_kneeCtrl/FK_R_ankleGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp/FK_R_thighGrp/FK_R_thighCtrl/FK_R_kneeGrp/FK_R_kneeCtrl/FK_R_ankleGrp/FK_R_ankleCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp/FK_R_thighGrp/FK_R_thighCtrl/FK_R_kneeGrp/FK_R_kneeCtrl/FK_R_ankleGrp/FK_R_ankleCtrl/FK_R_ballGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/R_leg_grp/FK_R_thighGrp/FK_R_thighCtrl/FK_R_kneeGrp/FK_R_kneeCtrl/FK_R_ankleGrp/FK_R_ankleCtrl/FK_R_ballGrp/FK_R_ballCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_index1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_index1Grp/FK_L_index1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_index1Grp/FK_L_index1Ctrl/FK_L_index2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_index1Grp/FK_L_index1Ctrl/FK_L_index2Grp/FK_L_index2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_index1Grp/FK_L_index1Ctrl/FK_L_index2Grp/FK_L_index2Ctrl/FK_L_index3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_index1Grp/FK_L_index1Ctrl/FK_L_index2Grp/FK_L_index2Ctrl/FK_L_index3Grp/FK_L_index3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_middle1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_middle1Grp/FK_L_middle1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_middle1Grp/FK_L_middle1Ctrl/FK_L_middle2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_middle1Grp/FK_L_middle1Ctrl/FK_L_middle2Grp/FK_L_middle2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_middle1Grp/FK_L_middle1Ctrl/FK_L_middle2Grp/FK_L_middle2Ctrl/FK_L_middle3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_middle1Grp/FK_L_middle1Ctrl/FK_L_middle2Grp/FK_L_middle2Ctrl/FK_L_middle3Grp/FK_L_middle3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_pinky1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_pinky1Grp/FK_L_pinky1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_pinky1Grp/FK_L_pinky1Ctrl/FK_L_pinky2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_pinky1Grp/FK_L_pinky1Ctrl/FK_L_pinky2Grp/FK_L_pinky2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_pinky1Grp/FK_L_pinky1Ctrl/FK_L_pinky2Grp/FK_L_pinky2Ctrl/FK_L_pinky3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_pinky1Grp/FK_L_pinky1Ctrl/FK_L_pinky2Grp/FK_L_pinky2Ctrl/FK_L_pinky3Grp/FK_L_pinky3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_ring1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_ring1Grp/FK_L_ring1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_ring1Grp/FK_L_ring1Ctrl/FK_L_ring2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_ring1Grp/FK_L_ring1Ctrl/FK_L_ring2Grp/FK_L_ring2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_ring1Grp/FK_L_ring1Ctrl/FK_L_ring2Grp/FK_L_ring2Ctrl/FK_L_ring3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_ring1Grp/FK_L_ring1Ctrl/FK_L_ring2Grp/FK_L_ring2Ctrl/FK_L_ring3Grp/FK_L_ring3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_thumb1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_thumb1Grp/FK_L_thumb1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_thumb1Grp/FK_L_thumb1Ctrl/FK_L_thumb2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_thumb1Grp/FK_L_thumb1Ctrl/FK_L_thumb2Grp/FK_L_thumb2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_thumb1Grp/FK_L_thumb1Ctrl/FK_L_thumb2Grp/FK_L_thumb2Ctrl/FK_L_thumb3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/L_clavGrp/L_clav_CTRL/FK_L_armGrp/FK_L_armCtrl/FK_L_elbowGrp/FK_L_elbowCtrl/FK_L_wristGrp/FK_L_wristCtrl/FK_L_handGrp/FK_L_handCtrl/FK_L_thumb1Grp/FK_L_thumb1Ctrl/FK_L_thumb2Grp/FK_L_thumb2Ctrl/FK_L_thumb3Grp/FK_L_thumb3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_index1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_index1Grp/FK_R_index1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_index1Grp/FK_R_index1Ctrl/FK_R_index2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_index1Grp/FK_R_index1Ctrl/FK_R_index2Grp/FK_R_index2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_index1Grp/FK_R_index1Ctrl/FK_R_index2Grp/FK_R_index2Ctrl/FK_R_index3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_index1Grp/FK_R_index1Ctrl/FK_R_index2Grp/FK_R_index2Ctrl/FK_R_index3Grp/FK_R_index3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_middle1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_middle1Grp/FK_R_middle1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_middle1Grp/FK_R_middle1Ctrl/FK_R_middle2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_middle1Grp/FK_R_middle1Ctrl/FK_R_middle2Grp/FK_R_middle2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_middle1Grp/FK_R_middle1Ctrl/FK_R_middle2Grp/FK_R_middle2Ctrl/FK_R_middle3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_middle1Grp/FK_R_middle1Ctrl/FK_R_middle2Grp/FK_R_middle2Ctrl/FK_R_middle3Grp/FK_R_middle3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_pinky1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_pinky1Grp/FK_R_pinky1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_pinky1Grp/FK_R_pinky1Ctrl/FK_R_pinky2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_pinky1Grp/FK_R_pinky1Ctrl/FK_R_pinky2Grp/FK_R_pinky2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_pinky1Grp/FK_R_pinky1Ctrl/FK_R_pinky2Grp/FK_R_pinky2Ctrl/FK_R_pinky3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_pinky1Grp/FK_R_pinky1Ctrl/FK_R_pinky2Grp/FK_R_pinky2Ctrl/FK_R_pinky3Grp/FK_R_pinky3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_ring1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_ring1Grp/FK_R_ring1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_ring1Grp/FK_R_ring1Ctrl/FK_R_ring2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_ring1Grp/FK_R_ring1Ctrl/FK_R_ring2Grp/FK_R_ring2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_ring1Grp/FK_R_ring1Ctrl/FK_R_ring2Grp/FK_R_ring2Ctrl/FK_R_ring3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_ring1Grp/FK_R_ring1Ctrl/FK_R_ring2Grp/FK_R_ring2Ctrl/FK_R_ring3Grp/FK_R_ring3Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_thumb1Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_thumb1Grp/FK_R_thumb1Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_thumb1Grp/FK_R_thumb1Ctrl/FK_R_thumb2Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_thumb1Grp/FK_R_thumb1Ctrl/FK_R_thumb2Grp/FK_R_thumb2Ctrl
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_thumb1Grp/FK_R_thumb1Ctrl/FK_R_thumb2Grp/FK_R_thumb2Ctrl/FK_R_thumb3Grp
+        weight: 1
+      - path: CTRL_GRP/hipGrp/hipCtrl/spine1Grp/spine1Ctrl/spine2Grp/spine2Ctrl/spine3Grp/spine3Ctrl/chestGrp/chestCtrl/R_clavGrp/R_clav_CTRL/FK_R_armGrp/FK_R_armCtrl/FK_R_elbowGrp/FK_R_elbowCtrl/FK_R_wristGrp/FK_R_wristCtrl/FK_R_handGrp/FK_R_handCtrl/FK_R_thumb1Grp/FK_R_thumb1Ctrl/FK_R_thumb2Grp/FK_R_thumb2Ctrl/FK_R_thumb3Grp/FK_R_thumb3Ctrl
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_index1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_index1Grp_ncl1_1/FK_L_index1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_index1Grp_ncl1_1/FK_L_index1Ctrl_ncl1_1/FK_L_index2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_index1Grp_ncl1_1/FK_L_index1Ctrl_ncl1_1/FK_L_index2Grp_ncl1_1/FK_L_index2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_index1Grp_ncl1_1/FK_L_index1Ctrl_ncl1_1/FK_L_index2Grp_ncl1_1/FK_L_index2Ctrl_ncl1_1/FK_L_index3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_index1Grp_ncl1_1/FK_L_index1Ctrl_ncl1_1/FK_L_index2Grp_ncl1_1/FK_L_index2Ctrl_ncl1_1/FK_L_index3Grp_ncl1_1/FK_L_index3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_middle1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_middle1Grp_ncl1_1/FK_L_middle1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_middle1Grp_ncl1_1/FK_L_middle1Ctrl_ncl1_1/FK_L_middle2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_middle1Grp_ncl1_1/FK_L_middle1Ctrl_ncl1_1/FK_L_middle2Grp_ncl1_1/FK_L_middle2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_middle1Grp_ncl1_1/FK_L_middle1Ctrl_ncl1_1/FK_L_middle2Grp_ncl1_1/FK_L_middle2Ctrl_ncl1_1/FK_L_middle3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_middle1Grp_ncl1_1/FK_L_middle1Ctrl_ncl1_1/FK_L_middle2Grp_ncl1_1/FK_L_middle2Ctrl_ncl1_1/FK_L_middle3Grp_ncl1_1/FK_L_middle3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_pinky1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_pinky1Grp_ncl1_1/FK_L_pinky1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_pinky1Grp_ncl1_1/FK_L_pinky1Ctrl_ncl1_1/FK_L_pinky2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_pinky1Grp_ncl1_1/FK_L_pinky1Ctrl_ncl1_1/FK_L_pinky2Grp_ncl1_1/FK_L_pinky2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_ring1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_ring1Grp_ncl1_1/FK_L_ring1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_ring1Grp_ncl1_1/FK_L_ring1Ctrl_ncl1_1/FK_L_ring2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_ring1Grp_ncl1_1/FK_L_ring1Ctrl_ncl1_1/FK_L_ring2Grp_ncl1_1/FK_L_ring2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_ring1Grp_ncl1_1/FK_L_ring1Ctrl_ncl1_1/FK_L_ring2Grp_ncl1_1/FK_L_ring2Ctrl_ncl1_1/FK_L_ring3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_ring1Grp_ncl1_1/FK_L_ring1Ctrl_ncl1_1/FK_L_ring2Grp_ncl1_1/FK_L_ring2Ctrl_ncl1_1/FK_L_ring3Grp_ncl1_1/FK_L_ring3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_thumb1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_thumb1Grp_ncl1_1/FK_L_thumb1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_thumb1Grp_ncl1_1/FK_L_thumb1Ctrl_ncl1_1/FK_L_thumb2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_thumb1Grp_ncl1_1/FK_L_thumb1Ctrl_ncl1_1/FK_L_thumb2Grp_ncl1_1/FK_L_thumb2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_thumb1Grp_ncl1_1/FK_L_thumb1Ctrl_ncl1_1/FK_L_thumb2Grp_ncl1_1/FK_L_thumb2Ctrl_ncl1_1/FK_L_thumb3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_armGrp/L_arm_IK_CTRL/FK_L_handGrp1/FK_L_handCtrl_ncl1_1/FK_L_thumb1Grp_ncl1_1/FK_L_thumb1Ctrl_ncl1_1/FK_L_thumb2Grp_ncl1_1/FK_L_thumb2Ctrl_ncl1_1/FK_L_thumb3Grp_ncl1_1/FK_L_thumb3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_thighGrp
+        weight: 1
+      - path: CTRL_GRP/IK_L_thighGrp/IK_L_ankleCtrl
+        weight: 1
+      - path: CTRL_GRP/IK_L_thighGrp/IK_L_ankleCtrl/FK_L_ballGrp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_L_thighGrp/IK_L_ankleCtrl/FK_L_ballGrp_ncl1_1/FK_L_ballCtrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_index1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_index1Grp_ncl1_1/FK_R_index1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_index1Grp_ncl1_1/FK_R_index1Ctrl_ncl1_1/FK_R_index2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_index1Grp_ncl1_1/FK_R_index1Ctrl_ncl1_1/FK_R_index2Grp_ncl1_1/FK_R_index2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_index1Grp_ncl1_1/FK_R_index1Ctrl_ncl1_1/FK_R_index2Grp_ncl1_1/FK_R_index2Ctrl_ncl1_1/FK_R_index3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_index1Grp_ncl1_1/FK_R_index1Ctrl_ncl1_1/FK_R_index2Grp_ncl1_1/FK_R_index2Ctrl_ncl1_1/FK_R_index3Grp_ncl1_1/FK_R_index3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_middle1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_middle1Grp_ncl1_1/FK_R_middle1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_middle1Grp_ncl1_1/FK_R_middle1Ctrl_ncl1_1/FK_R_middle2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_middle1Grp_ncl1_1/FK_R_middle1Ctrl_ncl1_1/FK_R_middle2Grp_ncl1_1/FK_R_middle2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_middle1Grp_ncl1_1/FK_R_middle1Ctrl_ncl1_1/FK_R_middle2Grp_ncl1_1/FK_R_middle2Ctrl_ncl1_1/FK_R_middle3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_middle1Grp_ncl1_1/FK_R_middle1Ctrl_ncl1_1/FK_R_middle2Grp_ncl1_1/FK_R_middle2Ctrl_ncl1_1/FK_R_middle3Grp_ncl1_1/FK_R_middle3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_pinky1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_pinky1Grp_ncl1_1/FK_R_pinky1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_pinky1Grp_ncl1_1/FK_R_pinky1Ctrl_ncl1_1/FK_R_pinky2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_pinky1Grp_ncl1_1/FK_R_pinky1Ctrl_ncl1_1/FK_R_pinky2Grp_ncl1_1/FK_R_pinky2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_pinky1Grp_ncl1_1/FK_R_pinky1Ctrl_ncl1_1/FK_R_pinky2Grp_ncl1_1/FK_R_pinky2Ctrl_ncl1_1/FK_R_pinky3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_pinky1Grp_ncl1_1/FK_R_pinky1Ctrl_ncl1_1/FK_R_pinky2Grp_ncl1_1/FK_R_pinky2Ctrl_ncl1_1/FK_R_pinky3Grp_ncl1_1/FK_R_pinky3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_ring1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_ring1Grp_ncl1_1/FK_R_ring1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_ring1Grp_ncl1_1/FK_R_ring1Ctrl_ncl1_1/FK_R_ring2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_ring1Grp_ncl1_1/FK_R_ring1Ctrl_ncl1_1/FK_R_ring2Grp_ncl1_1/FK_R_ring2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_ring1Grp_ncl1_1/FK_R_ring1Ctrl_ncl1_1/FK_R_ring2Grp_ncl1_1/FK_R_ring2Ctrl_ncl1_1/FK_R_ring3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_ring1Grp_ncl1_1/FK_R_ring1Ctrl_ncl1_1/FK_R_ring2Grp_ncl1_1/FK_R_ring2Ctrl_ncl1_1/FK_R_ring3Grp_ncl1_1/FK_R_ring3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_thumb1Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_thumb1Grp_ncl1_1/FK_R_thumb1Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_thumb1Grp_ncl1_1/FK_R_thumb1Ctrl_ncl1_1/FK_R_thumb2Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_thumb1Grp_ncl1_1/FK_R_thumb1Ctrl_ncl1_1/FK_R_thumb2Grp_ncl1_1/FK_R_thumb2Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_thumb1Grp_ncl1_1/FK_R_thumb1Ctrl_ncl1_1/FK_R_thumb2Grp_ncl1_1/FK_R_thumb2Ctrl_ncl1_1/FK_R_thumb3Grp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_armGrp/R_arm_IK_CTRL/FK_R_handGrp1/FK_R_handCtrl_ncl1_1/FK_R_thumb1Grp_ncl1_1/FK_R_thumb1Ctrl_ncl1_1/FK_R_thumb2Grp_ncl1_1/FK_R_thumb2Ctrl_ncl1_1/FK_R_thumb3Grp_ncl1_1/FK_R_thumb3Ctrl_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_thighGrp
+        weight: 1
+      - path: CTRL_GRP/IK_R_thighGrp/IK_R_ankleCtrl
+        weight: 1
+      - path: CTRL_GRP/IK_R_thighGrp/IK_R_ankleCtrl/FK_R_ballGrp_ncl1_1
+        weight: 1
+      - path: CTRL_GRP/IK_R_thighGrp/IK_R_ankleCtrl/FK_R_ballGrp_ncl1_1/FK_R_ballCtrl_ncl1_1
+        weight: 1
+      - path: hip
+        weight: 1
+      - path: hip/FK_L_thigh
+        weight: 1
+      - path: hip/FK_L_thigh/FK_L_knee
+        weight: 1
+      - path: hip/FK_L_thigh/FK_L_knee/FK_L_ankle
+        weight: 1
+      - path: hip/FK_L_thigh/FK_L_knee/FK_L_ankle/FK_L_ball
+        weight: 1
+      - path: hip/FK_L_thigh/FK_L_knee/FK_L_ankle/FK_L_ball/FK_L_ball_end
+        weight: 1
+      - path: hip/FK_R_thigh
+        weight: 1
+      - path: hip/FK_R_thigh/FK_R_knee
+        weight: 1
+      - path: hip/FK_R_thigh/FK_R_knee/FK_R_ankle
+        weight: 1
+      - path: hip/FK_R_thigh/FK_R_knee/FK_R_ankle/FK_R_ball
+        weight: 1
+      - path: hip/FK_R_thigh/FK_R_knee/FK_R_ankle/FK_R_ball/FK_R_ball_end
+        weight: 1
+      - path: hip/IK_L_thigh
+        weight: 1
+      - path: hip/IK_L_thigh/IK_L_knee
+        weight: 1
+      - path: hip/IK_L_thigh/IK_L_knee/IK_L_ankle
+        weight: 1
+      - path: hip/IK_L_thigh/IK_L_knee/IK_L_ankle/IK_L_ball
+        weight: 1
+      - path: hip/IK_L_thigh/IK_L_knee/IK_L_ankle/IK_L_ball/IK_L_ball_end
+        weight: 1
+      - path: hip/IK_R_thigh
+        weight: 1
+      - path: hip/IK_R_thigh/IK_R_knee
+        weight: 1
+      - path: hip/IK_R_thigh/IK_R_knee/IK_R_ankle
+        weight: 1
+      - path: hip/IK_R_thigh/IK_R_knee/IK_R_ankle/IK_R_ball
+        weight: 1
+      - path: hip/IK_R_thigh/IK_R_knee/IK_R_ankle/IK_R_ball/IK_R_ball_end
+        weight: 1
+      - path: hip/L_JIGGLE_BUTT
+        weight: 1
+      - path: hip/L_thigh
+        weight: 1
+      - path: hip/L_thigh/L_knee
+        weight: 1
+      - path: hip/L_thigh/L_knee/L_ankle
+        weight: 1
+      - path: hip/L_thigh/L_knee/L_ankle/L_ball
+        weight: 1
+      - path: hip/L_thigh/L_knee/L_ankle/L_ball/L_ball_end
+        weight: 1
+      - path: hip/R_JIGGLE_BUTT
+        weight: 1
+      - path: hip/R_thigh
+        weight: 1
+      - path: hip/R_thigh/R_knee
+        weight: 1
+      - path: hip/R_thigh/R_knee/R_ankle
+        weight: 1
+      - path: hip/R_thigh/R_knee/R_ankle/R_ball
+        weight: 1
+      - path: hip/R_thigh/R_knee/R_ankle/R_ball/R_ball_end
+        weight: 1
+      - path: hip/shoulderarmor_deform
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulder_cluster1
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulder_cluster2
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulder_cluster3
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulder_cluster4
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulder_cluster5
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulderstrap_cluster1
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulderstrap_cluster2
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulderstrap_cluster3
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulderstrap_cluster4
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulderstrap_cluster5
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulderstrap_cluster6
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulderstrap_cluster7
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_clusters/shoulderstrap_cluster8
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_DRIVER1
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_DRIVER1/shoulder_DRIVER2
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_DRIVER1/shoulder_DRIVER2/shoulder_DRIVER3
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_DRIVER1/shoulder_DRIVER2/shoulder_DRIVER3/shoulder_DRIVER4
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulder_DRIVER1/shoulder_DRIVER2/shoulder_DRIVER3/shoulder_DRIVER4/shoulder_DRIVER5
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulderarmor_ikHandle
+        weight: 1
+      - path: hip/shoulderarmor_deform/shoulderarmor_PV
+        weight: 1
+      - path: hip/spine1
+        weight: 1
+      - path: hip/spine1/spine2
+        weight: 1
+      - path: hip/spine1/spine2/spine3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_index1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_index1/FK_L_index2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_index1/FK_L_index2/FK_L_index3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_index1/FK_L_index2/FK_L_index3/FK_L_index_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_middle1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_middle1/FK_L_middle2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_middle1/FK_L_middle2/FK_L_middle3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_middle1/FK_L_middle2/FK_L_middle3/FK_L_middle_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_pinky1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_pinky1/FK_L_pinky2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_pinky1/FK_L_pinky2/FK_L_pinky3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_pinky1/FK_L_pinky2/FK_L_pinky3/FK_L_pinky_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_ring1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_ring1/FK_L_ring2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_ring1/FK_L_ring2/FK_L_ring3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_ring1/FK_L_ring2/FK_L_ring3/FK_L_ring_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_thumb1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_thumb1/FK_L_thumb2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_thumb1/FK_L_thumb2/FK_L_thumb3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/FK_L_arm/FK_L_elbow/FK_L_wrist/FK_L_hand/FK_L_thumb1/FK_L_thumb2/FK_L_thumb3/FK_L_thumb_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_index1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_index1/IK_L_index2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_index1/IK_L_index2/IK_L_index3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_index1/IK_L_index2/IK_L_index3/IK_L_index_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_middle1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_middle1/IK_L_middle2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_middle1/IK_L_middle2/IK_L_middle3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_middle1/IK_L_middle2/IK_L_middle3/IK_L_middle_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_pinky1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_pinky1/IK_L_pinky2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_pinky1/IK_L_pinky2/IK_L_pinky3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_pinky1/IK_L_pinky2/IK_L_pinky3/IK_L_pinky_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_ring1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_ring1/IK_L_ring2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_ring1/IK_L_ring2/IK_L_ring3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_ring1/IK_L_ring2/IK_L_ring3/IK_L_ring_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_thumb1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_thumb1/IK_L_thumb2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_thumb1/IK_L_thumb2/IK_L_thumb3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/IK_L_arm/IK_L_elbow/IK_L_wrist/IK_L_hand/IK_L_thumb1/IK_L_thumb2/IK_L_thumb3/IK_L_thumb_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_index1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_index1/L_index2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_index1/L_index2/L_index3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_index1/L_index2/L_index3/L_index_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_middle1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_middle1/L_middle2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_middle1/L_middle2/L_middle3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_middle1/L_middle2/L_middle3/L_middle_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_pinky1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_pinky1/L_pinky2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_pinky1/L_pinky2/L_pinky3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_pinky1/L_pinky2/L_pinky3/L_pinky_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_ring1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_ring1/L_ring2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_ring1/L_ring2/L_ring3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_ring1/L_ring2/L_ring3/L_ring_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_thumb1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_thumb1/L_thumb2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_thumb1/L_thumb2/L_thumb3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_clav/L_arm/L_elbow/L_wrist/L_hand/L_thumb1/L_thumb2/L_thumb3/L_thumb_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_JIGGLE_BREAST
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4/L_scarf_DRIVER5
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4/L_scarf_DRIVER5/L_scarf_DRIVER6
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4/L_scarf_DRIVER5/L_scarf_DRIVER6/L_scarf_DRIVER7
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4/L_scarf_DRIVER5/L_scarf_DRIVER6/L_scarf_DRIVER7/L_scarf_DRIVER8
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4/L_scarf_DRIVER5/L_scarf_DRIVER6/L_scarf_DRIVER7/L_scarf_DRIVER8/L_scarf_DRIVER9
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4/L_scarf_DRIVER5/L_scarf_DRIVER6/L_scarf_DRIVER7/L_scarf_DRIVER8/L_scarf_DRIVER9/L_scarf_DRIVER10
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4/L_scarf_DRIVER5/L_scarf_DRIVER6/L_scarf_DRIVER7/L_scarf_DRIVER8/L_scarf_DRIVER9/L_scarf_DRIVER10/L_scarf_DRIVER11
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/L_scarf_DRIVER1/L_scarf_DRIVER2/L_scarf_DRIVER3/L_scarf_DRIVER4/L_scarf_DRIVER5/L_scarf_DRIVER6/L_scarf_DRIVER7/L_scarf_DRIVER8/L_scarf_DRIVER9/L_scarf_DRIVER10/L_scarf_DRIVER11/L_scarf_DRIVER12
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/neck1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/neck1/neck2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/neck1/neck2/neck3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/neck1/neck2/neck3/head
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_index1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_index1/FK_R_index2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_index1/FK_R_index2/FK_R_index3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_index1/FK_R_index2/FK_R_index3/FK_R_index_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_middle1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_middle1/FK_R_middle2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_middle1/FK_R_middle2/FK_R_middle3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_middle1/FK_R_middle2/FK_R_middle3/FK_R_middle_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_pinky1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_pinky1/FK_R_pinky2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_pinky1/FK_R_pinky2/FK_R_pinky3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_pinky1/FK_R_pinky2/FK_R_pinky3/FK_R_pinky_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_ring1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_ring1/FK_R_ring2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_ring1/FK_R_ring2/FK_R_ring3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_ring1/FK_R_ring2/FK_R_ring3/FK_R_ring_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_thumb1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_thumb1/FK_R_thumb2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_thumb1/FK_R_thumb2/FK_R_thumb3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/FK_R_arm/FK_R_elbow/FK_R_wrist/FK_R_hand/FK_R_thumb1/FK_R_thumb2/FK_R_thumb3/FK_R_thumb_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_index1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_index1/IK_R_index2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_index1/IK_R_index2/IK_R_index3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_index1/IK_R_index2/IK_R_index3/IK_R_index_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_middle1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_middle1/IK_R_middle2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_middle1/IK_R_middle2/IK_R_middle3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_middle1/IK_R_middle2/IK_R_middle3/IK_R_middle_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_pinky1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_pinky1/IK_R_pinky2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_pinky1/IK_R_pinky2/IK_R_pinky3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_pinky1/IK_R_pinky2/IK_R_pinky3/IK_R_pinky_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_ring1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_ring1/IK_R_ring2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_ring1/IK_R_ring2/IK_R_ring3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_ring1/IK_R_ring2/IK_R_ring3/IK_R_ring_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_thumb1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_thumb1/IK_R_thumb2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_thumb1/IK_R_thumb2/IK_R_thumb3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/IK_R_arm/IK_R_elbow/IK_R_wrist/IK_R_hand/IK_R_thumb1/IK_R_thumb2/IK_R_thumb3/IK_R_thumb_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_index1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_index1/R_index2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_index1/R_index2/R_index3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_index1/R_index2/R_index3/R_index_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_middle1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_middle1/R_middle2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_middle1/R_middle2/R_middle3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_middle1/R_middle2/R_middle3/R_middle_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_pinky1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_pinky1/R_pinky2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_pinky1/R_pinky2/R_pinky3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_pinky1/R_pinky2/R_pinky3/R_pinky_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_ring1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_ring1/R_ring2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_ring1/R_ring2/R_ring3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_ring1/R_ring2/R_ring3/R_ring_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_thumb1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_thumb1/R_thumb2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_thumb1/R_thumb2/R_thumb3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_clav/R_arm/R_elbow/R_wrist/R_hand/R_thumb1/R_thumb2/R_thumb3/R_thumb_end
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_JIGGLE_BREAST
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1/R_scarf_DRIVER2
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1/R_scarf_DRIVER2/R_scarf_DRIVER3
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1/R_scarf_DRIVER2/R_scarf_DRIVER3/R_scarf_DRIVER4
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1/R_scarf_DRIVER2/R_scarf_DRIVER3/R_scarf_DRIVER4/R_scarf_DRIVER5
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1/R_scarf_DRIVER2/R_scarf_DRIVER3/R_scarf_DRIVER4/R_scarf_DRIVER5/R_scarf_DRIVER6
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1/R_scarf_DRIVER2/R_scarf_DRIVER3/R_scarf_DRIVER4/R_scarf_DRIVER5/R_scarf_DRIVER6/R_scarf_DRIVER7
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1/R_scarf_DRIVER2/R_scarf_DRIVER3/R_scarf_DRIVER4/R_scarf_DRIVER5/R_scarf_DRIVER6/R_scarf_DRIVER7/R_scarf_DRIVER8
+        weight: 1
+      - path: hip/spine1/spine2/spine3/chest/R_scarf_DRIVER1/R_scarf_DRIVER2/R_scarf_DRIVER3/R_scarf_DRIVER4/R_scarf_DRIVER5/R_scarf_DRIVER6/R_scarf_DRIVER7/R_scarf_DRIVER8/R_scarf_DRIVER9
+        weight: 1
+      - path: switches_and_PV
+        weight: 1
+      - path: switches_and_PV/L_arm_FKIKswitch
+        weight: 1
+      - path: switches_and_PV/L_leg_FKIKswitch
+        weight: 1
+      - path: switches_and_PV/R_arm_FKIKswitch
+        weight: 1
+      - path: switches_and_PV/R_leg_FKIKswitch
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
