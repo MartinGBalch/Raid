@@ -40,11 +40,14 @@ public class PylonManager : MonoBehaviour {
         {
             Pylon[i].GetComponent<BossPartsHealth>().ResetPylon();
         }
-        //NeedReset = true;
-       // PylonCount = 4;
+       
+       
         laser.charge = true;
     }
 
+    void TurnOffAnimRun() { AnimRun = false; }
+
+    public bool AnimRun = false;
 	// Update is called once per frame
 	void Update ()
     {
@@ -55,7 +58,13 @@ public class PylonManager : MonoBehaviour {
 
             if(Health.HealthStage != 2)
             {
-                Health.RunAnim();
+                if(AnimRun == false)
+                {
+                    Invoke("TurnOffAnimRun", 12);
+                    Health.RunAnim();
+                    AnimRun = true;
+                }
+               
             }
             
 

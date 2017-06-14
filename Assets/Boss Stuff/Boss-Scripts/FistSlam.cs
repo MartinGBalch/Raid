@@ -56,7 +56,7 @@ public class FistSlam : MonoBehaviour
             
             
             SpawnPos = Target.transform.position + (Target.transform.forward * Dist);
-            SpawnPos.y = 20;
+            SpawnPos.y = 15;
             Baby.transform.position = SpawnPos;
            Instantiate(Baby);
         
@@ -71,7 +71,7 @@ public class FistSlam : MonoBehaviour
         Baby.transform.Rotate(0, Arc, 0);
 
         SpawnPos = Target.transform.position + (Target.transform.forward * Dist) + (Target.transform.right * (Dist * 2));
-        SpawnPos.y = 20;
+        SpawnPos.y = 15;
         Baby.transform.position = SpawnPos;
        Instantiate(Baby);
     }
@@ -84,7 +84,7 @@ public class FistSlam : MonoBehaviour
         Baby.transform.Rotate(0, -Arc, 0);
 
         SpawnPos = Target.transform.position + (Target.transform.forward * Dist) + (Target.transform.right * (-Dist * 2));
-        SpawnPos.y = 20;
+        SpawnPos.y = 15;
         Baby.transform.position = SpawnPos;
         Instantiate(Baby);
     }

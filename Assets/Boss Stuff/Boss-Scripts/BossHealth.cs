@@ -119,17 +119,22 @@ public class BossHealth : MonoBehaviour, IDamageable
 
                 
                 anim.SetBool("IsVul", IsVulner);
-                IsVulner = false;
+                
             }
 
-            
-            BossState.Behaviour = 69;
+            if(HealthStage != 2)
+            {
+                BossState.Behaviour = 69;
+            }
+           
             
 
             if(Stage1Health <= 0 && HealthStage == 0)
             {
+                IsVulner = false;
                 Bugs = true;
                 Manager.Dela();
+                
                 anim.SetBool("IsVul", IsVulner);
              //   BabySpawner.RunMechanic();
                 BossState.PickBehavior();
@@ -141,6 +146,8 @@ public class BossHealth : MonoBehaviour, IDamageable
             }
             else if (Stage2Health <= 0 && HealthStage == 1)
             {
+                IsVulner = false;
+               
                 Bugs = true;
                 Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);
@@ -153,7 +160,7 @@ public class BossHealth : MonoBehaviour, IDamageable
             }
             else if (Stage3Health <= 0 && HealthStage == 2 && end == false)
             {
-               
+                
                 end = true;
                // Destroy(gameObject);
 
@@ -164,6 +171,8 @@ public class BossHealth : MonoBehaviour, IDamageable
 
             if(VulnerableTime <= 0)
             {
+                IsVulner = false;
+               
                 Bugs = true;
                 Manager.Dela();
                 anim.SetBool("IsVul", IsVulner);

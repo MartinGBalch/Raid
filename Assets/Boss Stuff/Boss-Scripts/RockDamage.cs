@@ -29,6 +29,7 @@ public class RockDamage : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(MyT.position, -Vector3.up, out hit, 50))
         {
+
             distDIF = Mathf.Abs(hit.point.y - transform.position.y);
 
             Vector3 NewPos = new Vector3(transform.position.x, transform.position.y - distDIF, transform.position.z);
