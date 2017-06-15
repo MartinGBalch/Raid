@@ -39,6 +39,7 @@ public class Bossraise : MonoBehaviour {
             if (run == true)
             {
                 Cam.openinglock = true;
+                Player.openinglock = true;
                 DT = Time.deltaTime;
                 if (runOnce)
                 {

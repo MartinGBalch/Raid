@@ -7,6 +7,7 @@ public class BossEffectController : MonoBehaviour {
     public GameObject[] Slams;
     public ParticleSystem[] screams;
     private ThirdPersonCameraController cam;
+    private ThirdPersonPlayerController player;
     private BossHealth HP;
     private CameraShake Shake;
     private TimeManager DeltaTime;
@@ -21,6 +22,7 @@ public class BossEffectController : MonoBehaviour {
     public GameObject BossByeBye;
     bool fix = false;
     bool start = true;
+    public Mesh mesh;
 	// Use this for initialization
 	void Start () {
         birdy = FindObjectOfType<BirdMotor>();
@@ -31,7 +33,7 @@ public class BossEffectController : MonoBehaviour {
         HP = GetComponent<BossHealth>();
         cam = FindObjectOfType<ThirdPersonCameraController>();
         Shake = FindObjectOfType<CameraShake>();
-
+        player = FindObjectOfType<ThirdPersonPlayerController>();
     }
 	
 	// Update is called once per frame
@@ -52,6 +54,7 @@ public class BossEffectController : MonoBehaviour {
             {
                 opening = false;
                 cam.openinglock = false;
+                player.openinglock = false;
                 cam.look = looks[3];
                 birdy.cinematic = false;
                 anim.SetBool("Cinematic", false);
@@ -82,7 +85,7 @@ public class BossEffectController : MonoBehaviour {
             }
             else
             {
-
+                
                 cam.openinglock = false;
             }
 

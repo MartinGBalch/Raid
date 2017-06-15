@@ -8,12 +8,13 @@ public class CinematicSwordGrab : MonoBehaviour {
     public GameObject sword, sword2;
     public bool Grabbed;
     public ThirdPersonPlayerController Player;
+    private ThirdPersonCameraController cam;
     public ParticleSystem Obsorb;
     public ParticleSeek1 seek;
     public AudioSource obsorb;
     public bool die;
 	void Start () {
-		
+        cam = FindObjectOfType<ThirdPersonCameraController>();
 	}
 
     float DT;
@@ -45,7 +46,7 @@ public class CinematicSwordGrab : MonoBehaviour {
         }
 	}
 
-
+    public float speed =.01f;
     public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -58,6 +59,7 @@ public class CinematicSwordGrab : MonoBehaviour {
                 Obsorb.Play();
                 Player.anim.SetTrigger("Grab");
                 Player.MV.grabed = true;
+                cam.Grabmove = true;
                 if (obsorb.isPlaying == false)
                 {
                     obsorb.Play();
@@ -66,11 +68,12 @@ public class CinematicSwordGrab : MonoBehaviour {
             if (Grabbed == true)
             {
                 Player.rb.velocity = new Vector3(0, Player.rb.velocity.y, 0);
-                sword.transform.localScale -= new Vector3(DT , DT  , DT );
-                sword2.transform.localScale += new Vector3(DT , DT  , DT );
+                sword.transform.localScale -= new Vector3(speed, speed, speed);
+                sword2.transform.localScale += new Vector3(speed, speed, speed);
             }
             if (sword.transform.localScale.x <= 0)
             {
+                cam.Grabmove = false;
                 Grabbed = false;
                 obsorb.Stop();
                 Player.MV.Armed = true;

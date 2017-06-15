@@ -585,32 +585,49 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
 
     }
-    
+    public float movespeed = .01f;
+    public float movespeed2 = .08f, rotspeed = 2;
     public bool openinglock = false;
-    public GameObject look;
+    public GameObject look, holdpos, grabpos;
+    public bool Grabmove;
     void LateUpdate ()
     {
         DT = DeltaTime.DT;
         playerWatch();
         KeyInput();
-        if (openinglock == false)
+        if (Grabmove == false)
         {
-            switch (CurrentState)
+            if (openinglock == false)
             {
-                case States.NonCombatCamState:
-                    CamMoveState();
-                    break;
-                case States.CombatCamState:
-                    CombatMoveCamState();
-                    break;
+                switch (CurrentState)
+                {
+                    case States.NonCombatCamState:
+                        CamMoveState();
+                        break;
+                    case States.CombatCamState:
+                        CombatMoveCamState();
+                        break;
+                }
+            }
+            else
+            {
+                target = look;
+                transform.position = Vector3.MoveTowards(transform.position, holdpos.transform.position, movespeed);
+
+                var fwd = Trans.forward;
+
+                var direct = (target.transform.position - Trans.position).normalized;
+
+                var lkat = Vector3.Slerp(fwd, direct, DT * tempDamp * 2);
+
+                Trans.LookAt(lkat + Trans.position, Vector3.up);
             }
         }
         else
         {
-            target = look;
-            CameraLock();
+            transform.position = Vector3.MoveTowards(transform.position, grabpos.transform.position, movespeed2);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, grabpos.transform.rotation, rotspeed);
         }
-
         if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == true)
         {
             Cursor.lockState = CursorLockMode.None;
