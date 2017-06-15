@@ -60,11 +60,8 @@ public class FadeManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-<<<<<<< HEAD
-        Time.timeScale = 1;
-=======
+        
         Time.timeScale = 1.0f;
->>>>>>> 6709966adbfbfa24b64ab35e75c184e8b37b2e06
         GameName.enabled = false;
         start.enabled = false;
         setting.enabled = false;
