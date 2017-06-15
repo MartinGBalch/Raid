@@ -380,7 +380,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             tempDamp -= DT * 50;
         }
-        tempDamp = Mathf.Clamp(tempDamp, 2, 50);
+        tempDamp = Mathf.Clamp(tempDamp, 1, 20);
        
         var fwd = Trans.forward;
 

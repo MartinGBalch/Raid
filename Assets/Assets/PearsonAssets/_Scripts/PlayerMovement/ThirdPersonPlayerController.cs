@@ -78,7 +78,7 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         public AudioSource Slashes, FootSteps, Dasher, SuperChargeSource;
         public AudioClip[] SlashSound, Footstep, DashingSound, Teleport, fall;
         public ControllerSupport Controller;
-        public ParticleSystem Slash, SlashDown, Poof, DashAir, LaserParticle, StepLeft, StepRight, SlashStraight, DashDust, Land;
+        public ParticleSystem Slash, SlashDown, Poof, DashAir, LaserParticle, StepLeft, StepRight, SlashStraight, DashDust, Land,Poofstart;
         public ParticleSystem[] SuperCharged, Poofs, DashParticles;
         public PlayerHealth health;
 
@@ -875,6 +875,8 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         if (StopSuper == true)
         {
             NonCombatState = States.IdleState;
+            AttackingState = States.AttackOne;
+            MV.attacking = false;
         }
         if (beginSuper == true)
         {
@@ -1159,13 +1161,16 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
         else
         {
-            if(once == true)
+            if (once == true)
             {
                 once = false;
-                Objects.Poof.Play();
+                Instantiate(Objects.Poof, transform.position, Objects.Poofstart.transform.rotation); 
             }
-            transform.position = holdpos.transform.position;
-            transform.rotation = holdpos.transform.rotation;
+            else
+            {
+                transform.position = holdpos.transform.position;
+                transform.rotation = holdpos.transform.rotation;
+            }
         }
     }
     bool once = true;

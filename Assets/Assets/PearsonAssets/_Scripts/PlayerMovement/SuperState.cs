@@ -79,6 +79,7 @@ public class SuperState : MonoBehaviour
             Player.anim.SetInteger("SuperNumb", 0);
             Player.StopSuper = true;
 
+            Player.MV.Attacking = false;
             CurrentSuperState = States.WaitingState;
         }
     }
@@ -104,6 +105,8 @@ public class SuperState : MonoBehaviour
             Player.Objects.LaserParticle.Stop();
             Player.Objects.LaserParticle.GetComponent<ParticleSeek1>().enabled = false;
             CurrentSuperState = States.WaitingState;
+
+            Player.MV.Attacking = false;
         }
     }
     public void DoIce()
@@ -123,7 +126,7 @@ public class SuperState : MonoBehaviour
             Player.anim.SetTrigger("EndSuper");
             Player.anim.SetInteger("SuperNumb", 0);
             Player.StopSuper = true;
-
+            Player.MV.Attacking = false;
             CurrentSuperState = States.WaitingState;
         }
     }

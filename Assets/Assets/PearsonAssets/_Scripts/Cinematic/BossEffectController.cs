@@ -77,17 +77,7 @@ public class BossEffectController : MonoBehaviour {
                     countdown = lookTime;
                 fix = true;
             }
-
-            if(countdown > 0)
-            {
-                cam.look = looks[3];
-                cam.openinglock = true;
-            }
-            else
-            {
-                
-                cam.openinglock = false;
-            }
+            
 
 
         }
@@ -120,7 +110,11 @@ public class BossEffectController : MonoBehaviour {
     public void BeginDie()
     {
         anim.SetBool("Cinematic", true);
-
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].GetComponent<IDamageable>().TakeDamage(100000000);
+        }
     }
     public float offset;
     bool shrink;

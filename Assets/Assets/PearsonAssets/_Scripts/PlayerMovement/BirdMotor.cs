@@ -23,6 +23,7 @@ public class BirdMotor : MonoBehaviour
     public ControllerSupport Controller;
     private TimeManager DeltaTime;
     public float attackSpeedDive, AttackSpeed;
+    public ParticleSystem jet;
     public Animator anim;
     enum States
     {
@@ -237,6 +238,7 @@ public class BirdMotor : MonoBehaviour
                 AttackTimer -= DT;
                 if (Vector3.Distance(Trans.position, (TempTarget.transform.position + killOffset)) < 1 || AttackTimer < 0)
                 {
+                    jet.Stop();
                     CurrentState = States.idleState;
                 }
             }
@@ -251,6 +253,8 @@ public class BirdMotor : MonoBehaviour
             AttackTimer -= DT;
             if (Vector3.Distance(Trans.position, (killpos + killOffset)) < 1 || AttackTimer < 0)
             {
+
+                jet.Stop();
                 CurrentState = States.idleState;
             }
 
@@ -283,7 +287,10 @@ public class BirdMotor : MonoBehaviour
             {
                 if (CamController.target != null && PlayerController.MV.BirdSuper == false)
                 {
-                    
+                    if (jet.isPlaying == false)
+                    {
+                        jet.Play();
+                    }
                     anim.ResetTrigger("Idle");
                     anim.SetTrigger("Attack");
                     TempTarget = CamController.target.gameObject;

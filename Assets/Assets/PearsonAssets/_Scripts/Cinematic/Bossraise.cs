@@ -103,6 +103,13 @@ public class Bossraise : MonoBehaviour {
                             dust[i].Play();
                         }
                     }
+                    for (int i = 0; i < beam.Length; i++)
+                    {
+                        if (beam[i] != null)
+                        {
+                            beam[i].Stop();
+                        }
+                    }
                 }
 
                 

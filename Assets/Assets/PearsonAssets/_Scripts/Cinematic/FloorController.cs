@@ -41,10 +41,6 @@ public class FloorController : MonoBehaviour {
                     falltime = falldelay;
                     fall = true;
                     raise = true;
-                    //for(int i = 0; i < props.Length; i++)
-                    //{
-                    //    props[i].SetActive(false);
-                    //}
                     Floor2.SetActive(true);
                     flooranim.SetTrigger("Fall");
                     shake.StartShake(shake.GroundFallProperties);
@@ -77,10 +73,11 @@ public class FloorController : MonoBehaviour {
                     {
 
                         platforms.transform.position += new Vector3(0, DT.DT * raisespeed, 0);
-                        platforms.transform.position = new Vector3(platforms.transform.position.x, Mathf.Clamp(platforms.transform.position.y, 9.5f, 10.5f), platforms.transform.position.z);
-                        if (platforms.transform.position.y > 10.49f)
+                        platforms.transform.position = new Vector3(platforms.transform.position.x, Mathf.Clamp(platforms.transform.position.y, 12, 13.3f), platforms.transform.position.z);
+                        if (platforms.transform.position.y > 13.29f)
                         {
                             raise = false;
+                            grow = true;
                         }
                     }
                     else
