@@ -18,8 +18,10 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
     public float AfkTime = 4;
     private float SetAfkTime;
-    public int MouseXSpeed = 5;
-    public int MouseYSpeed = 3;
+    
+    public float MouseXSpeed = 5;
+  
+    public float MouseYSpeed = 3;
     public int HorzSpeed = 5;
     public float maxViewDist = 25;
     public float minViewDist = 1;
@@ -82,7 +84,9 @@ public class ThirdPersonCameraController : MonoBehaviour {
     void Start()
     {
         Trans = GetComponent<Transform>();
-       
+
+        MouseYSpeed = SensitivityController.Ysensitivity;
+        MouseXSpeed = SensitivityController.Xsensitivity;
         Vector3 angles = Trans.eulerAngles;
         x = angles.x;
         y = angles.y;
@@ -368,20 +372,35 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         negDistance = new Vector3(0.0f, 0.0f, -distance);
         position = rotation * negDistance + follow.position;
-        if (!PlayerController.MV.moved && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0))
-        {
-            tempDamp = 50;
-        }
-        else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0 )
+        if (Vector3.Distance(follow.transform.position, transform.position) < .8f)
         {
             tempDamp += DT * 50;
+
+            camSmoothDampTimeNonLock -= DT * 20;
         }
-        else
+        else if(Vector3.Distance(follow.transform.position, transform.position) > 1)
         {
-            tempDamp -= DT * 50;
+            if (!PlayerController.MV.moved && (Input.GetAxis("Mouse X") != 0 && Input.GetAxis("Mouse Y") != 0 && Controller.RightStickVertical != 0 && Controller.RightStickHorizontal != 0))
+            {
+                tempDamp = 50;
+                camSmoothDampTimeNonLock = .15f;
+            }
+            else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Controller.RightStickVertical != 0 || Controller.RightStickHorizontal != 0)
+            {
+                tempDamp += DT * 50;
+                camSmoothDampTimeNonLock -= DT * 50;
+            }
+            else
+            {
+                tempDamp -= DT * 50;
+
+                camSmoothDampTimeNonLock += DT * 50;
+            }
         }
-        tempDamp = Mathf.Clamp(tempDamp, 1, 20);
-       
+        tempDamp = Mathf.Clamp(tempDamp, 1, 25);
+        camSmoothDampTimeNonLock = Mathf.Clamp(camSmoothDampTimeNonLock,.1f, .13f);
+      
+        
         var fwd = Trans.forward;
 
         var direct = (follow.position - Trans.position).normalized;
@@ -397,8 +416,8 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             transform.position = stopPos;
         }
-        //x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .03f;
-
+        x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .01f;
+        x += Controller.RightStickHorizontal * HorzSpeed * distance * .01f;
         if (target != null)
         {
             Vector3 screenPoint = cam.WorldToViewportPoint(target.transform.position);
@@ -590,12 +609,14 @@ public class ThirdPersonCameraController : MonoBehaviour {
     public bool openinglock = false;
     public GameObject look, holdpos, grabpos;
     public bool Grabmove;
+    bool entercam = true;
+
     void LateUpdate ()
     {
         DT = DeltaTime.DT;
         playerWatch();
         KeyInput();
-        if (Grabmove == false)
+        if (Grabmove == false )
         {
             if (openinglock == false)
             {
@@ -623,7 +644,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
                 Trans.LookAt(lkat + Trans.position, Vector3.up);
             }
         }
-        else
+        else if(Grabmove)
         {
             transform.position = Vector3.MoveTowards(transform.position, grabpos.transform.position, movespeed2);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, grabpos.transform.rotation, rotspeed);

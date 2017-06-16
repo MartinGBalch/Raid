@@ -320,8 +320,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
             Objects.mesh.SetActive(true);
 
             Objects.hitbox.SetActive(false);
-            anim.ResetTrigger("Grab");
-            anim.SetTrigger("EndGrab");
+            anim.ResetTrigger("EndDashAttack");
+            anim.ResetTrigger("DashAttack");
+            anim.SetTrigger("EndDashAttack");
             if (Super.Charge != 0)
             {
                 Objects.DashParticles[Super.Charge - 1].Stop();
@@ -407,8 +408,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
                 MV.attacking = true;
                 MV.mouseAttack = false;
                 Objects.Poofs[Super.Charge].Play();
-                anim.ResetTrigger("EndGrab");
-                anim.SetTrigger("Grab");
+                anim.ResetTrigger("EndDashAttack");
+                anim.ResetTrigger("DashAttack");
+                anim.SetTrigger("DashAttack");
                 AttackdashTime = MV.blinkTime;
                 Energy.Energy -= 25;
                 NonCombatState = States.DashAttackState;

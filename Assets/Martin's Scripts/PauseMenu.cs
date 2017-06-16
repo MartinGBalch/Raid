@@ -55,7 +55,9 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || controller.StartButton)
         {
-           //SetTime = Time.timeScale;
+            //SetTime = Time.timeScale;
+
+            
             paused = true;
             PauseCanvas.enabled = true;
             pausePanel.SetActive(true);

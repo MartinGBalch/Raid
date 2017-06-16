@@ -64,7 +64,7 @@ public class Bossraise : MonoBehaviour {
                 SpotLight.spotAngle += DT * 20;
                 DirectionalLight.intensity += DT * 5;
 
-                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 1, 70);
+                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity,  2, 70);
 
                 SpotLight.spotAngle = Mathf.Clamp(SpotLight.spotAngle, 2.250593f, 100);
 
@@ -85,6 +85,7 @@ public class Bossraise : MonoBehaviour {
                     run = false;
                     runOnce = true;
                     CanDamage = true;
+                    SpotLight.intensity = 2;
                 }
 
             }
