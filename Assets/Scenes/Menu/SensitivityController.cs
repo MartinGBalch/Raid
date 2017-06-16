@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SensitivityController : MonoBehaviour {
-    [Range(40, 120)]
+    [Range(40, 200)]
     public static float Xsensitivity;
-    [Range(2, 20)]
+    [Range(2, 50)]
     public static float Ysensitivity;
-    [Range(40, 120)]
+    [Range(40, 200)]
     public float Xsensitivityset;
-    [Range(2, 20)]
+    [Range(2, 50)]
     public float Ysensitivityset;
 
     public Slider Xaxis, Yaxis;
