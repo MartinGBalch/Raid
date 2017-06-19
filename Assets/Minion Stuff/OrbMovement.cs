@@ -33,7 +33,7 @@ public class OrbMovement : MonoBehaviour
     void Start()
     {
         DeltaTime = FindObjectOfType<TimeManager>();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
         agent = GetComponent<NavMeshAgent>();
         FollowDistance = AttackRange - 5;
         StartSpeed = AttackSpeed;

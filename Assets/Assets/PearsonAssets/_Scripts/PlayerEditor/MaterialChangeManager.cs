@@ -168,39 +168,7 @@ public class MaterialChangeManager : MonoBehaviour {
 
           
         }
-        else
-        {
-            //switch (desired)
-            //{
-            //    case 0:
-            //        //baseMat = baseMats[0];
-            //        rend = basereders[0];
-            //        break;
-            //    case 1:
-            //        //baseMat = baseMats[1];
-            //        rend = basereders[1];
-            //        break;
-            //    case 2:
-            //        //baseMat = baseMats[2];
-            //        rend = basereders[2];
-            //        break;
-            //    case 3:
-            //        //baseMat = baseMats[3];
-            //        rend = basereders[3];
-            //        break;
-            //    case 4:
-            //       // baseMat = baseMats[4];
-            //        rend = basereders[4];
-            //        break;
-            //}
-        }
-        for(int i = 0; i < CustombaseMats.Length; i++)
-        {
-        //    CustombaseRenders[i].gameObject.SetActive(false);
-        //    basereders[i].gameObject.SetActive(false);
-        //    CustombaseRenders[desired].enabled = false;
-        //    basereders[desired].enabled = false;
-        }
+       
         if(custom)
         {
             if (CustombaseMats[desired] != null)

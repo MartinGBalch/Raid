@@ -98,6 +98,17 @@ public class ThirdPersonPlayerController : MonoBehaviour {
     }
 
 
+    static private ThirdPersonPlayerController P1;
+
+    static public ThirdPersonPlayerController FindPlayerGameObject()
+    {
+        if(P1 == null)
+        {
+            P1 = FindObjectOfType<ThirdPersonPlayerController>();
+        }
+        return P1;
+    }
+
 
     public Rigidbody rb;
     public Animator anim;
