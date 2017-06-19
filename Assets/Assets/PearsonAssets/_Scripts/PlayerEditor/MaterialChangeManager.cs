@@ -203,8 +203,10 @@ public class MaterialChangeManager : MonoBehaviour {
         }
         if(custom)
         {
-            CustombaseRenders.material = CustombaseMats[desired];
-       
+            if (CustombaseMats[desired] != null)
+            {
+                CustombaseRenders.material = CustombaseMats[desired];
+            }
         }
         else
         {

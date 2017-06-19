@@ -107,8 +107,6 @@ public class CamControllerEditor : MonoBehaviour {
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    //Debug.Log(hit.collider.name);
-                    Debug.Log(hit.collider.tag);
                     if (hit.collider.tag == "MenuPlayer")
                     {
                         dragonselect = false;
@@ -215,6 +213,8 @@ public class CamControllerEditor : MonoBehaviour {
         point = points[i];
         point.transform.position = points[i].transform.position;
         point.transform.rotation = points[i].transform.rotation;
+
+        Textmenu.SetActive(true);
     }
     public void SelectOptions(int i)
     {
@@ -239,6 +239,8 @@ public class CamControllerEditor : MonoBehaviour {
         {
             SwordMenus[i].SetActive(true);
         }
+
+        Textmenu.SetActive(true);
     }
     public void SelectEdit(int i)
     {
@@ -248,7 +250,9 @@ public class CamControllerEditor : MonoBehaviour {
             {
                 Allmenus[j].SetActive(false);
             }
+           
         }
+        Textmenu.SetActive(true);
         if (playerselect)
         {
             PlayerEditMenus[i].SetActive(true);
