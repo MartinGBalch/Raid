@@ -55,6 +55,7 @@ public class winManager1 : MonoBehaviour {
         credits.enabled = false;
         Menu.enabled = false;
         Overlay.enabled = false;
+        controller = FindObjectOfType<ControllerSupport>();
     }
 
 

@@ -39,6 +39,7 @@ public class Bossraise : MonoBehaviour {
             if (run == true)
             {
                 Cam.openinglock = true;
+                Player.openinglock = true;
                 DT = Time.deltaTime;
                 if (runOnce)
                 {
@@ -63,7 +64,7 @@ public class Bossraise : MonoBehaviour {
                 SpotLight.spotAngle += DT * 20;
                 DirectionalLight.intensity += DT * 5;
 
-                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity, 1, 70);
+                SpotLight.intensity = Mathf.Clamp(SpotLight.intensity,  2, 70);
 
                 SpotLight.spotAngle = Mathf.Clamp(SpotLight.spotAngle, 2.250593f, 100);
 
@@ -84,6 +85,7 @@ public class Bossraise : MonoBehaviour {
                     run = false;
                     runOnce = true;
                     CanDamage = true;
+                    SpotLight.intensity = 2;
                 }
 
             }
@@ -100,6 +102,13 @@ public class Bossraise : MonoBehaviour {
                         if (dust[i] != null)
                         {
                             dust[i].Play();
+                        }
+                    }
+                    for (int i = 0; i < beam.Length; i++)
+                    {
+                        if (beam[i] != null)
+                        {
+                            beam[i].Stop();
                         }
                     }
                 }

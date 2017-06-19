@@ -45,8 +45,6 @@ public class CollisionDMG : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
-        DeltaTime = FindObjectOfType<TimeManager>();
         MyT = GetComponent<Transform>();
     }
 
@@ -54,7 +52,7 @@ public class CollisionDMG : MonoBehaviour {
     void Update()
     {
 
-        DT = DeltaTime.DT;
+        DT = Time.deltaTime;
         
         RaycastHit hit;
         if (Physics.Raycast(MyT.position, -MyT.up, out hit, 20))

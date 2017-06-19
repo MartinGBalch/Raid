@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ControllerSupport : MonoBehaviour {
 
-    public bool Xbox, PS4;
+    public static bool Xbox, PS4;
     public bool Fire, Charge, Attack, Jump, Sprint, ChargeAttack, SuperCharge,SuperLaser,StartButton, GrabButton;
     public float Horizontal, Vertical,Dash,Target,RightStickHorizontal, RightStickVertical;
 

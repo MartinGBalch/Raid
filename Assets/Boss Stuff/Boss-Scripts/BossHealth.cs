@@ -16,7 +16,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     public float Stage3Health;
     public float MaxHealth;
     public int HealthStage;
-
+    private ControllerSupport controller;
     public float ResistDamage;
     private float StartResistance;
     public float VulnerableTime;
@@ -68,7 +68,7 @@ public class BossHealth : MonoBehaviour, IDamageable
         Manager = FindObjectOfType<PylonManager>();
         anim = GetComponent<Animator>();
         DeltaTime = FindObjectOfType<TimeManager>();
-
+        controller = FindObjectOfType<ControllerSupport>();
         Shake = FindObjectOfType<CameraShake>();
 
         BossState = GetComponent<BossStateManagerTwo>();
@@ -91,10 +91,11 @@ public class BossHealth : MonoBehaviour, IDamageable
         //else { anim.SetTrigger("Scream"); }
        
     }
-
+    bool cheatonce;
 	// Update is called once per frame
 	void Update ()
     {
+      
         DT = DeltaTime.DT;
 
         if (Bugs == true)

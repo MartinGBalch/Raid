@@ -21,8 +21,9 @@ public class BirdMotor : MonoBehaviour
     public AudioClip ChargSound, FireSound;
     private Transform Trans;
     public ControllerSupport Controller;
-    private TimeManager DeltaTime;
+    public TimeManager DeltaTime;
     public float attackSpeedDive, AttackSpeed;
+    public ParticleSystem jet;
     public Animator anim;
     enum States
     {
@@ -33,12 +34,26 @@ public class BirdMotor : MonoBehaviour
         ChargeState,
         SuperState,
     }
+    GameObject[] temp;
+    GameObject[] temp3;
 
     States CurrentState, IdleState;
-
+    float deleteDelay = .02f; 
     void Start()
     {
-        DeltaTime = FindObjectOfType<TimeManager>();
+
+
+        temp = GameObject.FindGameObjectsWithTag("Dragon");
+
+        GameObject[] temp2 = GameObject.FindGameObjectsWithTag("Menu");
+        temp3 = GameObject.FindGameObjectsWithTag("MenuPlayer");
+
+        for (int i = 0; i < temp2.Length; i++)
+        {
+            temp2[i].SetActive(false);
+
+        }
+        
         Trans = GetComponent<Transform>();
        // offset = Player.transform.position + transform.position;
         SetcamSmoothDampTime = BirdSmoothDampIdle;
@@ -237,6 +252,7 @@ public class BirdMotor : MonoBehaviour
                 AttackTimer -= DT;
                 if (Vector3.Distance(Trans.position, (TempTarget.transform.position + killOffset)) < 1 || AttackTimer < 0)
                 {
+                    jet.Stop();
                     CurrentState = States.idleState;
                 }
             }
@@ -251,6 +267,8 @@ public class BirdMotor : MonoBehaviour
             AttackTimer -= DT;
             if (Vector3.Distance(Trans.position, (killpos + killOffset)) < 1 || AttackTimer < 0)
             {
+
+                jet.Stop();
                 CurrentState = States.idleState;
             }
 
@@ -283,7 +301,10 @@ public class BirdMotor : MonoBehaviour
             {
                 if (CamController.target != null && PlayerController.MV.BirdSuper == false)
                 {
-                    
+                    if (jet.isPlaying == false)
+                    {
+                        jet.Play();
+                    }
                     anim.ResetTrigger("Idle");
                     anim.SetTrigger("Attack");
                     TempTarget = CamController.target.gameObject;
@@ -335,9 +356,24 @@ public class BirdMotor : MonoBehaviour
         }
     }
     float DT;
-
+    bool deleted;
     private void Update()
     {
+        deleteDelay -= DT;
+        if(deleteDelay <= 0 && deleted == false)
+        {
+            for (int i = 0; i < temp.Length; i++)
+            {
+                temp[i].SetActive(false);
+
+            }
+            for (int i = 0; i < temp3.Length; i++)
+            {
+                temp3[i].SetActive(false);
+
+            }
+            deleted = true;
+        }
         KeyInput();
     }
     public bool cinematic = false;

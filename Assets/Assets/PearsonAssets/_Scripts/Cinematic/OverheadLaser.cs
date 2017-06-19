@@ -23,11 +23,18 @@ public class OverheadLaser : MonoBehaviour {
         shake = FindObjectOfType<CameraShake>();
         delay = laserDelay;
         chargedly = chargeDelay;
+        setspeed = 1;
     }
-	
+    public float maxspeed, growspeed;
+    float setspeed;
+    Vector3 startpos;
 	// Update is called once per frame
 	void Update ()
     {
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            charge = true;
+        }
 	
         if(charge)
         {
@@ -54,31 +61,59 @@ public class OverheadLaser : MonoBehaviour {
 
                 if (fire == true)
                 {
+                    setspeed += growspeed;
+                    if(setspeed >= maxspeed)
+                    {
+                        setspeed = maxspeed;
+                    }
                     if (shootin.isPlaying == false)
                     {
                         shootin.Play();
                     }
                     lasertimer -= Timer.DT;
+                    
                     if (lasertimer > 0)
                     {
                         RaycastHit hit;
                         delay -= Timer.DT;
 
-                        line.gameObject.SetActive(true);
-                        if (Physics.Linecast(transform.position, Player.transform.position + new Vector3(0, .7f, 0), out hit))
-                        {
-                            if (hit.collider.CompareTag("Player"))
-                            {
-                                Vector3[] pos = { transform.position, Player.transform.position + new Vector3(0, .7f, 0) };
-                                line.SetPositions(pos);
+                        var fwd = transform.forward;
 
+                        var direct = (Player.transform.position - transform.position).normalized ;
+
+                        var lkat = Vector3.Slerp(transform.forward, direct, Time.deltaTime * setspeed);
+
+                        transform.forward = (lkat);//orward = Vector3.Slerp(transform.forward, direct, Time.deltaTime * setspeed);
+                        line.gameObject.SetActive(true);
+                        if (Physics.Raycast(transform.position, transform.forward, out hit,Mathf.Infinity))
+                        {
+                            if (!hit.collider.CompareTag("Pylon") && hit.collider.GetComponent<IDamageable>() != null)
+                            {
+                                if (hit.collider.CompareTag("Player"))
+                                {
+                                    Vector3[] pos = { transform.position, Player.transform.position + new Vector3(0, .7f, 0) };
+                                    line.SetPositions(pos);
+                                }
+                                else
+                                {
+
+
+                                    Vector3[] pos = { transform.position, hit.point };
+                                    line.SetPositions(pos);
+                                }
                                 if (delay <= 0)
                                 {
                                     particlepoint.SetActive(true);
                                     particlepoint.transform.position = Player.transform.position + new Vector3(0, .5f, 0);
                                     particlepoint.GetComponent<ParticleSystem>().Play();
-                                    Player.GetComponent<IDamageable>().TakeDamage(Damage);
-
+                                    if (hit.collider.CompareTag("Player"))
+                                    {
+                                        Player.GetComponent<IDamageable>().TakeDamage(Damage);
+                                    }
+                                    else
+                                    {
+                                        hit.collider.GetComponent<IDamageable>().TakeDamage(Damage);
+                                    }
                                 }
                             }
                             else
@@ -98,6 +133,8 @@ public class OverheadLaser : MonoBehaviour {
                             }
                         }
 
+
+
                     }
                     else
                     {
@@ -109,7 +146,7 @@ public class OverheadLaser : MonoBehaviour {
                         charger = ChargeTime;
                         delay = laserDelay;
                         lasertimer = laserTime;
-
+                        setspeed = 1;
                         chargedly = chargeDelay;
                     }
 
@@ -117,8 +154,9 @@ public class OverheadLaser : MonoBehaviour {
                 }
                 else
                 {
+                    setspeed = 1;
                     RaycastHit hit;
-                    if (!Physics.Linecast(transform.position, Player.transform.position + new Vector3(0, .7f, 0), out hit))
+                    if (!Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
                     {
                         Vector3[] pos = { transform.position, Player.transform.position + new Vector3(0, .7f, 0) };
                         line.SetPositions(pos);
@@ -130,10 +168,13 @@ public class OverheadLaser : MonoBehaviour {
 
                     }
 
+                    var fwd = transform.forward;
 
+                    var direct = (Player.transform.position - transform.position).normalized;
 
+                    var lkat = Vector3.Slerp(transform.forward, direct, Time.deltaTime * 6);
+                    transform.forward = lkat;
                 }
-                transform.LookAt(Player.transform.position);
                 line.gameObject.SetActive(true);
             }
         }
