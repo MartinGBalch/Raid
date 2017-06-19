@@ -38,6 +38,21 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         Damage.Play();
     }
 
+
+
+
+    //static private GameObject Pylon;
+
+    //static public ThirdPersonPlayerController FindPlayerGameObject()
+    //{
+    //    if (P1 == null)
+    //    {
+    //        P1 = FindObjectOfType<ThirdPersonPlayerController>();
+    //    }
+    //    return P1;
+    //}
+
+
     void Start ()
     {
         changer = FindObjectOfType<MaterialChangeScript>();

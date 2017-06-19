@@ -83,7 +83,7 @@ public class SwordSwingMinion : MonoBehaviour {
         Objects.DeltaTime = TimeManager.FindTimeManager();
 
         Objects.Player = FindObjectOfType<ThirdPersonPlayerController>();
-        Objects.PlayerPos = GameObject.FindGameObjectWithTag("Player");
+        Objects.PlayerPos = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
 
         Objects.Sword.BoolValues.Idle = true;
         Objects.Sword.BoolValues.Attacking = false;

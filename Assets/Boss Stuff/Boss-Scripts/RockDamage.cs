@@ -25,7 +25,7 @@ public class RockDamage : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         MyT = GetComponent<Transform>();
-
+        DeltaTime = TimeManager.FindTimeManager();
         RaycastHit hit;
         if (Physics.Raycast(MyT.position, -Vector3.up, out hit, 50))
         {
@@ -50,7 +50,7 @@ public class RockDamage : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-
+        DT = DeltaTime.DT;
 
        
        // MyT.position = Vector3.Lerp(MyT.position, UpPos, UpSpeed * DT);

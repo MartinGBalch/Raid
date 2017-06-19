@@ -42,7 +42,7 @@ public class ChargerAI : MonoBehaviour {
 
     void Start ()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         DelayStart = ChargeDelay;
