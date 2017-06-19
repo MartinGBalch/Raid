@@ -16,6 +16,9 @@ public class BossTurning : MonoBehaviour
     private TimeManager DeltaTime;
     float DT;
 
+    Vector2 BossPos;
+    Vector2 PlayerPoS;
+
     Animator Anim;
     // Use this for initialization
     public float TurningFloat;
@@ -27,15 +30,21 @@ public class BossTurning : MonoBehaviour
         Anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         AdjustStart = AdjustTimer;
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
 	}
 
 
     public bool FOVCheck(float FOV)
     {
-        Vector3 Dir = (Player.transform.position - transform.position).normalized;
+        //Vector3 Dir = (Player.transform.position - transform.position).normalized;
+        //var DotVar = Vector3.Dot(transform.forward, Dir);
+        BossPos = new Vector2(transform.position.x, transform.position.z);
+        PlayerPoS = new Vector2(Player.transform.position.x, Player.transform.position.z);
+        Vector2 Dir = (PlayerPoS - BossPos).normalized;
+        Vector3 something = new Vector3(Dir.x, transform.position.y, Dir.y);
+        
         float Rad = FOV * Mathf.Deg2Rad;
-        var DotVar = Vector3.Dot(transform.forward, Dir);
+        var DotVar = Vector3.Dot(transform.forward, something);
         var CosVar = Mathf.Cos(Rad / 2);
 
         
@@ -79,7 +88,7 @@ public class BossTurning : MonoBehaviour
 
         if (IsTurning == true)
         {
-
+            if (FOVCheck(20)) { IsTurning = false; Anim.SetTrigger("StopTurning"); }
             //AdjustTimer -= DT;
             //if(AdjustTimer <= 0)
             //{
@@ -89,7 +98,7 @@ public class BossTurning : MonoBehaviour
                 if (Direction) { transform.Rotate(0, Speed, 0);  }
                 if (!Direction) { transform.Rotate(0, -Speed, 0);  }
 
-                if (FOVCheck(15)) { IsTurning = false; Anim.SetTrigger("StopTurning");/*AdjustTimer = AdjustStart;*/ }
+               
 
 
 

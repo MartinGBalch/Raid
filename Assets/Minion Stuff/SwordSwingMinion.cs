@@ -80,7 +80,7 @@ public class SwordSwingMinion : MonoBehaviour {
         Agent = GetComponent<NavMeshAgent>();
         AttackCooldown = MP.AttackCooldown;
         AttackDuration = -1;
-        Objects.DeltaTime = FindObjectOfType<TimeManager>();
+        Objects.DeltaTime = TimeManager.FindTimeManager();
 
         Objects.Player = FindObjectOfType<ThirdPersonPlayerController>();
         Objects.PlayerPos = GameObject.FindGameObjectWithTag("Player");

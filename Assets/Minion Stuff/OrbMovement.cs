@@ -32,8 +32,10 @@ public class OrbMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        DeltaTime = FindObjectOfType<TimeManager>();
         Player = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
+
+        DeltaTime = TimeManager.FindTimeManager();
+
         agent = GetComponent<NavMeshAgent>();
         FollowDistance = AttackRange - 5;
         StartSpeed = AttackSpeed;
@@ -192,7 +194,7 @@ public class OrbMovement : MonoBehaviour
                             transform.Rotate(new Vector3(0, -15, 0));
                             var projectile = (GameObject)Instantiate(Bullet, transform.position, transform.rotation);
                             projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward) * BulletSpeed;
-
+                            projectile.GetComponent<MinionOrbDamage>().target = Player;
                             Destroy(projectile, BulletLifetime);
                         }
                         AttackSpeed = StartSpeed;

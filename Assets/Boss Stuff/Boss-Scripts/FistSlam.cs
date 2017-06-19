@@ -41,7 +41,7 @@ public class FistSlam : MonoBehaviour
         SpawnRocks = false;
         
         anim = GetComponent<Animator>();
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
     }
 
 

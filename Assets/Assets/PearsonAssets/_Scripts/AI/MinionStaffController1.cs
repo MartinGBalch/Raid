@@ -85,7 +85,7 @@ public class MinionStaffController1 : MonoBehaviour {
     void Start () {
         CurrentsState = States.MoveState;
 
-        Objects.DeltaTime = FindObjectOfType<TimeManager>();
+        Objects.DeltaTime = TimeManager.FindTimeManager();
       
     }
 	

@@ -21,7 +21,7 @@ public class AttackDamage : MonoBehaviour
         setDamageAmount = DamageAmount;
         CanDamage = FindObjectOfType<Bossraise>();
         Shake = FindObjectOfType<CameraShake>();
-        Timer = FindObjectOfType<TimeManager>();
+        Timer = TimeManager.FindTimeManager();
     }
     public void Update()
     {
