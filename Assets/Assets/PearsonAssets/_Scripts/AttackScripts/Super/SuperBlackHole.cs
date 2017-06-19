@@ -27,7 +27,7 @@ public class SuperBlackHole : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
         if (Target != null)
         {
             if (Target.CompareTag("Pylon"))

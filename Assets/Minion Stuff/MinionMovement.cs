@@ -22,7 +22,7 @@ public class MinionMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
         agent = GetComponent<NavMeshAgent>();
         StartSpeed = atkSpeed;
         StartStun = StunTimer;

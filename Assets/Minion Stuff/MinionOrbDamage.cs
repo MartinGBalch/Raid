@@ -11,7 +11,7 @@ public class MinionOrbDamage : MonoBehaviour {
     public GameObject target;
     void Start()
     {
-       // target = GameObject.FindGameObjectWithTag("Player");
+       // target = Player = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
         rb = GetComponent<Rigidbody>();
     }
     private void Awake()

@@ -20,10 +20,15 @@ public class PylonManager : MonoBehaviour {
 
     public GameObject[] Pylon;
     // Use this for initialization
+
+
+   
+
+
     void Start ()
     {
         Pylon = GameObject.FindGameObjectsWithTag("Pylon");
-
+        
         Sound = GetComponent<AudioSource>();
         DeltaTime = TimeManager.FindTimeManager();
         laser = FindObjectOfType<OverheadLaser>();

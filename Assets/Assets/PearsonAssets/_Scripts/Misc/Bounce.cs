@@ -9,7 +9,7 @@ public class Bounce : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player =  ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
         RB = Player.GetComponent<Rigidbody>();
 	}
 
