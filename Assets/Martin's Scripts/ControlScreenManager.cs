@@ -31,7 +31,7 @@ public class ControlScreenManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if(XboxControl.isActiveAndEnabled || KeyboardControl.isActiveAndEnabled || PS4Control.isActiveAndEnabled && controller.Fire)
+        if((XboxControl.isActiveAndEnabled || KeyboardControl.isActiveAndEnabled || PS4Control.isActiveAndEnabled) && controller.Jump)
         {
             ControlPicker.SetActive(true);
             XboxControls.SetActive(false);
@@ -39,7 +39,7 @@ public class ControlScreenManager : MonoBehaviour
             PS4Controls.SetActive(false);
         }
         
-        if (ControlsPicker.isActiveAndEnabled && controller.Fire)
+        if (ControlsPicker.isActiveAndEnabled && controller.Jump)
         {
             wayback.ControlMenu.SetActive(false);
             wayback.ButtonMenu.SetActive(true);
@@ -52,13 +52,15 @@ public class ControlScreenManager : MonoBehaviour
         XboxControls.SetActive(true);
         KeyboardControls.SetActive(false);
         PS4Controls.SetActive(false);
+        
     }
 
     public void LoadKeyboardControls()
     {
-        XboxControls.SetActive(false);
         KeyboardControls.SetActive(true);
+        XboxControls.SetActive(false);
         PS4Controls.SetActive(false);
+        
     }
 
     public void LoadPS4Controls()
