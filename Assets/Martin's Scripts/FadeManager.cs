@@ -23,6 +23,7 @@ public class FadeManager : MonoBehaviour
     public Button b_controls;
     public Button b_exit;
     public Button b_back;
+    public Button b_Edit;
 
     public Text title;
     public Text l_title;
@@ -32,7 +33,7 @@ public class FadeManager : MonoBehaviour
     public Text setting;
     public Text controls;
     public Text quit;
-    
+    public Text TXT_Edit;
     private bool isInTransition;
     private bool isShowing;
 
@@ -56,26 +57,38 @@ public class FadeManager : MonoBehaviour
         this.duration = duration;
         transition = (isShowing) ? 0 : 1;
     }
-
+    bool startGame = true;
 	// Use this for initialization
 	void Start ()
     {
-        
+        fader = FindObjectOfType<Fade>();
         Time.timeScale = 1.0f;
         GameName.enabled = false;
         start.enabled = false;
         setting.enabled = false;
         quit.enabled = false;
-        
+        startGame = true;
         ButtonMenu.SetActive(false);
         SettingMenu.SetActive(false);
         ControlMenu.SetActive(false);
+        play = false;
+        edit = false;
+        
 
-             
     }
 	// Update is called once per frame
 	void Update ()
     {
+        if(fader.fadedout && play)
+        {
+            fader.text.SetActive(true);
+            SceneManager.LoadScene(PlayScene);
+        }
+        if (fader.fadedout && edit)
+        {
+            fader.text.SetActive(true);
+            SceneManager.LoadScene("EditMenu");
+        }
         if (controller.StartButton)
         {
             Fade(true, timer);
@@ -108,27 +121,48 @@ public class FadeManager : MonoBehaviour
             return;
 
         transition += ((isShowing) ? 1 : -1) * Time.deltaTime * (1 / duration);
-       
+
         //enter.color = Color.Lerp(Color.black, new Color(1,0,0,.5f), transition);
-        GameName.color = Color.Lerp(new Color(0,0,0,0), titleColor, transition);
-        start.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
-        quit.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
-        setting.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
-        controls.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+        if (edit == false && play == false)
+        {
+            GameName.color = Color.Lerp(new Color(0, 0, 0, 0), titleColor, transition);
+            start.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+            quit.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+            setting.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+            controls.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+            TXT_Edit.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+        }
+        else
+        {
 
+            GameName.color -= new Color(0, 0, 0, 1);
+            start.color -= new Color(0, 0, 0, 1);
+            quit.color -= new Color(0, 0, 0, 1);
+            setting.color -= new Color(0, 0, 0, 1);
+            controls.color -= new Color(0, 0, 0, 1);
+            TXT_Edit.color -= new Color(0, 0, 0, 1);
+        }
 
-
+       
 
         if (transition > 1 || transition < 0)
         {
             isInTransition = false;
         }
 	}
-
-
+    Fade fader;
+    bool play = false;
     public void  Play()
     {
-		SceneManager.LoadScene(PlayScene);
+        fader.Out = true;
+        play = true;
+       
+    }
+    bool edit = false;
+    public void Edit()
+    {
+        fader.Out = true;
+        edit = true;
     }
 
     public void Enter()
@@ -139,6 +173,7 @@ public class FadeManager : MonoBehaviour
         start.enabled = true;
         setting.enabled = true;
         quit.enabled = true;
+        TXT_Edit.enabled = true;
         ButtonMenu.SetActive(true);
         TitleMenu.SetActive(false);
     }

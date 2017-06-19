@@ -35,8 +35,7 @@ public class RockDamage : MonoBehaviour {
             Vector3 NewPos = new Vector3(transform.position.x, transform.position.y - distDIF, transform.position.z);
             transform.position = NewPos;
         }
-
-        DeltaTime = FindObjectOfType<TimeManager>();
+        
         //UpPos = MyT.position + (MyT.up*UpDistance);
         ForPos = MyT.position + (MyT.forward * ForDistance);
 
@@ -51,9 +50,9 @@ public class RockDamage : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-     
-      
-        DT = DeltaTime.DT;
+
+
+        DT = Time.deltaTime ;
        // MyT.position = Vector3.Lerp(MyT.position, UpPos, UpSpeed * DT);
         MyT.position = Vector3.Lerp(MyT.position, ForPos, ForSpeed * DT);
         //rb.MovePosition(Vector3.Lerp(MyT.position, ForPos, ForSpeed * DT));

@@ -87,6 +87,11 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         MouseYSpeed = SensitivityController.Ysensitivity;
         MouseXSpeed = SensitivityController.Xsensitivity;
+        if(MouseYSpeed <= 0)
+        {
+            MouseYSpeed = 15;
+            MouseXSpeed = 80;
+        }
         Vector3 angles = Trans.eulerAngles;
         x = angles.x;
         y = angles.y;
