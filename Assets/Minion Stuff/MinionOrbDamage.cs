@@ -8,10 +8,10 @@ public class MinionOrbDamage : MonoBehaviour {
     public float speed = 1;
     Rigidbody rb;
     Vector3 velocity;
-    private GameObject target;
+    public GameObject target;
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+       // target = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
     }
     private void Awake()
