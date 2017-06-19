@@ -657,13 +657,14 @@ public class ThirdPersonCameraController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == true)
         {
             Cursor.lockState = CursorLockMode.None;
-           
+
+            
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == false)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
+        //else if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == false)
+        //{
+        //    Cursor.lockState = CursorLockMode.Locked;
            
-        }
+        //}
         
 
     }
