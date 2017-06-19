@@ -9,7 +9,7 @@ public class AttackDamageMinion : MonoBehaviour {
 
     private void Start()
     {
-        Time = FindObjectOfType<TimeManager>();
+        Time = TimeManager.FindTimeManager();
     }
 
     private void OnTriggerEnter(Collider other)

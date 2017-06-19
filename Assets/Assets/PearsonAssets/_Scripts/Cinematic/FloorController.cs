@@ -23,7 +23,7 @@ public class FloorController : MonoBehaviour {
     public Animator flooranim;
     // Use this for initialization
     void Start () {
-        DT = FindObjectOfType<TimeManager>();
+        DT = TimeManager.FindTimeManager();
         props = GameObject.FindGameObjectsWithTag("Props");
        // BossState = FindObjectOfType<BossStateManagerTwo>();
         shake = FindObjectOfType<CameraShake>();

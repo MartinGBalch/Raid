@@ -30,7 +30,7 @@ public class BossTurning : MonoBehaviour
         Anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         AdjustStart = AdjustTimer;
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
 	}
 
 

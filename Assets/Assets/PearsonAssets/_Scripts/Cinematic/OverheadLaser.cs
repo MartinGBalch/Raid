@@ -17,7 +17,7 @@ public class OverheadLaser : MonoBehaviour {
     public AudioSource lasercharge;
 	// Use this for initialization
 	void Start () {
-        Timer = FindObjectOfType<TimeManager>();
+        Timer = TimeManager.FindTimeManager();
         charger = ChargeTime;
         lasertimer = laserTime;
         shake = FindObjectOfType<CameraShake>();

@@ -67,7 +67,7 @@ public class BossHealth : MonoBehaviour, IDamageable
 
         Manager = FindObjectOfType<PylonManager>();
         anim = GetComponent<Animator>();
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
         controller = FindObjectOfType<ControllerSupport>();
         Shake = FindObjectOfType<CameraShake>();
 

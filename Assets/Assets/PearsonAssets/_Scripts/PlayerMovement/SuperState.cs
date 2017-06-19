@@ -31,7 +31,7 @@ public class SuperState : MonoBehaviour
         SlashTime = -6;
         CurrentSuperState = States.WaitingState;
            ice = FindObjectOfType<IceSpawn>();
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
         Player = FindObjectOfType<ThirdPersonPlayerController>();
     }
     public void DoNull()

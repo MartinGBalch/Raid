@@ -17,7 +17,7 @@ public class FistCollision : MonoBehaviour {
     void Start ()
     {
         ActualTimer = timer;
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
         Shake = FindObjectOfType<CameraShake>();
         hit = GameObject.FindGameObjectWithTag("Hitter");
 

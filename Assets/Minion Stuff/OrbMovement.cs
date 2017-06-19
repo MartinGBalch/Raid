@@ -32,7 +32,7 @@ public class OrbMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
         Player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
         FollowDistance = AttackRange - 5;

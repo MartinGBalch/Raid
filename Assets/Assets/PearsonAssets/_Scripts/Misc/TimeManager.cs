@@ -14,6 +14,19 @@ public class TimeManager : MonoBehaviour
     IEnumerator CurrentSlowMotionCoroutine, CurrentStopTimeCoroutine;
 
     // Use this for initialization
+
+    static private TimeManager Instance;
+
+    static public TimeManager FindTimeManager()
+    {
+        if(Instance == null)
+        {
+            Instance = FindObjectOfType<TimeManager>();
+        }
+        return Instance; 
+
+    }
+    
     void Start()
     {
 

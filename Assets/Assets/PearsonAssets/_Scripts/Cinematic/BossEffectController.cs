@@ -27,7 +27,7 @@ public class BossEffectController : MonoBehaviour {
 	void Start () {
         birdy = FindObjectOfType<BirdMotor>();
         anim = GetComponent<Animator>();
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
         opening = true;
         mg = FindObjectOfType<PylonManager>();
         HP = GetComponent<BossHealth>();

@@ -59,7 +59,7 @@ public class BossStateManagerTwo : MonoBehaviour
     }
     void Start()
     {
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
         BulletSprayAmount = 0;
         
     }

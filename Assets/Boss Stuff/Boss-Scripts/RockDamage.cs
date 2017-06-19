@@ -52,7 +52,7 @@ public class RockDamage : MonoBehaviour {
     {
 
 
-        DT = Time.deltaTime ;
+       
        // MyT.position = Vector3.Lerp(MyT.position, UpPos, UpSpeed * DT);
         MyT.position = Vector3.Lerp(MyT.position, ForPos, ForSpeed * DT);
         //rb.MovePosition(Vector3.Lerp(MyT.position, ForPos, ForSpeed * DT));

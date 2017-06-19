@@ -124,7 +124,7 @@ public class MinionSwordController : MonoBehaviour {
     void Start () {
         CurrentsState = States.MoveState;
 
-        Objects.DeltaTime = FindObjectOfType<TimeManager>();
+        Objects.DeltaTime = TimeManager.FindTimeManager();
         Objects.ROT.RotSpeed = AV.RotSpeed;
     }
 	

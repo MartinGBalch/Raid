@@ -34,7 +34,7 @@ public class AoEdmg : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
         StartSpeed = AtkSpeed;
     }
 

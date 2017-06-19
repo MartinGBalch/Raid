@@ -25,7 +25,7 @@ public class PylonManager : MonoBehaviour {
         Pylon = GameObject.FindGameObjectsWithTag("Pylon");
 
         Sound = GetComponent<AudioSource>();
-        DeltaTime = FindObjectOfType<TimeManager>();
+        DeltaTime = TimeManager.FindTimeManager();
         laser = FindObjectOfType<OverheadLaser>();
         Health = Boss.GetComponent<BossHealth>();
        // DelayTimer = Health.VulnerableTime;
