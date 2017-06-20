@@ -657,16 +657,17 @@ public class ThirdPersonCameraController : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, grabpos.transform.position, movespeed2);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, grabpos.transform.rotation, rotspeed);
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == true)
+        if (Input.GetKeyDown(KeyCode.Escape) || Controller.StartButton && Screen.lockCursor == true)
         {
             Cursor.lockState = CursorLockMode.None;
-           
+
+            
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == false)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
+        //else if (Input.GetKeyDown(KeyCode.Escape) && Screen.lockCursor == false)
+        //{
+        //    Cursor.lockState = CursorLockMode.Locked;
            
-        }
+        //}
         
 
     }
