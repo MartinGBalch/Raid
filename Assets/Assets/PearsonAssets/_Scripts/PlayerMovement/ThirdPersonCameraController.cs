@@ -421,8 +421,11 @@ public class ThirdPersonCameraController : MonoBehaviour {
         {
             transform.position = stopPos;
         }
-        x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .01f;
-        x += Controller.RightStickHorizontal * HorzSpeed * distance * .01f;
+        if (Input.GetAxis("Horizontal") <= .01 && Controller.RightStickHorizontal <= .01)
+        {
+            x += Input.GetAxis("Horizontal") * HorzSpeed * distance * .01f;
+            x += Controller.RightStickHorizontal * HorzSpeed * distance * .01f;
+        }
         if (target != null)
         {
             Vector3 screenPoint = cam.WorldToViewportPoint(target.transform.position);

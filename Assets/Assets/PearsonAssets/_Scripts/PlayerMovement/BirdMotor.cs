@@ -61,7 +61,7 @@ public class BirdMotor : MonoBehaviour
         IdleState = States.idle;
        // CamController = Camera.GetComponent<ThirdPersonCameraController>();
         PlayerController = Player.GetComponent<ThirdPersonPlayerController>();
-       
+        DeltaTime = TimeManager.FindTimeManager();
     }
 
     public void DoIdleState()
