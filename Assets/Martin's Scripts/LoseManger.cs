@@ -47,10 +47,11 @@ public class LoseManger : MonoBehaviour
     }
 
 
-
+    public GameObject Player;
     // Use this for initialization
     void Start ()
     {
+        Player = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
         GameUI.SetActive(true);
         LoseOverlay.enabled = false;
         LoseText.enabled = false;
@@ -64,7 +65,11 @@ public class LoseManger : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-       
+       if(Player == null)
+        {
+
+            Cursor.lockState = CursorLockMode.None;
+        }
 
         if (hp.Health <= 0 && die == false)
         {
@@ -77,6 +82,7 @@ public class LoseManger : MonoBehaviour
             Overlay.enabled = true;
             GameUI.SetActive(false);
             die = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
             if (!isInTransition)

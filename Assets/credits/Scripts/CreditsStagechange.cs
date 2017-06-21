@@ -8,7 +8,7 @@ public class CreditsStagechange : MonoBehaviour {
     bool passed;
     public GameObject[] objectsTodisable,objectsToEnable;
     public Animator bossanim;
-
+    public Fade fader;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +27,7 @@ public class CreditsStagechange : MonoBehaviour {
 
             for (int i = 0; i < objectsTodisable.Length; i++)
             {
-                objectsTodisable[i].SetActive(false);
+                objectsTodisable[i].transform.localScale = new Vector3(0, 0, 0);// (false);
             }
 
             for (int i = 0; i < objectsToEnable.Length; i++)
@@ -50,5 +50,6 @@ public class CreditsStagechange : MonoBehaviour {
             }
             passed = true;
         }
+        
     }
 }

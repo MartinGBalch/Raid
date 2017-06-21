@@ -87,11 +87,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
 
         MouseYSpeed = SensitivityController.Ysensitivity;
         MouseXSpeed = SensitivityController.Xsensitivity;
-        if(MouseYSpeed <= 0)
-        {
-            MouseYSpeed = 15;
-            MouseXSpeed = 80;
-        }
+       
         Vector3 angles = Trans.eulerAngles;
         x = angles.x;
         y = angles.y;
@@ -657,7 +653,7 @@ public class ThirdPersonCameraController : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, grabpos.transform.position, movespeed2);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, grabpos.transform.rotation, rotspeed);
         }
-        if (Input.GetKeyDown(KeyCode.Escape) || Controller.StartButton && Screen.lockCursor == true)
+        if (Input.GetKeyDown(KeyCode.Escape) || Controller.StartButton && Screen.lockCursor == true && Player != null)
         {
             Cursor.lockState = CursorLockMode.None;
 

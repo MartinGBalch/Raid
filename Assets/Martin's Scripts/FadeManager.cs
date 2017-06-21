@@ -34,6 +34,7 @@ public class FadeManager : MonoBehaviour
     public Text controls;
     public Text quit;
     public Text TXT_Edit;
+    public Text credits;
     private bool isInTransition;
     private bool isShowing;
 
@@ -89,6 +90,11 @@ public class FadeManager : MonoBehaviour
             fader.text.SetActive(true);
             SceneManager.LoadScene("EditMenu");
         }
+        if (fader.fadedout && credit)
+        {
+            fader.text.SetActive(true);
+            SceneManager.LoadScene("Credits");
+        }
         if (controller.StartButton)
         {
             Fade(true, timer);
@@ -102,6 +108,8 @@ public class FadeManager : MonoBehaviour
             start.enabled = true;
             setting.enabled = true;
             quit.enabled = true;
+            credits.enabled = true;
+            TXT_Edit.enabled = true;
         }
 
         if (SettingsMenu.isActiveAndEnabled && controller.Fire)
@@ -131,6 +139,7 @@ public class FadeManager : MonoBehaviour
             setting.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
             controls.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
             TXT_Edit.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
+            credits.color = Color.Lerp(new Color(0, 0, 0, 0), buttonColor, transition);
         }
         else
         {
@@ -141,6 +150,7 @@ public class FadeManager : MonoBehaviour
             setting.color -= new Color(0, 0, 0, 1);
             controls.color -= new Color(0, 0, 0, 1);
             TXT_Edit.color -= new Color(0, 0, 0, 1);
+            credits.color -= new Color(0, 0, 0, 1);
         }
 
        
@@ -156,6 +166,7 @@ public class FadeManager : MonoBehaviour
     {
         fader.Out = true;
         play = true;
+        ButtonMenu.SetActive(false);
        
     }
     bool edit = false;
@@ -188,6 +199,14 @@ public class FadeManager : MonoBehaviour
     {
         ButtonMenu.SetActive(false);
         ControlMenu.SetActive(true);
+    }
+
+    bool credit = false;
+    public void Credits()
+    {
+        fader.Out = true;
+        credit = true;
+        ButtonMenu.SetActive(false);
     }
 
     public void Back()

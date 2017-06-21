@@ -69,18 +69,15 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
         bossHealth = FindObjectOfType<BossHealth>();
 	}
 
-
+    bool respawn;
     public void ResetPylon()
     {
         if (bossHealth.HealthStage != 2)
         {
             if (Alive == false)
             {
-
-                for (int i = 0; i < SpwnPts.Length; i++)
-                {
-                    Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
-                }
+                respawn = true;
+              
             }
 
             Alive = true;
@@ -90,7 +87,9 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
 
         PM.PylonCount++;
 }
-
+    int i = 0;
+    float spawnTimerset = .1f;
+    float spawnTimerDelay = .1f;
     // Update is called once per frame
     void Update()
     {
@@ -101,8 +100,37 @@ public class BossPartsHealth : MonoBehaviour, IDamageable
                 Beam.Play();
             }
         }
+        spawnTimerDelay -= Time.deltaTime;
         //if (Health > 0) { Debug.DrawLine(transform.position, Boss.transform.position); }
+        if(respawn == true)
+        {
+            if(spawnTimerDelay <= 0)
+            {
 
+                i++;
+
+
+
+                Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
+
+               
+                spawnTimerDelay = spawnTimerset;
+                if (i == SpwnPts.Length - 1)
+                {
+                    Instantiate(Minions[0], SpwnPts[0].transform.position, Minions[0].transform.rotation);
+
+                    respawn = false;
+                    i = 0;
+
+                }
+
+            }
+
+            //for (int i = 0; i < SpwnPts.Length; i++)
+            //{
+            //    Instantiate(Minions[i], SpwnPts[i].transform.position, Minions[i].transform.rotation);
+            //}
+        }
 
         if (Health <= 0 && Alive == true)
         {

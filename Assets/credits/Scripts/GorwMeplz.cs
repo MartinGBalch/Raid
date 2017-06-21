@@ -19,13 +19,14 @@ public class GorwMeplz : MonoBehaviour {
     void Update()
     {
 
-        if (Grownow)
+        if (Grownow && !Passed)
         {
             DT = Time.deltaTime;
             titleGrow.transform.localScale += new Vector3(speed * DT,  speed * DT,  speed * DT);
 
             if(titleGrow.transform.localScale.y > 1)
             {
+                Passed = true;
                 titleGrow.transform.localScale = new Vector3(1, 1, 1);
             }
 

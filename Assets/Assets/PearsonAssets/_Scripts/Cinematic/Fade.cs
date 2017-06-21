@@ -7,6 +7,7 @@ public class Fade : MonoBehaviour {
     private Color temp2;
     public GameObject text;
     public bool In, Out,fadedout,fadedin;
+    public bool credits;
 	// Use this for initialization
 	void Start () {
         temp2 = black.color;
@@ -20,26 +21,31 @@ public class Fade : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (In)
+        if (!credits)
         {
-            black.enabled = true;
-            black.color -= new Color(0, 0, 0, Time.deltaTime * .3f);
-            if (black.color.a <= 0)
+            if (In)
             {
-                black.enabled = false;
-                fadedin = true;
-                In = false;
-            }
-        }
 
-        if(Out)
-        {
-            black.enabled = true;
-            black.color += new Color(0, 0, 0, Time.deltaTime * 2);
-            if (black.color.a >= 1)
+                black.enabled = true;
+                black.color -= new Color(0, 0, 0, Time.deltaTime * .3f);
+                if (black.color.a <= 0)
+                {
+                    black.enabled = false;
+                    fadedin = true;
+                    In = false;
+                }
+            }
+
+            if (Out)
             {
-                fadedout = true;
-                Out = false;
+
+                black.enabled = true;
+                black.color += new Color(0, 0, 0, Time.deltaTime * 2);
+                if (black.color.a >= 1)
+                {
+                    fadedout = true;
+                    Out = false;
+                }
             }
         }
 	}

@@ -14,12 +14,19 @@ public class GrowCredits : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-        if(Grownow)
+        if (transform.localScale.y >= .99f)
+        {
+            Passed = true;
+            Grownow = false;
+        }
+        if (Grownow && !Passed)
         {
             DT = Time.deltaTime;
             titleGrow.transform.localScale += new Vector3(DT * speed, DT * speed, DT * speed);
-
+            if(transform.localScale.y >= 1)
+            {
+                Grownow = false;
+            }
         }
         if(Shrink)
         {

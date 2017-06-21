@@ -62,7 +62,7 @@ public class winManager1 : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (b_hp.Stage3Health <= 0 && die == false)
+        if (b_hp.Stage3Health <= 0 && die == false) 
         {
             Fade(true, timer);
             Cursor.visible = true;
@@ -72,7 +72,9 @@ public class winManager1 : MonoBehaviour {
             Menu.enabled = true;
             Overlay.enabled = true;
             die = true;
+            Cursor.lockState = CursorLockMode.None;
         }
+      
 
         if (!isInTransition)
             return;
