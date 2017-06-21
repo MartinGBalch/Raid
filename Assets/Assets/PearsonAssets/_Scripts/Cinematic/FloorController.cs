@@ -23,6 +23,9 @@ public class FloorController : MonoBehaviour {
     public Animator flooranim;
     // Use this for initialization
     void Start () {
+
+       
+
         DT = TimeManager.FindTimeManager();
         props = GameObject.FindGameObjectsWithTag("Props");
        // BossState = FindObjectOfType<BossStateManagerTwo>();
@@ -42,9 +45,10 @@ public class FloorController : MonoBehaviour {
                     fall = true;
                     raise = true;
                     Floor2.SetActive(true);
+                    Floor2.transform.localScale = new Vector3(1, 1, 1);
                     flooranim.SetTrigger("Fall");
                     shake.StartShake(shake.GroundFallProperties);
-                    floor.SetActive(false);
+                    floor.transform.localScale = new Vector3(0, 0, 0);
                     if (dust.isPlaying == false)
                     {
                         dust.Play();
@@ -66,7 +70,8 @@ public class FloorController : MonoBehaviour {
                     {
                         if (falltime < -6)
                         {
-                            Floor2.SetActive(false);
+                            floor.SetActive(false);
+                            Floor2.transform.localScale = new Vector3(0, 0, 0);
                         }
                     }
                     if (raise)

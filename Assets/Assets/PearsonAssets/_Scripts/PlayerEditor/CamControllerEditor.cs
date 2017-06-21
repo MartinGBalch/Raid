@@ -69,23 +69,51 @@ public class CamControllerEditor : MonoBehaviour {
         dragonselect = false;
         swordSelect = false;
         playerselect = false;
-        for (int j = 0; j < Allmenus.Length; j++)
-        {
-            if (Allmenus[j].activeSelf)
-            {
-                Allmenus[j].SetActive(false);
-            }
-        }
+       
         point = points[0];
         enter = true;
     }
-
+    bool once;
+    float quicktime  =.1f;
     // Update is called once per frame
     void Update ()
     {
        
         DT = Time.deltaTime;
 
+        if(once == false)
+        {
+            quicktime -= DT;
+            if(quicktime <= 0)
+            {
+                GameObject[] temp = GameObject.FindGameObjectsWithTag("MenuPlayer");
+                GameObject[] temp2 = GameObject.FindGameObjectsWithTag("DragonMenu");
+                GameObject[] temp3 = GameObject.FindGameObjectsWithTag("Swordmenu");
+
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    if (temp[i].activeSelf == false)
+                    {
+                        Destroy(temp[i]);
+                    }
+                }
+                for (int i = 0; i < temp2.Length; i++)
+                {
+                    if (temp2[i].activeSelf == false)
+                    {
+                        Destroy(temp2[i]);
+                    }
+                }
+                for (int i = 0; i < temp3.Length; i++)
+                {
+                    if (temp3[i].activeSelf == false)
+                    {
+                        Destroy(temp3[i]);
+                    }
+                }
+                once = true;
+            }
+        }
         if(fader.fadedout)
         {
             fader.text.SetActive(true);
@@ -119,7 +147,7 @@ public class CamControllerEditor : MonoBehaviour {
 
                         Spotlight[0].SetActive(false);
                     }
-                    if (hit.collider.tag == "Dragon")
+                    if (hit.collider.tag == "DragonMenu")
                     {
                         dragonselect = true;
                         swordSelect = false;
@@ -250,7 +278,6 @@ public class CamControllerEditor : MonoBehaviour {
             {
                 Allmenus[j].SetActive(false);
             }
-           
         }
         Textmenu.SetActive(true);
         if (playerselect)

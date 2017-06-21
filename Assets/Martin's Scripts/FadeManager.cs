@@ -77,10 +77,42 @@ public class FadeManager : MonoBehaviour
         
 
     }
+    bool once;
+    float quicktime = .1f;
 	// Update is called once per frame
 	void Update ()
     {
-        if(fader.fadedout && play)
+
+
+
+        if (once == false)
+        {
+            quicktime -= Time.deltaTime;
+            if (quicktime <= 0)
+            {
+                GameObject[] temp = GameObject.FindGameObjectsWithTag("MenuPlayer");
+                GameObject[] temp2 = GameObject.FindGameObjectsWithTag("DragonMenu");
+                GameObject[] temp3 = GameObject.FindGameObjectsWithTag("Swordmenu");
+
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    temp[i].SetActive(false);
+                }
+                for (int i = 0; i < temp2.Length; i++)
+                {
+
+                    temp2[i].SetActive(false);
+                }
+                for (int i = 0; i < temp3.Length; i++)
+                {
+
+                    temp3[i].SetActive(false);
+                }
+
+                once = true;
+            }
+        }
+        if (fader.fadedout && play)
         {
             fader.text.SetActive(true);
             SceneManager.LoadScene(PlayScene);

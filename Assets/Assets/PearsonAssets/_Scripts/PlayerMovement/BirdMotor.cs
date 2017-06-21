@@ -43,7 +43,7 @@ public class BirdMotor : MonoBehaviour
     {
 
 
-        temp = GameObject.FindGameObjectsWithTag("Dragon");
+        temp = GameObject.FindGameObjectsWithTag("DragonMenu");
 
         GameObject[] temp2 = GameObject.FindGameObjectsWithTag("Menu");
         temp3 = GameObject.FindGameObjectsWithTag("MenuPlayer");
@@ -53,7 +53,7 @@ public class BirdMotor : MonoBehaviour
             temp2[i].SetActive(false);
 
         }
-        
+
         Trans = GetComponent<Transform>();
        // offset = Player.transform.position + transform.position;
         SetcamSmoothDampTime = BirdSmoothDampIdle;
