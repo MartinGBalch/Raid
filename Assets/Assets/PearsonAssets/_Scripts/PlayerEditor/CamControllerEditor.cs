@@ -81,10 +81,10 @@ public class CamControllerEditor : MonoBehaviour {
        
         DT = Time.deltaTime;
 
-        if(once == false)
+        if (once == false)
         {
             quicktime -= DT;
-            if(quicktime <= 0)
+            if (quicktime <= 0)
             {
                 GameObject[] temp = GameObject.FindGameObjectsWithTag("MenuPlayer");
                 GameObject[] temp2 = GameObject.FindGameObjectsWithTag("DragonMenu");
@@ -114,7 +114,7 @@ public class CamControllerEditor : MonoBehaviour {
                 once = true;
             }
         }
-        if(fader.fadedout)
+        if (fader.fadedout)
         {
             fader.text.SetActive(true);
 

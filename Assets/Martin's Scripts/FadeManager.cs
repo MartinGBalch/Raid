@@ -94,20 +94,20 @@ public class FadeManager : MonoBehaviour
                 GameObject[] temp2 = GameObject.FindGameObjectsWithTag("DragonMenu");
                 GameObject[] temp3 = GameObject.FindGameObjectsWithTag("Swordmenu");
 
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    temp[i].SetActive(false);
-                }
+                //for (int i = 0; i < temp.Length; i++)
+                //{
+                //    temp[i].SetActive(false);
+                //}
                 for (int i = 0; i < temp2.Length; i++)
                 {
 
-                    temp2[i].SetActive(false);
+                    temp2[i].transform.localScale = new Vector3(0,0,0);
                 }
-                for (int i = 0; i < temp3.Length; i++)
-                {
+                //for (int i = 0; i < temp3.Length; i++)
+                //{
 
-                    temp3[i].SetActive(false);
-                }
+                //    temp3[i].SetActive(false);
+                //}
 
                 once = true;
             }
