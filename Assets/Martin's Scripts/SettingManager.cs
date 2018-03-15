@@ -59,14 +59,10 @@ public class SettingManager : MonoBehaviour
        switch (selection)
         {
             case 0:
-                ControllerSupport.Xbox = false;
-                ControllerSupport.PS4 = false;
-                break;
-            case 1:
                 ControllerSupport.Xbox = true;
                 ControllerSupport.PS4 = false;
                 break;
-            case 2:
+            case 1:
                 ControllerSupport.Xbox = false;
                 ControllerSupport.PS4 = true;
                 break;

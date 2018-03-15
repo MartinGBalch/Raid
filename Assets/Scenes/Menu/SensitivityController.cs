@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class SensitivityController : MonoBehaviour {
     [Range(40, 200)]
-    public static float Xsensitivity;
+    public static float Xsensitivity = 80;
     [Range(2, 50)]
-    public static float Ysensitivity;
+    public static float Ysensitivity = 12;
     [Range(40, 200)]
     public float Xsensitivityset;
     [Range(2, 50)]

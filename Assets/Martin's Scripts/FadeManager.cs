@@ -62,6 +62,7 @@ public class FadeManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        TitleMenu.gameObject.SetActive(true);
         fader = FindObjectOfType<Fade>();
         Time.timeScale = 1.0f;
         GameName.enabled = false;

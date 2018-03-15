@@ -62,7 +62,7 @@ public class winManager1 : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (b_hp.Stage3Health <= 0 && die == false) 
+        if (b_hp.Stage3Health <= 0 && die == false || Input.GetKeyDown(KeyCode.Equals)) 
         {
             Fade(true, timer);
             Cursor.visible = true;

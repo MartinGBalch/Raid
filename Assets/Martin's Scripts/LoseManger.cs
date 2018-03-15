@@ -71,7 +71,7 @@ public class LoseManger : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
-        if (hp.Health <= 0 && die == false)
+        if (hp.Health <= 0 && die == false || Input.GetKeyDown(KeyCode.P))
         {
             Fade(true, timer);
             Cursor.visible = true;

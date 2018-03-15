@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class ControllerSupport : MonoBehaviour {
 
-    public static bool Xbox, PS4;
+    public static bool Xbox = true, PS4 = false;
     public bool Fire, Charge, Attack, Jump, Sprint, ChargeAttack, SuperCharge,SuperLaser,StartButton, GrabButton;
     public float Horizontal, Vertical,Dash,Target,RightStickHorizontal, RightStickVertical;
 
 	// Use this for initialization
 	void Start ()
     {
-	
 	}
 	
 	// Update is called once per frame
