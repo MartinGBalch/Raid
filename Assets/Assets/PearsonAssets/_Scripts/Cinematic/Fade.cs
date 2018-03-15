@@ -27,7 +27,7 @@ public class Fade : MonoBehaviour {
             {
 
                 black.enabled = true;
-                black.color -= new Color(0, 0, 0, Time.deltaTime * .3f);
+                black.color -= new Color(0, 0, 0, Time.deltaTime * 1f);
                 if (black.color.a <= 0)
                 {
                     black.enabled = false;
