@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class winManager1 : MonoBehaviour {
 
     public static winManager1 Instance { get; set; }
-    public Canvas LoseOverlay;
+    public Canvas WinOverlay;
     public GameObject Credits;
 
     bool die;
@@ -50,7 +50,7 @@ public class winManager1 : MonoBehaviour {
     void Start()
     {
         b_hp = FindObjectOfType<BossHealth>();
-        LoseOverlay.enabled = false;
+        WinOverlay.gameObject.SetActive(false);
         WinText.enabled = false;
         credits.enabled = false;
         Menu.enabled = false;
@@ -62,11 +62,11 @@ public class winManager1 : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (b_hp.Stage3Health <= 0 && die == false || Input.GetKeyDown(KeyCode.Equals)) 
+        if (b_hp.Stage3Health <= 0 && die == false) 
         {
             Fade(true, timer);
             Cursor.visible = true;
-            LoseOverlay.enabled = true;
+            WinOverlay.gameObject.SetActive(true);
             WinText.enabled = true;
             credits.enabled = true;
             Menu.enabled = true;

@@ -53,7 +53,7 @@ public class LoseManger : MonoBehaviour
     {
         Player = ThirdPersonPlayerController.FindPlayerGameObject().gameObject;
         GameUI.SetActive(true);
-        LoseOverlay.enabled = false;
+        LoseOverlay.gameObject.SetActive(false);
         LoseText.enabled = false;
         restart.enabled = false;
         Menu.enabled = false;
@@ -75,7 +75,7 @@ public class LoseManger : MonoBehaviour
         {
             Fade(true, timer);
             Cursor.visible = true;
-            LoseOverlay.enabled = true;
+            LoseOverlay.gameObject.SetActive(true);
             LoseText.enabled = true;
             restart.enabled = true;
             Menu.enabled = true;

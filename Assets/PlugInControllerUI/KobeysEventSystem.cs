@@ -8,7 +8,7 @@ public class KobeysEventSystem : MonoBehaviour {
     PlayerIndex pIdx = PlayerIndex.One;
     GamePadState state;
     GamePadState prevState;
-
+    Button first;
     public Button firstSelectedButton;
     Selectable selectable;
 
@@ -16,7 +16,7 @@ public class KobeysEventSystem : MonoBehaviour {
     public bool getButtonDown()
     {
 
-        if (state.Buttons.A == ButtonState.Pressed)
+        if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Released)
         {
             downCount++;
             if (downCount > 1)
@@ -28,12 +28,22 @@ public class KobeysEventSystem : MonoBehaviour {
         downCount = 0;
         return false;
     }
+    private void Awake()
+    {
+        first = firstSelectedButton;
+    }
     // Use this for initialization
     void Start()
     {
         delayTime = inputDelay;
+       
     }
-    public float inputDelay = .2f;
+    private void OnEnable()
+    {
+        delayTime = inputDelay;
+        firstSelectedButton = first;
+    }
+    public float inputDelay = .3f;
     float delayTime;
     // Update is called once per frame
     void Update()

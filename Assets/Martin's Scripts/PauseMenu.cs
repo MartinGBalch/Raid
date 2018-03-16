@@ -40,7 +40,7 @@ public class PauseMenu : MonoBehaviour
     {
         GameUI.SetActive(true);
         paused = false;
-        PauseCanvas.enabled = true;
+        PauseCanvas.gameObject.SetActive(false);
         XboxControls.SetActive(false);
         KeyboardControls.SetActive(false);
         PS4Controls.SetActive(false);
@@ -59,7 +59,7 @@ public class PauseMenu : MonoBehaviour
 
             
             paused = true;
-            PauseCanvas.enabled = true;
+            PauseCanvas.gameObject.SetActive(true);
             pausePanel.SetActive(true);
             GameUI.SetActive(false);
             Cursor.visible = true;
@@ -77,7 +77,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        PauseCanvas.enabled = false;
+        PauseCanvas.gameObject.SetActive(false);
         paused = false;
         GameUI.SetActive(true);
         pausePanel.SetActive(false);
