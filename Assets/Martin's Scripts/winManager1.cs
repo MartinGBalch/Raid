@@ -44,12 +44,19 @@ public class winManager1 : MonoBehaviour {
         transition = (isShowing) ? 0 : 1;
     }
 
-
+    IEnumerator findBossHealth()
+    {
+        while(b_hp == null)
+        {
+            b_hp = BossHealth.instance;
+            yield return null;
+        }
+    }
 
     // Use this for initialization
     void Start()
     {
-        b_hp = FindObjectOfType<BossHealth>();
+        StartCoroutine(findBossHealth());
         WinOverlay.gameObject.SetActive(false);
         WinText.enabled = false;
         credits.enabled = false;

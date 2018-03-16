@@ -36,7 +36,7 @@ public class SettingManager : MonoBehaviour
         textureQualityDropdown.onValueChanged.AddListener(delegate { OnTectureQualityChange(); });
         antiAliasingDropdown.onValueChanged.AddListener(delegate { OnAntiAliasingChange(); });
         vSyncDropdown.onValueChanged.AddListener(delegate { OnVSyncChange(); });
-        musicVolumeSlider.onValueChanged.AddListener(delegate { OnMusicVolumeChange(); });
+       
         b_apply.onClick.AddListener(delegate { OnApplyButtonClick(); });
 
 
@@ -113,7 +113,7 @@ public class SettingManager : MonoBehaviour
     public void loadSettings()
     {
         gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gameSettings.json"));
-        musicVolumeSlider.value = gameSettings.musicVolume;
+       
         antiAliasingDropdown.value = gameSettings.antiAliasing;
         vSyncDropdown.value = gameSettings.vSync;
         textureQualityDropdown.value = gameSettings.textureQuality;

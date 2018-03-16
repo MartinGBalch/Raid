@@ -7,7 +7,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     public Canvas UIBar;
     private TimeManager DeltaTime;
     float DT;
-
+    public static BossHealth instance;
     Animator anim;
     public float Health;
 
@@ -60,11 +60,17 @@ public class BossHealth : MonoBehaviour, IDamageable
         
     }
 
-   
+    void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
     // Use this for initialization
     void Start ()
     {
-
+        
         Manager = FindObjectOfType<PylonManager>();
         anim = GetComponent<Animator>();
         DeltaTime = TimeManager.FindTimeManager();
