@@ -389,8 +389,10 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         moveVector.Normalize();
 
-
-        MV.Jump = Input.GetKeyDown(KeyCode.Space) || Objects.Controller.Jump;
+        if (!openinglock)
+        {
+            MV.Jump = Input.GetKeyDown(KeyCode.Space) || Objects.Controller.Jump;
+        }
         if (Forward || Backward || Left || Right || MV.Jump || MV.Sprint || MV.attacking)
         { MV.moved = true; }
         else
@@ -1143,8 +1145,6 @@ public class ThirdPersonPlayerController : MonoBehaviour {
 
         if (openinglock == false)
         {
-
-
             if (stop == true)
             {
                 NonCombatState = States.IdleState;
@@ -1174,6 +1174,9 @@ public class ThirdPersonPlayerController : MonoBehaviour {
         }
         else
         {
+
+            jumpInput = 0;
+            
             if (once == true)
             {
                 once = false;
